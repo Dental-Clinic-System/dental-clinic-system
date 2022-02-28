@@ -1,0 +1,17 @@
+{
+  "name": "dental-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-server-express": "^3.6.3",
+    "express": "^4.17.3",
+    "graphql-tools": "^8.2.0",
+    "mongoose": "^6.2.3"
+  }
+}
