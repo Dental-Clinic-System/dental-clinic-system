@@ -1,6 +1,8 @@
+import { UserModel } from '../models'
 
 const queries = {
-    hello: () => 'hello'
+    hello: () => 'hello',
+    getHospitals: async () =>  await UserModel.find()
 }
 
 export default queries;

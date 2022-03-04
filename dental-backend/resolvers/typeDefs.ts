@@ -1,4 +1,4 @@
-const { gql } = require('apollo-server');
+import { gql } from 'apollo-server'
 
 const typeDefs = gql`
   type patient {
@@ -6,11 +6,18 @@ const typeDefs = gql`
     mimetype: String
     encoding: String
   }
+  type Hospital {
+    name: String
+    email: String
+  }
   type Mutation {
-    addBook(title: String):
+    addHospital(name: String, email: String): Hospital
+
+    deleteHospital(hospitalId: String): String
   }
   type Query {
     hello: String
+    getHospitals: [Hospital]
   }
 `
 export default typeDefs
