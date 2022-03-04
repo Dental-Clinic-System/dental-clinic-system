@@ -1,11 +1,22 @@
-import React from 'react';
+import { useRoutes } from 'react-router-dom';
+import routes from './router';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
 
-function App() {
+import ThemeProvider from './theme/ThemeProvider';
+import { CssBaseline } from '@mui/material';
+
+const App = () => {
+
+  const content = useRoutes(routes);
+
   return (
-    <div className="App">
-      <h1>Dental-Clinic-system</h1>
-    </div>
+    <ThemeProvider>
+      <LocalizationProvider dateAdapter={AdapterDateFns}>
+        <CssBaseline />
+        {content}
+      </LocalizationProvider>
+    </ThemeProvider>
   );
 }
-
 export default App;
