@@ -44,8 +44,8 @@ const menuItems: MenuItems[] = [
     heading: 'Dashboards',
     items: [
       {
-        name: 'Crypto',
-        link: '/crypto',
+        name: 'Dashboard',
+        link: '/dashboard',
         icon: BrightnessLowTwoToneIcon
       },
     ]
@@ -110,34 +110,6 @@ const menuItems: MenuItems[] = [
       },
     ]
   },
-  {
-    heading: 'Extra Pages',
-    items: [
-      {
-        name: 'Status',
-        icon: VerifiedUserTwoToneIcon,
-        link: '/status',
-        items: [
-          {
-            name: 'Error 404',
-            link: '/status/404'
-          },
-          {
-            name: 'Error 500',
-            link: '/status/500'
-          },
-          {
-            name: 'Maintenance',
-            link: '/status/maintenance'
-          },
-          {
-            name: 'Coming Soon',
-            link: '/status/coming-soon'
-          }
-        ]
-      }
-    ]
-  }
 ];
 
 export default menuItems;

@@ -97,7 +97,7 @@ const LogoText = styled(Box)(
 `
 );
 
-function Logo() {
+const Logo = () => {
 
 
   return (
