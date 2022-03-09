@@ -16,6 +16,10 @@ import { LoadingButton } from '@mui/lab';
 function LoginForm() {
     const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState(false);
+    const [email, setEmail] = useState('')
+    const [pass, setPass] = useState('')
+    const [remember, setRemember] = useState(true)
+    const [error, setError] = useState({email: '', pass: ''})
 
     const LoginSchema = Yup.object().shape({
         email: Yup.string().email('Email must be a valid email address').required('Email is required'),
@@ -40,6 +44,19 @@ function LoginForm() {
         setShowPassword((show) => !show);
     };
 
+    const login = () => {
+        if (!email) {
+            alert('fuckass')
+            setError({email: 'Email is required', pass: error.pass})
+            setEmail('')
+        }
+        if (!pass) {
+            setError({pass: 'Password is required', email: error.email})
+            setPass('')
+        }
+        console.log(error);
+    }
+
     return (
         <FormikProvider value={formik}>
             <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
@@ -49,10 +66,12 @@ function LoginForm() {
                         autoComplete="username"
                         type="email"
                         label="Email address"
-                        {...getFieldProps('email')}
-                        error={Boolean(touched.email && errors.email)}
-                        helperText={touched.email && errors.email}
+                        error={Boolean(email && error.email)}
+                        helperText={error.email}
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                     />
+                    
 
                     <TextField
                         fullWidth
@@ -60,14 +79,16 @@ function LoginForm() {
                         type={showPassword ? 'text' : 'password'}
                         label="Password"
                         {...getFieldProps('password')}
-                        error={Boolean(touched.password && errors.password)}
-                        helperText={touched.password && errors.password}
+                        error={Boolean(pass && error.pass)}
+                        helperText={error.pass}
+                        value={pass}
+                        onChange={(e) => setPass(e.target.value)}
                     />
                 </Stack>
 
                 <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ my: 2 }}>
                     <FormControlLabel
-                        control={<Checkbox {...getFieldProps('remember')} checked={values.remember} />}
+                        control={<Checkbox onChange={() => setRemember(!remember)} checked={remember}  />}
                         label="Remember me"
                     />
 
@@ -82,6 +103,7 @@ function LoginForm() {
                     type="submit"
                     variant="contained"
                     loading={isSubmitting}
+                    onClick={() => login()}
                 >
                     Login
                 </LoadingButton>
