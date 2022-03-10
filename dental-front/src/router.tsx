@@ -15,84 +15,36 @@ const Loader = (Component) => (props) => (
 
 // Pages
 
-const Overview = Loader(lazy(() => import('src/content/overview')));
+const Overview = Loader(lazy(() => import('src/pages/overview')));
+const Login  = Loader(lazy(() => import('src/pages/login')));
 
 // Dashboards
 
-const Crypto = Loader(lazy(() => import('src/content/dashboards')));
+const Dashboard = Loader(lazy(() => import('src/pages/dashboards')));
 
 // Applications
 
-const Transactions = Loader(lazy(() => import('src/content/applications/Transactions')));
-const UserProfile = Loader(lazy(() => import('src/content/applications/Users/profile')));
-const UserSettings = Loader(lazy(() => import('src/content/applications/Users/settings')));
+const Transactions = Loader(lazy(() => import('src/pages/applications/Transactions')));
+const UserProfile = Loader(lazy(() => import('src/pages/applications/Users/profile')));
+const UserSettings = Loader(lazy(() => import('src/pages/applications/Users/settings')));
 
 // Components
 
-const Buttons = Loader(lazy(() => import('src/content/pages/Components/Buttons')));
-const Modals = Loader(lazy(() => import('src/content/pages/Components/Modals')));
-const Accordions = Loader(lazy(() => import('src/content/pages/Components/Accordions')));
-const Tabs = Loader(lazy(() => import('src/content/pages/Components/Tabs')));
-const Badges = Loader(lazy(() => import('src/content/pages/Components/Badges')));
-const Tooltips = Loader(lazy(() => import('src/content/pages/Components/Tooltips')));
-const Avatars = Loader(lazy(() => import('src/content/pages/Components/Avatars')));
-const Cards = Loader(lazy(() => import('src/content/pages/Components/Cards')));
-const Forms = Loader(lazy(() => import('src/content/pages/Components/Forms')));
+const Buttons = Loader(lazy(() => import('src/pages/Buttons')));
+const Modals = Loader(lazy(() => import('src/pages/Modals')));
+const Accordions = Loader(lazy(() => import('src/pages/Accordions')));
+const Tabs = Loader(lazy(() => import('src/pages/Tabs')));
+const Badges = Loader(lazy(() => import('src/pages/Badges')));
+const Tooltips = Loader(lazy(() => import('src/pages/Tooltips')));
+const Avatars = Loader(lazy(() => import('src/pages/Avatars')));
+const Cards = Loader(lazy(() => import('src/pages/Cards')));
+const Forms = Loader(lazy(() => import('src/pages/Forms')));
 
 const routes: PartialRouteObject[] = [
-  // {
-  //   path: '*',
-  //   element: <BaseLayout />,
-  //   children: [
-  //     {
-  //       path: '/',
-  //       element: <Overview />
-  //     },
-  //     {
-  //       path: 'overview',
-  //       element: (
-  //         <Navigate
-  //           to="/"
-  //           replace
-  //         />
-  //       )
-  //     },
-  //     {
-  //       path: 'status',
-  //       children: [
-  //         {
-  //           path: '/',
-  //           element: (
-  //             <Navigate
-  //               to="404"
-  //               replace
-  //             />
-  //           )
-  //         },
-  //         {
-  //           path: '404',
-  //           element: <Status404 />
-  //         },
-  //         {
-  //           path: '500',
-  //           element: <Status500 />
-  //         },
-  //         {
-  //           path: 'maintenance',
-  //           element: <StatusMaintenance />
-  //         },
-  //         {
-  //           path: 'coming-soon',
-  //           element: <StatusComingSoon />
-  //         },
-  //       ]
-  //     },
-  //     {
-  //       path: '*',
-  //       element: <Status404 />
-  //     },
-  //   ]
-  // },
+  {
+    path: '*',
+    element: <Login />,
+  },
   {
     path: '*',
     element: (
@@ -103,7 +55,7 @@ const routes: PartialRouteObject[] = [
         path: '/',
         element: (
           <Navigate
-            to="/crypto"
+            to="/dashboard"
             replace
           />
         )
@@ -113,8 +65,8 @@ const routes: PartialRouteObject[] = [
         element: <Overview />
       },
       {
-        path: 'crypto',
-        element: <Crypto />
+        path: 'dashboard',
+        element: <Dashboard />
       },
     ]
   },
