@@ -2,19 +2,11 @@ import { ReactNode } from 'react';
 
 import DesignServicesTwoToneIcon from '@mui/icons-material/DesignServicesTwoTone';
 import BrightnessLowTwoToneIcon from '@mui/icons-material/BrightnessLowTwoTone';
-import MmsTwoToneIcon from '@mui/icons-material/MmsTwoTone';
 import TableChartTwoToneIcon from '@mui/icons-material/TableChartTwoTone';
-import AccountCircleTwoToneIcon from '@mui/icons-material/AccountCircleTwoTone';
 import BallotTwoToneIcon from '@mui/icons-material/BallotTwoTone';
 import BeachAccessTwoToneIcon from '@mui/icons-material/BeachAccessTwoTone';
 import EmojiEventsTwoToneIcon from '@mui/icons-material/EmojiEventsTwoTone';
 import FilterVintageTwoToneIcon from '@mui/icons-material/FilterVintageTwoTone';
-import HowToVoteTwoToneIcon from '@mui/icons-material/HowToVoteTwoTone';
-import LocalPharmacyTwoToneIcon from '@mui/icons-material/LocalPharmacyTwoTone';
-import RedeemTwoToneIcon from '@mui/icons-material/RedeemTwoTone';
-import SettingsTwoToneIcon from '@mui/icons-material/SettingsTwoTone';
-import TrafficTwoToneIcon from '@mui/icons-material/TrafficTwoTone';
-import VerifiedUserTwoToneIcon from '@mui/icons-material/VerifiedUserTwoTone';
 
 export interface MenuItem {
   link?: string;
@@ -64,49 +56,24 @@ const menuItems: MenuItems[] = [
     heading: 'Components',
     items: [
       {
-        name: 'Buttons',
-        icon: BallotTwoToneIcon,
-        link: '/components/buttons'
-      },
-      {
-        name: 'Modals',
+        name: 'Clinics',
         icon: BeachAccessTwoToneIcon,
-        link: '/components/modals'
+        link: '/components/clinics'
       },
       {
-        name: 'Accordions',
+        name: 'Users',
+        icon: BallotTwoToneIcon,
+        link: '/components/users'
+      },
+      {
+        name: 'Patients',
         icon: EmojiEventsTwoToneIcon,
-        link: '/components/accordions'
+        link: '/components/patients'
       },
       {
-        name: 'Tabs',
+        name: 'Services',
         icon: FilterVintageTwoToneIcon,
-        link: '/components/tabs'
-      },
-      {
-        name: 'Badges',
-        icon: HowToVoteTwoToneIcon,
-        link: '/components/badges'
-      },
-      {
-        name: 'Tooltips',
-        icon: LocalPharmacyTwoToneIcon,
-        link: '/components/tooltips'
-      },
-      {
-        name: 'Avatars',
-        icon: RedeemTwoToneIcon,
-        link: '/components/avatars'
-      },
-      {
-        name: 'Cards',
-        icon: SettingsTwoToneIcon,
-        link: '/components/cards'
-      },
-      {
-        name: 'Forms',
-        icon: TrafficTwoToneIcon,
-        link: '/components/forms'
+        link: '/components/services'
       },
     ]
   },
