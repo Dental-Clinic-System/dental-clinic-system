@@ -1,0 +1,43 @@
+# name: landingpage-build
+# on: [push]
+# jobs:
+#   build:
+#     runs-on: macos-latest
+#     steps:
+#       - script: # script path or inline
+#           workingDirectory: #
+#           displayName: #
+#           failOnStderr: #
+#           env:  # mapping of environment variables to add
+#       - name: compiling ...
+#         uses: actions/setup-node@v1
+#       - run: echo compiling ...   
+#       - run: ls
+#       - run: cd landing-page
+#       # - run: cd dental-clinic-system
+#       # - run: cd landing-page
+#       - run: yarn build
+#       - run: yarn deploy
+
+
+name: landingpage-build
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: macos-latest
+    - script: # script path or inline
+      workingDirectory: #
+      displayName: #
+      failOnStderr: #
+      env: { string: string } # mapping of environment variables to add
+    steps:
+      - name: compiling ...
+        uses: actions/setup-node@v1
+      # - script: # script path or inline
+      #     workingDirectory: #
+      #     displayName: #
+      #     failOnStderr: #
+      #     env:  # mapping of environment variables to add
+      - run: echo compiling ... 
+      - run: ls
+      - run: yarn build
