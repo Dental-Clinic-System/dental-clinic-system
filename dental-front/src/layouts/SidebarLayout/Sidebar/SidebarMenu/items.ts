@@ -23,36 +23,6 @@ export interface MenuItems {
 
 const menuItems: MenuItems[] = [
   {
-    heading: '',
-    items: [
-      {
-        name: 'Overview',
-        link: '/overview',
-        icon: DesignServicesTwoToneIcon
-      }
-    ]
-  },
-  {
-    heading: 'Dashboards',
-    items: [
-      {
-        name: 'Dashboard',
-        link: '/dashboard',
-        icon: BrightnessLowTwoToneIcon
-      },
-    ]
-  },
-  {
-    heading: 'Management',
-    items: [
-      {
-        name: 'Transactions',
-        icon: TableChartTwoToneIcon,
-        link: '/management/transactions'
-      },
-    ]
-  },
-  {
     heading: 'Components',
     items: [
       {
