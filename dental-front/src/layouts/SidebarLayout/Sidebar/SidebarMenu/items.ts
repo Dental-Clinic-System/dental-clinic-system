@@ -1,8 +1,5 @@
 import { ReactNode } from 'react';
 
-import DesignServicesTwoToneIcon from '@mui/icons-material/DesignServicesTwoTone';
-import BrightnessLowTwoToneIcon from '@mui/icons-material/BrightnessLowTwoTone';
-import TableChartTwoToneIcon from '@mui/icons-material/TableChartTwoTone';
 import BallotTwoToneIcon from '@mui/icons-material/BallotTwoTone';
 import BeachAccessTwoToneIcon from '@mui/icons-material/BeachAccessTwoTone';
 import EmojiEventsTwoToneIcon from '@mui/icons-material/EmojiEventsTwoTone';
@@ -23,7 +20,7 @@ export interface MenuItems {
 
 const menuItems: MenuItems[] = [
   {
-    heading: 'Components',
+    heading: 'Medical',
     items: [
       {
         name: 'Clinics',

@@ -3,8 +3,6 @@ import { Navigate } from 'react-router-dom';
 import { PartialRouteObject } from 'react-router';
 
 import SidebarLayout from 'src/layouts/SidebarLayout';
-import BaseLayout from 'src/layouts/BaseLayout';
-
 import SuspenseLoader from 'src/components/SuspenseLoader';
 
 const Loader = (Component) => (props) => (
