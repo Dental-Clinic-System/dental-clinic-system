@@ -29,14 +29,6 @@ const Home: NextPage = () => {
       <main>
         <NavigationBar />
         <HomePageContent />
-        <Box
-          width="100vw"
-          height="50vh"
-          bgcolor="#eff6ff"
-          position="fixed"
-          top={0}
-          zIndex={-1}
-        ></Box>
       </main>
     </ThemeProvider>
   );
