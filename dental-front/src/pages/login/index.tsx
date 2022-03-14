@@ -11,7 +11,7 @@ import {
     Link,
     Stack,
 } from '@mui/material';
-import LoginForm from './LoginForm';
+import { LoginForm } from './LoginForm';
 
 const RootStyle = styled(Box)(({ theme }) => ({
     [theme.breakpoints.up('md')]: {

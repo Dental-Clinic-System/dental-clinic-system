@@ -12,7 +12,7 @@ import {
     Button
 } from '@mui/material';
 
-function LoginForm() {
+export const LoginForm = () => {
     const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState(false);
     const [email, setEmail] = useState('')
@@ -107,5 +107,3 @@ function LoginForm() {
         </>
     );
 }
-
-export default LoginForm;
