@@ -12,32 +12,33 @@ import * as React from 'react';
   }
   
   const rows = [
-    createData('1234','example@gmail.com', 99009900, 'password123', 'Mon 1:00 - friday 2:00', 'ClinicId', 'ClinicId' , 'ServiceId'),
-    createData('1234','example@gmail.com', 99009900, 'password123', 'Mon 1:00 - friday 2:00', 'ClinicId', 'ClinicId' , 'ServiceId'),
-    createData('1234','example@gmail.com', 99009900, 'password123', 'Mon 1:00 - friday 2:00', 'ClinicId', 'ClinicId' , 'ServiceId'),
-    createData('1234','example@gmail.com', 99009900, 'password123', 'Mon 1:00 - friday 2:00', 'ClinicId', 'ClinicId' , 'ServiceId'),
-    createData('1234','example@gmail.com', 99009900, 'password123', 'Mon 1:00 - friday 2:00', 'ClinicId', 'ClinicId' , 'ServiceId'),
-    createData('1234','example@gmail.com', 99009900, 'password123', 'Mon 1:00 - friday 2:00', 'ClinicId', 'ClinicId' , 'ServiceId'),
-    createData('1234','example@gmail.com', 99009900, 'password123', 'Mon 1:00 - friday 2:00', 'ClinicId', 'ClinicId' , 'ServiceId'),
-    createData('1234','example@gmail.com', 99009900, 'password123', 'Mon 1:00 - friday 2:00', 'ClinicId', 'ClinicId' , 'ServiceId'),
-    createData('1234','example@gmail.com', 99009900, 'password123', 'Mon 1:00 - friday 2:00', 'ClinicId', 'ClinicId' , 'ServiceId'),
-    createData('1234','example@gmail.com', 99009900, 'password123', 'Mon 1:00 - friday 2:00', 'ClinicId', 'ClinicId' , 'ServiceId'),
-    createData('1234','example@gmail.com', 99009900, 'password123', 'Mon 1:00 - friday 2:00', 'ClinicId', 'ClinicId' , 'ServiceId'),
-    createData('1234','example@gmail.com', 99009900, 'password123', 'Mon 1:00 - friday 2:00', 'ClinicId', 'ClinicId' , 'ServiceId'),
-    createData('1234','example@gmail.com', 99009900, 'password123', 'Mon 1:00 - friday 2:00', 'ClinicId', 'ClinicId' , 'ServiceId'),
-    createData('1234','example@gmail.com', 99009900, 'password123', 'Mon 1:00 - friday 2:00', 'ClinicId', 'ClinicId' , 'ServiceId'),
-    createData('1234','example@gmail.com', 99009900, 'password123', 'Mon 1:00 - friday 2:00', 'ClinicId', 'ClinicId' , 'ServiceId'),
-    createData('1234','example@gmail.com', 99009900, 'password123', 'Mon 1:00 - friday 2:00', 'ClinicId', 'ClinicId' , 'ServiceId'),
-    createData('1234','example@gmail.com', 99009900, 'password123', 'Mon 1:00 - friday 2:00', 'ClinicId', 'ClinicId' , 'ServiceId'),
-    createData('1234','example@gmail.com', 99009900, 'password123', 'Mon 1:00 - friday 2:00', 'ClinicId', 'ClinicId' , 'ServiceId'),
-    createData('1234','example@gmail.com', 99009900, 'password123', 'Mon 1:00 - friday 2:00', 'ClinicId', 'ClinicId' , 'ServiceId'),
-    createData('1234','example@gmail.com', 99009900, 'password123', 'Mon 1:00 - friday 2:00', 'ClinicId', 'ClinicId' , 'ServiceId'),
+    createData('1234','example@gmail.com', 99009900, 'password123', 'Mon 1:00 - friday 2:00', 'Accepted', 'ClinicId' , 'ServiceId'),
+    createData('1234','example@gmail.com', 99009900, 'password123', 'Mon 1:00 - friday 2:00', 'Accepted', 'ClinicId' , 'ServiceId'),
+    createData('1234','example@gmail.com', 99009900, 'password123', 'Mon 1:00 - friday 2:00', 'Accepted', 'ClinicId' , 'ServiceId'),
+    createData('1234','example@gmail.com', 99009900, 'password123', 'Mon 1:00 - friday 2:00', 'Accepted', 'ClinicId' , 'ServiceId'),
+    createData('1234','example@gmail.com', 99009900, 'password123', 'Mon 1:00 - friday 2:00', 'Accepted', 'ClinicId' , 'ServiceId'),
+    createData('1234','example@gmail.com', 99009900, 'password123', 'Mon 1:00 - friday 2:00', 'Accepted', 'ClinicId' , 'ServiceId'),
+    createData('1234','example@gmail.com', 99009900, 'password123', 'Mon 1:00 - friday 2:00', 'Accepted', 'ClinicId' , 'ServiceId'),
+    createData('1234','example@gmail.com', 99009900, 'password123', 'Mon 1:00 - friday 2:00', 'Accepted', 'ClinicId' , 'ServiceId'),
+    createData('1234','example@gmail.com', 99009900, 'password123', 'Mon 1:00 - friday 2:00', 'Accepted', 'ClinicId' , 'ServiceId'),
+    createData('1234','example@gmail.com', 99009900, 'password123', 'Mon 1:00 - friday 2:00', 'Declined', 'ClinicId' , 'ServiceId'),
+    createData('1234','example@gmail.com', 99009900, 'password123', 'Mon 1:00 - friday 2:00', 'Declined', 'ClinicId' , 'ServiceId'),
+    createData('1234','example@gmail.com', 99009900, 'password123', 'Mon 1:00 - friday 2:00', 'Declined', 'ClinicId' , 'ServiceId'),
+    createData('1234','example@gmail.com', 99009900, 'password123', 'Mon 1:00 - friday 2:00', 'Declined', 'ClinicId' , 'ServiceId'),
+    createData('1234','example@gmail.com', 99009900, 'password123', 'Mon 1:00 - friday 2:00', 'Declined', 'ClinicId' , 'ServiceId'),
+    createData('1234','example@gmail.com', 99009900, 'password123', 'Mon 1:00 - friday 2:00', 'Declined', 'ClinicId' , 'ServiceId'),
+    createData('1234','example@gmail.com', 99009900, 'password123', 'Mon 1:00 - friday 2:00', 'Requested', 'ClinicId' , 'ServiceId'),
+    createData('1234','example@gmail.com', 99009900, 'password123', 'Mon 1:00 - friday 2:00', 'Requested', 'ClinicId' , 'ServiceId'),
+    createData('1234','example@gmail.com', 99009900, 'password123', 'Mon 1:00 - friday 2:00', 'Requested', 'ClinicId' , 'ServiceId'),
+    createData('1234','example@gmail.com', 99009900, 'password123', 'Mon 1:00 - friday 2:00', 'Requested', 'ClinicId' , 'ServiceId'),
+    createData('1234','example@gmail.com', 99009900, 'password123', 'Mon 1:00 - friday 2:00', 'Requested', 'ClinicId' , 'ServiceId'),
   ];
   
   const Users = () => {
   return (
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
+          <TableHead>asdfgd</TableHead>
           <TableHead>
             <TableRow style={{'position': 'relative'}}>
               <TableCell>_id</TableCell>
