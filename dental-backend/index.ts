@@ -7,7 +7,6 @@ import typeDefs from "./resolvers/typeDefs"
 import mutations from "./resolvers/mutation"
 import queries from "./resolvers/query"
 
-
 const resolvers = {
   Query: queries,
   Mutation: mutations
