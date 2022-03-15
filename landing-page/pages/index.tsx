@@ -1,6 +1,6 @@
 import Head from "next/head";
 import type { NextPage } from "next";
-import { NavigationBar } from "../components";
+import { NavigationBar, Footer } from "../components";
 import { HomePageContent } from "../subsets";
 import { Box, CssBaseline, createTheme, ThemeProvider } from "@mui/material";
 
@@ -29,6 +29,7 @@ const Home: NextPage = () => {
       <main>
         <NavigationBar />
         <HomePageContent />
+        <Footer />
       </main>
     </ThemeProvider>
   );
