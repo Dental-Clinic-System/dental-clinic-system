@@ -9,7 +9,12 @@ const ClinicSchema = new Schema({
     contact_number:String,
     clinic_web: String,
     email: String,
-    official_address: String,
+    official_address: {
+        city: String,
+        district: String,   
+        sub_district: String,
+        full_address:String
+    },
     status: String,
     clinic_admin:{
         admin_number:String,
