@@ -1,76 +1,42 @@
-import * as React from 'react';
-  import Table from '@mui/material/Table';
-  import TableBody from '@mui/material/TableBody';
-  import TableCell from '@mui/material/TableCell';
-  import TableContainer from '@mui/material/TableContainer';
-  import TableHead from '@mui/material/TableHead';
-  import TableRow from '@mui/material/TableRow';
-  import Paper from '@mui/material/Paper';
-  
-  function createData( _id, Email, Phone, Password, Timestamp, Status, ClinicId, ServiceId) {
-    return {_id, Email, Phone, Password, Timestamp, Status, ClinicId, ServiceId};
-  }
-  
-  const rows = [
-    createData('1234','example@gmail.com', 99009900, 'password123', 'Mon 1:00 - friday 2:00', 'Accepted', 'ClinicId' , 'ServiceId'),
-    createData('1234','example@gmail.com', 99009900, 'password123', 'Mon 1:00 - friday 2:00', 'Accepted', 'ClinicId' , 'ServiceId'),
-    createData('1234','example@gmail.com', 99009900, 'password123', 'Mon 1:00 - friday 2:00', 'Accepted', 'ClinicId' , 'ServiceId'),
-    createData('1234','example@gmail.com', 99009900, 'password123', 'Mon 1:00 - friday 2:00', 'Accepted', 'ClinicId' , 'ServiceId'),
-    createData('1234','example@gmail.com', 99009900, 'password123', 'Mon 1:00 - friday 2:00', 'Accepted', 'ClinicId' , 'ServiceId'),
-    createData('1234','example@gmail.com', 99009900, 'password123', 'Mon 1:00 - friday 2:00', 'Accepted', 'ClinicId' , 'ServiceId'),
-    createData('1234','example@gmail.com', 99009900, 'password123', 'Mon 1:00 - friday 2:00', 'Accepted', 'ClinicId' , 'ServiceId'),
-    createData('1234','example@gmail.com', 99009900, 'password123', 'Mon 1:00 - friday 2:00', 'Accepted', 'ClinicId' , 'ServiceId'),
-    createData('1234','example@gmail.com', 99009900, 'password123', 'Mon 1:00 - friday 2:00', 'Accepted', 'ClinicId' , 'ServiceId'),
-    createData('1234','example@gmail.com', 99009900, 'password123', 'Mon 1:00 - friday 2:00', 'Declined', 'ClinicId' , 'ServiceId'),
-    createData('1234','example@gmail.com', 99009900, 'password123', 'Mon 1:00 - friday 2:00', 'Declined', 'ClinicId' , 'ServiceId'),
-    createData('1234','example@gmail.com', 99009900, 'password123', 'Mon 1:00 - friday 2:00', 'Declined', 'ClinicId' , 'ServiceId'),
-    createData('1234','example@gmail.com', 99009900, 'password123', 'Mon 1:00 - friday 2:00', 'Declined', 'ClinicId' , 'ServiceId'),
-    createData('1234','example@gmail.com', 99009900, 'password123', 'Mon 1:00 - friday 2:00', 'Declined', 'ClinicId' , 'ServiceId'),
-    createData('1234','example@gmail.com', 99009900, 'password123', 'Mon 1:00 - friday 2:00', 'Declined', 'ClinicId' , 'ServiceId'),
-    createData('1234','example@gmail.com', 99009900, 'password123', 'Mon 1:00 - friday 2:00', 'Requested', 'ClinicId' , 'ServiceId'),
-    createData('1234','example@gmail.com', 99009900, 'password123', 'Mon 1:00 - friday 2:00', 'Requested', 'ClinicId' , 'ServiceId'),
-    createData('1234','example@gmail.com', 99009900, 'password123', 'Mon 1:00 - friday 2:00', 'Requested', 'ClinicId' , 'ServiceId'),
-    createData('1234','example@gmail.com', 99009900, 'password123', 'Mon 1:00 - friday 2:00', 'Requested', 'ClinicId' , 'ServiceId'),
-    createData('1234','example@gmail.com', 99009900, 'password123', 'Mon 1:00 - friday 2:00', 'Requested', 'ClinicId' , 'ServiceId'),
-  ];
-  
-  const Users = () => {
-  return (
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
-          <TableHead>asdfgd</TableHead>
-          <TableHead>
-            <TableRow style={{'position': 'relative'}}>
-              <TableCell>_id</TableCell>
-              <TableCell align="center">Email</TableCell>
-              <TableCell align="center">Phone</TableCell>
-              <TableCell align="center">Password</TableCell>
-              <TableCell align="center">Timestamp</TableCell>
-              <TableCell align="center">Status</TableCell>
-              <TableCell align="center">ClinicId</TableCell>
-              <TableCell align="center">ServiceId</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows.map((row) => (
-              <TableRow
-                key={row._id}
-                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-              >
-                <TableCell align="left">{row._id}</TableCell>
-                <TableCell align="center">{row.Email}</TableCell>
-                <TableCell align="center">{row.Phone}</TableCell>
-                <TableCell align="center">{row.Password}</TableCell>
-                <TableCell align="center">{row.Timestamp}</TableCell>
-                <TableCell align="center">{row.Status}</TableCell>
-                <TableCell align="center">{row.ClinicId}</TableCell>
-                <TableCell align="center">{row.ServiceId}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    );
-  }
+import * as React from "react"
+import * as data from "./User.json"
+import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
 
-export default Users;
+const column = Object.keys(data.data[0]);
+const ThData = () => {
+  return column.map((data) => {
+    return <th key={data}>{data}</th>
+  })
+}
+const tdData = () => {
+  return data.data.map((data) => {
+    return (
+      <tr>
+        {
+          column.map((v) => {
+            return <td>{data[v]}</td>
+          })
+        }
+      </tr>
+    )
+  })
+}
+
+const Users = () => {
+  console.log('data: ', data)
+  return (
+    <div>
+      {/* @ts-ignore */}
+      {data?.data.map((e, i) => {
+        return (
+          <div style={{ height: '100vh', width: '100vw' }}>
+            {/* <DataGrid rows={data.data} columns={data.data}/> */}
+              {ThData()}
+              {tdData()}
+          </div>
+        )
+      })}
+    </div>
+  )
+}
+export default Users
