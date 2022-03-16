@@ -1,67 +1,64 @@
 import * as React from 'react';
-  import Table from '@mui/material/Table';
-  import TableBody from '@mui/material/TableBody';
-  import TableCell from '@mui/material/TableCell';
-  import TableContainer from '@mui/material/TableContainer';
-  import TableHead from '@mui/material/TableHead';
-  import TableRow from '@mui/material/TableRow';
-  import Paper from '@mui/material/Paper';
-  
-  function createData( _id, ClinicId, Title, Description) {
-    return {_id, ClinicId, Title, Description};
-  }
-  
-  const rows = [
-    createData('1234', 'ClinicId', 'Title',  'Description Description Description'),
-    createData('1234', 'ClinicId', 'Title',  'Description Description Description'),
-    createData('1234', 'ClinicId', 'Title',  'Description Description Description'),
-    createData('1234', 'ClinicId', 'Title',  'Description Description Description'),
-    createData('1234', 'ClinicId', 'Title',  'Description Description Description'),
-    createData('1234', 'ClinicId', 'Title',  'Description Description Description'),
-    createData('1234', 'ClinicId', 'Title',  'Description Description Description'),
-    createData('1234', 'ClinicId', 'Title',  'Description Description Description'),
-    createData('1234', 'ClinicId', 'Title',  'Description Description Description'),
-    createData('1234', 'ClinicId', 'Title',  'Description Description Description'),
-    createData('1234', 'ClinicId', 'Title',  'Description Description Description'),
-    createData('1234', 'ClinicId', 'Title',  'Description Description Description'),
-    createData('1234', 'ClinicId', 'Title',  'Description Description Description'),
-    createData('1234', 'ClinicId', 'Title',  'Description Description Description'),
-    createData('1234', 'ClinicId', 'Title',  'Description Description Description'),
-    createData('1234', 'ClinicId', 'Title',  'Description Description Description'),
-    createData('1234', 'ClinicId', 'Title',  'Description Description Description'),
-    createData('1234', 'ClinicId', 'Title',  'Description Description Description'),
-    createData('1234', 'ClinicId', 'Title',  'Description Description Description'),
-    createData('1234', 'ClinicId', 'Title',  'Description Description Description'),
-  ];
-  
-  const Services = () => {
-  return (
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
-          <TableHead>
-            <TableRow style={{'position': 'relative'}}>
-              <TableCell>_id</TableCell>
-              <TableCell align="center">ClinicId</TableCell>
-              <TableCell align="center">Title</TableCell>
-              <TableCell align="center">Description</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows.map((row) => (
-              <TableRow
-                key={row._id}
-                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-              >
-                <TableCell align="left">{row._id}</TableCell>
-                <TableCell align="center">{row.ClinicId}</TableCell>
-                <TableCell align="center">{row.Title}</TableCell>
-                <TableCell align="center">{row.Description}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    );
-  }
+import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
+import { AlignHorizontalCenter, AlignVerticalCenter } from '@mui/icons-material';
+import { textAlign } from '@mui/system';
 
-export default Services;
+const columns: GridColDef[] = [
+  { field: 'id',headerAlign: 'center', headerName: 'ID', width: 90 },
+  {
+    field: 'firstName',
+    headerName: 'First name',
+    width: 150,
+
+    headerAlign: 'center',
+  },
+  {
+    field: 'lastName',
+    headerName: 'Last name',
+    width: 150,
+    headerAlign: 'center',
+  },
+  {
+    field: 'age',
+    headerName: 'Age',
+    type: 'number',
+    width: 110,
+    headerAlign: 'center',
+  },
+  {
+    field: 'fullName',
+    headerName: 'Full name',
+    description: 'This column has a value getter and is not sortable.',
+    sortable: false,
+    width: 160,
+    headerAlign: 'center',
+    valueGetter: (params: GridValueGetterParams) =>
+      `${params.row.firstName || ''} ${params.row.lastName || ''}`,
+  },
+];
+
+const rows = [
+  {display: "flex", alignItems: "center", id: 1, lastName: 'Snow', firstName: 'Jon', age: 35, },
+  { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
+  { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
+  { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
+  { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
+  { id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
+  { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
+  { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
+  { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
+];
+
+const Users = () => {
+  return (
+    <div style={{height: 400, width: '100%' }}>
+      <DataGrid
+        rows={rows}
+        columns={columns}
+        pageSize={5}
+        rowsPerPageOptions={[5]}
+      />
+    </div>
+  );
+}
+export default Users;
