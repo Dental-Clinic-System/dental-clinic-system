@@ -3,7 +3,6 @@ import mongoose from 'mongoose'
 const { Schema } = mongoose;
 
 const PatientSchema = new Schema({
-    _id: String,
     lastname: String,
     firstname: String,
     birth: String,

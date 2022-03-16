@@ -40,43 +40,45 @@ const ContentStyle = styled('div')(({ theme }) => ({
 
 const Login = () => {
     return (
-        <RootStyle>
-            <SectionStyle sx={{ display: { xs: 'none', md: 'flex' } }}>
-                <Logo />
-                <Typography variant="h2" sx={{ px: 5, mt: 10, mb: 5 }}>
-                    Welcome to Dental Clinic System
-                </Typography>
-                <img src="/static/images/illustrations/illustration_login.png" alt="login" />
-            </SectionStyle>
-
-            <Container maxWidth="sm">
-                <ContentStyle>
-                    <Stack sx={{ mb: 5 }}>
-                        <Typography variant="h4" gutterBottom>
-                            Sign in
-                        </Typography>
-                        <Typography sx={{ color: 'text.secondary' }}>Enter your details below.</Typography>
-                    </Stack>
-
-                    <LoginForm />
-
-                    <Typography
-                        variant="body2"
-                        align="center"
-                        sx={{
-                            mt: 3,
-                            display: { sm: 'none' }
-                        }}
-
-                    >
-                        Don’t have an account?&nbsp;
-                        <Link variant="subtitle2" component={RouterLink} to="register" underline="hover">
-                            Get started
-                        </Link>
+        <>
+            <RootStyle>
+                <SectionStyle sx={{ display: { xs: 'none', md: 'flex' } }}>
+                    <Logo />
+                    <Typography variant="h2" sx={{ px: 5, mt: 10, mb: 5 }}>
+                        Welcome to Dental Clinic System
                     </Typography>
-                </ContentStyle>
-            </Container>
-        </RootStyle>
+                    <img src="/static/images/illustrations/illustration_login.png" alt="login" />
+                </SectionStyle>
+
+                <Container maxWidth="sm">
+                    <ContentStyle>
+                        <Stack sx={{ mb: 5 }}>
+                            <Typography variant="h4" gutterBottom>
+                                Sign in
+                            </Typography>
+                            <Typography sx={{ color: 'text.secondary' }}>Enter your details below.</Typography>
+                        </Stack>
+
+                        <LoginForm />
+
+                        <Typography
+                            variant="body2"
+                            align="center"
+                            sx={{
+                                mt: 3,
+                                display: { sm: 'none' }
+                            }}
+
+                        >
+                            Don’t have an account?&nbsp;
+                            <Link variant="subtitle2" component={RouterLink} to="register" underline="hover">
+                                Get started
+                            </Link>
+                        </Typography>
+                    </ContentStyle>
+                </Container>
+            </RootStyle>
+        </>
     );
 }
 

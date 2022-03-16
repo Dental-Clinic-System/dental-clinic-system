@@ -2,10 +2,12 @@
   "name": "dental-backend",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint './**/*.{js,jsx,ts,tsx}' --fix"
+    "lint": "eslint './**/*.{js,jsx,ts,tsx}' --fix",
+    "clean": "rm -rf ./build",
+    "build": "yarn clean && tsc -p ."
   },
   "author": "",
   "license": "ISC",
