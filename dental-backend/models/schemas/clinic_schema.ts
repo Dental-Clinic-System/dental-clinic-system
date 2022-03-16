@@ -3,10 +3,21 @@ import mongoose from 'mongoose'
 const { Schema } = mongoose;
 
 const ClinicSchema = new Schema({
-    name: String,
-    email: { type: String, unique: true },
+    clinic_name: String,
+    operation_name: String,
+    operation_date: String,
+    contact_number:String,
+    clinic_web: String,
+    email: String,
+    official_address: String,
     status: String,
-    workhours: String,
+    clinic_admin:{
+        admin_number:String,
+        admin_email:String,
+        admin_name:String,
+        position:String
+    },
+    workhours: Object,
     phone: String,
 });
 
