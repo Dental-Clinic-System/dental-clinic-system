@@ -1,10 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
-import { display, textAlign } from '@mui/system';
-import axios from 'axios'
-
-
-
+import { useQuery } from "@apollo/client";
+import { DataGrid, GridColDef } from '@mui/x-data-grid';
+import React, { useEffect, useState } from 'react';
+import { UsersQuery } from 'src/hooks/query';
 const columns: GridColDef[] = [
   {
     field: 'username',
@@ -57,61 +54,26 @@ const columns: GridColDef[] = [
     field: 'clinicId',
     headerName: 'ClinicId',
   },
-];
-
-const rows = [
-  // { id: `${id}`, username: `${username}`, timestamp: `${timestamp}`, serviceId: `${serviceId}`, role:`${role}`, phone:`${phone}`, password: `${password}`, lastname: `${lastname}`, firstname: `${firstname}`, email:`${email}`, address: `${address}`, birth:`${birth}`, clinicId:`${clinicId}` },
-  { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35, },
-  { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
-  { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
-  { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
-  { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
-  { id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
-  { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
-  { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-  { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
+  {
+    field: '_id',
+    headerName: 'id',
+  },
 ];
 
 const Users = () => {
-  const [data, setData] = useState<any>()
+  const { loading, error, data } = useQuery(UsersQuery);
+  const [users, setUsers] = useState([])
+
   useEffect(() => {
+    if (loading == false) setUsers(data.getUsers)
+  }, [loading])
 
-    const dat = axios.post('http://192.168.0.102:4000/', {
-      query: `query GetUsers($id: String, $address: String, $firstname: String, $lastname: String, $birth: String, $email: String, $phone: String, $username: String, $password: String, $timestamp: String, $role: String, $clinicId: String, $serviceId: String) {
-        getUsers(_id: $id, address: $address, firstname: $firstname, lastname: $lastname, birth: $birth, email: $email, phone: $phone, username: $username, password: $password, timestamp: $timestamp, role: $role, clinicId: $clinicId, serviceId: $serviceId) {
-          _id
-          username
-          timestamp
-          serviceId
-          role
-          password
-          phone
-          lastname
-          firstname
-          email
-          clinicId
-          birth
-          address
-        }
-      }`,
-    }, {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-    setData(dat)
-
-
-  }, [])
-
-  console.log('data: ', data)
   return (
-    <div style={{ height: 400, width: '100%', justifyContent: "space-between" }}>
+    <div style={{ height: '100%', width: '100%', justifyContent: "space-between" }}>
       <DataGrid
-      sx={{
-        justifyContent: "space-between"
-      }}
-        rows={rows}
+        getRowId={(row) => row._id}
+        sx={{ justifyContent: "space-between" }}
+        rows={users}
         columns={columns}
         pageSize={20}
         rowsPerPageOptions={[10]}
