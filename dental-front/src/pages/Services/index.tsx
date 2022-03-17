@@ -39,7 +39,7 @@ const columns: GridColDef[] = [
 
 const rows = [
   {display: "flex", alignItems: "center", id: 1, lastName: 'Snow', firstName: 'Jon', age: 35, },
-  { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
+  { id: 2, lastName: 'Idol', firstName: 'Super', age: 69 },
   { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
   { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
   { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
