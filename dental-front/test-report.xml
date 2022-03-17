@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testExecutions version="1">
+  <file path="/Users/ermuun-orgil/Projects/dental-clinic-system/dental-front/__test__/pages/Accordions.test.js">
+    <testCase name="Accordions page it should render the accordions page" duration="16"/>
+  </file>
+</testExecutions>
