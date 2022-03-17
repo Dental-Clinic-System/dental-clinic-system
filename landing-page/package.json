@@ -12,6 +12,7 @@
   "dependencies": {
     "@emotion/react": "^11.8.1",
     "@emotion/styled": "^11.8.1",
+    "@mui/lab": "^5.0.0-alpha.73",
     "@mui/material": "^5.4.4",
     "formik": "^2.2.9",
     "next": "12.1.0",
