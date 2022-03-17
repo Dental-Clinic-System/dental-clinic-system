@@ -1,8 +1,8 @@
-export * from './userDef'
-export * from './clinicDef'
-export * from './patientDef'
-export * from './serviceDefs'
-export * from './appointmentDef'
-export * from './permissionDef'
-export * from './patient_historyDef'
-export * from './roleDef'
+import * as path from 'path'
+import { mergeTypeDefs } from '@graphql-tools/merge'
+import { loadFilesSync } from '@graphql-tools/load-files'
+
+const typesArray = loadFilesSync(path.join(__dirname, '.'), {
+    extensions: ['graphql'],
+})
+export const typeDefs = mergeTypeDefs(typesArray)
