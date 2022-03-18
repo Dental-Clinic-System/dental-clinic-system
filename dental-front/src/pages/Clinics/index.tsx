@@ -59,7 +59,7 @@ const Clinics = () => {
   
   console.log(clinics)
   useEffect(() => {
-    if (loading == false) setClinics(data.getServices)
+    if (loading == false) setClinics(data.getClinics)
   }, [loading])
 
   return (

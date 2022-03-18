@@ -114,7 +114,7 @@ const Patients = () => {
   const [patients, setPatients] = useState([])
 
   useEffect(() => {
-    if (loading == false) setPatients(data.getUsers)
+    if (loading == false) setPatients(data.getPatients)
   }, [loading])
 
   return (

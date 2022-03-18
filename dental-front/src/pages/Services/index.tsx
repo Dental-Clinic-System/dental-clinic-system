@@ -37,7 +37,7 @@ const Users = () => {
   const { loading, error, data } = useQuery(ServicesQuery);
   const [services, setServices] = useState([])
 
-  console.log(services)
+  console.log(services);
   useEffect(() => {
     if (loading == false) setServices(data.getServices)
   }, [loading])
