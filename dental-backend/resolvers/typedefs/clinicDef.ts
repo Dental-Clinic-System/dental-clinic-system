@@ -43,7 +43,6 @@ input Official_address_type {
   }
   type Mutation {
       addClinic(
-        _id: String
         clinic_name: String
         operation_name: String
         operation_date: String
