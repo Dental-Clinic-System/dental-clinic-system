@@ -1,8 +1,10 @@
-import Head from "next/head";
-import type { NextPage } from "next";
-import { NavigationBar, Footer } from "../components";
-import { HomePageContent } from "../subsets";
-import { Box, CssBaseline, createTheme, ThemeProvider } from "@mui/material";
+import Head from 'next/head';
+import type { NextPage } from 'next';
+import { NavigationBar, Footer } from '../components';
+import { HomePageContent } from '../subsets';
+import { CssBaseline, createTheme, ThemeProvider } from '@mui/material';
+import { ApolloProvider } from '@apollo/client';
+import { apolloClient } from '../graphql';
 
 const theme = createTheme({
   components: {
@@ -16,7 +18,7 @@ const theme = createTheme({
   },
 });
 
-const Home: NextPage = () => {
+const Content = () => {
   return (
     <ThemeProvider theme={theme}>
       <Head>
@@ -32,6 +34,14 @@ const Home: NextPage = () => {
         <Footer />
       </main>
     </ThemeProvider>
+  );
+};
+
+const Home: NextPage = () => {
+  return (
+    <ApolloProvider client={apolloClient}>
+      <Content />
+    </ApolloProvider>
   );
 };
 

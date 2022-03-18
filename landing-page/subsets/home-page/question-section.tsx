@@ -9,6 +9,7 @@ type grid = {
   xl?: number;
 };
 type QuestionType = {
+  id: string;
   question: string;
   type: 'input' | 'selector' | 'number';
   grid: grid;
@@ -18,11 +19,11 @@ type QuestionType = {
 type QuestionSectionType = {
   label: string;
   width?: string;
-  onChange?: (question: string, change: string) => void;
+  onChange?: (id: string, question: string, change: string) => void;
   questions: Array<QuestionType>;
 };
 type QuestionInputType = {
-  onChange?: (question: string, change: string) => void;
+  onChange?: (id: string, question: string, change: string) => void;
 };
 
 export const QuestionSection = ({ label, width, questions, onChange }: QuestionSectionType) => {
@@ -41,24 +42,19 @@ export const QuestionSection = ({ label, width, questions, onChange }: QuestionS
   );
 };
 
-const Question = ({ question, grid, onChange, selections, error, type }: QuestionType & QuestionInputType) => {
+const Question = ({ id, question, grid, onChange, selections, error, type }: QuestionType & QuestionInputType) => {
   const [value, setValue] = useState('');
+
+  const handleChange = (e: any) => {
+    onChange && onChange(id, question, e.target.value);
+    setValue(e.target.value);
+  };
 
   if (type === 'selector')
     return (
       <Grid item {...grid}>
         <InputLabel style={{ marginBottom: '10px', marginTop: '10px' }}>{question}</InputLabel>
-        <TextField
-          fullWidth
-          select
-          value={value}
-          onChange={(e) => {
-            onChange && onChange(question, e.target.value);
-            setValue(e.target.value);
-          }}
-          size="small"
-          error={error}
-        >
+        <TextField fullWidth select value={value} onChange={handleChange} size="small" error={error}>
           {selections?.map((option, index) => (
             <MenuItem key={`${question}-option-${index}`} value={option}>
               {option}
@@ -72,24 +68,13 @@ const Question = ({ question, grid, onChange, selections, error, type }: Questio
     return (
       <Grid item {...grid}>
         <InputLabel style={{ marginBottom: '10px', marginTop: '10px' }}>{question}</InputLabel>
-        <TextField
-          type="number"
-          error={error}
-          onChange={(e) => onChange && onChange(question, e.target.value)}
-          fullWidth
-          size="small"
-        />
+        <TextField type="number" error={error} onChange={handleChange} fullWidth size="small" />
       </Grid>
     );
   return (
     <Grid item {...grid}>
       <InputLabel style={{ marginBottom: '10px', marginTop: '10px' }}>{question}</InputLabel>
-      <TextField
-        error={error}
-        onChange={(e) => onChange && onChange(question, e.target.value)}
-        fullWidth
-        size="small"
-      />
+      <TextField error={error} onChange={handleChange} fullWidth size="small" />
     </Grid>
   );
 };
