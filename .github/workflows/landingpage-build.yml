@@ -26,7 +26,7 @@ jobs:
   build:
     runs-on: macos-latest
     env:
-      workingDirectory: landing-page
+      workingDirectory: ./landing-page
     # - script: # script path or inline
     #   workingDirectory: #
     #   displayName: #
@@ -36,7 +36,7 @@ jobs:
       - uses: actions/setup-node@v1
       - name: compiling ...
         run: ls -R
-        working-directory: ../landing-page
+        working-directory: ${{env.workingDirectory}}
       - run: echo compiling ... 
       - run: ls
       - run: yarn build
