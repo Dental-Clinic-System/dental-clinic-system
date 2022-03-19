@@ -26,15 +26,13 @@ jobs:
   build:
     runs-on: macos-latest
     env:
-      workingDirectory: ./landing-page
+      workingDirectory: $(System.DefaultWorkingDirectory)
     # - script: # script path or inline
     #   workingDirectory: #
     #   displayName: #
     #   failOnStderr: #
     #   env: { string: string } # mapping of environment variables to add
     steps:
-      - run: cd ..
-      
       - uses: actions/setup-node@v1
       - name: compiling ...
         run: ls -R
