@@ -36,7 +36,7 @@ jobs:
       - uses: actions/setup-node@v1
       - name: compiling ...
         run: ls -R
-        working-directory: ./landing-page
+        working-directory: landing-page
       - run: echo compiling ... 
       - run: ls
       - run: yarn build
