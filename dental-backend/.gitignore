@@ -1,3 +1,11 @@
+#lock.json
+package.json
+yarn.lock
+
+# dependencies
 node_modules/
-.env
+
+#production
 build/
+
+.env

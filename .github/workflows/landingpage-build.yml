@@ -26,7 +26,7 @@ jobs:
   build:
     runs-on: macos-latest
     env:
-      workingDirectory: $(System.DefaultWorkingDirectory)
+      workingDirectory: ${{System.DefaultWorkingDirectory}}
     # - script: # script path or inline
     #   displayName: #
     #   failOnStderr: #
