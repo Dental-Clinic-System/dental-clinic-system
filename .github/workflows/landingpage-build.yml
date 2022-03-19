@@ -36,5 +36,6 @@ jobs:
       - name: compiling ...
         uses: actions/setup-node@v1
       - run: echo compiling ... 
+      - run: cd ..
       - run: ls
       - run: yarn build
