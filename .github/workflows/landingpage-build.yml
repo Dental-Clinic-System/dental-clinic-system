@@ -34,6 +34,7 @@ jobs:
     #   env: { string: string } # mapping of environment variables to add
     steps:
       - run: cd ..
+      
       - uses: actions/setup-node@v1
       - name: compiling ...
         run: ls -R
