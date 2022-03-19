@@ -26,16 +26,17 @@ jobs:
   build:
     runs-on: macos-latest
     env:
-      workingDirectory: ./dental-clinic-system/landing-page
+      workingDirectory: ./landing-page
     # - script: # script path or inline
     #   workingDirectory: #
     #   displayName: #
     #   failOnStderr: #
     #   env: { string: string } # mapping of environment variables to add
     steps:
+      - uses: actions/setup-node@v1
       - name: compiling ...
-        uses: actions/setup-node@v1
+        run: ls -R
+        working-directory: ./landing-page
       - run: echo compiling ... 
-      - run: cd ..
       - run: ls
       - run: yarn build
