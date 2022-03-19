@@ -25,6 +25,8 @@ on: [push, pull_request]
 jobs:
   build:
     runs-on: macos-latest
+    env:
+      workingDirectory: ./landing-page
     # - script: # script path or inline
     #   workingDirectory: #
     #   displayName: #
