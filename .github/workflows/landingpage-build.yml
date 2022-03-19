@@ -25,19 +25,14 @@ on: [push, pull_request]
 jobs:
   build:
     runs-on: macos-latest
-    - script: # script path or inline
-      workingDirectory: #
-      displayName: #
-      failOnStderr: #
-      env: { string: string } # mapping of environment variables to add
+    # - script: # script path or inline
+    #   workingDirectory: #
+    #   displayName: #
+    #   failOnStderr: #
+    #   env: { string: string } # mapping of environment variables to add
     steps:
       - name: compiling ...
         uses: actions/setup-node@v1
-      # - script: # script path or inline
-      #     workingDirectory: #
-      #     displayName: #
-      #     failOnStderr: #
-      #     env:  # mapping of environment variables to add
       - run: echo compiling ... 
       - run: ls
       - run: yarn build
