@@ -28,7 +28,6 @@ jobs:
     env:
       workingDirectory: $(System.DefaultWorkingDirectory)
     # - script: # script path or inline
-    #   workingDirectory: #
     #   displayName: #
     #   failOnStderr: #
     #   env: { string: string } # mapping of environment variables to add
