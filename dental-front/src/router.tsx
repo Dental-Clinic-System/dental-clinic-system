@@ -3,8 +3,6 @@ import { Navigate } from 'react-router-dom';
 import { PartialRouteObject } from 'react-router';
 
 import SidebarLayout from 'src/layouts/SidebarLayout';
-import BaseLayout from 'src/layouts/BaseLayout';
-
 import SuspenseLoader from 'src/components/SuspenseLoader';
 
 const Loader = (Component) => (props) => (
@@ -30,15 +28,10 @@ const UserSettings = Loader(lazy(() => import('src/pages/Applications/Users/Sett
 
 // Components
 
-const Buttons = Loader(lazy(() => import('src/pages/Buttons')));
-const Modals = Loader(lazy(() => import('src/pages/Modals')));
-const Accordions = Loader(lazy(() => import('src/pages/Accordions')));
-const Tabs = Loader(lazy(() => import('src/pages/Tabs')));
-const Badges = Loader(lazy(() => import('src/pages/Badges')));
-const Tooltips = Loader(lazy(() => import('src/pages/Tooltips')));
-const Avatars = Loader(lazy(() => import('src/pages/Avatars')));
-const Cards = Loader(lazy(() => import('src/pages/Cards')));
-const Forms = Loader(lazy(() => import('src/pages/Forms')));
+const Users = Loader(lazy(() => import('src/pages/Users')));
+const Clinics = Loader(lazy(() => import('src/pages/Clinics')));
+const Patients = Loader(lazy(() => import('src/pages/Patients')));
+const Services = Loader(lazy(() => import('src/pages/Services')));
 
 const routes: PartialRouteObject[] = [
   {
@@ -120,50 +113,21 @@ const routes: PartialRouteObject[] = [
     ),
     children: [
       {
-        path: '/',
-        element: (
-          <Navigate
-            to="/components/buttons"
-            replace
-          />
-        )
+        path: 'clinics',
+        element: <Clinics />
       },
       {
-        path: 'buttons',
-        element: <Buttons />
+        path: 'users',
+        element: <Users />
       },
       {
-        path: 'modals',
-        element: <Modals />
+        path: 'patients',
+        element: <Patients />
       },
       {
-        path: 'accordions',
-        element: <Accordions />
-      },
-      {
-        path: 'tabs',
-        element: <Tabs />
-      },
-      {
-        path: 'badges',
-        element: <Badges />
-      },
-      {
-        path: 'tooltips',
-        element: <Tooltips />
-      },
-      {
-        path: 'avatars',
-        element: <Avatars />
-      },
-      {
-        path: 'cards',
-        element: <Cards />
-      },
-      {
-        path: 'forms',
-        element: <Forms />
-      },
+        path: 'services',
+        element: <Services />
+      }
     ]
   }
 ];
