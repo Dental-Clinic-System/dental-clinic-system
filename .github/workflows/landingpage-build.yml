@@ -1,21 +1,23 @@
 name: landingpage-build
-on: [push, pull_request]
+on: [pull_request]
+defaults:
+  run:
+    working-directory: "./landing-page"
 jobs:
-  deploy:
-    runs-on: macos-latest
-    env:
-      workingDirectory: landing-page
+  build_and_deploy:
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@main
 
       - name: installing modules
         run: yarn && yarn add firebase-tools
-        working-directory: ${{env.workingDirectory}}
 
       - name: building ...
         run: yarn build
-        working-directory: ${{env.workingDirectory}}
 
-      - name: deploying ...
-        run: yarn deploy --token "1//0e1BZH0Sff2ABCgYIARAAGA4SNwF-L9Irw0QPpTwQYQcQ9NICqmtl_91qNxND8bECT_lFIQtWBt1ED2rbFkuMTZ-s3Q79snbemwo"
-        working-directory: ${{env.workingDirectory}}
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: "${{ secrets.GITHUB_TOKEN }}"
+          firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_DENTAL_CLINIC_1B3F5 }}"
+          channelId: live
+          projectId: dental-clinic-1b3f5
