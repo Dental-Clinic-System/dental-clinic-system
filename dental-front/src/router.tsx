@@ -13,7 +13,7 @@ const Loader = (Component) => (props) => (
 
 // Pages
 
-const Overview = Loader(lazy(() => import('src/pages/Overview')));
+const Overview = Loader(lazy(() => import('src/pages/overview')));
 const Login  = Loader(lazy(() => import('src/pages/Login')));
 
 // Dashboards
@@ -22,9 +22,9 @@ const Dashboard = Loader(lazy(() => import('src/pages/Dashboards')));
 
 // Applications
 
-const Transactions = Loader(lazy(() => import('src/pages/Applications/Transactions')));
-const UserProfile = Loader(lazy(() => import('src/pages/Applications/Users/Profile')));
-const UserSettings = Loader(lazy(() => import('src/pages/Applications/Users/Settings')));
+const Transactions = Loader(lazy(() => import('src/pages/applications/Transactions')));
+const UserProfile = Loader(lazy(() => import('src/pages/applications/Users/Profile')));
+const UserSettings = Loader(lazy(() => import('src/pages/applications/Users/Settings')));
 
 // Components
 
