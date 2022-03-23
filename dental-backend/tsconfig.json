@@ -97,5 +97,24 @@
     /* Completeness */
     // "skipDefaultLibCheck": true,                      /* Skip type checking .d.ts files that are included with TypeScript. */
     "skipLibCheck": true                                 /* Skip type checking all .d.ts files. */
-  }
+  },
+
+  "version": 2,
+  "builds": [
+    {
+      "src": "public/dist/index.ts",
+      "use": "@vercel/node",
+      "config": {
+        "includeFiles": [
+          "public/dist/**"
+        ]
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "public/dist/index.ts"
+    }
+  ]
 }
