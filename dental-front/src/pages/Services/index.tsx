@@ -5,32 +5,33 @@ import { useState, useEffect } from 'react';
 import { ServicesQuery } from "src/hooks/query";
 
 const columns: GridColDef[] = [
-  { field: 'id',headerAlign: 'center', headerName: 'ID',},
+  { field: 'id',headerAlign: 'center', headerName: '№',},
   {
     field: 'classification',
-    headerName: 'Classification',
+    headerName: 'Ангилал',
     width: 150
   },
   {
     field: 'service_name',
-    headerName: 'Service Name',
+    headerName: 'Үйлчилгээний нэр',
     width: 150
   },
   {
     field: 'code',
-    headerName: 'Code',
+    headerName: 'Код',
   },
   {
     field: 'short',
-    headerName: 'Short',
+    headerName: 'Богино',
   },
   {
     field: 'price',
-    headerName: 'Price',
+    headerName: 'Үнэ',
   },
   {
     field: 'description',
-    headerName: 'Description',
+    headerName: 'Тодорхойлолт',
+    width: 150
   },
 ];
 const Users = () => {

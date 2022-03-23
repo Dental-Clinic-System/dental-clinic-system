@@ -20,25 +20,25 @@ export interface MenuItems {
 
 const menuItems: MenuItems[] = [
   {
-    heading: 'Medical',
+    heading: 'Эмчилгээ',
     items: [
       {
-        name: 'Clinics',
+        name: 'Эмнэлэг',
         icon: BeachAccessTwoToneIcon,
         link: '/components/clinics'
       },
       {
-        name: 'Users',
+        name: 'Хэрэглэгчид',
         icon: BallotTwoToneIcon,
         link: '/components/users'
       },
       {
-        name: 'Patients',
+        name: 'Өвчтөнүүд',
         icon: EmojiEventsTwoToneIcon,
         link: '/components/patients'
       },
       {
-        name: 'Services',
+        name: 'Үйлчилгээ',
         icon: FilterVintageTwoToneIcon,
         link: '/components/services'
       },
