@@ -6,61 +6,46 @@ import { useState, useEffect } from 'react';
 
 
 const columns: GridColDef[] = [
-  { field: 'id',headerAlign: 'center', headerName: 'ID', width: 90 },
+  { field: 'id',headerAlign: 'center', headerName: '№', width: 90 },
   {
     field: 'clinic_name',
-    headerName: 'Clinic Name',
+    headerName: 'Эмнэлгийн нэр',
     width: 130
   },
-  // {
-  //   field: 'operation_name',
-  //   headerName: 'Operation Date',
-  // width: 130
-  // },
-  // {
-  //   field: 'operation_date',
-  //   headerName: 'Operation Date',
-  // width: 130
-  // },
   {
     field: 'contact_number',
-    headerName: 'Contact Number',
-    width: 130
-  },
-  {
-    field: 'clinic_web',
-    headerName: 'clinic Web',
-    width: 130
-  },
-  {
-    field: 'official_address',
-    headerName: 'Official Address',
-    width: 130
+    headerName: 'Утас',
+    width: 160
   },
   {
     field: 'email',
-    headerName: 'Email',
-    width: 130
+    headerName: 'Имэйл',
+    width: 170
   },
   {
     field: 'status',
-    headerName: 'Status',
+    headerName: 'Төлөв',
     width: 130
   },
   {
-    field: 'clinic_admin',
-    headerName: 'Clinic Admin',
+    field: 'city',
+    headerName: 'Аймаг, хот',
+    width: 150
+  },
+  {
+    field: 'district',
+    headerName: 'Cум, дүүрэг',
+    width: 140
+  },
+  {
+    field: 'street',
+    headerName: 'Баг, хороо',
     width: 130
   },
   {
-    field: 'work_hours',
-    headerName: 'Work Hours',
-    width: 130
-  },
-  {
-    field: 'phone',
-    headerName: 'Phone',
-    width: 130
+    field: 'address_detail',
+    headerName: 'Дэлгэрэнгүй хаяг',
+    width: 260
   },
 ];
 

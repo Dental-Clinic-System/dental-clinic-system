@@ -4,59 +4,78 @@ import React, { useEffect, useState } from 'react';
 import { UsersQuery } from 'src/hooks/query';
 const columns: GridColDef[] = [
   {
+    field: 'id',
+    headerName: '№',
+    width: 90
+  },
+  {
     field: 'username',
-    headerName: 'Username',
+    headerName: 'Хэрэглэгчийн нэр',
+    width: 150
   },
   {
     field: 'timestamp',
-    headerName: 'Time Stamp',
+    headerName: 'Цаг',
+    width: 100
   },
   {
     field: 'serviceId',
-    headerName: 'Service ID',
+    headerName: 'Үйлчилгээний №',
+    width: 120
   },
   {
     field: 'role',
-    headerName: 'Role',
+    headerName: 'Үүрэг',
+    width: 100
   },
   {
     field: 'phone',
-    headerName: 'Phone',
-    headerAlign: 'left',
-    type: "number",
-  },
-  {
-    field: 'password',
-    headerName: 'Password',
+    headerName: 'Утас',
+    width: 160
   },
   {
     field: 'lastname',
-    headerName: 'Last Name',
+    headerName: 'Овог',
+    width: 130
   },
   {
     field: 'firstname',
-    headerName: 'First Name',
+    headerName: 'Нэр',
+    width: 130
   },
   {
     field: 'email',
-    headerName: 'Email',
+    headerName: 'Имэйл',
     type: "email",
+    width: 170
   },
   {
-    field: 'address',
-    headerName: 'Address',
+    field: 'city',
+    headerName: 'Аймаг, хот',
+    width: 150
+  },
+  {
+    field: 'district',
+    headerName: 'Cум, дүүрэг',
+    width: 140
+  },
+  {
+    field: 'street',
+    headerName: 'Баг, хороо',
+    width: 130
+  },
+  {
+    field: 'address_detail',
+    headerName: 'Дэлгэрэнгүй хаяг',
+    width: 260
   },
   {
     field: 'birth',
-    headerName: 'Birth',
+    headerName: 'Төрсөн өдөр',
   },
   {
     field: 'clinicId',
-    headerName: 'ClinicId',
-  },
-  {
-    field: '_id',
-    headerName: 'id',
+    headerName: 'Эмнэлгийн №',
   },
 ];
 
