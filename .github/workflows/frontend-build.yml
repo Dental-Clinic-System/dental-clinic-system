@@ -15,7 +15,3 @@ jobs:
       - name: building ...
         run: yarn build
         working-directory: ${{env.workingDirectory}}
-
-      - name: deploying ...
-        run: yarn deploy --token "1//0e1BZH0Sff2ABCgYIARAAGA4SNwF-L9Irw0QPpTwQYQcQ9NICqmtl_91qNxND8bECT_lFIQtWBt1ED2rbFkuMTZ-s3Q79snbemwo"
-        working-directory: ${{env.workingDirectory}}
