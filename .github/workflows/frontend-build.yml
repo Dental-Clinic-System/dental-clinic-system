@@ -1,0 +1,17 @@
+name: frontend-build
+on: push
+jobs:
+  deploy:
+    runs-on: macos-latest
+    env:
+      workingDirectory: dental-front
+    steps:
+      - uses: actions/checkout@master
+
+      - name: installing modules
+        run: yarn && yarn add firebase-tools
+        working-directory: ${{env.workingDirectory}}
+
+      - name: building ...
+        run: yarn build
+        working-directory: ${{env.workingDirectory}}

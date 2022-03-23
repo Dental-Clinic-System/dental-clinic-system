@@ -14,17 +14,17 @@ const Loader = (Component) => (props) => (
 // Pages
 
 const Overview = Loader(lazy(() => import('src/pages/overview')));
-const Login  = Loader(lazy(() => import('src/pages/Login')));
+const Login  = Loader(lazy(() => import('src/pages/login')));
 
 // Dashboards
 
-const Dashboard = Loader(lazy(() => import('src/pages/Dashboards')));
+const Dashboard = Loader(lazy(() => import('src/pages/dashboards')));
 
 // Applications
 
 const Transactions = Loader(lazy(() => import('src/pages/applications/Transactions')));
-const UserProfile = Loader(lazy(() => import('src/pages/applications/Users/Profile')));
-const UserSettings = Loader(lazy(() => import('src/pages/applications/Users/Settings')));
+const UserProfile = Loader(lazy(() => import('src/pages/applications/Users/profile')));
+const UserSettings = Loader(lazy(() => import('src/pages/applications/Users/settings')));
 
 // Components
 
