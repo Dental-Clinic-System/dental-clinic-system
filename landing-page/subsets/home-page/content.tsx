@@ -106,37 +106,6 @@ export const HomePageContent = () => {
           />
         </Grid>
 
-        <Grid item xs={6}>
-          <QuestionSection
-            label="Хариуцсан ажилтны мэдээлэл"
-            onChange={onChange}
-            questions={[
-              {
-                id: 'admin_number',
-                question: 'Утас',
-                type: 'number',
-                grid: { xs: 12 },
-                error: !formData['admin_number'],
-              },
-              {
-                id: 'admin_email',
-                question: 'Имэйл',
-                type: 'input',
-                grid: { xs: 12 },
-                error: !formData['admin_email'],
-              },
-              { id: 'admin_name', question: 'Нэр', type: 'input', grid: { xs: 12 }, error: !formData['admin_name'] },
-              {
-                id: 'position',
-                question: 'Албан тушаал',
-                type: 'input',
-                grid: { xs: 12 },
-                error: !formData['position'],
-              },
-            ]}
-          />
-        </Grid>
-
         <Grid item container xs={6} justifyContent="flex-end">
           <Grid item xs={4}>
             <Button onClick={onSubmit} fullWidth variant="contained">
