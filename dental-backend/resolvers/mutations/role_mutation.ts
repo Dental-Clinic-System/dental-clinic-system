@@ -17,7 +17,7 @@ export const role_mutation = {
             .then(() => {
                 console.log("role deleted");
             })
-            .catch((error) => {
+            .catch((error:any) => {
                 console.log(error);
             });
     },
@@ -27,7 +27,7 @@ export const role_mutation = {
             .then(() => {
                 console.log('role updated')
             })
-            .catch((error) => {
+            .catch((error:any) => {
                 console.log(error);
             });
     }

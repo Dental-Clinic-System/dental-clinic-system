@@ -17,7 +17,7 @@ export const clinic_mutation = {
             .then(() => {
                 console.log("clinic deleted");
             })
-            .catch((error) => {
+            .catch((error:any) => {
                 console.log(error);
             });
     },
@@ -27,7 +27,7 @@ export const clinic_mutation = {
             .then(() => {
                 console.log('clinic updated')
             })
-            .catch((error) => {
+            .catch((error:any) => {
                 console.log(error);
             });
     },

@@ -17,7 +17,7 @@ export const permission_mutation = {
             .then(() => {
                 console.log("permission deleted");
             })
-            .catch((error) => {
+            .catch((error :any) => {
                 console.log(error);
             });
     },
@@ -27,7 +27,7 @@ export const permission_mutation = {
             .then(() => {
                 console.log('permission updated')
             })
-            .catch((error) => {
+            .catch((error:any) => {
                 console.log(error);
             });
     },

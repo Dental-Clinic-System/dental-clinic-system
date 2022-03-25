@@ -17,7 +17,7 @@ export const service_mutation = {
             .then(() => {
                 console.log("service deleted");
             })
-            .catch((error) => {
+            .catch((error:any) => {
                 console.log(error);
             });
     },
@@ -27,7 +27,7 @@ export const service_mutation = {
             .then(() => {
                 console.log('service updated')
             })
-            .catch((error) => {
+            .catch((error:any) => {
                 console.log(error);
             });
     },
