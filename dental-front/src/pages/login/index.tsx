@@ -1,6 +1,6 @@
 import { Link as RouterLink } from 'react-router-dom';
 
-import Logo from 'src/components/LogoSign';
+import Logo from 'src/components/logoSign';
 
 import { styled } from '@mui/material/styles';
 import {
@@ -11,7 +11,7 @@ import {
     Link,
     Stack,
 } from '@mui/material';
-import { LoginForm } from './LoginForm';
+import { LoginForm } from './loginForm';
 
 const RootStyle = styled(Box)(({ theme }) => ({
     [theme.breakpoints.up('md')]: {

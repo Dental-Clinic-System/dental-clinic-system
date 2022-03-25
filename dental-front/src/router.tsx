@@ -2,8 +2,8 @@ import { Suspense, lazy } from 'react';
 import { Navigate } from 'react-router-dom';
 import { PartialRouteObject } from 'react-router';
 
-import SidebarLayout from 'src/layouts/SidebarLayout';
-import SuspenseLoader from 'src/components/SuspenseLoader';
+import SidebarLayout from 'src/layouts/sidebarLayout';
+import SuspenseLoader from 'src/components/suspenseLoader';
 
 const Loader = (Component) => (props) => (
   <Suspense fallback={<SuspenseLoader />}>
@@ -13,18 +13,18 @@ const Loader = (Component) => (props) => (
 
 // Pages
 
-const Login  = Loader(lazy(() => import('src/pages/Login')));
+const Login  = Loader(lazy(() => import('src/pages/login')));
 
 // Dashboards
 
-const Dashboard = Loader(lazy(() => import('src/pages/Dashboards')));
+const Dashboard = Loader(lazy(() => import('src/pages/dashboards')));
 
 // Components
 
-const Users = Loader(lazy(() => import('src/pages/Users')));
-const Clinics = Loader(lazy(() => import('src/pages/Clinics')));
-const Patients = Loader(lazy(() => import('src/pages/Patients')));
-const Services = Loader(lazy(() => import('src/pages/Services')));
+const Users = Loader(lazy(() => import('src/pages/users')));
+const Clinics = Loader(lazy(() => import('src/pages/clinics')));
+const Patients = Loader(lazy(() => import('src/pages/patients')));
+const Services = Loader(lazy(() => import('src/pages/services')));
 
 const routes: PartialRouteObject[] = [
   {

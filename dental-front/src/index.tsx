@@ -6,7 +6,7 @@ import { HelmetProvider } from 'react-helmet-async';
 import { BrowserRouter } from 'react-router-dom';
 
 import 'nprogress/nprogress.css';
-import { SidebarProvider } from './contexts/SidebarContext';
+import { SidebarProvider } from './contexts/sidebarContext';
 import {
   ApolloClient,
   InMemoryCache,

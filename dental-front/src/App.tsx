@@ -3,7 +3,7 @@ import routes from './router';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 
-import ThemeProvider from './theme/ThemeProvider';
+import ThemeProvider from './theme/themeProvider';
 import { CssBaseline } from '@mui/material';
 
 const App = () => {
