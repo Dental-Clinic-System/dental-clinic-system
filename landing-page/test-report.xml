@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testExecutions version="1">
+  <file path="/Users/khashotgonjargal/Developer/dental-clinic-system/landing-page/__tests__/footer.spec.tsx">
+    <testCase name="Footer renders Footer component" duration="28"/>
+  </file>
+  <file path="/Users/khashotgonjargal/Developer/dental-clinic-system/landing-page/__tests__/navigation-bar.spec.tsx">
+    <testCase name="NavigationBar renders NavigationBar component" duration="91"/>
+  </file>
+</testExecutions>
