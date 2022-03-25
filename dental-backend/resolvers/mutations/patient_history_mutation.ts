@@ -17,7 +17,7 @@ export const patient_history_mutation = {
             .then(() => {
                 console.log("patient history deleted");
             })
-            .catch((error) => {
+            .catch((error:any) => {
                 console.log(error);
             });
     },
@@ -27,7 +27,7 @@ export const patient_history_mutation = {
             .then(() => {
                 console.log('patient history updated')
             })
-            .catch((error) => {
+            .catch((error:any) => {
                 console.log(error);
             });
     },

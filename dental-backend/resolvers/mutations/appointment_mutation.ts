@@ -17,7 +17,7 @@ export const appointment_mutation = {
             .then(() => {
                 console.log("appointment deleted");
             })
-            .catch((error) => {
+            .catch((error:any) => {
                 console.log(error);
             });
     },
@@ -27,7 +27,7 @@ export const appointment_mutation = {
             .then(() => {
                 console.log('appointment updated')
             })
-            .catch((error) => {
+            .catch((error:any) => {
                 console.log(error);
             });
     },
