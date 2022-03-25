@@ -93,20 +93,20 @@ function Clinics(props: WithStyles<typeof styles>) {
     {
       field: 'clinic_name',
       headerName: 'Эмнэлгийн нэр',
-      width: 130,
+      flex: 1,
       editable: true
     },
     {
       field: 'contact_number',
       headerName: 'Утас',
       type: 'number',
-      width: 160,
+      flex: 1,
       editable: true
     },
     {
       field: 'email',
       headerName: 'Имэйл',
-      width: 170,
+      flex: 1,
       editable: true
     },
     {
@@ -158,16 +158,25 @@ function Clinics(props: WithStyles<typeof styles>) {
                 <Button variant='contained' sx={{ mt: 2 }}>Хадгалах</Button>
               </Box>}
           </Modal>
-          <DataGrid
-            getRowId={(row) => row._id}
-            rows={clinics}
-            columns={columns}
-            pageSize={5}
-            rowsPerPageOptions={[5]}
-            onSelectionModelChange={(itm: Array<string>) => {
-              setSelectedClinic(clinics.filter((e: clinicType) => e._id === itm[0])[0])
-            }}
-          />
+          <Box sx={{
+            height: "100%",
+            width: '100%',
+            borderRadius: 40,
+            padding: "5%",
+            paddingTop: "2%"
+          }}>
+            <DataGrid
+              className={classes.root}
+              getRowId={(row) => row._id}
+              rows={clinics}
+              columns={columns}
+              pageSize={5}
+              rowsPerPageOptions={[5]}
+              onSelectionModelChange={(itm: Array<string>) => {
+                setSelectedClinic(clinics.filter((e: clinicType) => e._id === itm[0])[0])
+              }}
+            />
+          </Box>
         </>
       }
     </div >

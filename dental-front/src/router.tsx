@@ -17,7 +17,7 @@ const Login  = Loader(lazy(() => import('src/pages/Login')));
 
 // Dashboards
 
-const Dashboard = Loader(lazy(() => import('src/pages/Dashboards')));
+const Dashboard = Loader(lazy(() => import('src/pages/dashboards')));
 
 // Applications
 

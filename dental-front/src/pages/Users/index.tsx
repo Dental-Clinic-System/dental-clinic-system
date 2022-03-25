@@ -112,15 +112,21 @@ function Users(props: WithStyles<typeof styles>) {
           </Typography>
         </Container>
         :
-        <div style={{ height: '100%', width: '100%', justifyContent: "space-between" }}>
+        <Box sx={{
+          height: "100%",
+          width: '100%',
+          borderRadius: 40,
+          padding: "5%"
+        }}>
           <DataGrid
+            className={classes.root}
             getRowId={(row) => row._id}
             rows={users}
             columns={columns}
-            pageSize={20}
-            rowsPerPageOptions={[10]}
+            pageSize={5}
+            rowsPerPageOptions={[5]}
           />
-        </div>
+        </Box>
       }
     </>
   );
