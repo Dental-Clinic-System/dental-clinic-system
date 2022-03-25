@@ -20,8 +20,13 @@ export interface MenuItems {
 
 const menuItems: MenuItems[] = [
   {
-    heading: 'Эмчилгээ',
+    heading: '',
     items: [
+      {
+        name: 'Хяналтын самбар',
+        icon: EmojiEventsTwoToneIcon,
+        link: '/components/dashboard'
+      },
       {
         name: 'Эмнэлэг',
         icon: BeachAccessTwoToneIcon,

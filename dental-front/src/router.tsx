@@ -13,7 +13,6 @@ const Loader = (Component) => (props) => (
 
 // Pages
 
-const Overview = Loader(lazy(() => import('src/pages/overview')));
 const Login  = Loader(lazy(() => import('src/pages/Login')));
 
 // Dashboards
@@ -22,12 +21,9 @@ const Dashboard = Loader(lazy(() => import('src/pages/Dashboards')));
 
 // Applications
 
-const Transactions = Loader(lazy(() => import('src/pages/applications/Transactions')));
-const UserProfile = Loader(lazy(() => import('src/pages/applications/Users/Profile')));
-const UserSettings = Loader(lazy(() => import('src/pages/applications/Users/Settings')));
+const Appointments = Loader(lazy(() => import('src/pages/Appointments')));
 
 // Components
-
 const Users = Loader(lazy(() => import('src/pages/Users')));
 const Clinics = Loader(lazy(() => import('src/pages/Clinics')));
 const Patients = Loader(lazy(() => import('src/pages/Patients')));
@@ -39,79 +35,19 @@ const routes: PartialRouteObject[] = [
     element: <Login />,
   },
   {
-    path: '*',
+    path: 'components',
     element: (
       <SidebarLayout />
-    ),
-    children: [
-      {
-        path: '/',
-        element: (
-          <Navigate
-            to="/dashboard"
-            replace
-          />
-        )
-      },
-      {
-        path: 'overview',
-        element: <Overview />
-      },
+      ),
+      children: [
       {
         path: 'dashboard',
         element: <Dashboard />
       },
-    ]
-  },
-  {
-    path: 'management',
-    element: (
-      <SidebarLayout />
-    ),
-    children: [
       {
-        path: '/',
-        element: (
-          <Navigate
-            to="/management/transactions"
-            replace
-          />
-        )
+        path: 'appointments',
+        element: <Appointments />
       },
-      {
-        path: 'transactions',
-        element: <Transactions />
-      },
-      {
-        path: 'profile',
-        children: [
-          {
-            path: '/',
-            element: (
-              <Navigate
-                to="details"
-                replace
-              />
-            )
-          },
-          {
-            path: 'details',
-            element: <UserProfile />
-          },
-          {
-            path: 'settings',
-            element: <UserSettings />
-          },
-        ]
-      }
-    ]
-  },
-  {
-    path: 'components',
-    element: (
-      <SidebarLayout />
-    ),
-    children: [
       {
         path: 'clinics',
         element: <Clinics />

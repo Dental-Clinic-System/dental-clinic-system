@@ -13,21 +13,21 @@ export const patient_mutation = {
     },
 
     async deletePatient(_: any, params: any) {
-        PatientModel.findByIdAndDelete({ _id: params._patientId })
+        PatientModel.findByIdAndDelete({ _id: params._id })
             .then(() => {
                 console.log("patient deleted");
             })
-            .catch((error) => {
+            .catch((error:any) => {
                 console.log(error);
             });
     },
 
-    async updatePatient(_: any, { _patientId, ...params }: any) {
-        PatientModel.findByIdAndUpdate(_patientId, params)
+    async updatePatient(_: any, { _id, ...params }: any) {
+        PatientModel.findByIdAndUpdate(_id, params)
             .then(() => {
                 console.log('patient updated')
             })
-            .catch((error) => {
+            .catch((error:any) => {
                 console.log(error);
             });
     },

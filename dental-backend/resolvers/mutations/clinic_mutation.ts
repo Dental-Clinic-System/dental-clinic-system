@@ -13,21 +13,21 @@ export const clinic_mutation = {
     },
 
     async deleteClinic(_: any, params: any) {
-        ClinicModel.findByIdAndDelete({ _id: params._clinicId })
+        ClinicModel.findByIdAndDelete({ _id: params._id })
             .then(() => {
                 console.log("clinic deleted");
             })
-            .catch((error) => {
+            .catch((error:any) => {
                 console.log(error);
             });
     },
 
-    async updateClinic(_: any, { _clinicId, ...params }: any) {
-        ClinicModel.findByIdAndUpdate(_clinicId, params)
+    async updateClinic(_: any, { _id, ...params }: any) {
+        ClinicModel.findByIdAndUpdate(_id, params)
             .then(() => {
                 console.log('clinic updated')
             })
-            .catch((error) => {
+            .catch((error:any) => {
                 console.log(error);
             });
     },

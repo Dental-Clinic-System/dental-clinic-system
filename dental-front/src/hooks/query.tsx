@@ -85,3 +85,17 @@ query GetPatient($id: String, $lastname: String, $firstname: String, $birth: Str
   }
 }
 `
+export const AppointmentsQuery = gql`
+query AppointmentsQuery($id: String, $userId: String, $patientId: String, $status: String, $clinicId: String, $serviceId: String, $date: String, $hour: String) {
+  getAppointments(_id: $id, userId: $userId, patientId: $patientId, status: $status, clinicId: $clinicId, serviceId: $serviceId, date: $date, hour: $hour) {
+    _id
+    userId
+    patientId
+    clinicId
+    status
+    date
+    serviceId
+    hour
+  }
+}
+`
