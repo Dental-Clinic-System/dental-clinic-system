@@ -1,4 +1,5 @@
 import { useQuery } from "@apollo/client";
+import { Container, Typography } from "@mui/material";
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import Box from '@mui/material/Box'
 import { withStyles, WithStyles } from '@mui/styles';
@@ -52,24 +53,30 @@ function Services(props: WithStyles<typeof styles>) {
   const { classes } = props;
 
   useEffect(() => {
-    if (loading == false) setServices(data.getServices)
+    if (error) console.log(error)
+    if (!loading && !error) setServices(data.getServices);
   }, [loading])
 
   return (
-    <Box sx={{
-      height: "100%",
-      width: "100%",
-      padding: "5%",
-    }}>
-      <DataGrid
-        className={classes.root}
-        getRowId={(row) => row._id}
-        rows={services}
-        columns={columns}
-        pageSize={20}
-        rowsPerPageOptions={[10]}
-      />
-    </Box>
+    <>
+      {loading || error ?
+        <Container maxWidth="sm" sx={{ textAlign: "center" }}>
+          <Typography paddingTop='100px' variant="h1" color={error ? "crimson" : ''}>
+            {error ? 'Error' : 'Loading...'}
+          </Typography>
+        </Container>
+        :
+        <div style={{ height: "100%", width: '100%' }}>
+          <DataGrid
+            getRowId={(row) => row._id}
+            rows={services}
+            columns={columns}
+            pageSize={5}
+            rowsPerPageOptions={[5]}
+          />
+        </div>
+      }
+    </>
   );
 }
 export default withStyles(styles)(Services);

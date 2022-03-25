@@ -17,7 +17,7 @@ export const user_mutation = {
             .then(() => {
                 console.log("user deleted");
             })
-            .catch((error) => {
+            .catch((error:any) => {
                 console.log(error);
             });
     },
@@ -27,7 +27,7 @@ export const user_mutation = {
             .then(() => {
                 console.log('user updated')
             })
-            .catch((error) => {
+            .catch((error:any) => {
                 console.log(error);
             });
     },

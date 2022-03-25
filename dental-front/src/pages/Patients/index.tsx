@@ -1,4 +1,5 @@
 import { useQuery } from "@apollo/client";
+import { Container, Typography } from "@mui/material";
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import Box from '@mui/material/Box'
 import { withStyles, WithStyles } from '@mui/styles';
@@ -120,25 +121,31 @@ function Patients(props: WithStyles<typeof styles>) {
 
 
   useEffect(() => {
-    if (loading == false) setPatients(data.getPatients)
+    if (error) console.log(error)
+    if (!loading && !error) setPatients(data.getPatients);
   }, [loading])
 
   return (
-    <Box sx={{
-      height: "100%",
-      width: "100%",
-      padding: "5%",
-      paddingTop: "5%",
-    }}>
-      <DataGrid
-        className={classes.root}
-        getRowId={(row) => row._id}
-        rows={patients}
-        columns={columns}
-        pageSize={20}
-        rowsPerPageOptions={[10]}
-      />
-    </Box>
+    <>
+      {loading || error ?
+        <Container maxWidth="sm" sx={{ textAlign: "center" }}>
+          <Typography paddingTop='100px' variant="h1" color={error ? "crimson" : ''}>
+            {error ? 'Error' : 'Loading...'}
+          </Typography>
+        </Container>
+        :
+        <div style={{ height: '100%', width: '100%', justifyContent: "space-between" }}>
+          <DataGrid
+            getRowId={(row) => row._id}
+            rows={patients}
+            columns={columns}
+            pageSize={20}
+            rowsPerPageOptions={[10]}
+          />
+        </div>
+      }
+    </>
   );
 }
-export default withStyles(styles)(Patients);
+
+export default Patients;
