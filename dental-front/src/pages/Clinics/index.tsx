@@ -5,7 +5,6 @@ import { ADDCLINIC, UPDATECLINIC } from 'src/hooks/mutations';
 import { useQuery, useMutation } from "@apollo/client";
 import { useState, useEffect } from 'react';
 import { Box, Button, Modal, Typography, TextField } from '@mui/material';
-import { AddDataModal } from '../../components/Modal';
 
 const style = {
   position: 'absolute',
@@ -76,6 +75,7 @@ const Clinics = () => {
   useEffect(() => {
     if (loading == false) setClinics(data.getClinics)
   }, [loading])
+  
 
   const columns: GridColDef[] = [
     { field: '_id', headerAlign: 'center', headerName: '№', width: 90 },
@@ -111,7 +111,6 @@ const Clinics = () => {
   return (
     <div style={{ height: "100%", width: '100%' }}>
       <Button variant='contained' onClick={addButton}>Эмнэлэг нэмэх</Button>
-      {/* <AddDataModal openAdd={openAdd}/> */}
       <Modal
         open={open}
         onClose={handleClose}

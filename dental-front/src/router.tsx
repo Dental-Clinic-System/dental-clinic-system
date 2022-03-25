@@ -13,18 +13,11 @@ const Loader = (Component) => (props) => (
 
 // Pages
 
-const Overview = Loader(lazy(() => import('src/pages/overview')));
 const Login  = Loader(lazy(() => import('src/pages/Login')));
 
 // Dashboards
 
 const Dashboard = Loader(lazy(() => import('src/pages/Dashboards')));
-
-// Applications
-
-const Transactions = Loader(lazy(() => import('src/pages/applications/Transactions')));
-const UserProfile = Loader(lazy(() => import('src/pages/applications/Users/Profile')));
-const UserSettings = Loader(lazy(() => import('src/pages/applications/Users/Settings')));
 
 // Components
 
@@ -54,10 +47,6 @@ const routes: PartialRouteObject[] = [
         )
       },
       {
-        path: 'overview',
-        element: <Overview />
-      },
-      {
         path: 'dashboard',
         element: <Dashboard />
       },
@@ -79,10 +68,6 @@ const routes: PartialRouteObject[] = [
         )
       },
       {
-        path: 'transactions',
-        element: <Transactions />
-      },
-      {
         path: 'profile',
         children: [
           {
@@ -93,14 +78,6 @@ const routes: PartialRouteObject[] = [
                 replace
               />
             )
-          },
-          {
-            path: 'details',
-            element: <UserProfile />
-          },
-          {
-            path: 'settings',
-            element: <UserSettings />
           },
         ]
       }
