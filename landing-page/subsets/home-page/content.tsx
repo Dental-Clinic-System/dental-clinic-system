@@ -48,21 +48,7 @@ export const HomePageContent = () => {
                 grid: { xs: 12 },
                 error: !formData['clinicName'],
               },
-              {
-                id: 'operationName',
-                question: 'Үйл ажиллагааны чиглэл',
-                type: 'selector',
-                grid: { xs: 5.4 },
-                error: !formData['operationName'],
-                selections: ['Шүдний эмнэлэг'],
-              },
-              {
-                id: 'operationDate',
-                question: 'Үйл ажиллагаа явуулж эхэлсэн огноо',
-                type: 'input',
-                grid: { xs: 5.4 },
-                error: !formData['operationDate'],
-              },
+            
               {
                 id: 'contactNumber',
                 question: 'Холбоо барих утас',
@@ -70,14 +56,8 @@ export const HomePageContent = () => {
                 grid: { xs: 12 },
                 error: !formData['contactNumber'],
               },
-              { id: 'email', question: 'Имэйл хаяг', type: 'input', grid: { xs: 12 }, error: !formData['email'] },
-              {
-                id: 'clinicWeb',
-                question: 'Эмнэлгийн вэб сайт',
-                type: 'input',
-                grid: { xs: 12 },
-                error: !formData['clinicWeb'],
-              },
+              { id: 'email', question: 'Имэйл хаяг', type: 'input', grid: { xs: 12 }, error: !formData['email'] }
+              
             ]}
           />
         </Grid>
