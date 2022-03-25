@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Box, Grid, TextField, Typography, InputLabel, MenuItem } from '@mui/material';
 
+
+
 type grid = {
   xs?: number;
   sm?: number;
@@ -27,6 +29,7 @@ type QuestionInputType = {
 };
 
 export const QuestionSection = ({ label, width, questions, onChange }: QuestionSectionType) => {
+  // console.log(`here: ${questions}`);
   return (
     <Box width={width || '100%'}>
       <Typography variant="h5" gutterBottom fontWeight={600}>
@@ -43,6 +46,13 @@ export const QuestionSection = ({ label, width, questions, onChange }: QuestionS
 };
 
 const Question = ({ id, question, grid, onChange, selections, error, type }: QuestionType & QuestionInputType) => {
+ 
+  interface IFormInput {
+    firstName: string;
+    lastName: string;
+    age: number;
+  }
+ 
   const [value, setValue] = useState('');
 
   const handleChange = (e: any) => {
