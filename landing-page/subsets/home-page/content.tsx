@@ -9,7 +9,13 @@ import { useFormik } from 'formik';
 import * as yup from 'yup';
 
 const validationSchema = yup.object({
+  clinicName: yup.string().required('Clinic name is required'),
   email: yup.string().email('Enter a valid email').required('Email is required'),
+  contactNumber: yup.string().required('contact number is required '),
+  city: yup.string().required('Please enter a city name') ,
+  district: yup.string().required('Please enter a district name'),
+  sub_district: yup.string().required('Please enter a sub district'),
+  full_address: yup.string().required('Please enter a full address'),
   password: yup.string().min(8, 'Password should be of minimum 8 characters length').required('Password is required'),
 });
 
@@ -19,8 +25,14 @@ export const HomePageContent = () => {
   const [snackBar, setSnackBar] = useState<SnackBatTypeParam>({ open: false, message: '', severity: 'info' });
   const formik = useFormik({
     initialValues: {
-      email: 'foobar@example.com',
+      clinicName:'',
+      email: '',
       password: 'foobar',
+      contactNumber: '',
+      city: '',
+      district: '',
+      sub_district: '',
+      full_address:''
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
@@ -63,18 +75,18 @@ export const HomePageContent = () => {
                 question: 'Эмнэлгийн нэр',
                 type: 'input',
                 grid: { xs: 12 },
-                error: !formData['clinicName'],
-                value: 'wtf',
-                onChange: (str: string) => console.log(str),
+                error: Boolean(formik.errors.clinicName),
+                value: formik.values.clinicName,
+                onChange: formik.handleChange,
               },
               {
                 id: 'contactNumber',
                 question: 'Холбоо барих утас',
                 type: 'input',
                 grid: { xs: 12 },
-                error: !formData['contactNumber'],
-                value: '',
-                onChange: (str: string) => console.log(str),
+                error: Boolean(formik.errors.contactNumber),
+                value: formik.values.contactNumber,
+                onChange: formik.handleChange,
               },
               {
                 id: 'email',
@@ -98,36 +110,36 @@ export const HomePageContent = () => {
                 question: 'Аймаг / хот',
                 type: 'input',
                 grid: { xs: 5.4 },
-                error: !formData['city'],
-                value: '',
-                onChange: (str: string) => console.log(str),
+                error: Boolean(formik.errors.city),
+                value: formik.values.city,
+                onChange: formik.handleChange,
               },
               {
                 id: 'district',
                 question: 'Дүүрэг',
                 type: 'input',
                 grid: { xs: 5.4 },
-                error: !formData['district'],
-                value: '',
-                onChange: (str: string) => console.log(str),
+                error: Boolean(formik.errors.district),
+                value: formik.values.district,
+                onChange: formik.handleChange,
               },
               {
                 id: 'sub_district',
                 question: 'Хороо',
                 type: 'input',
                 grid: { xs: 5.4 },
-                error: !formData['sub_district'],
-                value: '',
-                onChange: (str: string) => console.log(str),
+                error: Boolean(formik.errors.sub_district),
+                value: formik.values.sub_district,
+                onChange: formik.handleChange,
               },
               {
                 id: 'full_address',
                 question: 'Дэлгэрэнгүй хаяг',
                 type: 'input',
                 grid: { xs: 12 },
-                error: !formData['full_address'],
-                value: '',
-                onChange: (str: string) => console.log(str),
+                error: Boolean(formik.errors.full_address),
+                value: formik.values.full_address,
+                onChange: formik.handleChange,
               },
             ]}
           />
