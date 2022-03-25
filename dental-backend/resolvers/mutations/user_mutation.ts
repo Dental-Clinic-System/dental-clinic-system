@@ -13,7 +13,7 @@ export const user_mutation = {
     },
 
     async deleteUser(_: any, params: any) {
-        UserModel.findByIdAndDelete({ _id: params._userId })
+        UserModel.findByIdAndDelete({ _id: params._id })
             .then(() => {
                 console.log("user deleted");
             })
@@ -22,8 +22,8 @@ export const user_mutation = {
             });
     },
 
-    async updateUser(_: any, { _userId, ...params }: any) {
-        UserModel.findByIdAndUpdate(_userId, params)
+    async updateUser(_: any, { _id, ...params }: any) {
+        UserModel.findByIdAndUpdate(_id, params)
             .then(() => {
                 console.log('user updated')
             })

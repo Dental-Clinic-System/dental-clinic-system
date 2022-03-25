@@ -13,7 +13,7 @@ export const role_mutation = {
     },
 
     async deleteRole(_: any, params: any) {
-        RoleModel.findByIdAndDelete({ _id: params._roleId })
+        RoleModel.findByIdAndDelete({ _id: params._id })
             .then(() => {
                 console.log("role deleted");
             })
@@ -22,8 +22,8 @@ export const role_mutation = {
             });
     },
 
-    async updateRole(_: any, { _roleId, ...params }: any) {
-        RoleModel.findByIdAndUpdate(_roleId, params)
+    async updateRole(_: any, { _id, ...params }: any) {
+        RoleModel.findByIdAndUpdate(_id, params)
             .then(() => {
                 console.log('role updated')
             })
