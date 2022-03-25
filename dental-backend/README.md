@@ -10,8 +10,13 @@ Inside ```models``` you can find all schemas, for example: ```appointment_schema
 Same as that ```mutations, typedefs, queries.tsx``` will include all the mutations, typeDefs and queries.
 
 > ### `How to start backend`
+First of all you have to install the dependencies
+```zsh
+npm i 
+```
 
-You can start the backend server simply by
+
+You can start the backend server in local simply by
 ```zsh
 nodemon index.ts
 ```
@@ -25,7 +30,10 @@ MongoDB database connection established successfully
 
 you can communicate directly to server with ```http://localhost:4000/```
 
-
+or simply you can communicate directly with 
+```zsh
+backend: https://dental-backend.vercel.app/
+```
 
 
 
