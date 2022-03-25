@@ -13,7 +13,7 @@ export const appointment_mutation = {
     },
 
     async deleteAppointment(_: any, params: any) {
-        AppointmentModel.findByIdAndDelete({ _id: params._appointmentId })
+        AppointmentModel.findByIdAndDelete({ _id: params._id })
             .then(() => {
                 console.log("appointment deleted");
             })
@@ -22,8 +22,8 @@ export const appointment_mutation = {
             });
     },
 
-    async updateAppointment(_: any, { _appointmentId, ...params }: any) {
-        AppointmentModel.findByIdAndUpdate(_appointmentId, params)
+    async updateAppointment(_: any, { _Id, ...params }: any) {
+        AppointmentModel.findByIdAndUpdate(_Id, params)
             .then(() => {
                 console.log('appointment updated')
             })
