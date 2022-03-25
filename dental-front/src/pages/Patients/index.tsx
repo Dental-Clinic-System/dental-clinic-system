@@ -1,4 +1,5 @@
 import { useQuery } from "@apollo/client";
+import { Container, Typography } from "@mui/material";
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import React, { useEffect, useState } from 'react';
 import { PatientsQuery } from 'src/hooks/query';
@@ -95,19 +96,31 @@ const Patients = () => {
   const [patients, setPatients] = useState([])
 
   useEffect(() => {
-    if (loading == false) setPatients(data.getPatients)
+    if (error) console.log(error)
+    if (!loading && !error) setPatients(data.getPatients);
   }, [loading])
 
   return (
-    <div style={{ height: '100%', width: '100%', justifyContent: "space-between" }}>
-      <DataGrid
-        getRowId={(row) => row._id}
-        rows={patients}
-        columns={columns}
-        pageSize={20}
-        rowsPerPageOptions={[10]}
-      />
-    </div>
+    <>
+      {loading || error ?
+        <Container maxWidth="sm" sx={{ textAlign: "center" }}>
+          <Typography paddingTop='100px' variant="h1" color={error ? "crimson" : ''}>
+            {error ? 'Error' : 'Loading...'}
+          </Typography>
+        </Container>
+        :
+        <div style={{ height: '100%', width: '100%', justifyContent: "space-between" }}>
+          <DataGrid
+            getRowId={(row) => row._id}
+            rows={patients}
+            columns={columns}
+            pageSize={20}
+            rowsPerPageOptions={[10]}
+          />
+        </div>
+      }
+    </>
   );
 }
+
 export default Patients;
