@@ -7,8 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint './**/*.{js,jsx,ts,tsx}' --fix",
     "clean": "rm -rf ./build",
-    "build": "yarn clean && tsc -p ."
-    "start": "nodemon index.ts"
+    "build": "yarn clean && tsc -p .",
+    "start": "nodemon index.ts",
+    "deploy": "vercel"
   },
   "author": "",
   "license": "ISC",

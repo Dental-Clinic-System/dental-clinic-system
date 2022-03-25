@@ -1,0 +1,17 @@
+name: backend-build
+on: push
+jobs:
+  deploy:
+    runs-on: macos-latest
+    env:
+      workingDirectory: dental-backend
+    steps:
+      - uses: actions/checkout@master
+
+      - name: installing modules
+        run: yarn && yarn global add vercel
+        working-directory: ${{env.workingDirectory}}
+
+      - name: deploying ...
+        run: yarn deploy
+        working-directory: ${{env.workingDirectory}}
