@@ -1,0 +1,11 @@
+{
+  "hosting": {
+    "site": "dental-clinic-admin",
+    "public": "build",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
