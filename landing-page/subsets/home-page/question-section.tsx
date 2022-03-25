@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Box, Grid, TextField, Typography, InputLabel, MenuItem } from '@mui/material';
 
 type grid = {
@@ -9,24 +9,22 @@ type grid = {
   xl?: number;
 };
 type QuestionType = {
-  id: string;
+  id?: string;
   question: string;
+  value: string;
+  onChange: any;
   type: 'input' | 'selector' | 'number';
   grid: grid;
   selections?: Array<string>;
-  error?: boolean;
+  error: boolean;
 };
 type QuestionSectionType = {
   label: string;
   width?: string;
-  onChange?: (id: string, question: string, change: string) => void;
   questions: Array<QuestionType>;
 };
-type QuestionInputType = {
-  onChange?: (id: string, question: string, change: string) => void;
-};
 
-export const QuestionSection = ({ label, width, questions, onChange }: QuestionSectionType) => {
+export const QuestionSection = ({ label, width, questions }: QuestionSectionType) => {
   return (
     <Box width={width || '100%'}>
       <Typography variant="h5" gutterBottom fontWeight={600}>
@@ -35,26 +33,23 @@ export const QuestionSection = ({ label, width, questions, onChange }: QuestionS
 
       <Grid container justifyContent="space-between">
         {questions.map((cur, index) => (
-          <Question onChange={onChange} key={`label-question-${index}`} {...cur} />
+          <Question key={`label-question-${index}`} {...cur} />
         ))}
       </Grid>
     </Box>
   );
 };
 
-const Question = ({ id, question, grid, onChange, selections, error, type }: QuestionType & QuestionInputType) => {
-  const [value, setValue] = useState('');
-
-  const handleChange = (e: any) => {
-    onChange && onChange(id, question, e.target.value);
-    setValue(e.target.value);
-  };
+const Question = ({ id, value, question, grid, onChange, selections, error, type }: QuestionType) => {
+  // const handleChange = (e: any) => {
+  //   onChange && onChange(e.target.value);
+  // };
 
   if (type === 'selector')
     return (
       <Grid item {...grid}>
         <InputLabel style={{ marginBottom: '10px', marginTop: '10px' }}>{question}</InputLabel>
-        <TextField fullWidth select value={value} onChange={handleChange} size="small" error={error}>
+        <TextField fullWidth select value={value} onChange={onChange} size="small" error={error}>
           {selections?.map((option, index) => (
             <MenuItem key={`${question}-option-${index}`} value={option}>
               {option}
@@ -68,13 +63,13 @@ const Question = ({ id, question, grid, onChange, selections, error, type }: Que
     return (
       <Grid item {...grid}>
         <InputLabel style={{ marginBottom: '10px', marginTop: '10px' }}>{question}</InputLabel>
-        <TextField type="number" error={error} onChange={handleChange} fullWidth size="small" />
+        <TextField value={value} type="number" error={error} onChange={onChange} fullWidth size="small" />
       </Grid>
     );
   return (
     <Grid item {...grid}>
       <InputLabel style={{ marginBottom: '10px', marginTop: '10px' }}>{question}</InputLabel>
-      <TextField error={error} onChange={handleChange} fullWidth size="small" />
+      <TextField id={id} label={id} name={id} value={value} error={error} onChange={onChange} fullWidth size="small" />
     </Grid>
   );
 };
