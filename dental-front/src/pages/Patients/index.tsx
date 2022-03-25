@@ -1,113 +1,144 @@
 import { useQuery } from "@apollo/client";
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
+import Box from '@mui/material/Box'
+import { withStyles, WithStyles } from '@mui/styles';
 import React, { useEffect, useState } from 'react';
 import { PatientsQuery } from 'src/hooks/query';
+import { Rowing } from "@mui/icons-material";
 
 const columns: GridColDef[] = [
-  { field: 'id', headerName: '№', width: 90 },
+  { field: 'id', headerName: '№',width: 60 },
   {
     field: 'lastname',
     headerName: 'Овог',
-    width: 150,
+    flex: 1,
+    hide: true,
   },
   {
     field: 'firstname',
     headerName: 'Нэр',
-    width: 150,
+    flex: 1,
+    hide: true,
   },
   {
     field: 'birth',
     headerName: 'Төрсөн өдөр',
+    flex: 1,
+    hide: true,
   },
   {
     field: 'age',
     headerName: 'Нас',
-    width: 60,
+    width: 70,
   },
   {
     field: 'registration_number',
     headerName: 'Регистрийн дугаар',
-    width: 120,
+    flex: 1,
   },
   {
     field: 'sex',
     headerName: 'Хүйс',
-    width: 90,
+    width: 80,
   },
   {
     field: 'city',
     headerName: 'Аймаг, хот',
-    width: 150
+    flex: 0.5
   },
   {
     field: 'district',
     headerName: 'Cум, дүүрэг',
-    width: 140
+    flex: 1,
+    hide: true,
   },
   {
     field: 'street',
     headerName: 'Баг, хороо',
-    width: 130
+    flex: 1,
+    hide: true,
   },
   {
     field: 'address_detail',
     headerName: 'Дэлгэрэнгүй хаяг',
-    width: 260
+    flex: 1,
+    hide: true,
   },
   {
     field: 'role',
     headerName: 'Үүрэг',
-    width: 100,
+    flex: 1,
   },
   {
     field: 'phone',
     headerName: 'Утас',
-    width: 160,
+    flex: 1,
   },
   {
     field: 'home_phone',
     headerName: 'Гэрийн утас',
-    width: 150,
+    flex: 1,
+    hide: true,
   },
   {
     field: 'doctor',
     headerName: 'Эмч',
-    width: 140,
+    flex: 1,
+    hide: true,
   },
   {
     field: 'email',
     headerName: 'Имэйл',
-    width: 170,
+    flex: 1,
   },
   {
     field: 'card_number',
     headerName: 'Картны дугаар',
-    width: 150,
+    flex: 1,
+    hide: true,
   },
   {
     field: 'sysdate',
     headerName: 'Огноо',
+    flex: 1,
+    hide: true,
   },
 ];
 
-const Patients = () => {
+const styles = {
+  root: {
+    border: 3,
+    borderRadius: '40',
+    boxShadow: '0 1px 10px 1px lightgrey'
+  }
+}
+
+function Patients(props: WithStyles<typeof styles>) {
   const { loading, error, data } = useQuery(PatientsQuery);
   const [patients, setPatients] = useState([])
+  const { classes } = props;
+
 
   useEffect(() => {
     if (loading == false) setPatients(data.getPatients)
   }, [loading])
 
   return (
-    <div style={{ height: '100%', width: '100%', justifyContent: "space-between" }}>
+    <Box sx={{
+      height: "100%",
+      width: "100%",
+      padding: "5%",
+      paddingTop: "5%",
+    }}>
       <DataGrid
+        className={classes.root}
         getRowId={(row) => row._id}
         rows={patients}
         columns={columns}
         pageSize={20}
         rowsPerPageOptions={[10]}
       />
-    </div>
+    </Box>
   );
 }
-export default Patients;
+export default withStyles(styles)(Patients);

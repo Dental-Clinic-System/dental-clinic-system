@@ -19,8 +19,11 @@ const Login  = Loader(lazy(() => import('src/pages/Login')));
 
 const Dashboard = Loader(lazy(() => import('src/pages/Dashboards')));
 
-// Components
+// Applications
 
+const Appointments = Loader(lazy(() => import('src/pages/Appointments')));
+
+// Components
 const Users = Loader(lazy(() => import('src/pages/Users')));
 const Clinics = Loader(lazy(() => import('src/pages/Clinics')));
 const Patients = Loader(lazy(() => import('src/pages/Patients')));
@@ -32,63 +35,19 @@ const routes: PartialRouteObject[] = [
     element: <Login />,
   },
   {
-    path: '*',
+    path: 'components',
     element: (
       <SidebarLayout />
-    ),
-    children: [
-      {
-        path: '/',
-        element: (
-          <Navigate
-            to="/dashboard"
-            replace
-          />
-        )
-      },
+      ),
+      children: [
       {
         path: 'dashboard',
         element: <Dashboard />
       },
-    ]
-  },
-  {
-    path: 'management',
-    element: (
-      <SidebarLayout />
-    ),
-    children: [
       {
-        path: '/',
-        element: (
-          <Navigate
-            to="/management/transactions"
-            replace
-          />
-        )
+        path: 'appointments',
+        element: <Appointments />
       },
-      {
-        path: 'profile',
-        children: [
-          {
-            path: '/',
-            element: (
-              <Navigate
-                to="details"
-                replace
-              />
-            )
-          },
-        ]
-      }
-    ]
-  },
-  {
-    path: 'components',
-    element: (
-      <SidebarLayout />
-    ),
-    children: [
       {
         path: 'clinics',
         element: <Clinics />

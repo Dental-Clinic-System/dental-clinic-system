@@ -1,102 +1,121 @@
 import { useQuery } from "@apollo/client";
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
+import Box from '@mui/material/Box'
+import { withStyles, WithStyles } from '@mui/styles';
 import React, { useEffect, useState } from 'react';
 import { UsersQuery } from 'src/hooks/query';
+
 const columns: GridColDef[] = [
   {
     field: 'id',
     headerName: '№',
-    width: 90
+    flex: 1
   },
   {
     field: 'username',
     headerName: 'Хэрэглэгчийн нэр',
-    width: 150
+    flex: 1
   },
   {
     field: 'timestamp',
     headerName: 'Цаг',
-    width: 100
+    flex: 1
   },
   {
     field: 'serviceId',
     headerName: 'Үйлчилгээний №',
-    width: 120
+    flex: 1
   },
   {
     field: 'role',
     headerName: 'Үүрэг',
-    width: 100
+    flex: 1
   },
   {
     field: 'phone',
     headerName: 'Утас',
-    width: 160
+    flex: 1
   },
   {
     field: 'lastname',
     headerName: 'Овог',
-    width: 130
+    flex: 1
   },
   {
     field: 'firstname',
     headerName: 'Нэр',
-    width: 130
+    flex: 1
   },
   {
     field: 'email',
     headerName: 'Имэйл',
     type: "email",
-    width: 170
+    flex: 1
   },
   {
     field: 'city',
     headerName: 'Аймаг, хот',
-    width: 150
+    flex: 1
   },
   {
     field: 'district',
     headerName: 'Cум, дүүрэг',
-    width: 140
+    flex: 1
   },
   {
     field: 'street',
     headerName: 'Баг, хороо',
-    width: 130
+    flex: 1
   },
   {
     field: 'address_detail',
     headerName: 'Дэлгэрэнгүй хаяг',
-    width: 260
+    flex: 1
   },
   {
     field: 'birth',
     headerName: 'Төрсөн өдөр',
+    flex: 1
   },
   {
     field: 'clinicId',
     headerName: 'Эмнэлгийн №',
+    flex: 1
   },
 ];
 
-const Users = () => {
+const styles = {
+  root: {
+    border: 3,
+    borderRadius: '40',
+    boxShadow: '0 1px 10px 1px lightgrey'
+  }
+}
+
+function Users(props: WithStyles<typeof styles>) {
   const { loading, error, data } = useQuery(UsersQuery);
   const [users, setUsers] = useState([])
+  const { classes } = props;
 
   useEffect(() => {
     if (loading == false) setUsers(data.getUsers)
   }, [loading])
 
   return (
-    <div style={{ height: '100%', width: '100%', justifyContent: "space-between" }}>
+    <Box sx={{
+      height: "100%",
+      width: "100%",
+      padding: "5%",
+    }}>
       <DataGrid
+        className={classes.root}
         getRowId={(row) => row._id}
         rows={users}
         columns={columns}
         pageSize={20}
         rowsPerPageOptions={[10]}
       />
-    </div>
+    </Box>
   );
 }
-export default Users;
+export default withStyles(styles)(Users);
