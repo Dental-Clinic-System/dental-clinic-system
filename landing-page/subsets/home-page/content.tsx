@@ -5,20 +5,9 @@ import { QuestionSection } from './question-section';
 import { ADDCLINIC } from '../../graphql';
 import { useMutation } from '@apollo/client';
 import { SnackBar, SnackBatTypeParam } from '../../components/';
-import {useForm, SubmitHandler} from 'react-hook-form';
-
-interface IFormInput {
-  firstName: string;
-  lastName: string;
-} // react-hook-form
 
 
 export const HomePageContent = () => {
-  const {register, handleSubmit, watch, formState: { errors}} = useForm<IFormInput>()
-  const formSubmitHandler: SubmitHandler<IFormInput> = (data: IFormInput) => {
-    console.log(data)
-  } // react-hook-form
-
 
   const [formData, setFormData] = useState<any>({});
   const [AddClinic] = useMutation(ADDCLINIC);
@@ -40,39 +29,13 @@ export const HomePageContent = () => {
     }
   };
 
-  // interface IFormInput {
-  //   clinicName: string;
-  //   operationName: string;
-  //   operationDate: number;
-  //   contactNumber: number;
-  //   email: string;
-  //   clinicWeb: string;
-  // }
-
-  // const { register, handleSubmit } = useForm<IFormInput>();
   
 
+  
   return (
-
-    
-
-    
-
-   
-
     <Box width="100vw" display="flex" flexDirection="column" alignItems="center" marginY={5}>
-
-
-       <form onSubmit={handleSubmit(formSubmitHandler)}>
-      <TextField  error={!!errors.firstName} {...register("firstName", { required: true, maxLength: 20 })} />
-      {/* {errors.firstName && <FormHelperText > This field is required</FormHelperText>} */}
-      <TextField  error={!!errors.lastName}{...register("lastName", { required: true, pattern: /^[A-Za-z]+$/i })} />
-
-      <TextField type="submit" />
-    </form>
-
-
       <Grid container justifyContent="center" columns={{ xs: 11 }} rowSpacing={5}>
+
         <Grid item xs={6} sm={6} md={6} lg={6} xl={6}>
           <QuestionSection
             onChange={onChange}
@@ -157,14 +120,19 @@ export const HomePageContent = () => {
             </Button>
           </Grid>
         </Grid>
+      
       </Grid>
+      
 
       <SnackBar
         open={snackBar.open}
         handleClose={() => setSnackBar({ ...snackBar, open: false })}
         message={snackBar.message}
-        severity={snackBar.severity}
+        severity={snackBar.severity}   
       />
+
     </Box>
   );
 };
+// };
+
