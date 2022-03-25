@@ -1,18 +1,5 @@
 import React, { useState } from 'react';
 import { Box, Grid, TextField, Typography, InputLabel, MenuItem } from '@mui/material';
-import { useFormik } from 'formik';
-import * as yup from 'yup';
-
-const validationSchema = yup.object({
-  email: yup
-    .string()
-    .email('Enter a valid email')
-    .required('Email is required'),
-  password: yup
-    .string()
-    .min(8, 'Password should be of minimum 8 characters length')
-    .required('Password is required'),
-});
 
 type grid = {
   xs?: number;
@@ -40,7 +27,7 @@ type QuestionInputType = {
 };
 
 export const QuestionSection = ({ label, width, questions, onChange }: QuestionSectionType) => {
-  // console.log(`here: ${questions}`);
+ 
   return (
     <Box width={width || '100%'}>
       <Typography variant="h5" gutterBottom fontWeight={600}>
@@ -58,11 +45,7 @@ export const QuestionSection = ({ label, width, questions, onChange }: QuestionS
 
 const Question = ({ id, question, grid, onChange, selections, error, type }: QuestionType & QuestionInputType) => {
  
-  // interface IFormInput {
-  //   firstName: string;
-  //   lastName: string;
-  //   age: number;
-  // }
+  
  
   const [value, setValue] = useState('');
 
