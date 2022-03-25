@@ -13,7 +13,7 @@ export const patient_history_mutation = {
     },
 
     async deletePatientHistory(_: any, params: any) {
-        PatientHistoryModel.findByIdAndDelete({ _id: params._patientHistoryId })
+        PatientHistoryModel.findByIdAndDelete({ _id: params._id })
             .then(() => {
                 console.log("patient history deleted");
             })
@@ -22,8 +22,8 @@ export const patient_history_mutation = {
             });
     },
 
-    async updatePatientHistory(_: any, { _patientHistoryId, ...params }: any) {
-        PatientHistoryModel.findByIdAndUpdate(_patientHistoryId, params)
+    async updatePatientHistory(_: any, { _id, ...params }: any) {
+        PatientHistoryModel.findByIdAndUpdate(_id, params)
             .then(() => {
                 console.log('patient history updated')
             })
