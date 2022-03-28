@@ -40,8 +40,8 @@ export const patientDef = gql`
       doctor: String,
       card_number: String,
       sysdate: String): Patient
-    deletePatient(_patientId: String): String
-    updatePatient(_patientId: String, 
+    deletePatient(_id: String): String
+    updatePatient(_id: String, 
       lastname: String,
       firstname: String,
       birth: String,

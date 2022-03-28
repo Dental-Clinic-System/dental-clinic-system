@@ -14,8 +14,8 @@ export const patientHistoryDef = gql`
       serviceId: String,
       clinicId: String,
       date: String) : PatientHistory
-    deletePatientHistory(_patientHistoryId: String): String
-    updatePatientHistory(_patientHistoryId: String,
+    deletePatientHistory(_id: String): String
+    updatePatientHistory(_id: String,
       patientId: String,
       serviceId: String,
       clinicId: String,
