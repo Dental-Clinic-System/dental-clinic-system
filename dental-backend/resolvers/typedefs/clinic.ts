@@ -55,7 +55,7 @@ input Official_address_type {
         workhours: object
         phone: String
       ): Clinic,
-      deleteClinic(_userId: String): String
+      deleteClinic(_id: String): String
       updateClinic(
         _id: String
         clinic_name: String

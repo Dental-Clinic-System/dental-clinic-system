@@ -30,8 +30,8 @@ export const userDef = gql`
       role: String, 
       clinicId: String, 
       serviceId: String): User
-    deleteUser(_userId: String): String
-    updateUser(_userId: String, 
+    deleteUser(_id: String): String
+    updateUser(_id: String, 
       address: String,
       firstname: String,
       lastname: String,

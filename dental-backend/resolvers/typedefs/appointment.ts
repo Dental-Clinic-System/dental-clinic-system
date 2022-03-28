@@ -20,15 +20,15 @@ export const appointmentDef = gql`
       serviceId: String,
       date: String,
       hour: String) : Appointment
-    deleteAppointment(_appointmentId: String): String
-    updateAppointment(_appointmentId: String,
+    deleteAppointment(_id: String): String
+    updateAppointment(_id: String,
       userId: String
       patientId: String,
       clinicId: String,
       status: String,
       serviceId: String,
       date: String,
-      hour: String): String
+      hour: String): Appointment
   }
 
   type Query {

@@ -9,8 +9,8 @@ export const permissionDef = gql`
 
   type Mutation {
     addPermission(title: String, description: String) : Permission
-    deletePermission(_permissionId: String): String
-    updatePermission(_permissionId: String, title: String, description: String): String
+    deletePermission(_id: String): String
+    updatePermission(_id: String, title: String, description: String): String
   }
 
   type Query {

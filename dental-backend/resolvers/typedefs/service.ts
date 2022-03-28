@@ -18,8 +18,8 @@ export const serviceDef = gql`
       short: String,
       description: String,
       price: String): Service
-    deleteService(_serviceId: String): String
-    updateService(_serviceId: String, 
+    deleteService(_id: String): String
+    updateService(_id: String, 
       classification: String,
       service_name: String,
       code: String,
