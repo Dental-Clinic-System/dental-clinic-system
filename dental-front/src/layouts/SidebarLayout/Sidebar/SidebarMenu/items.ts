@@ -25,27 +25,27 @@ const menuItems: MenuItems[] = [
       {
         name: 'Хяналтын самбар',
         icon: EmojiEventsTwoToneIcon,
-        link: '/components/dashboard'
+        link: '/dashboard'
       },
       {
         name: 'Эмнэлэг',
         icon: BeachAccessTwoToneIcon,
-        link: '/components/clinics'
+        link: '/clinics'
       },
       {
         name: 'Хэрэглэгчид',
         icon: BallotTwoToneIcon,
-        link: '/components/users'
+        link: '/users'
       },
       {
         name: 'Өвчтөнүүд',
         icon: EmojiEventsTwoToneIcon,
-        link: '/components/patients'
+        link: '/patients'
       },
       {
         name: 'Үйлчилгээ',
         icon: FilterVintageTwoToneIcon,
-        link: '/components/services'
+        link: '/services'
       },
     ]
   },

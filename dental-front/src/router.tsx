@@ -17,7 +17,7 @@ const Login  = Loader(lazy(() => import('src/pages/Login')));
 
 // Dashboards
 
-const Dashboard = Loader(lazy(() => import('src/pages/Dashboards')));
+const Dashboard = Loader(lazy(() => import('src/pages/dashboards')));
 
 // Applications
 
@@ -35,15 +35,23 @@ const routes: PartialRouteObject[] = [
     element: <Login />,
   },
   {
-    path: 'components',
+    path: " ",
     element: (
       <SidebarLayout />
-      ),
-      children: [
+    ),
+    children: [
       {
         path: 'dashboard',
         element: <Dashboard />
       },
+    ]
+  },
+  {
+    path: '/',
+    element: (
+      <SidebarLayout />
+      ),
+      children: [
       {
         path: 'appointments',
         element: <Appointments />
