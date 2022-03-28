@@ -41,10 +41,6 @@ export const QuestionSection = ({ label, width, questions }: QuestionSectionType
 };
 
 const Question = ({ id, value, question, grid, onChange, selections, error, type }: QuestionType) => {
-  // const handleChange = (e: any) => {
-  //   onChange && onChange(e.target.value);
-  // };
-
   if (type === 'selector')
     return (
       <Grid item {...grid}>
@@ -69,7 +65,7 @@ const Question = ({ id, value, question, grid, onChange, selections, error, type
   return (
     <Grid item {...grid}>
       <InputLabel style={{ marginBottom: '10px', marginTop: '10px' }}>{question}</InputLabel>
-      <TextField id={id} label={id} name={id} value={value} error={error} onChange={onChange} fullWidth size="small" />
+      <TextField id={id} value={value} error={error} onChange={onChange} fullWidth size="small" />
     </Grid>
   );
 };

@@ -11,58 +11,40 @@ import * as yup from 'yup';
 const validationSchema = yup.object({
   clinicName: yup.string().required('Clinic name is required'),
   email: yup.string().email('Enter a valid email').required('Email is required'),
-  contactNumber: yup.string().required('contact number is required '),
+  phone: yup.string().required('contact number is required '),
   city: yup.string().required('Please enter a city name'),
   district: yup.string().required('Please enter a district name'),
   sub_district: yup.string().required('Please enter a sub district'),
   full_address: yup.string().required('Please enter a full address'),
 });
-// password: yup.string().min(8, 'Password should be of minimum 8 characters length').required('Password is required'),
 
 export const HomePageContent = () => {
-  const [formData, setFormData] = useState<any>({});
   const [AddClinic] = useMutation(ADDCLINIC);
   const [snackBar, setSnackBar] = useState<SnackBatTypeParam>({ open: false, message: '', severity: 'info' });
-  // password: 'foobar',
+
   const formik = useFormik({
     initialValues: {
       clinicName: '',
       email: '',
-      contactNumber: '',
+      phone: '',
       city: '',
       district: '',
       sub_district: '',
-      full_address: ''
+      full_address: '',
     },
     validationSchema: validationSchema,
-    onSubmit: (values) => {
-      console.log('sss')
-      alert(JSON.stringify(values, null, 2));
-      // setSnackBar({ message: 'Хүсэлт илгээж байна.', open: true, severity: 'info' });
-      // try {
-      //   await AddClinic({ variables: formData });
+    onSubmit: async (values) => {
+      setSnackBar({ message: 'Хүсэлт илгээж байна.', open: true, severity: 'info' });
+      try {
+        await AddClinic({ variables: values });
 
-      //   setSnackBar({ message: 'Таны хүсэлтийг хүлээж авлаа.', open: true, severity: 'success' });
-      // } catch (error) {
-      //   setSnackBar({ message: 'Та мэдээллээ бүтэн оруулна уу!!', open: true, severity: 'error' });
-      // }
+        setSnackBar({ message: 'Таны хүсэлтийг хүлээж авлаа.', open: true, severity: 'success' });
+      } catch (error) {
+        console.log(error);
+        setSnackBar({ message: 'Хүсэлт илгээхэд алдаа гарлаа.', open: true, severity: 'error' });
+      }
     },
   });
-
-  const onChange = (id: string, _: string, change: string) => {
-    setFormData({ ...formData, [id]: change });
-  };
-
-  const onSubmit = async () => {
-    setSnackBar({ message: 'Хүсэлт илгээж байна.', open: true, severity: 'info' });
-    try {
-      await AddClinic({ variables: formData });
-
-      setSnackBar({ message: 'Таны хүсэлтийг хүлээж авлаа.', open: true, severity: 'success' });
-    } catch (error) {
-      setSnackBar({ message: 'Та мэдээллээ бүтэн оруулна уу!!', open: true, severity: 'error' });
-    }
-  };
 
   return (
     <Box width="100vw" display="flex" flexDirection="column" alignItems="center" marginY={5}>
@@ -82,12 +64,12 @@ export const HomePageContent = () => {
                   onChange: formik.handleChange,
                 },
                 {
-                  id: 'contactNumber',
+                  id: 'phone',
                   question: 'Холбоо барих утас',
                   type: 'input',
                   grid: { xs: 12 },
-                  error: Boolean(formik.errors.contactNumber),
-                  value: formik.values.contactNumber,
+                  error: Boolean(formik.errors.phone),
+                  value: formik.values.phone,
                   onChange: formik.handleChange,
                 },
                 {
