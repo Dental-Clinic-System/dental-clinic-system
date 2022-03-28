@@ -35,15 +35,23 @@ const routes: PartialRouteObject[] = [
     element: <Login />,
   },
   {
-    path: 'components',
+    path: " ",
     element: (
       <SidebarLayout />
-      ),
-      children: [
+    ),
+    children: [
       {
         path: 'dashboard',
         element: <Dashboard />
       },
+    ]
+  },
+  {
+    path: '/',
+    element: (
+      <SidebarLayout />
+      ),
+      children: [
       {
         path: 'appointments',
         element: <Appointments />

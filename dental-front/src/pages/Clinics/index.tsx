@@ -89,7 +89,7 @@ function Clinics(props: WithStyles<typeof styles>) {
 
 
   const columns: GridColDef[] = [
-    { field: '_id', headerAlign: 'center', headerName: '№', width: 90 },
+    { field: '_id', headerName: '№', flex: 1 },
     {
       field: 'clinic_name',
       headerName: 'Эмнэлгийн нэр',
@@ -99,7 +99,6 @@ function Clinics(props: WithStyles<typeof styles>) {
     {
       field: 'contact_number',
       headerName: 'Утас',
-      type: 'number',
       flex: 1,
       editable: true
     },
@@ -129,7 +128,6 @@ function Clinics(props: WithStyles<typeof styles>) {
         </Container>
         :
         <>
-          <Button variant='contained' onClick={addButton}>Эмнэлэг нэмэх</Button>
           <Modal
             open={open}
             onClose={handleClose}
@@ -164,13 +162,21 @@ function Clinics(props: WithStyles<typeof styles>) {
             borderRadius: 40,
             padding: "5%",
             paddingTop: "2%"
+
           }}>
+            <Box sx={{
+              display: 'flex',
+              flexDirection: 'row-reverse',
+              justifyContent: "flex-start",
+            }}>
+              <Button sx={{marginTop: "-15px", marginBottom: "15px"}}variant='contained' onClick={addButton}>Эмнэлэг нэмэх</Button>
+            </Box>
             <DataGrid
               className={classes.root}
               getRowId={(row) => row._id}
               rows={clinics}
               columns={columns}
-              pageSize={5}
+              pageSize={10}
               rowsPerPageOptions={[5]}
               onSelectionModelChange={(itm: Array<string>) => {
                 setSelectedClinic(clinics.filter((e: clinicType) => e._id === itm[0])[0])
