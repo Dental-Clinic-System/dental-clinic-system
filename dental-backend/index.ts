@@ -2,7 +2,7 @@ import { ApolloServer } from "apollo-server"
 
 import mongoose from "mongoose"
 import "dotenv/config"
-import { appointmentDef, clinicDef, patientDef, patientHistoryDef, permissionDef, roleDef, serviceDef, userDef } from './resolvers/typedefs'
+import { appointmentDef, clinicDef, patientDef, patientHistoryDef, permissionDef, roleDef, serviceDef, userDef, provinceDef, districtDef, committeeDef } from './resolvers/typedefs'
 import { Mutation } from "./resolvers/mutations"
 import queries from "./resolvers/query"
 
@@ -19,7 +19,10 @@ const typeDefs = [
   permissionDef,
   roleDef,
   serviceDef,
-  userDef
+  userDef,
+  provinceDef,
+  districtDef,
+  committeeDef
 ]
 
 const server = new ApolloServer({
