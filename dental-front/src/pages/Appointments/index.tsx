@@ -1,64 +1,81 @@
-import * as React from 'react';
-import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
-import { AlignHorizontalCenter, AlignVerticalCenter } from '@mui/icons-material';
-import { textAlign } from '@mui/system';
+import { useQuery } from "@apollo/client";
+import { DataGrid, GridColDef } from '@mui/x-data-grid';
+import Box from '@mui/material/Box'
+import { withStyles, WithStyles } from '@mui/styles';
+import React, { useEffect, useState } from 'react';
+import { AppointmentsQuery } from 'src/hooks/query';
 
 const columns: GridColDef[] = [
-  { field: 'id',headerAlign: 'center', headerName: 'ID', width: 90 },
+  { field: 'id',headerAlign: 'center', headerName: '№', width: 90 },
   {
-    field: 'firstName',
-    headerName: 'First name',
-    width: 150,
-
-    headerAlign: 'center',
+    field: 'userId',
+    headerName: 'userId',
+    flex: 1
   },
   {
-    field: 'lastName',
-    headerName: 'Last name',
-    width: 150,
-    headerAlign: 'center',
+    field: 'patientId',
+    headerName: 'patientId',
+    flex: 1
   },
   {
-    field: 'age',
-    headerName: 'Age',
-    type: 'number',
-    width: 110,
-    headerAlign: 'center',
+    field: 'clinicsId',
+    headerName: 'ClinicsId',
+    flex: 1
   },
   {
-    field: 'fullName',
-    headerName: 'Full name',
-    description: 'This column has a value getter and is not sortable.',
-    sortable: false,
-    width: 160,
-    headerAlign: 'center',
-    valueGetter: (params: GridValueGetterParams) =>
-      `${params.row.firstName || ''} ${params.row.lastName || ''}`,
+    field: 'status',
+    headerName: 'Төлөв',
+    flex: 1
+  },
+  {
+    field: 'date',
+    headerName: 'Date',
+    flex: 1
+  },
+  {
+    field: 'serviceId',
+    headerName: 'serviceId',
+    flex: 1
+  },
+  {
+    field: 'hour',
+    headerName: 'hour',
+    flex: 1
   },
 ];
 
-const rows = [
-  {display: "flex", alignItems: "center", id: 1, lastName: 'Snow', firstName: 'Jon', age: 35, },
-  { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
-  { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
-  { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
-  { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
-  { id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
-  { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
-  { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-  { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
-];
+const styles={
+  root: {
+    border: 3,
+    borderRadius: '40',
+    boxShadow: '0 1px 10px 1px lightgrey'
+  }
+}
 
-const Users = () => {
+function Appointments(props: WithStyles<typeof styles>) {
+  const { loading, error, data } = useQuery(AppointmentsQuery);
+  const [Appointments, setAppointments] = useState([])
+  const { classes } = props;
+
+  useEffect(() => {
+    if (loading == false) setAppointments(data.getServices)
+  }, [loading])
+
   return (
-    <div style={{height: 400, width: '100%' }}>
+    <Box sx={{
+      height: "100%",
+      width: "100%",
+      padding: "5%",
+    }}>
       <DataGrid
-        rows={rows}
+        className={classes.root}
+        getRowId={(row) => row._id}
+        rows={Appointments}
         columns={columns}
-        pageSize={5}
-        rowsPerPageOptions={[5]}
+        pageSize={20}
+        rowsPerPageOptions={[10]}
       />
-    </div>
+    </Box>
   );
 }
-export default Users;
+export default withStyles(styles)(Appointments);

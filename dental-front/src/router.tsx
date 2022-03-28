@@ -19,7 +19,9 @@ const Login  = Loader(lazy(() => import('src/pages/login')));
 
 const Dashboard = Loader(lazy(() => import('src/pages/dashboards')));
 
-// Components
+// Applications
+
+const Appointments = Loader(lazy(() => import('src/pages/Appointments')));
 
 const Users = Loader(lazy(() => import('src/pages/users')));
 const Clinics = Loader(lazy(() => import('src/pages/clinics')));
@@ -32,63 +34,19 @@ const routes: PartialRouteObject[] = [
     element: <Login />,
   },
   {
-    path: '*',
+    path: 'components',
     element: (
       <SidebarLayout />
-    ),
-    children: [
-      {
-        path: '/',
-        element: (
-          <Navigate
-            to="/dashboard"
-            replace
-          />
-        )
-      },
+      ),
+      children: [
       {
         path: 'dashboard',
         element: <Dashboard />
       },
-    ]
-  },
-  {
-    path: 'management',
-    element: (
-      <SidebarLayout />
-    ),
-    children: [
       {
-        path: '/',
-        element: (
-          <Navigate
-            to="/management/transactions"
-            replace
-          />
-        )
+        path: 'appointments',
+        element: <Appointments />
       },
-      {
-        path: 'profile',
-        children: [
-          {
-            path: '/',
-            element: (
-              <Navigate
-                to="details"
-                replace
-              />
-            )
-          },
-        ]
-      }
-    ]
-  },
-  {
-    path: 'components',
-    element: (
-      <SidebarLayout />
-    ),
-    children: [
       {
         path: 'clinics',
         element: <Clinics />

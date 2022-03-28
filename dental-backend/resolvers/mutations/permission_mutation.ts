@@ -13,21 +13,21 @@ export const permission_mutation = {
     },
 
     async deletePermission(_: any, params: any) {
-        PermissionModel.findByIdAndDelete({ _id: params._permissionId })
+        PermissionModel.findByIdAndDelete({ _id: params._id })
             .then(() => {
                 console.log("permission deleted");
             })
-            .catch((error) => {
+            .catch((error :any) => {
                 console.log(error);
             });
     },
 
-    async updatePermission(_: any, { _permissionId, ...params }: any) {
-        PermissionModel.findByIdAndUpdate(_permissionId, params)
+    async updatePermission(_: any, { _id, ...params }: any) {
+        PermissionModel.findByIdAndUpdate(_id, params)
             .then(() => {
                 console.log('permission updated')
             })
-            .catch((error) => {
+            .catch((error:any) => {
                 console.log(error);
             });
     },

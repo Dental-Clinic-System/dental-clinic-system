@@ -13,21 +13,21 @@ export const service_mutation = {
     },
 
     async deleteService(_: any, params: any) {
-        ServiceModel.findByIdAndDelete({ _id: params._serviceId })
+        ServiceModel.findByIdAndDelete({ _id: params._id })
             .then(() => {
                 console.log("service deleted");
             })
-            .catch((error) => {
+            .catch((error:any) => {
                 console.log(error);
             });
     },
 
-    async updateService(_: any, { _serviceId, ...params }: any) {
-        ServiceModel.findByIdAndUpdate(_serviceId, params)
+    async updateService(_: any, { _id, ...params }: any) {
+        ServiceModel.findByIdAndUpdate(_id, params)
             .then(() => {
                 console.log('service updated')
             })
-            .catch((error) => {
+            .catch((error:any) => {
                 console.log(error);
             });
     },
