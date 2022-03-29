@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Grid, TextField, Typography, InputLabel, MenuItem } from '@mui/material';
+import { Box, Grid, TextField, Typography, InputLabel, MenuItem} from '@mui/material';
 
 type grid = {
   xs?: number;
@@ -13,6 +13,7 @@ type QuestionType = {
   question: string;
   value: string;
   onChange: any;
+  helperText: string;
   type: 'input' | 'selector' | 'number';
   grid: grid;
   selections?: Array<string>;
@@ -40,12 +41,12 @@ export const QuestionSection = ({ label, width, questions }: QuestionSectionType
   );
 };
 
-const Question = ({ id, value, question, grid, onChange, selections, error, type }: QuestionType) => {
+const Question = ({ id, value, question, grid, onChange, helperText, selections, error, type }: QuestionType) => {
   if (type === 'selector')
     return (
       <Grid item {...grid}>
         <InputLabel style={{ marginBottom: '10px', marginTop: '10px' }}>{question}</InputLabel>
-        <TextField fullWidth select value={value} onChange={onChange} size="small" error={error}>
+        <TextField fullWidth select value={value} onChange={onChange} size="small" error={error} helperText={helperText}>
           {selections?.map((option, index) => (
             <MenuItem key={`${question}-option-${index}`} value={option}>
               {option}

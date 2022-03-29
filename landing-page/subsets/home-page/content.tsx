@@ -6,16 +6,17 @@ import { ADDCLINIC } from '../../graphql';
 import { useMutation } from '@apollo/client';
 import { SnackBar, SnackBatTypeParam } from '../../components/';
 import { useFormik } from 'formik';
-import * as yup from 'yup';
+import * as Yup from 'yup';
+import positive from 'yup';
 
-const validationSchema = yup.object({
-  clinicName: yup.string().required('Clinic name is required'),
-  email: yup.string().email('Enter a valid email').required('Email is required'),
-  phone: yup.string().required('contact number is required '),
-  city: yup.string().required('Please enter a city name'),
-  district: yup.string().required('Please enter a district name'),
-  sub_district: yup.string().required('Please enter a sub district'),
-  full_address: yup.string().required('Please enter a full address'),
+const validationSchema = Yup.object().shape({
+  clinicName: Yup.string().max(50).required('Clinic name is required'),
+  email: Yup.string().max(50).email('Not a valid email').required('Email is required'),
+  phone: Yup.string().max(20).required('contact number is required ').matches(/^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/),
+  city: Yup.string().required('Please enter a city name'),
+  district: Yup.string().required('Please enter a district name'),
+  sub_district: Yup.string().required('Please enter a sub district'),
+  full_address: Yup.string().max(200).required('Please enter a full address'),
 });
 
 export const HomePageContent = () => {
@@ -60,6 +61,7 @@ export const HomePageContent = () => {
                   type: 'input',
                   grid: { xs: 12 },
                   error: Boolean(formik.errors.clinicName),
+                  helperText: '',
                   value: formik.values.clinicName,
                   onChange: formik.handleChange,
                 },
@@ -69,6 +71,7 @@ export const HomePageContent = () => {
                   type: 'input',
                   grid: { xs: 12 },
                   error: Boolean(formik.errors.phone),
+                  helperText: '',
                   value: formik.values.phone,
                   onChange: formik.handleChange,
                 },
@@ -78,6 +81,7 @@ export const HomePageContent = () => {
                   type: 'input',
                   grid: { xs: 12 },
                   error: Boolean(formik.errors.email),
+                  helperText: 'hey',
                   value: formik.values.email,
                   onChange: formik.handleChange,
                 },
@@ -92,27 +96,30 @@ export const HomePageContent = () => {
                 {
                   id: 'city',
                   question: 'Аймаг / хот',
-                  type: 'input',
+                  type: 'selector',
                   grid: { xs: 5.4 },
                   error: Boolean(formik.errors.city),
+                  helperText: '',
                   value: formik.values.city,
                   onChange: formik.handleChange,
                 },
                 {
                   id: 'district',
-                  question: 'Дүүрэг',
-                  type: 'input',
+                  question: 'Сум / Дүүрэг',
+                  type: 'selector',
                   grid: { xs: 5.4 },
                   error: Boolean(formik.errors.district),
+                  helperText: '',
                   value: formik.values.district,
                   onChange: formik.handleChange,
                 },
                 {
                   id: 'sub_district',
-                  question: 'Хороо',
-                  type: 'input',
+                  question: 'Баг / Хороо',
+                  type: 'selector',
                   grid: { xs: 5.4 },
                   error: Boolean(formik.errors.sub_district),
+                  helperText: '',
                   value: formik.values.sub_district,
                   onChange: formik.handleChange,
                 },
@@ -122,6 +129,7 @@ export const HomePageContent = () => {
                   type: 'input',
                   grid: { xs: 12 },
                   error: Boolean(formik.errors.full_address),
+                  helperText: '',
                   value: formik.values.full_address,
                   onChange: formik.handleChange,
                 },
