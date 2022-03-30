@@ -7,7 +7,7 @@ import { useMutation } from '@apollo/client';
 import { SnackBar, SnackBatTypeParam } from '../../components/';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import positive from 'yup';
+
 
 const validationSchema = Yup.object().shape({
   clinicName: Yup.string().max(50).required('Clinic name is required'),
@@ -61,6 +61,7 @@ export const HomePageContent = () => {
                   type: 'input',
                   grid: { xs: 12 },
                   error: Boolean(formik.errors.clinicName),
+                  helperText:'',
                   value: formik.values.clinicName,
                   onChange: formik.handleChange,
                 },
@@ -70,6 +71,7 @@ export const HomePageContent = () => {
                   type: 'input',
                   grid: { xs: 12 },
                   error: Boolean(formik.errors.phone),
+                  helperText:'',
                   value: formik.values.phone,
                   onChange: formik.handleChange,
                 },
@@ -79,6 +81,7 @@ export const HomePageContent = () => {
                   type: 'input',
                   grid: { xs: 12 },
                   error: Boolean(formik.errors.email),
+                  helperText:'',
                   value: formik.values.email,
                   onChange: formik.handleChange,
                 },
@@ -96,6 +99,7 @@ export const HomePageContent = () => {
                   type: 'selector',
                   grid: { xs: 5.4 },
                   error: Boolean(formik.errors.city),
+                  helperText:'',
                   value: formik.values.city,
                   onChange: formik.handleChange,
                 },
@@ -105,6 +109,7 @@ export const HomePageContent = () => {
                   type: 'selector',
                   grid: { xs: 5.4 },
                   error: Boolean(formik.errors.district),
+                  helperText:'',
                   value: formik.values.district,
                   onChange: formik.handleChange,
                 },
@@ -114,6 +119,7 @@ export const HomePageContent = () => {
                   type: 'selector',
                   grid: { xs: 5.4 },
                   error: Boolean(formik.errors.sub_district),
+                  helperText:'',
                   value: formik.values.sub_district,
                   onChange: formik.handleChange,
                 },
@@ -123,6 +129,7 @@ export const HomePageContent = () => {
                   type: 'input',
                   grid: { xs: 12 },
                   error: Boolean(formik.errors.full_address),
+                  helperText:'',
                   value: formik.values.full_address,
                   onChange: formik.handleChange,
                 },
