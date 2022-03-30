@@ -12,7 +12,7 @@ import * as Yup from 'yup';
 const validationSchema = Yup.object().shape({
   clinicName: Yup.string().max(50).required('Clinic name is required'),
   email: Yup.string().max(50).email('Not a valid email').required('Email is required'),
-  phone: Yup.string().max(20).required('contact number is required ').matches(/^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/),
+  phone: Yup.string().min(8).max(11).required('contact number is required ').matches(/^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/),
   city: Yup.string().required('Please enter a city name'),
   district: Yup.string().required('Please enter a district name'),
   sub_district: Yup.string().required('Please enter a sub district'),
@@ -101,6 +101,7 @@ export const HomePageContent = () => {
                   error: Boolean(formik.errors.city),
                   helperText:'',
                   value: formik.values.city,
+                  selections: ['ulanbaatar', 'erdenet'],
                   onChange: formik.handleChange,
                 },
                 {
