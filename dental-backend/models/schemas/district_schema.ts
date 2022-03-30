@@ -3,9 +3,10 @@ import mongoose from 'mongoose'
 const { Schema } = mongoose;
 
 const DistrictSchema = new Schema({
-    _id: String,
-    province: String,
-    name: String
+    code: String,
+    name: String,
+    parent: String,
+    name_en: String
 });
 
-export const DistrictModel = mongoose.model("Distric", DistrictSchema);
+export const DistrictModel = mongoose.model("District", DistrictSchema);
