@@ -36,7 +36,7 @@ const routes: PartialRouteObject[] = [
     element: <Login />,
   },
   {
-    path: " ",
+    path: "*",
     element: (
       <SidebarLayout />
     ),
