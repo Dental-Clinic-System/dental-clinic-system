@@ -7,7 +7,7 @@ import React, { useEffect, useState } from 'react';
 import { ServicesQuery } from 'src/hooks/query';
 
 const columns: GridColDef[] = [
-  { field: 'id', headerAlign: 'center', headerName: '№', },
+  { field: '_id', headerAlign: 'center', headerName: '№', },
   {
     field: 'classification',
     headerName: 'Ангилал',
@@ -54,7 +54,7 @@ function Services(props: WithStyles<typeof styles>) {
 
   useEffect(() => {
     if (error) console.log(error)
-    if (!loading && !error) setServices(data.getServices);
+    if (!loading && !error) setServices(data.getServices.map((e: any, i: number) => ({...e, _id: i+1})));
   }, [loading])
 
   return (

@@ -59,6 +59,7 @@ function Clinics(props: WithStyles<typeof styles>) {
     setClinicData({
       ...clinicData,
       [key]: data,
+      '_id': clinics.length
     });
   };
 
@@ -84,9 +85,8 @@ function Clinics(props: WithStyles<typeof styles>) {
 
   useEffect(() => {
     if (error) console.log(error)
-    if (!loading && !error) setClinics(data.getClinics);
+    if (!loading && !error) setClinics(data.getClinics.map((e: any, i: number) => ({...e, _id: i+1})));
   }, [loading])
-
 
   const columns: GridColDef[] = [
     { field: '_id', headerName: '№', flex: 1 },

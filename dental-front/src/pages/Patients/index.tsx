@@ -8,7 +8,7 @@ import { PatientsQuery } from 'src/hooks/query';
 import { Rowing } from "@mui/icons-material";
 
 const columns: GridColDef[] = [
-  { field: 'id', headerName: '№',width: 60 },
+  { field: '_id', headerName: '№',width: 60 },
   {
     field: 'lastname',
     headerName: 'Овог',
@@ -122,7 +122,7 @@ function Patients(props: WithStyles<typeof styles>) {
 
   useEffect(() => {
     if (error) console.log(error)
-    if (!loading && !error) setPatients(data.getPatients);
+    if (!loading && !error) setPatients(data.getPatients.map((e: any, i: number) => ({...e, _id: i+1})));
   }, [loading])
 
   return (
