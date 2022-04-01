@@ -2,10 +2,34 @@ import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import * as React from 'react';
 import { withStyles, WithStyles } from '@mui/styles';
 import { ClinicsQuery } from 'src/hooks/query';
-import { ADDCLINIC, UPDATECLINIC, DELETECLINIC } from 'src/hooks/mutations';
+import { ADDCLINIC, UPDATECLINIC } from 'src/hooks/mutations';
 import { useQuery, useMutation } from "@apollo/client";
 import { useState, useEffect } from 'react';
-import { Box, Button, Modal, Typography, TextField, Container } from '@mui/material';
+import {
+  Box,
+  Button,
+  Modal,
+  Typography,
+  TextField,
+  Container
+} from '@mui/material';
+
+const desHeader = {
+  mt: '20px',
+  ml: '20px',
+  height: '90%',
+  display: 'flex',
+  justifyContent: 'flex-start',
+  flexDirection: "column"
+};
+const desBody = {
+  mt: '20px',
+  ml: '20px',
+  height: '90%',
+  display: 'flex',
+  justifyContent: 'flex-start',
+  flexDirection: "column"
+};
 
 const style = {
   position: 'absolute',
@@ -18,23 +42,8 @@ const style = {
   boxShadow: 24,
   p: 4,
   display: 'flex',
-  flexDirection: 'column',
+  flexDirection: 'row'
 };
-
-type clinicType = {
-  _id: string
-  clinic_admin?: { admin_number?: string, admin_email?: string, admin_name?: string, position?: string }
-  clinic_name?: string
-  clinic_web?: string
-  contact_number?: string
-  email?: string
-  official_address?: { city?: string, district?: string, sub_district?: string, full_address?: string }
-  operation_date?: string
-  operation_name?: string
-  phone?: string
-  status?: string
-  workhours?: string
-}
 
 const styles = {
   root: {
@@ -42,7 +51,7 @@ const styles = {
     borderRadius: '40',
     boxShadow: '0 1px 10px 1px lightgrey'
   }
-}
+};
 
 function Clinics(props: WithStyles<typeof styles>) {
   const { loading, error, data } = useQuery(ClinicsQuery);
@@ -55,7 +64,6 @@ function Clinics(props: WithStyles<typeof styles>) {
   const [AddClinic] = useMutation(ADDCLINIC);
   const [UpdateClinic] = useMutation(UPDATECLINIC);
   const { classes } = props;
-  const [DeleteClinic] = useMutation(DELETECLINIC);
 
   const addChangeData = (key: string, data: string) => {
     setClinicData({
@@ -81,7 +89,7 @@ function Clinics(props: WithStyles<typeof styles>) {
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   const updateData = async () => {
     try {
@@ -109,24 +117,51 @@ function Clinics(props: WithStyles<typeof styles>) {
   const fixButton = () => {
     setOpen(true);
     setModalType('fix');
-  }
-
+  };
+  const desButton = (props) => {
+    setOpen(true);
+    setModalType('description');
+  };
   const addButton = () => {
     setClinicData({});
     setOpen(true);
     setModalType('add');
-  }
+  };
 
   useEffect(() => {
     if (error) console.log(error)
     if (!loading && !error) setClinics(data.getClinics.map((e: any, i: number) => ({...e, _id: i+1})));
   }, [loading])
 
+  type clinicType = {
+    _id: string;
+    clinic_admin?: {
+      admin_number?: string;
+      admin_email?: string;
+      admin_name?: string;
+      position?: string;
+    };
+    clinic_name?: string;
+    clinic_web?: string;
+    contact_number?: string;
+    email?: string;
+    official_address?: {
+      city?: string;
+      district?: string;
+      sub_district?: string;
+      full_address?: string;
+    };
+    operation_date?: string;
+    operation_name?: string;
+    phone?: string;
+    status?: string;
+    workhours?: string;
+  };
   const columns: GridColDef[] = [
     { field: '_id', headerName: '№', flex: 1 },
     {
       field: 'clinic_name',
-      headerName: 'Эмнэлгийн нэр',
+      headerName: 'Нэр',
       flex: 1,
       editable: true
     },
@@ -143,26 +178,40 @@ function Clinics(props: WithStyles<typeof styles>) {
       editable: true
     },
     {
-      field: "action",
-      headerName: "Үйлдэл",
+      field: 'action',
+      headerName: 'Үйлдэл',
       sortable: false,
+      flex: 1,
       renderCell: () => {
         return <Button onClick={fixButton}>Засах</Button>;
       }
     },
+    {
+      field: 'description',
+      headerName: 'Дэлгэрэнгүй',
+      sortable: false,
+      flex: 1,
+      renderCell: () => {
+        return <Button onClick={desButton}>Дэлгэрэнгүй</Button>;
+      }
+    }
   ];
 
   // console.log(selectedClinic);
 
   return (
-    <div style={{ height: "100%", width: '100%' }}>
-      {loading || error ?
-        <Container maxWidth="sm" sx={{ textAlign: "center" }}>
-          <Typography paddingTop='100px' variant="h1" color={error ? "crimson" : ''}>
+    <div style={{ height: '100%', width: '100%' }}>
+      {loading || error ? (
+        <Container maxWidth="sm" sx={{ textAlign: 'center' }}>
+          <Typography
+            paddingTop="100px"
+            variant="h1"
+            color={error ? 'crimson' : ''}
+          >
             {error ? 'Error' : 'Loading...'}
           </Typography>
         </Container>
-        :
+      ) : (
         <>
           <Modal
             open={open}
@@ -170,17 +219,37 @@ function Clinics(props: WithStyles<typeof styles>) {
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
           >
-            {modalType == 'add' ?
+            {modalType == 'add' ? (
               <Box sx={style}>
                 <Typography id="modal-modal-title" variant="h6" component="h2">
                   Эмнэлэг нэмэх
                 </Typography>
-                <TextField id="outlined-basic" label="Эмнэлгийн нэр" variant="outlined" sx={{ mt: 2 }} onChange={(e) => addChangeData('clinicName', e.target.value)} />
-                <TextField id="outlined-basic" label="Холбоо барих дугаар" variant="outlined" sx={{ mt: 2 }} onChange={(e) => addChangeData('phone', e.target.value)} />
-                <TextField id="outlined-basic" label="Имэйл хаяг" variant="outlined" sx={{ mt: 2 }} onChange={(e) => addChangeData('email', e.target.value)} />
-                <Button variant='contained' sx={{ mt: 2 }} onClick={addData}>Хадгалах</Button>
+                <TextField
+                  id="outlined-basic"
+                  label="Эмнэлгийн нэр"
+                  variant="outlined"
+                  sx={{ mt: 2 }}
+                  onChange={(e) => addChangeData('clinicName', e.target.value)}
+                />
+                <TextField
+                  id="outlined-basic"
+                  label="Холбоо барих дугаар"
+                  variant="outlined"
+                  sx={{ mt: 2 }}
+                  onChange={(e) => addChangeData('phone', e.target.value)}
+                />
+                <TextField
+                  id="outlined-basic"
+                  label="Имэйл хаяг"
+                  variant="outlined"
+                  sx={{ mt: 2 }}
+                  onChange={(e) => addChangeData('email', e.target.value)}
+                />
+                <Button variant="contained" sx={{ mt: 2 }} onClick={addData}>
+                  Хадгалах
+                </Button>
               </Box>
-              :
+            ) : modalType == 'fix' ? (
               <Box sx={style}>
                 <Typography id="modal-modal-title" variant="h6" component="h2">
                   Мэдээлэл засах
@@ -190,22 +259,46 @@ function Clinics(props: WithStyles<typeof styles>) {
                 <TextField id="outlined-basic" label="Имэйл хаяг" variant="outlined" sx={{ mt: 2 }} onChange={(e) => updateChangeData('email', e.target.value)} value={clinicData.email} />
                 {/* <Button variant='text' sx={{ mt: 2 }} onClick={deleteData}>Устгах</Button> */}
                 <Button variant='contained' sx={{ mt: 2 }} onClick={updateData}>Хадгалах</Button>
-              </Box>}
+              </Box>
+            ) : (
+              <Box sx={style}>
+                <Typography
+                  id="modal-modal-title"
+                  variant="h6"
+                  component="h2"
+                >
+                  Дэлгэрэнгүй
+                </Typography>
+                <Box sx={desHeader}>
+                  <p>_id : </p>
+                  <p>Clinic Name : </p>
+                </Box>
+              </Box>
+            )}
           </Modal>
-          <Box sx={{
-            height: "100%",
-            width: '100%',
-            borderRadius: 40,
-            padding: "5%",
-            paddingTop: "2%"
-
-          }}>
-            <Box sx={{
-              display: 'flex',
-              flexDirection: 'row-reverse',
-              justifyContent: "flex-start",
-            }}>
-              <Button sx={{marginTop: "-15px", marginBottom: "15px"}}variant='contained' onClick={addButton}>Эмнэлэг нэмэх</Button>
+          <Box
+            sx={{
+              height: '100%',
+              width: '100%',
+              borderRadius: 40,
+              padding: '5%',
+              paddingTop: '2%'
+            }}
+          >
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'row-reverse',
+                justifyContent: 'flex-start'
+              }}
+            >
+              <Button
+                sx={{ marginTop: '-15px', marginBottom: '15px' }}
+                variant="contained"
+                onClick={addButton}
+              >
+                Эмнэлэг нэмэх
+              </Button>
             </Box>
             <DataGrid
               className={classes.root}
@@ -227,8 +320,8 @@ function Clinics(props: WithStyles<typeof styles>) {
             />
           </Box>
         </>
-      }
-    </div >
+      )}
+    </div>
   );
 }
 export default withStyles(styles)(Clinics);
