@@ -5,6 +5,7 @@
     "@emotion/styled": "^11.8.1",
     "@mui/lab": "^5.0.0-alpha.72",
     "@mui/material": "^5.5.0",
+    "axios": "^0.26.1",
     "firebase": "^9.6.8",
     "husky": "^7.0.4",
     "mui": "^0.0.1"
