@@ -16,7 +16,7 @@ import {
 } from "@apollo/client";
 
 const client = new ApolloClient({
-  uri: 'https://dental-backend.vercel.app/',
+  uri: 'https://dental-backend-bilguun1324.vercel.app/',
   cache: new InMemoryCache()
 });
 

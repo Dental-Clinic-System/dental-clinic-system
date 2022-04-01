@@ -188,7 +188,7 @@ function Clinics(props: WithStyles<typeof styles>) {
                 <TextField id="outlined-basic" label="Эмнэлгийн нэр" variant="outlined" sx={{ mt: 2 }} onChange={(e) => updateChangeData('clinicName', e.target.value)} value={clinicData.clinicName} />
                 <TextField id="outlined-basic" label="Холбоо барих дугаар" variant="outlined" sx={{ mt: 2 }} onChange={(e) => updateChangeData('phone', e.target.value)} value={clinicData.phone} />
                 <TextField id="outlined-basic" label="Имэйл хаяг" variant="outlined" sx={{ mt: 2 }} onChange={(e) => updateChangeData('email', e.target.value)} value={clinicData.email} />
-                <Button variant='text' sx={{ mt: 2 }} onClick={deleteData}>Устгах</Button>
+                {/* <Button variant='text' sx={{ mt: 2 }} onClick={deleteData}>Устгах</Button> */}
                 <Button variant='contained' sx={{ mt: 2 }} onClick={updateData}>Хадгалах</Button>
               </Box>}
           </Modal>
@@ -216,6 +216,13 @@ function Clinics(props: WithStyles<typeof styles>) {
               rowsPerPageOptions={[5]}
               onSelectionModelChange={(itm: Array<string>) => {
                 setSelectedClinic(clinics.filter((e: clinicType) => e._id === itm[0])[0])
+                setSelectedId({ id: itm[0] })
+                setClinicData({
+                  id: clinics.filter((e: clinicType) => e._id === itm[0])[0]._id,
+                  clinicName: clinics.filter((e: clinicType) => e._id === itm[0])[0].clinic_name,
+                  phone: clinics.filter((e: clinicType) => e._id === itm[0])[0].phone,
+                  email: clinics.filter((e: clinicType) => e._id === itm[0])[0].email
+                })
               }}
             />
           </Box>
