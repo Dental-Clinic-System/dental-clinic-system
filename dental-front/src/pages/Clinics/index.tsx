@@ -2,7 +2,7 @@ import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import * as React from 'react';
 import { withStyles, WithStyles } from '@mui/styles';
 import { ClinicsQuery } from 'src/hooks/query';
-import { ADDCLINIC, UPDATECLINIC } from 'src/hooks/mutations';
+import { ADDCLINIC, UPDATECLINIC, DELETECLINIC } from 'src/hooks/mutations';
 import { useQuery, useMutation } from "@apollo/client";
 import { useState, useEffect } from 'react';
 import { Box, Button, Modal, Typography, TextField, Container } from '@mui/material';
@@ -50,16 +50,28 @@ function Clinics(props: WithStyles<typeof styles>) {
   const [open, setOpen] = useState(false);
   const [modalType, setModalType] = useState<String>('');
   const [clinicData, setClinicData] = useState<any>({});
-  const [selectedClinic, setSelectedClinic] = useState<clinicType>({ _id: 'alshu' });
+  const [selectedClinic, setSelectedClinic] = useState<clinicType>({ _id: '0000' });
+  const [selectedId, setSelectedId] = useState({});
   const [AddClinic] = useMutation(ADDCLINIC);
   const [UpdateClinic] = useMutation(UPDATECLINIC);
   const { classes } = props;
+  const [DeleteClinic] = useMutation(DELETECLINIC);
 
   const addChangeData = (key: string, data: string) => {
     setClinicData({
       ...clinicData,
       [key]: data,
       '_id': clinics.length
+    });
+  };
+
+  const updateChangeData = (key: string, data: string) => {
+    // setChangeData({
+    //   value + data
+    // })
+    setClinicData({
+      ...clinicData,
+      [key]: data,
     });
   };
 
@@ -71,7 +83,28 @@ function Clinics(props: WithStyles<typeof styles>) {
     }
   }
 
-  const handleClose = () => setOpen(false);
+  const updateData = async () => {
+    try {
+      console.log('clinicData', clinicData);
+      await UpdateClinic({ variables: clinicData });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const deleteData = async () => {
+    try {
+      console.log('selectedClinic', selectedId);
+      await DeleteClinic({ variables: selectedId });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const handleClose = () => {
+    setClinicData({});
+    setOpen(false);
+  };
 
   const fixButton = () => {
     setOpen(true);
@@ -79,6 +112,7 @@ function Clinics(props: WithStyles<typeof styles>) {
   }
 
   const addButton = () => {
+    setClinicData({});
     setOpen(true);
     setModalType('add');
   }
@@ -97,7 +131,7 @@ function Clinics(props: WithStyles<typeof styles>) {
       editable: true
     },
     {
-      field: 'contact_number',
+      field: 'phone',
       headerName: 'Утас',
       flex: 1,
       editable: true
@@ -117,6 +151,8 @@ function Clinics(props: WithStyles<typeof styles>) {
       }
     },
   ];
+
+  // console.log(selectedClinic);
 
   return (
     <div style={{ height: "100%", width: '100%' }}>
@@ -149,11 +185,11 @@ function Clinics(props: WithStyles<typeof styles>) {
                 <Typography id="modal-modal-title" variant="h6" component="h2">
                   Мэдээлэл засах
                 </Typography>
-                <TextField id="outlined-basic" label="Эмнэлгийн нэр" value={selectedClinic.clinic_name} variant="outlined" sx={{ mt: 2 }} onChange={(e) => addChangeData('clinicName', e.target.value)} />
-                <TextField id="outlined-basic" label="Холбоо барих дугаар" variant="outlined" sx={{ mt: 2 }} onChange={(e) => addChangeData('phone', e.target.value)} />
-                <TextField id="outlined-basic" label="Имэйл хаяг" variant="outlined" sx={{ mt: 2 }} onChange={(e) => addChangeData('email', e.target.value)} />
-                <Button variant='text' sx={{ mt: 2 }}>Устгах</Button>
-                <Button variant='contained' sx={{ mt: 2 }}>Хадгалах</Button>
+                <TextField id="outlined-basic" label="Эмнэлгийн нэр" variant="outlined" sx={{ mt: 2 }} onChange={(e) => updateChangeData('clinicName', e.target.value)} value={clinicData.clinicName} />
+                <TextField id="outlined-basic" label="Холбоо барих дугаар" variant="outlined" sx={{ mt: 2 }} onChange={(e) => updateChangeData('phone', e.target.value)} value={clinicData.phone} />
+                <TextField id="outlined-basic" label="Имэйл хаяг" variant="outlined" sx={{ mt: 2 }} onChange={(e) => updateChangeData('email', e.target.value)} value={clinicData.email} />
+                {/* <Button variant='text' sx={{ mt: 2 }} onClick={deleteData}>Устгах</Button> */}
+                <Button variant='contained' sx={{ mt: 2 }} onClick={updateData}>Хадгалах</Button>
               </Box>}
           </Modal>
           <Box sx={{
@@ -180,6 +216,13 @@ function Clinics(props: WithStyles<typeof styles>) {
               rowsPerPageOptions={[5]}
               onSelectionModelChange={(itm: Array<string>) => {
                 setSelectedClinic(clinics.filter((e: clinicType) => e._id === itm[0])[0])
+                setSelectedId({ id: itm[0] })
+                setClinicData({
+                  id: clinics.filter((e: clinicType) => e._id === itm[0])[0]._id,
+                  clinicName: clinics.filter((e: clinicType) => e._id === itm[0])[0].clinic_name,
+                  phone: clinics.filter((e: clinicType) => e._id === itm[0])[0].phone,
+                  email: clinics.filter((e: clinicType) => e._id === itm[0])[0].email
+                })
               }}
             />
           </Box>
