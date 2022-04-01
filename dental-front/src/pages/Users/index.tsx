@@ -8,7 +8,7 @@ import { UsersQuery } from 'src/hooks/query';
 
 const columns: GridColDef[] = [
   {
-    field: 'id',
+    field: '_id',
     headerName: '№',
     flex: 1
   },
@@ -100,7 +100,7 @@ function Users(props: WithStyles<typeof styles>) {
 
   useEffect(() => {
     if (error) console.log(error)
-    if (!loading && !error) setUsers(data.getUsers);
+    if (!loading && !error) setUsers(data.getUsers.map((e: any, i: number) => ({...e, _id: i+1})));
   }, [loading])
 
   return (
