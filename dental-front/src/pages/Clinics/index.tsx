@@ -100,14 +100,14 @@ function Clinics(props: WithStyles<typeof styles>) {
     }
   }
 
-  const deleteData = async () => {
-    try {
-      console.log('selectedClinic', selectedId);
-      await DeleteClinic({ variables: selectedId });
-    } catch (error) {
-      console.log(error);
-    }
-  }
+  // const deleteData = async () => {
+  //   try {
+  //     console.log('selectedClinic', selectedId);
+  //     await DeleteClinic({ variables: selectedId });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
 
   const handleClose = () => {
     setClinicData({});
@@ -270,8 +270,8 @@ function Clinics(props: WithStyles<typeof styles>) {
                   Дэлгэрэнгүй
                 </Typography>
                 <Box sx={desHeader}>
-                  <p>_id : </p>
-                  <p>Clinic Name : </p>
+                  <p>_id : {selectedClinic._id}</p>
+                  <p>Clinic Name : {selectedClinic.clinic_name}</p>
                 </Box>
               </Box>
             )}
