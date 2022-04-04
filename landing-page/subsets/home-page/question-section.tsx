@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Grid, TextField, Typography, InputLabel, MenuItem} from '@mui/material';
+import { Box, Grid, TextField, Typography, InputLabel, MenuItem } from '@mui/material';
 
 type grid = {
   xs?: number;
@@ -14,10 +14,11 @@ type QuestionType = {
   value: string;
   onChange: any;
   helperText: string;
-  type: 'input' | 'selector' | 'number';
+  type: 'input' | 'selector' | 'number' | 'textarea';
   grid: grid;
   selections?: Array<string>;
   error: boolean;
+  placeholder?: string;
 };
 type QuestionSectionType = {
   label: string;
@@ -41,12 +42,31 @@ export const QuestionSection = ({ label, width, questions }: QuestionSectionType
   );
 };
 
-const Question = ({ id, value, question, grid, onChange, helperText, selections, error, type }: QuestionType) => {
+const Question = ({
+  id,
+  value,
+  question,
+  grid,
+  onChange,
+  helperText,
+  selections,
+  error,
+  type,
+  placeholder,
+}: QuestionType) => {
   if (type === 'selector')
     return (
       <Grid item {...grid}>
         <InputLabel style={{ marginBottom: '10px', marginTop: '10px' }}>{question}</InputLabel>
-        <TextField fullWidth select value={value} onChange={onChange} size="small" error={error} helperText={helperText}>
+        <TextField
+          fullWidth
+          select
+          value={value}
+          onChange={onChange}
+          size="small"
+          error={error}
+          helperText={helperText}
+        >
           {selections?.map((option, index) => (
             <MenuItem key={`${question}-option-${index}`} value={option}>
               {option}
@@ -60,13 +80,51 @@ const Question = ({ id, value, question, grid, onChange, helperText, selections,
     return (
       <Grid item {...grid}>
         <InputLabel style={{ marginBottom: '10px', marginTop: '10px' }}>{question}</InputLabel>
-        <TextField value={value} type="number" error={error} onChange={onChange} fullWidth size="small" />
+        <TextField
+          value={value}
+          type="number"
+          error={error}
+          onChange={onChange}
+          fullWidth
+          size="small"
+          helperText={helperText}
+          placeholder={placeholder}
+        />
       </Grid>
     );
+
+  if (type === 'textarea')
+    return (
+      <Grid item {...grid}>
+        <InputLabel style={{ marginBottom: '10px', marginTop: '10px' }}>{question}</InputLabel>
+        <TextField
+          id={id}
+          value={value}
+          multiline
+          rows={4}
+          error={error}
+          onChange={onChange}
+          fullWidth
+          size="small"
+          helperText={helperText}
+          placeholder={placeholder}
+        />
+      </Grid>
+    );
+
   return (
     <Grid item {...grid}>
       <InputLabel style={{ marginBottom: '10px', marginTop: '10px' }}>{question}</InputLabel>
-      <TextField id={id} value={value} error={error} onChange={onChange} fullWidth size="small" />
+      <TextField
+        id={id}
+        value={value}
+        error={error}
+        onChange={onChange}
+        fullWidth
+        size="small"
+        helperText={helperText}
+        placeholder={placeholder}
+      />
     </Grid>
   );
 };
