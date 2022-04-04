@@ -2,7 +2,7 @@ import { alpha, createTheme, lighten, darken } from '@mui/material';
 import '@mui/lab/themeAugmentation';
 
 const themeColors = {
-  primary: '#5569ff',
+  primary: '#5569ff', // * Ongiig enuuger oorchilj bolno
   secondary: '#6E759F',
   success: '#44D600',
   warning: '#FFA319',
@@ -1065,7 +1065,7 @@ export const PureLightTheme = createTheme({
   },
   typography: {
     fontFamily: [
-      'Inter',
+      'Montserrat',
       '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"'
     ].join(','),
     fontSize: 14,
