@@ -16,7 +16,7 @@ export const NavigationBar = () => {
     >
       <Box width={'100%'} display={'flex'} alignItems={'center'} justifyContent={'space-between'}>
         <Box marginLeft={5}>
-          <Typography></Typography>
+          <Typography>DentalMN</Typography>
         </Box>
         <Stack direction={'row'} spacing={1} marginRight={5}>
           <IconButton>

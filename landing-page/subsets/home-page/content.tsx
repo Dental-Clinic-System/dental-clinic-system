@@ -54,7 +54,7 @@ const RightSide = () => {
   return (
     <Box width="100%" display="flex" flexDirection="column" alignItems="flex-start" marginY={5} paddingTop={6}>
       <form onSubmit={formik.handleSubmit}>
-        <Grid container justifyContent="center" columns={{ xs: 11 }} rowSpacing={4}>
+        <Grid container justifyContent="center" columns={{ xs: 11 }} rowSpacing={5}>
           <Grid item xs={8} sm={8} md={8} lg={8} xl={8}>
             <QuestionSection
               label="Эмнэлгийн мэдээлэл"
