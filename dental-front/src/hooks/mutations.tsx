@@ -41,13 +41,7 @@ export const UPDATECLINIC = gql`
 `;
 
 export const DELETECLINIC = gql`
-  mutation DeleteClinic(
-    $id: String
-  ) {
-    deleteClinic(
-      _id: $id
-    ) {
-      _id
-    }
+  mutation DeleteClinic($id: String) {
+    deleteClinic(_id: $id)
   }
 `;

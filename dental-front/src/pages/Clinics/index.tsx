@@ -119,11 +119,11 @@ function Clinics(props: WithStyles<typeof styles>) {
 
   useEffect(() => {
     if (error) console.log(error)
-    if (!loading && !error) setClinics(data.getClinics.map((e: any, i: number) => ({...e, _id: i+1})));
+    if (!loading && !error) setClinics(data.getClinics.map((e: any, i: number) => ({...e, number: i+1})));
   }, [loading])
 
   const columns: GridColDef[] = [
-    { field: '_id', headerName: '№', flex: 1 },
+    { field: 'number', headerName: '№', flex: 1 },
     {
       field: 'clinic_name',
       headerName: 'Эмнэлгийн нэр',
@@ -188,7 +188,7 @@ function Clinics(props: WithStyles<typeof styles>) {
                 <TextField id="outlined-basic" label="Эмнэлгийн нэр" variant="outlined" sx={{ mt: 2 }} onChange={(e) => updateChangeData('clinicName', e.target.value)} value={clinicData.clinicName} />
                 <TextField id="outlined-basic" label="Холбоо барих дугаар" variant="outlined" sx={{ mt: 2 }} onChange={(e) => updateChangeData('phone', e.target.value)} value={clinicData.phone} />
                 <TextField id="outlined-basic" label="Имэйл хаяг" variant="outlined" sx={{ mt: 2 }} onChange={(e) => updateChangeData('email', e.target.value)} value={clinicData.email} />
-                {/* <Button variant='text' sx={{ mt: 2 }} onClick={deleteData}>Устгах</Button> */}
+                <Button variant='text' sx={{ mt: 2 }} onClick={deleteData}>Устгах</Button>
                 <Button variant='contained' sx={{ mt: 2 }} onClick={updateData}>Хадгалах</Button>
               </Box>}
           </Modal>
