@@ -1,8 +1,6 @@
 import { ApolloClient, InMemoryCache } from '@apollo/client';
 
 export const apolloClient = new ApolloClient({
-  uri: 'http://localhost:4000/',
+  uri: 'https://dental-backend.vercel.app/',
   cache: new InMemoryCache(),
 });
-
-// https://dental-backend.vercel.app/
