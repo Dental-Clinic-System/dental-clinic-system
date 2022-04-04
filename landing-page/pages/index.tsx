@@ -14,7 +14,7 @@ const theme = createTheme({
           margin: 0,
         },
         '*': {
-          fontFamily: "'Noto Sans', sans-serif !important",
+          fontFamily: "'Montserrat', sans-serif !important",
         },
       },
     },
