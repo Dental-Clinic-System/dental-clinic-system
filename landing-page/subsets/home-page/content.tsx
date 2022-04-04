@@ -189,7 +189,7 @@ const RightSide = () => {
 
           <Grid item container xs={8} justifyContent="flex-end">
             <Grid item xs={4}>
-              <Button fullWidth variant="contained" type="submit">
+              <Button fullWidth variant="contained" type="submit" style={{fontWeight: '600'}}>
                 Илгээх
               </Button>
             </Grid>
