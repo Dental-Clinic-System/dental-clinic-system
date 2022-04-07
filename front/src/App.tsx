@@ -1,9 +1,11 @@
 import React from 'react';
-import { PatientScreen } from './pages';
+import { Services } from './pages/services';
 
 const App = () => {
   return (
-      <PatientScreen/>
+      <div className="App">
+        <Services />
+      </div>
   );
 }
 
