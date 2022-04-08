@@ -1,10 +1,17 @@
+import { Button } from '@mui/material';
 import React from 'react';
+import { PatientsGrid } from './pages';
 
 const App = () => {
   return (
-      <div className="App">
-        happy hacking!!!
+    <>
+      <div style={{backgroundColor: 'honeydew'}}>
+        <Button>Нэмэх</Button>
+        <Button>Засах</Button>
+        <Button>Устгах</Button>
+        <PatientsGrid />
       </div>
+    </>
   );
 }
 
