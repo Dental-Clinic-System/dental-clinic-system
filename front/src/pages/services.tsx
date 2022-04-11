@@ -1,5 +1,7 @@
 import React from "react";
 import { DataGrid, GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
+import { useQuery } from "@apollo/client";
+import { GET_SERVICES } from "../graphql";
 
 type serviceType = {
   id: string;
@@ -11,9 +13,12 @@ type serviceType = {
 };
 
 export const Services = () => {
+  const { loading, data } = useQuery(GET_SERVICES);
+  if (!loading) console.log(data);
+
   const rows: Array<serviceType> = [
     {
-      id: '1',
+      id: "1",
       serviceName: "Shud avah mes ajilbar",
       shortName: "Shud avah",
       code: "A02",
@@ -21,7 +26,7 @@ export const Services = () => {
       description: "shud avah agt araag tootsohgu",
     },
     {
-      id: '2',
+      id: "2",
       serviceName: "Shud tseverleh",
       shortName: "tseverlgee",
       code: "A02",
@@ -29,7 +34,7 @@ export const Services = () => {
       description: "shud avah agt araag tootsohgu",
     },
     {
-      id: '3',
+      id: "3",
       serviceName: "Shud gun tseverlegee",
       shortName: "gun tseverlgee",
       code: "A02",
@@ -37,7 +42,7 @@ export const Services = () => {
       description: "shud avah agt araag tootsohgu",
     },
     {
-      id: '4',
+      id: "4",
       serviceName: "Tsoorson shud lombdoh",
       shortName: "Lomb",
       code: "A02",
@@ -45,7 +50,7 @@ export const Services = () => {
       description: "shud avah agt araag tootsohgu",
     },
     {
-      id: '5',
+      id: "5",
       serviceName: "Hiimel shud suulgah ajilbar",
       shortName: "Shud suulgah",
       code: "A02",
