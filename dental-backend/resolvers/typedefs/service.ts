@@ -1,9 +1,9 @@
-import { gql } from 'apollo-server'
+import { gql } from "apollo-server";
 
 export const serviceDef = gql`
   type Service {
+    clinic_id: String
     _id: String
-    classification: String
     service_name: String
     code: String
     short: String
@@ -12,29 +12,35 @@ export const serviceDef = gql`
   }
 
   type Mutation {
-    addService(classification: String,
-      service_name: String,
-      code: String,
-      short: String,
-      description: String,
-      price: String): Service
+    addService(
+      clinic_id: String
+      service_name: String
+      code: String
+      short: String
+      description: String
+      price: String
+    ): Service
     deleteService(_id: String): String
-    updateService(_id: String, 
-      classification: String,
-      service_name: String,
-      code: String,
-      short: String,
-      description: String,
-      price: String): String
+    updateService(
+      _id: String
+      clinic_id: String
+      service_name: String
+      code: String
+      short: String
+      description: String
+      price: String
+    ): String
   }
 
   type Query {
-    getServices(_id: String,
-      classification: String,
-      service_name: String,
-      code: String,
-      short: String,
-      description: String,
-      price: String): [Service]
+    getServices(
+      clinic_id: String
+      _id: String
+      service_name: String
+      code: String
+      short: String
+      description: String
+      price: String
+    ): [Service]
   }
-`
+`;
