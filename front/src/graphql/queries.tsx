@@ -24,3 +24,31 @@ export const GET_PATIENTS = gql`
   }
 }   
 `
+export const GetClinics = gql`
+query GetClinics {
+    getClinics {
+      _id
+      clinic_name
+      operation_date
+      operation_name
+      contact_number
+      clinic_web
+      email
+      official_address {
+        city
+        district
+        sub_district
+        full_address
+      }
+      clinic_admin {
+        admin_number
+        admin_email
+        admin_name
+        position
+      }
+      workhours
+      phone
+      status
+    }
+  }
+`
