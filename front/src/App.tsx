@@ -1,5 +1,5 @@
 import { useRoutes } from 'react-router-dom';
-import routes from '../router';
+import routes from './router';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import ThemeProvider from './theme/ThemeProvider';
@@ -16,5 +16,4 @@ const App = () => {
     </ThemeProvider>
   )
 }
-
 export default App;

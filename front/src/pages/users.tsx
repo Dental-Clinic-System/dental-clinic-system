@@ -1,12 +1,47 @@
 import { Box } from '@mui/system'
 import React from 'react'
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
+import { Link } from 'react-router-dom';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 
+const RenderInfo = () => {
+  const [age, setAge] = React.useState('');
+  const handleChange = (event: SelectChangeEvent) => {
+    setAge(event.target.value as string);
+  };
+  return (
+    <FormControl fullWidth>
+      <InputLabel id="demo-simple-select-label">Age</InputLabel>
+      <Select
+        labelId="demo-simple-select-label"
+        id="demo-simple-select"
+        value={age}
+        label="Age"
+        onChange={handleChange}
+      >
+        <MenuItem value={10}>Ten</MenuItem>
+        <MenuItem value={20}>Twenty</MenuItem>
+        <MenuItem value={30}>Thirty</MenuItem>
+      </Select>
+    </FormControl>
+  )
+}
 export const Users = () => {
+  // const navigate = useNavigate()
+  // const SendProfile = (params: any) => {
+  //   return (
+  //     <button onClick={() => navigation?.navigate('profile', { state: params })}>
+  //       Дэлгэрэнгүй
+  //     </button>
+  //   )
+  // }
   const column: GridColDef[] = [
     {
-      field:"id", 
-      headerName:"ID",
+      field: "id",
+      headerName: "ID",
       flex: 1
     },
     {
@@ -52,8 +87,17 @@ export const Users = () => {
     {
       field: "role",
       headerName: "Үүрэг",
-      flex: 1
+      flex: 1,
+      renderCell: () => { return RenderInfo }
     },
+    {
+      field: "info",
+      headerName: "Дэлгэрэнгүй",
+      flex: 1,
+      renderCell: (row) => {
+        return <Link to={`/profile/${row.id}`} state={{id: row.id}}>Дэлгэрэнгүй</Link>
+      }
+    }
     // {
     //   field: "clinicId",
     //   headerName: ""
@@ -65,49 +109,52 @@ export const Users = () => {
   ]
   const row = [
     {
-      id: 1, 
-      username: "Sonor",
-      firstname: "Mungunsukh",
-      lastname: "Sonor",
-      email: "sonor@gmail.com",
+      id: 1,
+      username: "anand",
+      firstname: "radnaa",
+      lastname: "anand",
+      email: "anada@gmail.com",
       phone: "99119911",
       birth: "2005.11.04",
       timestamp: "9:00 - 17:00",
-      role: "worker", // ["admin", "superadmin", "worker"]
+      role: "worker", // ["admin", "superadmin", "worker"],
+      info: "Дэлгэрэнгүй"
     },
     {
-      id: 2, 
-      username: "Sonor 2",
-      firstname: "Mungunsukh",
-      lastname: "Sonor 2",
-      email: "sonor@gmail.com",
+      id: 2,
+      username: "anand 2",
+      firstname: "radnaa",
+      lastname: "anand 2",
+      email: "anada@gmail.com",
       phone: "99119911",
       birth: "2005.11.04",
       timestamp: "9:00 - 17:00",
       role: "worker", // ["admin", "superadmin", "worker"]
+      info: "Дэлгэрэнгүй"
     },
     {
-      id: 3, 
-      username: "Sonor 3",
-      firstname: "Mungunsukh",
-      lastname: "Sonor 3",
-      email: "sonor@gmail.com",
+      id: 3,
+      username: "anand 3",
+      firstname: "radnaa",
+      lastname: "anand 3",
+      email: "anada@gmail.com",
       phone: "99119911",
       birth: "2005.11.04",
       timestamp: "9:00 - 17:00",
       role: "worker", // ["admin", "superadmin", "worker"]
+      info: "Дэлгэрэнгүй",
     },
   ]
   return (
     <Box>
-      <DataGrid 
-      sx={{        height: "70vh"
-      }}
-      getRowId={(row) => row.id}
-      rows={row}
-      columns={column}
-      pageSize={10}
-      rowsPerPageOptions={[5]}
+      <DataGrid
+        sx={{ height: "70vh" }}
+        getRowId={(row) => row.id}
+        rows={row}
+        columns={column}
+        pageSize={10}
+        rowsPerPageOptions={[5]}
+        disableSelectionOnClick
       />
     </Box>
   )
