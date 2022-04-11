@@ -1,10 +1,9 @@
 import React from 'react';
+import { PatientScreen } from './pages';
 
 const App = () => {
   return (
-      <div className="App">
-        happy hacking!!!
-      </div>
+      <PatientScreen/>
   );
 }
 
