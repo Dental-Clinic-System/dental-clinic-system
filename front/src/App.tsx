@@ -1,5 +1,5 @@
 import React from 'react';
-import PatientScreen from './pages/patients';
+import { PatientScreen } from './pages';
 
 const App = () => {
   return (

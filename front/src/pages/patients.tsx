@@ -1,30 +1,19 @@
-import { useQuery } from "@apollo/client";
-import { GET_PATIENTS } from "../graphql";
-import { Loading } from "../components";
-import { Box } from '@mui/material';
+import { useState } from "react";
+import { Box, Button } from '@mui/material';
+import { PatientsGrid, AddPatientModal, DeletePatientModal } from '../components'
 
-const PatientScreen = () => {
-    const { loading, error, data } = useQuery(GET_PATIENTS)
-
-    const ShowData = () => {
-        return (
-            <Box></Box>
-        )
-    }
-
-    console.log(data, data && data.getPatients)
+export const PatientScreen = () => {
+    const [openAdd, setOpenAdd] = useState(false)
+    const [openDelete, setOpenDelete] = useState(false)
+    const [selectedPatient, setSelectedPatient] = useState([])
 
     return (
-        <div>
-            {loading ?
-                <Loading />
-                :
-                data
-                &&
-                <ShowData />
-            }
-        </div>
-    )
+        <Box>
+            <Button onClick={() => setOpenAdd(true)} variant='outlined'>Өвчтөн нэмэх</Button>
+            <Button onClick={() => setOpenDelete(true)} variant='outlined' color='error'>Өвчтөн хасах</Button>
+            <PatientsGrid setSelectedPatient={setSelectedPatient}/>
+            <AddPatientModal open={openAdd} setOpen={setOpenAdd}/>
+            <DeletePatientModal open={openDelete} setOpen={setOpenDelete} deletingUser={selectedPatient}/>
+        </Box>
+    );
 }
-
-export default PatientScreen
