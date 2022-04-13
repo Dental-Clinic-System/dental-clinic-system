@@ -1,4 +1,4 @@
-import { Suspense, lazy } from 'react';
+import { Suspense, lazy, Profiler } from 'react';
 import { Navigate } from 'react-router-dom';
 import { PartialRouteObject } from 'react-router';
 
@@ -29,6 +29,7 @@ const Users = Loader(lazy(() => import('src/pages/Users')));
 const Clinics = Loader(lazy(() => import('src/pages/Clinics')));
 const Patients = Loader(lazy(() => import('src/pages/Patients')));
 const Services = Loader(lazy(() => import('src/pages/Services')));
+const ProfilePage = Loader(lazy(() => import('src/pages/Profile')));
 
 const routes: PartialRouteObject[] = [
   {
@@ -36,11 +37,15 @@ const routes: PartialRouteObject[] = [
     element: <Login />,
   },
   {
-    path: " ",
+    path: "*",
     element: (
       <SidebarLayout />
-    ),
-    children: [
+      ),
+      children: [
+      {
+        path: 'profile',
+        element: <ProfilePage />,
+      },
       {
         path: 'dashboard',
         element: <Dashboard />
