@@ -1,7 +1,8 @@
-import React from "react";
-import { DataGrid, GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
+import { Box } from '@mui/material'
+import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { useQuery } from "@apollo/client";
 import { GET_SERVICES } from "../graphql";
+import { Loading } from '../components';
 
 type serviceType = {
   id: string;
@@ -59,50 +60,53 @@ export const Services = () => {
     },
   ];
 
-  const columns: GridColDef[] = [
-    { field: "id", headerName: "ID", width: 90 },
-    {
-      field: "serviceName",
-      headerName: "Үйлчилгээний нэр",
-      width: 150,
-      editable: true,
-    },
-    {
-      field: "shortName",
-      headerName: "Богино нэр",
-      width: 150,
-      editable: true,
-    },
-    {
-      field: "code",
-      headerName: "Код",
-      width: 110,
-      editable: true,
-    },
-    {
-      field: "price",
-      headerName: "Үнэ",
-      type: "number",
-      width: 110,
-      editable: true,
-    },
-    {
-      field: "description",
-      headerName: "Тодорхойлолт",
-      width: 250,
-      editable: true,
-    },
-  ];
-
   return (
-    <div style={{ height: 400, width: "100%" }}>
+    <Box>
+      {loading && <Loading/>}
       <DataGrid
+        sx={{ height: 640, width: "60vw" }}
+        getRowId={(row) => row.id}
         rows={rows}
         columns={columns}
-        pageSize={5}
+        pageSize={10}
         rowsPerPageOptions={[5]}
         onSelectionModelChange={(e) => console.log(e)}
       />
-    </div>
+    </Box>
   );
 };
+
+const columns: GridColDef[] = [
+  { field: "id", headerName: "ID", width: 90 },
+  {
+    field: "serviceName",
+    headerName: "Үйлчилгээний нэр",
+    width: 150,
+    editable: true,
+  },
+  {
+    field: "shortName",
+    headerName: "Богино нэр",
+    width: 150,
+    editable: true,
+  },
+  {
+    field: "code",
+    headerName: "Код",
+    width: 110,
+    editable: true,
+  },
+  {
+    field: "price",
+    headerName: "Үнэ",
+    type: "number",
+    width: 110,
+    editable: true,
+  },
+  {
+    field: "description",
+    headerName: "Тодорхойлолт",
+    width: 250,
+    editable: true,
+  },
+];
