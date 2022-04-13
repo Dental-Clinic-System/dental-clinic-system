@@ -4,8 +4,6 @@
   "private": true,
   "dependencies": {
     "@apollo/client": "^3.5.10",
-    "@date-io/date-fns": "^2.13.1",
-    "@devexpress/dx-react-core": "^3.0.2",
     "@devexpress/dx-react-scheduler": "^3.0.2",
     "@devexpress/dx-react-scheduler-material-ui": "^3.0.2",
     "@emotion/react": "^11.9.0",
