@@ -1,11 +1,29 @@
 import { Button } from '@mui/material';
 import React from 'react';
 import { PatientScreen } from './pages';
+import { useRoutes } from "react-router-dom";
+import routes from "./router";
+import AdapterDateFns from "@mui/lab/AdapterDateFns";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import { Theme } from "./theme";
+import { Grid } from "@mui/material";
+import { Sidebar } from "./layout/SideBar";
 
 const App = () => {
+  const content = useRoutes(routes);
   return (
-      <PatientScreen/>
+    <Theme>
+      <LocalizationProvider dateAdapter={AdapterDateFns}>
+        <Grid container>
+          <Grid item xs={2}>
+            <Sidebar />
+          </Grid>
+          <Grid item md={8}>
+            {content}
+          </Grid>
+        </Grid>
+      </LocalizationProvider>
+    </Theme>
   );
-}
-
+};
 export default App;
