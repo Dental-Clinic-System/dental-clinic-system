@@ -16,18 +16,16 @@ export const PatientsGrid: React.FC<PatientsGridType> = ({
     return (
         <Box>
             {loading && <Loading/>}
-            <Box sx={{ height: 400, width: '100%' }}>
                 <DataGrid
+                    sx={{ height: 640, width: '80vw' }}
                     getRowId={(row) => row._id}
                     rows={data ? data.getPatients : []}
                     columns={columns}
-                    checkboxSelection
-                    disableSelectionOnClick 
                     onSelectionModelChange={(item: any) => {
                         setSelectedPatient(item)
                     }}
+                    pageSize={10}
                 />
-            </Box>
         </Box>
     );
 }

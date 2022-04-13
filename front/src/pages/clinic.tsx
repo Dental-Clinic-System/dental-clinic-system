@@ -1,8 +1,9 @@
-import { useQuery } from "@apollo/client";
-import { Chip } from "@mui/material";
-import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import React, { useState, useEffect } from "react";
-import { GetClinics } from "../graphql/queries";
+import { useQuery } from '@apollo/client';
+import { Chip, Box } from '@mui/material';
+import { DataGrid, GridColDef } from '@mui/x-data-grid';
+import { useState, useEffect } from 'react';
+import { GetClinics } from '../graphql/queries';
+import { Loading } from '../components';
 
 const RenderStatus = (params: any) => {
   if (params.status == "accepted") {
@@ -12,26 +13,6 @@ const RenderStatus = (params: any) => {
   }
 };
 
-const columns: GridColDef[] = [
-  {
-    field: "index",
-    headerName: "No",
-    width: 15,
-  },
-  { field: "clinic_name", headerName: "name", width: 150 },
-  { field: "operation_name", headerName: "operation name", width: 150 },
-  { field: "operation_date", headerName: "operation date", width: 150 },
-  { field: "email", headerName: "email", width: 200 },
-  { field: "clinic_web", headerName: "web", width: 150 },
-  { field: "phone", headerName: "phone", width: 150 },
-  { field: "contact_number", headerName: "contact number", width: 150 },
-  {
-    field: "status",
-    headerName: "status",
-    width: 150,
-    renderCell: (params) => <RenderStatus status={params.value} />,
-  },
-];
 
 export const Clinic = () => {
   const { loading, error, data } = useQuery(GetClinics);
@@ -50,28 +31,42 @@ export const Clinic = () => {
     setClinics(formatedData);
   }, [data]);
 
-  return (
-    <div
-      style={{
-        width: "100%",
-        height: "90Vh",
-        display: "flex ",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
-      {loading == true ? (
-        "Loading..."
-      ) : (
-        <div style={{ width: "100%", height: "90%" }}>
-          <DataGrid
-            getRowId={(doc) => doc._id}
-            rows={clinics}
-            columns={columns}
-            pageSize={10}
-          />
-        </div>
-      )}
-    </div>
-  );
-};
+    return (
+        <Box sx={{ width: '100%', height: '90Vh', display: 'flex ', alignItems: 'center', justifyContent: 'center' }}>
+            {
+                loading ? 
+                <Loading /> 
+                :
+                <DataGrid
+                        sx={{
+                            width: '100%',
+                            height: 640
+                        }}
+                        getRowId={(doc) => doc._id}
+                        rows={clinics}
+                        columns={columns}
+                        pageSize={10}
+                    />
+            }
+        </Box>
+    )
+}
+
+const columns: GridColDef[] = [
+    {
+        field: 'index',
+        headerName: 'No',
+        width: 15,
+    },
+    { field: 'clinic_name', headerName: 'name', width: 150 },
+    { field: 'operation_name', headerName: 'operation name', width: 150 },
+    { field: 'operation_date', headerName: 'operation date', width: 150 },
+    { field: 'email', headerName: 'email', width: 200 },
+    { field: 'clinic_web', headerName: 'web', width: 150 },
+    { field: 'phone', headerName: 'phone', width: 150 },
+    { field: 'contact_number', headerName: 'contact number', width: 150 },
+    {
+        field: 'status', headerName: 'status', width: 150,
+        renderCell: (params) => <RenderStatus status={params.value} />
+    },
+]
