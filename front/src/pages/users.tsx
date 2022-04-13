@@ -1,5 +1,5 @@
 import { Box } from "@mui/system";
-import React from "react";
+import { useState } from "react";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { Link } from "react-router-dom";
 import InputLabel from "@mui/material/InputLabel";
@@ -8,7 +8,7 @@ import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 
 const RenderInfo = () => {
-  const [age, setAge] = React.useState("");
+  const [age, setAge] = useState("");
   const handleChange = (event: SelectChangeEvent) => {
     setAge(event.target.value as string);
   };
@@ -38,79 +38,6 @@ export const Users = () => {
   //     </button>
   //   )
   // }
-  const column: GridColDef[] = [
-    {
-      field: "id",
-      headerName: "ID",
-      flex: 1,
-    },
-    {
-      field: "username",
-      headerName: "Хэрэглэгчийн нэр",
-      flex: 1,
-    },
-    {
-      field: "address",
-      headerName: "Хаяг",
-      flex: 1,
-    },
-    {
-      field: "firstname",
-      headerName: "Нэр",
-      flex: 1,
-    },
-    {
-      field: "lastname",
-      headerName: "Овог",
-      flex: 1,
-    },
-    {
-      field: "email",
-      headerName: "Мэйл",
-      flex: 1,
-    },
-    {
-      field: "phone",
-      headerName: "Дугаар",
-      flex: 1,
-    },
-    {
-      field: "birth",
-      headerName: "Төрсөн өдөр",
-      flex: 1,
-    },
-    {
-      field: "timestamp",
-      headerName: "Ажиллах хуваарь",
-      flex: 1,
-    },
-    {
-      field: "role",
-      headerName: "Үүрэг",
-      flex: 1,
-      // renderCell: () => { return RenderInfo }
-    },
-    {
-      field: "info",
-      headerName: "Дэлгэрэнгүй",
-      flex: 1,
-      renderCell: (row) => {
-        return (
-          <Link to={`/profile/${row.id}`} state={{ id: row.id }}>
-            Дэлгэрэнгүй
-          </Link>
-        );
-      },
-    },
-    // {
-    //   field: "clinicId",
-    //   headerName: ""
-    // },
-    // {
-    //   field: "serviceId",
-    //   headerName: ""
-    // }`
-  ];
   const row = [
     {
       id: 1,
@@ -152,7 +79,7 @@ export const Users = () => {
   return (
     <Box>
       <DataGrid
-        sx={{ height: "70vh" }}
+        sx={{ height: 640, width: '80vw' }}
         getRowId={(row) => row.id}
         rows={row}
         columns={column}
@@ -163,4 +90,79 @@ export const Users = () => {
     </Box>
   );
 };
+
 export default Users;
+
+const column: GridColDef[] = [
+  {
+    field: "id",
+    headerName: "ID",
+    flex: 1,
+  },
+  {
+    field: "username",
+    headerName: "Хэрэглэгчийн нэр",
+    flex: 1,
+  },
+  {
+    field: "address",
+    headerName: "Хаяг",
+    flex: 1,
+  },
+  {
+    field: "firstname",
+    headerName: "Нэр",
+    flex: 1,
+  },
+  {
+    field: "lastname",
+    headerName: "Овог",
+    flex: 1,
+  },
+  {
+    field: "email",
+    headerName: "Мэйл",
+    flex: 1,
+  },
+  {
+    field: "phone",
+    headerName: "Дугаар",
+    flex: 1,
+  },
+  {
+    field: "birth",
+    headerName: "Төрсөн өдөр",
+    flex: 1,
+  },
+  {
+    field: "timestamp",
+    headerName: "Ажиллах хуваарь",
+    flex: 1,
+  },
+  {
+    field: "role",
+    headerName: "Үүрэг",
+    flex: 1,
+    // renderCell: () => { return RenderInfo }
+  },
+  {
+    field: "info",
+    headerName: "Дэлгэрэнгүй",
+    flex: 1,
+    renderCell: (row) => {
+      return (
+        <Link to={`/profile/${row.id}`} state={{ id: row.id }}>
+          Дэлгэрэнгүй
+        </Link>
+      );
+    },
+  },
+  // {
+  //   field: "clinicId",
+  //   headerName: ""
+  // },
+  // {
+  //   field: "serviceId",
+  //   headerName: ""
+  // }`
+];
