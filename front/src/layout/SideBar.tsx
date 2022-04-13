@@ -5,6 +5,7 @@ export const Sidebar = (props: any) => {
   //   let { items } = props;
   const arr = [
     { path: "/", text: "Home" },
+    { path: "appointment", text: "Appointments" },
     { path: "users", text: "Users" },
     { path: "clinics", text: "Clinics" },
     { path: "services", text: "Services" },
