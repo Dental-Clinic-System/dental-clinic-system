@@ -1,19 +1,26 @@
-import { useRoutes } from 'react-router-dom';
-import routes from './router';
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import ThemeProvider from './theme/ThemeProvider';
-import { CssBaseline } from '@mui/material';
+import { useRoutes } from "react-router-dom";
+import routes from "./router";
+import AdapterDateFns from "@mui/lab/AdapterDateFns";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import { Theme } from "./theme";
+import { Grid } from "@mui/material";
+import { Sidebar } from "./layout/SideBar";
 
 const App = () => {
   const content = useRoutes(routes);
-  return(
-    <ThemeProvider>
+  return (
+    <Theme>
       <LocalizationProvider dateAdapter={AdapterDateFns}>
-        <CssBaseline />
-        {content}
+        <Grid container>
+          <Grid item xs={2}>
+            <Sidebar />
+          </Grid>
+          <Grid item md={8}>
+            {content}
+          </Grid>
+        </Grid>
       </LocalizationProvider>
-    </ThemeProvider>
-  )
-}
+    </Theme>
+  );
+};
 export default App;
