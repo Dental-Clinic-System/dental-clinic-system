@@ -1,6 +1,6 @@
 export const PATIENT_NAME = "Эмчлүүлэгчийн нэр";
-export const LAST_NAME= "Сүүлчийн нэр";
-export const FIRST_NAME = "Эхний нэр";
+export const LAST_NAME= "Овог";
+export const FIRST_NAME = "Нэр";
 export const BIRTH = "Төрсөн огноо";
 export const AGE = "Нас";
 export const REGISTRATION_NUMBER = "Регистирийн дугаар";
