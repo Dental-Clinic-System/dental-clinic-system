@@ -15,7 +15,7 @@ const App = () => {
           <Grid item xs={2}>
             <Sidebar />
           </Grid>
-          <Grid item md={8}>
+          <Grid item xs={10}>
             {content}
           </Grid>
         </Grid>
