@@ -5,32 +5,31 @@ import { useState, useEffect } from 'react';
 import { GetClinics } from '../graphql/queries';
 import { Loading } from '../components';
 
-
 const RenderStatus = (params: any) => {
-    if (params.status == 'accepted') {
-        return (<Chip label="accepted" color="success" />)
-    }
-    else {
-        return (<Chip label="requested" />)
-    }
-}
+  if (params.status == "accepted") {
+    return <Chip label="accepted" color="success" />;
+  } else {
+    return <Chip label="requested" />;
+  }
+};
+
 
 export const Clinic = () => {
-    const { loading, data } = useQuery(GetClinics);
-    const [clinics, setClinics] = useState([])
+  const { loading, error, data } = useQuery(GetClinics);
+  const [clinics, setClinics] = useState([]);
 
-    useEffect(() => {
-        let formatedData: any = []
-        data?.getClinics?.map((clinic: any, index: number) => {
-            let cli = {
-                ...clinic,
-                index: index + 1
-            }
-            console.log(cli)
-            formatedData.push(cli)
-        })
-        setClinics(formatedData)
-    }, [data])
+  useEffect(() => {
+    let formatedData: any = [];
+    data?.getClinics?.map((clinic: any, index: number) => {
+      let cli = {
+        ...clinic,
+        index: index + 1,
+      };
+      console.log(cli);
+      formatedData.push(cli);
+    });
+    setClinics(formatedData);
+  }, [data]);
 
     return (
         <Box sx={{ width: '100%', height: '90Vh', display: 'flex ', alignItems: 'center', justifyContent: 'center' }}>
