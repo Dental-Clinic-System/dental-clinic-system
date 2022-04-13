@@ -1,13 +1,11 @@
 import { Box, Modal, Button } from '@mui/material'
-import { useMutation } from '@apollo/client';
-import { DELETE_PATIENT } from '../../graphql';
 
 const style = {
     position: 'absolute',
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 400,
+    width: 450,
     bgcolor: 'white',
     boxShadow: 24,
     p: 4,
@@ -18,28 +16,16 @@ const style = {
     alignItems: "center"
 };
 
-type DeletePatientModalType = {
+type DeleteModalType = {
     open: boolean;
     setOpen: Function;
-    deletingUser: Array<String>;
+    deleteFunction: Function;
+    deleteButtonName: String;
 }
 
-export const DeletePatientModal: React.FC<DeletePatientModalType> = ({ open, setOpen, deletingUser }) => {
+export const DeleteModal: React.FC<DeleteModalType> = (params) => {
+    const { open, setOpen, deleteFunction, deleteButtonName, children } = params;
     const handleClose = () => setOpen(false);
-    const [deletePatient] = useMutation(DELETE_PATIENT)
-
-    const clear = () => {
-        setOpen(false)
-    }
-
-    const DeletePatients = () => {
-        let variables = {
-            id: deletingUser[0]
-        }
-
-        deletePatient({ variables: variables })
-        clear()
-    }
 
     return (
         <Modal
@@ -47,21 +33,23 @@ export const DeletePatientModal: React.FC<DeletePatientModalType> = ({ open, set
             onClose={handleClose}
         >
             <Box sx={style}>
+                {children}
                 <Box sx={{
                     width: '100%',
                     display: 'flex',
                     justifyContent: 'space-around'
                 }}>
-                    <Button variant='outlined' onClick={handleClose} size='small'>Үгүй</Button>
+                    <Button variant='outlined' onClick={handleClose} size='small'>Буцах</Button>
                     <Button 
                         variant='outlined'
                         color='error' 
-                        onClick={() => DeletePatients()}
+                        onClick={() => deleteFunction()}
                         size='small'
-                    >Өвчтөн хасахдаа итгэлтэй байна уу?</Button>
+                    >
+                        {deleteButtonName}
+                    </Button>
                 </Box>
             </Box>
-
         </Modal>
     );
 }
