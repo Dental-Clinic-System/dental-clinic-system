@@ -1,3 +1,17 @@
 export const PATIENT_NAME = "Эмчлүүлэгчийн нэр";
 export const LAST_NAME = "Овог";
 export const FIRST_NAME = "Нэр";
+export const BIRTH = "Төрсөн огноо";
+export const AGE = "Нас";
+export const REGISTRATION_NUMBER = "Регистирийн дугаар";
+export const SEX = "Xүйс";
+export const CITY = "Xот";
+export const DISTRICT = "Дүүрэг";
+export const COMMITTEE = "Xороо";
+export const ADDRESS_DESCRIPTION = "Дэлгэрэнгүй хаяг";
+export const PHONE = "Утас";
+export const HOME_PHONE = "Гэрийн утас";
+export const EMAIL= "Мэйл";
+export const DOCTOR = "Эмч";
+export const CARD_NUMBER= "Картын дугаар";
+export const SYSDATE = "Эмчилгээний дуусах хугацаа"; 
