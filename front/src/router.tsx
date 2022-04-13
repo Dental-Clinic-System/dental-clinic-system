@@ -2,7 +2,7 @@ import { Suspense, lazy } from "react";
 import { RouteObject } from "react-router";
 
 import SuspenseLoader from "./components/suspenseloader/index";
-import { Clinic, PatientScreen, Appointment } from "./pages";
+import { Clinic, PatientScreen, Appointment, Home } from "./pages";
 import { Services } from "./pages/services";
 
 const Loader = (Component: any) => (props: any) =>
@@ -18,6 +18,10 @@ const Users = Loader(lazy(() => import("./pages/users")));
 const router: RouteObject[] = [
   {
     path: "/",
+    element: <Home />,
+  },
+  {
+    path: "/appointment",
     element: <Appointment />,
   },
   {

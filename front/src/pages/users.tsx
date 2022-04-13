@@ -1,14 +1,14 @@
-import { Box } from '@mui/system'
-import React from 'react'
-import { DataGrid, GridColDef } from '@mui/x-data-grid';
-import { Link } from 'react-router-dom';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import { Box } from "@mui/system";
+import React from "react";
+import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import { Link } from "react-router-dom";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
 
 const RenderInfo = () => {
-  const [age, setAge] = React.useState('');
+  const [age, setAge] = React.useState("");
   const handleChange = (event: SelectChangeEvent) => {
     setAge(event.target.value as string);
   };
@@ -27,8 +27,8 @@ const RenderInfo = () => {
         <MenuItem value={30}>Thirty</MenuItem>
       </Select>
     </FormControl>
-  )
-}
+  );
+};
 export const Users = () => {
   // const navigate = useNavigate()
   // const SendProfile = (params: any) => {
@@ -42,62 +42,66 @@ export const Users = () => {
     {
       field: "id",
       headerName: "ID",
-      flex: 1
+      flex: 1,
     },
     {
       field: "username",
       headerName: "Хэрэглэгчийн нэр",
-      flex: 1
+      flex: 1,
     },
     {
       field: "address",
       headerName: "Хаяг",
-      flex: 1
+      flex: 1,
     },
     {
       field: "firstname",
       headerName: "Нэр",
-      flex: 1
+      flex: 1,
     },
     {
       field: "lastname",
       headerName: "Овог",
-      flex: 1
+      flex: 1,
     },
     {
       field: "email",
       headerName: "Мэйл",
-      flex: 1
+      flex: 1,
     },
     {
       field: "phone",
       headerName: "Дугаар",
-      flex: 1
+      flex: 1,
     },
     {
       field: "birth",
       headerName: "Төрсөн өдөр",
-      flex: 1
+      flex: 1,
     },
     {
       field: "timestamp",
       headerName: "Ажиллах хуваарь",
-      flex: 1
+      flex: 1,
     },
     {
       field: "role",
       headerName: "Үүрэг",
       flex: 1,
-      renderCell: () => { return RenderInfo }
+      // renderCell: () => { return RenderInfo }
     },
     {
       field: "info",
       headerName: "Дэлгэрэнгүй",
       flex: 1,
       renderCell: (row) => {
-        return <Link to={`/profile/${row.id}`} state={{id: row.id}}>Дэлгэрэнгүй</Link>
-      }
-    }
+        return (
+          <Link to={`/profile/${row.id}`} state={{ id: row.id }}>
+            Дэлгэрэнгүй
+          </Link>
+        );
+      },
+    },
     // {
     //   field: "clinicId",
     //   headerName: ""
@@ -106,7 +110,7 @@ export const Users = () => {
     //   field: "serviceId",
     //   headerName: ""
     // }`
-  ]
+  ];
   const row = [
     {
       id: 1,
@@ -118,7 +122,7 @@ export const Users = () => {
       birth: "2005.11.04",
       timestamp: "9:00 - 17:00",
       role: "worker", // ["admin", "superadmin", "worker"],
-      info: "Дэлгэрэнгүй"
+      info: "Дэлгэрэнгүй",
     },
     {
       id: 2,
@@ -130,7 +134,7 @@ export const Users = () => {
       birth: "2005.11.04",
       timestamp: "9:00 - 17:00",
       role: "worker", // ["admin", "superadmin", "worker"]
-      info: "Дэлгэрэнгүй"
+      info: "Дэлгэрэнгүй",
     },
     {
       id: 3,
@@ -144,7 +148,7 @@ export const Users = () => {
       role: "worker", // ["admin", "superadmin", "worker"]
       info: "Дэлгэрэнгүй",
     },
-  ]
+  ];
   return (
     <Box>
       <DataGrid
@@ -157,6 +161,6 @@ export const Users = () => {
         disableSelectionOnClick
       />
     </Box>
-  )
-}
+  );
+};
 export default Users;
