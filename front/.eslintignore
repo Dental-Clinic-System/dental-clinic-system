@@ -1,0 +1,7 @@
+**/package-lock.json/**
+**/.github/**
+**/node_modules/**
+**/build/**
+**/.git/**
+**/public/**
+.eslintrc.js

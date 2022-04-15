@@ -1,15 +1,16 @@
-import { useRoutes } from "react-router-dom";
-import { router, registerRouter } from "./router";
-import AdapterDateFns from "@mui/lab/AdapterDateFns";
-import LocalizationProvider from "@mui/lab/LocalizationProvider";
-import { Theme } from "./theme";
-import { Grid } from "@mui/material";
-import { Sidebar } from "./layout/SideBar";
+import React from 'react';
+import { useRoutes } from 'react-router-dom';
+import { Grid } from '@mui/material';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import { router, registerRouter } from 'router';
+import { Sidebar } from 'layout/SideBar';
+import { Theme } from './theme';
 
 const App = () => {
   const routerContent = useRoutes(router);
   const registerContent = useRoutes(registerRouter);
-  let userToken = window.sessionStorage.getItem("username");
+  const userToken = window.sessionStorage.getItem('username');
 
   return (
     <Theme>
