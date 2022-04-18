@@ -57,3 +57,28 @@ query Query {
 }
 `;
 
+export const GET_PATIENT_HISTORY = gql`
+query GetPatients($id: String) {
+  getPatients(_id: $id) {
+    history {
+      serviceId
+      clinicId
+      date
+      payment
+      detail
+    }
+  }
+}
+`
+
+export const GET_PATIENTS_BRIEFLY = gql`
+query GetPatients {
+    getPatients {
+      _id
+      lastname
+      firstname
+      registration_number
+      card_number
+    }
+  }
+`
