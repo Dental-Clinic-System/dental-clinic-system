@@ -19,7 +19,14 @@ const PatientSchema = new Schema({
     email: String,
     doctor: String,
     card_number: String,
-    sysdate: String
+    sysdate: String,
+    history: [{
+        serviceId: String,
+        clinicId: String,
+        date: String,
+        payment: String,
+        detail: String,
+    }]
 });
 
 export const PatientModel = mongoose.model("Patient", PatientSchema);
