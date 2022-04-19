@@ -36,3 +36,24 @@ export const UPDATE_PATIENT = gql`
   updatePatient(_id: $id, lastname: $lastname)
 }
 `
+
+export const ADD_USER = gql`
+  mutation AddUser($email: String, $phone: String, $password: String, $firstname: String, $address: String, $lastname: String, $birth: String, $username: String) {
+    addUser(email: $email, phone: $phone, password: $password, firstname: $firstname, address: $address, lastname: $lastname, birth: $birth, username: $username) {
+      _id
+      email
+      phone
+      password
+    }
+  }
+`
+
+export const LOGIN = gql`
+  mutation Login($email: String, $password: String) {
+    login(email: $email, password: $password) {
+      _id
+      email
+      phone
+    }
+  }
+`
