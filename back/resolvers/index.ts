@@ -1,4 +1,4 @@
-import { addStaff, getStaff, loginStaff } from "./StaffMutation";
+import { addStaff, getStaff, loginStaff } from "./staffResolver";
 
 export default {
   Query: {
