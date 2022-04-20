@@ -56,25 +56,32 @@ export const LogIn = () => {
 
   const handleSubmit = async () => {
     console.log({ clinicId: id, email: info.email, password: info.password });
-    const { data, error: loginError } = await login({
-      variables: {
-        clinicId: id,
-        email: info.email,
-        password: info.password,
-      },
-    });
-    
-    if (!loginError) {
-      const { loginStaff } = data || {};
-      const { clinicId, username } = loginStaff || {};
+    try {
+      const { data, error: loginError } = await login({
+        variables: {
+          clinicId: id,
+          email: info.email,
+          password: info.password,
+        },
+      });
 
-      window.sessionStorage.setItem("clinicId", clinicId);
-      window.sessionStorage.setItem("username", username);
+      if (!loginError) {
+        const { loginStaff } = data || {};
+        const { clinicId, username } = loginStaff || {};
 
-      console.log(loginStaff);
+        if (!loginStaff) alert("user not found");
+        else {
+          window.sessionStorage.setItem("clinicId", clinicId);
+          window.sessionStorage.setItem("username", username);
 
-      alert(`successfully logged in by: ${info.email}`);
-      navigate("/");
+          console.log(loginStaff);
+
+          alert(`successfully logged in by: ${info.email}`);
+          navigate("/");
+        }
+      }
+    } catch (err) {
+      alert(err);
     }
   };
 
