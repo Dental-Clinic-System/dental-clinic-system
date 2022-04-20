@@ -1,8 +1,34 @@
 import { useQuery } from "@apollo/client";
 import { GET_PATIENTS } from "../../graphql";
 import { Loading } from "..";
-import { Box } from '@mui/material';
-import { DataGrid } from '@mui/x-data-grid';
+import { Box } from "@mui/material";
+import { DataGrid } from "@mui/x-data-grid";
+
+type PatientsGridType = {
+  setSelectedPatient: Function;
+};
+
+export const PatientsGrid: React.FC<PatientsGridType> = ({
+  setSelectedPatient,
+}) => {
+  const { loading, data } = useQuery(GET_PATIENTS);
+
+    return (
+        <Box>
+            {loading && <Loading/>}
+                <DataGrid
+                    sx={{ height: 640, width: '80vw' }}
+                    getRowId={(row) => row._id}
+                    rows={data ? data.getPatients : []}
+                    columns={columns}
+                    onSelectionModelChange={(item: any) => {
+                        setSelectedPatient(item)
+                    }}
+                    pageSize={10}
+                />
+        </Box>
+    );
+}
 
 const columns = [
     { field: '_id', width: 150 },
@@ -19,29 +45,3 @@ const columns = [
     { field: 'doctor', headerName: 'Эмчлэгч эмч', width: 150, editable: true },
     { field: 'card_number', headerName: 'Картын дугаар', width: 150, editable: true },
 ];
-
-type PatientsGridType = {
-    setSelectedPatient: Function
-}
-
-export const PatientsGrid:React.FC<PatientsGridType> = ({ setSelectedPatient }) => {
-    const { loading, data } = useQuery(GET_PATIENTS)
-
-    return (
-        <Box>
-            {loading && <Loading/>}
-            <Box sx={{ height: 400, width: '100%' }}>
-                <DataGrid
-                    getRowId={(row) => row._id}
-                    rows={data ? data.getPatients : []}
-                    columns={columns}
-                    checkboxSelection
-                    disableSelectionOnClick 
-                    onSelectionModelChange={(item: any) => {
-                        setSelectedPatient(item)
-                    }}
-                />
-            </Box>
-        </Box>
-    );
-}

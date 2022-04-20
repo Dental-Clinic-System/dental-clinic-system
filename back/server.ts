@@ -1,33 +1,21 @@
 import { ApolloServer } from "apollo-server"
+import { typeDefs } from './typedefs'
+import { queries } from "./queries"
+import { mutations } from './mutations' 
 
 import mongoose from "mongoose"
 import "dotenv/config"
-import { appointmentDef, clinicDef, patientDef, permissionDef, roleDef, serviceDef, userDef, provinceDef, districtDef, committeeDef } from './resolvers/typedefs'
-import { Mutation } from "./resolvers/mutations"
-import queries from "./resolvers/query"
 
-const resolvers = {
+const resolvers = { 
   Query: queries,
-  Mutation: Mutation
+  Mutation: mutations
 }
-
-const typeDefs = [
-  appointmentDef,
-  clinicDef,
-  patientDef,
-  permissionDef,
-  roleDef,
-  serviceDef,
-  userDef,
-  provinceDef,
-  districtDef,
-  committeeDef
-]
 
 const server = new ApolloServer({
   typeDefs,
   resolvers,
 })
+
 const uri: any = process.env.URI;
 mongoose.connect(uri);
 const connection = mongoose.connection;
