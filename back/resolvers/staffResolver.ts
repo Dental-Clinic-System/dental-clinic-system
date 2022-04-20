@@ -28,6 +28,7 @@ const loginStaff = async (_: any, params: any) => {
     .lean();
   staff.clinic = staff.clinicId;
   staff.password = "N/A";
+  staff.clinicId = staff.clinicId.toString();
   return staff;
 };
 export { addStaff, getStaff, loginStaff };

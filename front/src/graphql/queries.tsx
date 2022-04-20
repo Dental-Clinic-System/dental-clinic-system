@@ -40,39 +40,39 @@ export const GET_SERVICES = gql`
 `;
 
 export const GetClinics = gql`
-query Query {
-  getClinics {
-    _id
-    clinic_name
-    contact_number
-    email
-    official_address {
-      city
-      district
-      sub_district
-      full_address
+  query Query {
+    getClinics {
+      _id
+      clinic_name
+      contact_number
+      email
+      official_address {
+        city
+        district
+        sub_district
+        full_address
+      }
+      status
     }
-    status
   }
-}
 `;
 
 export const GET_PATIENT_HISTORY = gql`
-query GetPatients($id: String) {
-  getPatients(_id: $id) {
-    history {
-      serviceId
-      clinicId
-      date
-      payment
-      detail
+  query GetPatients($id: String) {
+    getPatients(_id: $id) {
+      history {
+        serviceId
+        clinicId
+        date
+        payment
+        detail
+      }
     }
   }
-}
-`
+`;
 
 export const GET_PATIENTS_BRIEFLY = gql`
-query GetPatients {
+  query GetPatients {
     getPatients {
       _id
       lastname
@@ -81,13 +81,16 @@ query GetPatients {
       card_number
     }
   }
-`
+`;
 
 export const LOGIN = gql`
   query LoginStaff($clinicId: String, $email: String, $password: String) {
     loginStaff(clinicId: $clinicId, email: $email, password: $password) {
       clinicId
       username
+      clinic {
+        title
+      }
     }
-}
-`
+  }
+`;

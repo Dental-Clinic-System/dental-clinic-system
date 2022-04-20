@@ -48,8 +48,8 @@ export const LogIn = () => {
     passwordError: false,
   });
   const [info, setInfo] = useState<ILogin>({
-    email: "",
-    password: "",
+    email: "test@gmail.com",
+    password: "123456",
   });
 
   const [login] = useLazyQuery(LOGIN);
@@ -63,18 +63,20 @@ export const LogIn = () => {
         password: info.password,
       },
     });
-    
+
     if (!loginError) {
       const { loginStaff } = data || {};
-      const { clinicId, username } = loginStaff || {};
+      const { clinicId, username, clinic } = loginStaff || {};
 
+      console.log(clinic);
       window.sessionStorage.setItem("clinicId", clinicId);
       window.sessionStorage.setItem("username", username);
+      window.sessionStorage.setItem("clinicTitle", clinic?.title);
 
       console.log(loginStaff);
 
       alert(`successfully logged in by: ${info.email}`);
-      navigate("/");
+      navigate("/625fca30c1cf951c042bd5ec");
     }
   };
 

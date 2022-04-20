@@ -15,8 +15,8 @@ export const Sidebar = () => {
   const route = [
     { path: "/", text: "Home" },
     { path: "appointment", text: "Appointments" },
-    { path: "users", text: "Users" },
-    { path: "clinics", text: "Clinics" },
+    { path: "users", text: "Stafff" },
+    // { path: "clinics", text: "Clinics" },
     { path: "services", text: "Services" },
     { path: "patients", text: "Patients" },
     { path: "patient-histories", text: "Patient Histories" },
@@ -25,6 +25,7 @@ export const Sidebar = () => {
   return (
     <Box>
       <Toolbar />
+      {sessionStorage.getItem("clinicTitle")}
       <Divider />
       <List>
         {route.map((data) => (
