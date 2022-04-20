@@ -53,3 +53,7 @@ mutation Mutation($clinic_name: String, $contact_number: String, $email: String,
   }
 }
 `
+export const DELETE_CLINIC = gql`
+mutation DeleteClinic($id: String) {
+  deleteClinic(_id: $id)
+}`

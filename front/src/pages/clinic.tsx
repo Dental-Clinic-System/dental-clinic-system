@@ -3,8 +3,8 @@ import { Chip, Box, Button } from '@mui/material';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { useState, useEffect } from 'react';
 import { GetClinics } from '../graphql/queries';
-import { AddPatientInput, CreateModal, Loading } from '../components';
-import { ADD_CLINIC } from '../graphql';
+import { AddPatientInput, CreateModal, DeleteModal, Loading } from '../components';
+import { ADD_CLINIC, DELETE_CLINIC } from '../graphql';
 
 const RenderStatus = (params: any) => {
   if (params.status == "accepted") {
@@ -20,9 +20,9 @@ export const Clinic = () => {
   const [clinics, setClinics] = useState([]);
   const [modal, setModal] = useState(false)
   const [deleteModal, setDeleteModal] = useState(false)
-
+  const [deleteCLinic] = useMutation(DELETE_CLINIC)
   const [addTodo] = useMutation(ADD_CLINIC)
-  const [selectClinic, setSelectClinic] = useState({})
+  const [selectClinic, setSelectClinic] = useState([])
 
   const [addData, setAddData] = useState({
     clinic_name: '',
@@ -88,7 +88,7 @@ export const Clinic = () => {
             }}
           />
       }
-      
+      <DeleteModal open={deleteModal} setOpen={setDeleteModal} deleteButtonName='delete clinic' deleteFunction={() => { deleteCLinic({ variables: { id: selectClinic[0] } }) }} />
       <CreateModal open={modal} setOpen={setModal} createFunction={() => addTodo({ variables: addData })} addButtonName={'Add clinic'}>
         <AddPatientInput placeholder={'clinic_name'} value={addData.clinic_name} setValue={(value: string) => setAddData({ ...addData, clinic_name: value })} />
         <AddPatientInput placeholder={'contact_number'} value={addData.contact_number} setValue={(value: string) => setAddData({ ...addData, contact_number: value })} />
