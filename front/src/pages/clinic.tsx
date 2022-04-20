@@ -1,9 +1,10 @@
-import { useQuery } from '@apollo/client';
-import { Chip, Box } from '@mui/material';
+import { useMutation, useQuery } from '@apollo/client';
+import { Chip, Box, Button } from '@mui/material';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { useState, useEffect } from 'react';
 import { GetClinics } from '../graphql/queries';
-import { Loading } from '../components';
+import { AddPatientInput, CreateModal, Loading } from '../components';
+import { ADD_CLINIC } from '../graphql';
 
 const RenderStatus = (params: any) => {
   if (params.status == "accepted") {
@@ -17,7 +18,24 @@ const RenderStatus = (params: any) => {
 export const Clinic = () => {
   const { loading, error, data } = useQuery(GetClinics);
   const [clinics, setClinics] = useState([]);
+  const [modal, setModal] = useState(false)
+  const [deleteModal, setDeleteModal] = useState(false)
 
+  const [addTodo] = useMutation(ADD_CLINIC)
+  const [selectClinic, setSelectClinic] = useState({})
+
+  const [addData, setAddData] = useState({
+    clinic_name: '',
+    contact_number: '',
+    email: '',
+    official_address: {
+      city: '',
+      district: '',
+      sub_district: '',
+      full_address: '',
+    },
+    status: '',
+  })
   useEffect(() => {
     let formatedData: any = [];
     data?.getClinics?.map((clinic: any, index: number) => {
@@ -25,48 +43,62 @@ export const Clinic = () => {
         ...clinic,
         index: index + 1,
       };
-      console.log(cli);
       formatedData.push(cli);
     });
     setClinics(formatedData);
   }, [data]);
-
-    return (
-        <Box sx={{ width: '100%', height: '90Vh', display: 'flex ', alignItems: 'center', justifyContent: 'center' }}>
-            {
-                loading ? 
-                <Loading /> 
-                :
-                <DataGrid
-                        sx={{
-                            width: '100%',
-                            height: 640
-                        }}
-                        getRowId={(doc) => doc._id}
-                        rows={clinics}
-                        columns={columns}
-                        pageSize={10}
-                    />
-            }
-        </Box>
-    )
-}
-
-const columns: GridColDef[] = [
+  const columns: GridColDef[] = [
     {
-        field: 'index',
-        headerName: 'No',
-        width: 15,
+      field: 'index',
+      headerName: 'No',
+      width: 15,
     },
     { field: 'clinic_name', headerName: 'name', width: 150 },
-    { field: 'operation_name', headerName: 'operation name', width: 150 },
-    { field: 'operation_date', headerName: 'operation date', width: 150 },
     { field: 'email', headerName: 'email', width: 200 },
-    { field: 'clinic_web', headerName: 'web', width: 150 },
-    { field: 'phone', headerName: 'phone', width: 150 },
     { field: 'contact_number', headerName: 'contact number', width: 150 },
     {
-        field: 'status', headerName: 'status', width: 150,
-        renderCell: (params) => <RenderStatus status={params.value} />
+      field: 'official_address', headerName: 'official_address', width: 150,
+      renderCell: (address: any) => <div>{address?.full_address}</div>
     },
-]
+    {
+      field: 'status', headerName: 'status', width: 150,
+      renderCell: (params) => <RenderStatus status={params.value} />
+    },
+  ]
+
+  return (
+    <Box sx={{ width: '100%', height: '90Vh', alignItems: 'center', justifyContent: 'center' }}>
+      <Button onClick={() => setModal(true)} variant='outlined'>Clinic нэмэх</Button>
+      <Button onClick={() => setDeleteModal(true)} variant='outlined' color='error'>Clinic хасах</Button>
+      {
+        loading ?
+          <Loading />
+          :
+          <DataGrid
+            sx={{
+              width: '100%',
+              height: 640
+            }}
+            getRowId={(doc) => doc._id}
+            rows={clinics}
+            columns={columns}
+            pageSize={10}
+            onSelectionModelChange={(item: any) => {
+              setSelectClinic(item)
+            }}
+          />
+      }
+      
+      <CreateModal open={modal} setOpen={setModal} createFunction={() => addTodo({ variables: addData })} addButtonName={'Add clinic'}>
+        <AddPatientInput placeholder={'clinic_name'} value={addData.clinic_name} setValue={(value: string) => setAddData({ ...addData, clinic_name: value })} />
+        <AddPatientInput placeholder={'contact_number'} value={addData.contact_number} setValue={(value: string) => setAddData({ ...addData, contact_number: value })} />
+        <AddPatientInput placeholder={'email'} value={addData.email} setValue={(value: string) => setAddData({ ...addData, email: value })} />
+        <AddPatientInput placeholder={'status'} value={addData.status} setValue={(value: string) => setAddData({ ...addData, status: value })} />
+        <AddPatientInput placeholder={'city'} value={addData.official_address.city} setValue={(value: string) => setAddData({ ...addData, official_address: { ...addData.official_address, city: value } })} />
+        <AddPatientInput placeholder={'district'} value={addData.official_address.district} setValue={(value: string) => setAddData({ ...addData, official_address: { ...addData.official_address, district: value } })} />
+        <AddPatientInput placeholder={'sub_district'} value={addData.official_address.sub_district} setValue={(value: string) => setAddData({ ...addData, official_address: { ...addData.official_address, sub_district: value } })} />
+        <AddPatientInput placeholder={'full_address'} value={addData.official_address.full_address} setValue={(value: string) => setAddData({ ...addData, official_address: { ...addData.official_address, full_address: value } })} />
+      </CreateModal>
+    </Box >
+  )
+}

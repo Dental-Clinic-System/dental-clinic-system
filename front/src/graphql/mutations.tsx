@@ -36,3 +36,20 @@ export const UPDATE_PATIENT = gql`
   updatePatient(_id: $id, lastname: $lastname)
 }
 `
+export const ADD_CLINIC = gql`
+mutation Mutation($clinic_name: String, $contact_number: String, $email: String, $official_address: Official_address_type, $status: String) {
+  addClinic(clinic_name: $clinic_name, contact_number: $contact_number, email: $email, official_address: $official_address, status: $status) {
+    _id
+    clinic_name
+    contact_number
+    email
+    official_address {
+      city
+      district
+      sub_district
+      full_address
+    }
+    status
+  }
+}
+`

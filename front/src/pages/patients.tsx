@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Box, Button } from '@mui/material';
-import { PatientsGrid, CreateModal, AddPatientInput, DeleteModal } from '../components'
+import { PatientsGrid, CreateModal, AddPatientInput, DeleteModal } from '../components/index'
 import { ADD_PATIENTS, DELETE_PATIENT } from "../graphql";
 import { useMutation } from "@apollo/client";
 
