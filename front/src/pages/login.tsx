@@ -13,9 +13,9 @@ import {
 import { makeStyles } from "@material-ui/core";
 import { useNavigate, useParams } from "react-router";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import { useMutation } from "@apollo/client";
-import { AUTH_TOKEN } from "../helper/constants";
+import { useLazyQuery } from "@apollo/client";
 import { IError, ILogin } from "../interfaces/ILogin";
+import { LOGIN } from "../graphql";
 
 const useStyles = makeStyles({
   paperContainer: {
@@ -23,8 +23,6 @@ const useStyles = makeStyles({
     height: "100vh",
     display: "flex",
     justifyContent: "center",
-    alignContent: "center",
-    backgroundColor: "red",
   },
   container: {
     marginTop: 8,
@@ -53,20 +51,31 @@ export const LogIn = () => {
     email: "",
     password: "",
   });
-  //   const [login] = useMutation(LOGIN);
 
-  const handleSubmit = () => {
-    alert(`successfully logged in by: ${info.email}`);
-    // login({
-    //   variables: {
-    //     email: info.email,
-    //     password: info.password,
-    //   },
-    //   onCompleted: ({ login }) => {
-    //     window.sessionStorage.setItem(AUTH_TOKEN, login.token);
-    //     navigate("/");
-    //   },
-    // });
+  const [login] = useLazyQuery(LOGIN);
+
+  const handleSubmit = async () => {
+    console.log({ clinicId: id, email: info.email, password: info.password });
+    const { data, error: loginError } = await login({
+      variables: {
+        clinicId: id,
+        email: info.email,
+        password: info.password,
+      },
+    });
+    
+    if (!loginError) {
+      const { loginStaff } = data || {};
+      const { clinicId, username } = loginStaff || {};
+
+      window.sessionStorage.setItem("clinicId", clinicId);
+      window.sessionStorage.setItem("username", username);
+
+      console.log(loginStaff);
+
+      alert(`successfully logged in by: ${info.email}`);
+      navigate("/");
+    }
   };
 
   return (
@@ -81,7 +90,7 @@ export const LogIn = () => {
           Нэвтрэх
         </Typography>
 
-        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+        <Box sx={{ mt: 1 }}>
           <TextField
             margin="normal"
             error={error.emailError}
@@ -108,7 +117,7 @@ export const LogIn = () => {
           />
 
           <Button
-            type="submit"
+            onClick={handleSubmit}
             fullWidth
             variant="contained"
             className={styles.submitButton}

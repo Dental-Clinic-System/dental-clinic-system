@@ -82,3 +82,12 @@ query GetPatients {
     }
   }
 `
+
+export const LOGIN = gql`
+  query LoginStaff($clinicId: String, $email: String, $password: String) {
+    loginStaff(clinicId: $clinicId, email: $email, password: $password) {
+      clinicId
+      username
+    }
+}
+`
