@@ -73,13 +73,14 @@ export const LogIn = () => {
       window.sessionStorage.setItem("username", username);
       window.sessionStorage.setItem("clinicTitle", clinic?.title);
 
-        if (!loginStaff) alert("user not found");
-        else {
-          window.sessionStorage.setItem("clinicId", clinicId);
-          window.sessionStorage.setItem("username", username);
+      if (!loginStaff) alert("user not found");
+      else {
+        window.sessionStorage.setItem("clinicId", clinicId);
+        window.sessionStorage.setItem("username", username);
 
-      alert(`successfully logged in by: ${info.email}`);
-      navigate("/625fca30c1cf951c042bd5ec");
+        alert(`successfully logged in by: ${info.email}`);
+        navigate("/625fca30c1cf951c042bd5ec");
+      }
     }
   };
 
