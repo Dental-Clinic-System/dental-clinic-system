@@ -2,7 +2,7 @@ import { Suspense, lazy } from "react";
 import { RouteObject } from "react-router";
 
 import SuspenseLoader from "./components/suspenseloader/index";
-// import { Clinic, PatientScreen, Appointment, Home } from "./pages";
+import { Clinic, PatientScreen, Appointment, Home, PatientHistoriesScreen } from "./pages";
 import { Services } from "./pages/services";
 
 const Loader = (Component: any) => (props: any) =>
@@ -17,14 +17,14 @@ const Users = Loader(lazy(() => import("./pages/users")));
 const Login = Loader(lazy(() => import('./pages/login')))
 
 const router: RouteObject[] = [
-  // {
-  //   path: "/",
-  //   element: <Home />,
-  // },
-  // {
-  //   path: "/appointment",
-  //   element: <Appointment />,
-  // },
+  {
+    path: "/",
+    element: <Home />,
+  },
+  {
+    path: "/appointment",
+    element: <Appointment />,
+  },
   {
     path: "/services",
     element: <Services />,
@@ -41,14 +41,18 @@ const router: RouteObject[] = [
     path:"/login",
     element: <Login/>,
   }
-  // {
-  //   path: "/clinics",
-  //   element: <Clinic />,
-  // },
-  // {
-  //   path: "/patients",
-  //   element: <PatientScreen />,
-  // },
+  {
+    path: "/clinics",
+    element: <Clinic />,
+  },
+  {
+    path: "/patients",
+    element: <PatientScreen />,
+  },
+  {
+    path: "/patient-histories",
+    element: <PatientHistoriesScreen />,
+  },
 ];
 
 export default router;
