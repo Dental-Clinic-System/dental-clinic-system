@@ -18,3 +18,4 @@ export const SYSDATE = "Эмчилгээний дуусах хугацаа";
 export const BigDataGridHeight = 640;
 export const MediumDataGridHeight = 450;
 export const SmallDataGridHeight = 300;
+export const AUTH_TOKEN = 'auth-token';

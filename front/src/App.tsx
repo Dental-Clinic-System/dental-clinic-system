@@ -1,5 +1,5 @@
 import { useRoutes } from "react-router-dom";
-import routes from "./router";
+import { router, registerRouter } from "./router";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import { Theme } from "./theme";
@@ -7,18 +7,25 @@ import { Grid } from "@mui/material";
 import { Sidebar } from "./layout/SideBar";
 
 const App = () => {
-  const content = useRoutes(routes);
+  const routerContent = useRoutes(router);
+  const registerContent = useRoutes(registerRouter);
+  let userToken = window.sessionStorage.getItem("username");
+
   return (
     <Theme>
       <LocalizationProvider dateAdapter={AdapterDateFns}>
-        <Grid container>
-          <Grid item xs={2}>
-            <Sidebar />
+        {userToken ? (
+          <Grid container>
+            <Grid item xs={2}>
+              <Sidebar />
+            </Grid>
+            <Grid item xs={10}>
+              {routerContent}
+            </Grid>
           </Grid>
-          <Grid item xs={10}>
-            {content}
-          </Grid>
-        </Grid>
+        ) : (
+          registerContent
+        )}
       </LocalizationProvider>
     </Theme>
   );
