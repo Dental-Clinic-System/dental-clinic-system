@@ -1,2 +1,3 @@
-export * from './patients_grid'
-export * from './add_patient_input'
+export * from './patients-grid'
+export * from './add-patient-input'
+export * from './patient-history-grid'
