@@ -20,13 +20,13 @@ const PatientSchema = new Schema({
     doctor: String,
     card_number: String,
     sysdate: String,
-    history: {
+    history: [{
         serviceId: String,
         clinicId: String,
         date: String,
         payment: String,
         detail: String,
-    }
+    }]
 });
 
-export const PatientModel = mongoose.model("Patient", PatientSchema);
+export const PatientModel = mongoose.model("Patient", PatientSchema); //mongoDB deer Patient -> patients bolj huviraad collection bolno.

@@ -3,20 +3,22 @@ import { gql } from 'apollo-server'
 export const patientDef = gql`
   scalar object
 
-  type patient_history {
+  type patient_history_type {
     serviceId: String
     clinicId: String
     date: String
     payment: String
     detail: String
-  }
+    _id: String
+  } #object maygaar type zarlah uyd type gj tuhain object oo biceed davhar input bicne.
 
-  input patient_history_type {
+  input patient_history {
     serviceId: String
     clinicId: String
     date: String
     payment: String
     detail: String
+    _id: String
   }
 
   type Patient {
@@ -38,7 +40,7 @@ export const patientDef = gql`
     doctor: String
     card_number: String
     sysdate: String
-    history: patient_history
+    history: [patient_history_type] #end typetai hesgiin bicne
   }
 
   type Mutation {
@@ -59,7 +61,7 @@ export const patientDef = gql`
       doctor: String,
       card_number: String,
       sysdate: String,
-      history: patient_history_type): Patient
+      history: [patient_history]): Patient
     deletePatient(_id: String): String
     updatePatient(_id: String, 
       lastname: String,
@@ -79,7 +81,7 @@ export const patientDef = gql`
       doctor: String,
       card_number: String,
       sysdate: String,
-      history: patient_history_type): String
+      history: [patient_history]): String #busad hesegt inputteigee bicne
   }
 
   type Query {
@@ -101,6 +103,6 @@ export const patientDef = gql`
     doctor: String
     card_number: String
     sysdate: String
-    history: patient_history_type): [Patient]
+    history: [patient_history]): [Patient]
   }
 `
