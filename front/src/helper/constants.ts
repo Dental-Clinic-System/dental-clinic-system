@@ -15,3 +15,6 @@ export const EMAIL= "Мэйл";
 export const DOCTOR = "Эмч";
 export const CARD_NUMBER= "Картын дугаар";
 export const SYSDATE = "Эмчилгээний дуусах хугацаа"; 
+export const BigDataGridHeight = 640;
+export const MediumDataGridHeight = 450;
+export const SmallDataGridHeight = 300;
