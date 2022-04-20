@@ -11,7 +11,13 @@ export const user_mutation = {
             return error;
         }
     },
+    async login(_: any, { email, password }: any) {
+        const user = await UserModel.findOne({ email })
 
+        if(user.password == password) {
+            return user;
+        } return null
+    },
     async deleteUser(_: any, params: any) {
         UserModel.findByIdAndDelete({ _id: params._id })
             .then(() => {

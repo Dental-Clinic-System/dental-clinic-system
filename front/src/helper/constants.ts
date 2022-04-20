@@ -15,3 +15,4 @@ export const EMAIL= "Мэйл";
 export const DOCTOR = "Эмч";
 export const CARD_NUMBER= "Картын дугаар";
 export const SYSDATE = "Эмчилгээний дуусах хугацаа"; 
+export const AUTH_TOKEN = 'auth-token';

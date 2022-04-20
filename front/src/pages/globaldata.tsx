@@ -19,7 +19,7 @@ export const info = [
         clinicId: '62384439c08d86a577ca37d4',
         serviceId: '622dbd4af7b28facf9bad4d5',
         profileImage: 'https://thumbs.dreamstime.com/b/medical-doctor-profile-icon-stethoscope-sign-editable-vector-eps-symbol-illustration-183153126.jpg',
-        info: "Дэлгэрэнгүй"
+        information: "Дэлгэрэнгүй"
     },
     {
         id: 2,
@@ -41,7 +41,7 @@ export const info = [
         clinicId: '62384439c08d86a577ca37d4',
         serviceId: '622dbd4af7b28facf9bad4d5',
         profileImage: 'https://thumbs.dreamstime.com/b/medical-doctor-profile-icon-stethoscope-sign-editable-vector-eps-symbol-illustration-183153126.jpg',
-        info: "Дэлгэрэнгүй"
+        information: "Дэлгэрэнгүй"
     },
     {
         id: 3,
@@ -63,6 +63,6 @@ export const info = [
         clinicId: '62384439c08d86a577ca37d4',
         serviceId: '622dbd4af7b28facf9bad4d5',
         profileImage: 'https://thumbs.dreamstime.com/b/medical-doctor-profile-icon-stethoscope-sign-editable-vector-eps-symbol-illustration-183153126.jpg',
-        info: "Дэлгэрэнгүй",
+        information: "Дэлгэрэнгүй",
     },
 ]
