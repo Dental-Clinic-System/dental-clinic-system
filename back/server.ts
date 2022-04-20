@@ -1,21 +1,20 @@
-import { ApolloServer } from "apollo-server"
-import { typeDefs } from './typedefs'
-import { queries } from "./queries"
-import { mutations } from './mutations' 
+import { ApolloServer } from "apollo-server";
+import { queries } from "./queries";
+import resolvers from "./resolvers";
 
-import mongoose from "mongoose"
-import "dotenv/config"
-
-const resolvers = { 
+import mongoose from "mongoose";
+import "dotenv/config";
+import { typeDefs } from "./types";
+/*
+const resolvers = {
   Query: queries,
-  Mutation: mutations
-}
+  Mutation: mutations,
+};*/
 
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-})
-
+});
 const uri: any = process.env.URI;
 mongoose.connect(uri);
 const connection = mongoose.connection;

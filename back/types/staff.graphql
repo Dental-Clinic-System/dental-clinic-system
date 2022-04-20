@@ -1,0 +1,23 @@
+type Clinic {
+  title: String
+}
+type Staff {
+  clinicId: String
+  clinic: Clinic!
+  username: String
+  email: String
+  password: String!
+}
+type Query {
+  loginStaff(clinicId: String, email: String, password: String): Staff
+  getStaff(clinicId: String, _id: String): Staff
+  getStaffs(clinicID: String): [Staff]
+}
+type Mutation {
+  addStaff(
+    clinicId: String
+    username: String
+    email: String
+    password: String
+  ): Staff
+}

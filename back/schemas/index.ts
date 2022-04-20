@@ -1,1 +1,2 @@
-export * from './patient-schema'
+export * from "./Clinic";
+export * from "./Staff";
