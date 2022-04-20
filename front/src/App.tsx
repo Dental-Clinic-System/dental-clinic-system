@@ -4,7 +4,6 @@ import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import { Theme } from "./theme";
 import { Grid } from "@mui/material";
-import { AUTH_TOKEN } from "./helper/constants";
 import { Sidebar } from "./layout/SideBar";
 
 const App = () => {
