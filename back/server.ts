@@ -1,15 +1,9 @@
 import { ApolloServer } from "apollo-server";
-import { queries } from "./queries";
 import resolvers from "./resolvers";
 
 import mongoose from "mongoose";
 import "dotenv/config";
 import { typeDefs } from "./types";
-/*
-const resolvers = {
-  Query: queries,
-  Mutation: mutations,
-};*/
 
 const server = new ApolloServer({
   typeDefs,
