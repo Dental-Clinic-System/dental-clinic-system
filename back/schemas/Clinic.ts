@@ -14,4 +14,5 @@ const ClinicSchema = new Schema({
 });
 
 const Clinic = mongoose.model("Clinic", ClinicSchema);
+
 export { Clinic };
