@@ -20,11 +20,13 @@ type DeleteModalType = {
     open: boolean;
     setOpen: Function;
     deleteFunction: Function;
+    fixFunction?: Function;
     deleteButtonName: String;
+    fixButtonName?: String;
 }
 
 export const DeleteModal: React.FC<DeleteModalType> = (params) => {
-    const { open, setOpen, deleteFunction, deleteButtonName, children } = params;
+    const { open, setOpen, deleteFunction, deleteButtonName, fixButtonName, fixFunction, children } = params;
     const handleClose = () => setOpen(false);
 
     return (
@@ -40,6 +42,14 @@ export const DeleteModal: React.FC<DeleteModalType> = (params) => {
                     justifyContent: 'space-around'
                 }}>
                     <Button variant='outlined' onClick={handleClose} size='small'>Буцах</Button>
+                    <Button 
+                        variant='outlined'
+                        color='success' 
+                        onClick={fixFunction ? () => fixFunction() : () => console.log('failed')}
+                        size='small'
+                    >
+                        {fixButtonName}
+                    </Button>
                     <Button 
                         variant='outlined'
                         color='error' 
