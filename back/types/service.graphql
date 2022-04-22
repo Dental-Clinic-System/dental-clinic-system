@@ -1,23 +1,30 @@
-type Clinic {
-  title: String
-}
-type Staff {
+type Service {
   clinicId: String
-  clinic: Clinic!
-  username: String
-  email: String
-  password: String!
+  serviceName: String
+  serviceCode: String
+  price: String
+  description: String
 }
 type Query {
-  loginStaff(clinicId: String, email: String, password: String): Staff
-  getStaff(clinicId: String, _id: String): Staff
-  getStaffs(clinicID: String): [Staff]
+  getService(clinicId: String, _id: String): Service
+  getServices(clinicId: String): [Service]
 }
 type Mutation {
-  addStaff(
+  addService(
     clinicId: String
-    username: String
-    email: String
-    password: String
-  ): Staff
+    serviceName: String
+    serviceCode: String
+    price: String
+    description: String
+  ): Service
+
+  updateService(
+    _id: String
+    serviceName: String
+    serviceCode: String
+    price: String
+    description: String
+  ): Service
+
+  deleteService(_id: String): Service
 }

@@ -3,24 +3,17 @@ import mongoose, { Schema } from "mongoose";
 const ServiceSchema = new Schema(
   {
     clinicId: { type: Schema.Types.ObjectId, ref: "Clinic" },
-    title: {
+    serviceName: {
       type: String,
       required: true,
       maxlength: 64,
       minlength: 2,
     },
-    shortName: {
+    serviceCode: {
       type: String,
       required: true,
-      maxlength: 64,
+      maxlength: 32,
       minlength: 2,
-    },
-    code: {
-      type: String,
-      required: true,
-      maxlength: 64,
-      minlength: 2,
-      index: true,
     },
     price: {
       type: String,
@@ -35,9 +28,8 @@ const ServiceSchema = new Schema(
       minlength: 2,
     },
   },
-  { timestamps: true }
 );
-ServiceSchema.index({ clinicId: 1, title: 1, email: 1 }, { unique: true });
+ServiceSchema.index({ clinicId: 1, serviceName: 1, serviceCode: 1 }, { unique: true });
 
 const Service = mongoose.model("Service", ServiceSchema);
 
