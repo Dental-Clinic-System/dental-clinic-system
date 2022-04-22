@@ -1,142 +1,94 @@
-import { Box, sizing } from '@mui/system'
-import { Paper, Input } from '@mui/material'
-import Snackbar from '@mui/material/Snackbar';
-import MuiAlert, { AlertProps } from '@mui/material/Alert';
-import Fab from '@mui/material/Fab';
+import { Box } from '@mui/system'
+import { Paper, Container } from '@mui/material'
 import EditIcon from '@mui/icons-material/Edit';
 import SaveIcon from '@mui/icons-material/Save';
-import React from 'react'
-import { LoadingButton } from '@mui/lab';
 import { info } from './globaldata'
 import { useLocation } from 'react-router-dom'
+import { SnackBar } from '../components/custom/snackbaralert';
+import { FabLoading } from '../components/custom/loaderfab';
+import { useState } from 'react';
+import { IProfile } from '../interfaces/IProfile';
 
-const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
-  props,
-  ref,
-) {
-  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-});
+//STYLES
+const styles = {
+    mainContainer: {
+        display: 'flex', flexDirection: 'column',
+    },
+    paperContainer: {
+        display: 'flex', flexDiretion: 'row', justifyContent: 'space-around',
+    },
+    descriptionContainer: {
+        display: 'flex', alignItems: 'flex-start', justifyContent: 'center', flexDirection: 'column',
+    },
+    avatar: {
+        width: '30px', height: '30px', objectFit: 'fill', borderRadius: '50%',
+    },
+    avatarContainer: {
+        width: '30px', height: '30px', 
+    },
 
+}
 
+//PAGE CODE
 export const ProfilePage = () => {
-  const location = useLocation();
-  console.log(location);
-  // const {} = useQuery({variant: {uid: location.pathname.split('/')[2]}})
-  // const id = location.state;
-  const [edit, setEdit] = React.useState(false);
-  const [open, setOpen] = React.useState(false);
-  const [loading, setLoading] = React.useState(false);
-  const [data, setData] = React.useState(info[0]);
-
-  const handleClick = () => {
-    setOpen(true);
-    setEdit(false);
-  };
-  const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
-    if (reason === 'clickaway') {
-      return;
+    //GETTING DATA FROM MOCKDATA
+    const avatar = 'https://thumbs.dreamstime.com/b/medical-doctor-profile-icon-stethoscope-sign-editable-vector-eps-symbol-illustration-183153126.jpg'
+    const location = useLocation();
+    const id: any = location.pathname.split('/')[2];
+    const information = {
+        _id: info[id - 1]._id,
+        username: info[id - 1].username,
+        firstname: info[id - 1].firstname,
+        lastname: info[id - 1].lastname,
+        address: info[id - 1].address,
+        email: info[id - 1].email,
+        phone: info[id - 1].phone,
+        birth: info[id - 1].birth,
+        timestamp: {
+            mon: info[id - 1].timestamp.mon,
+            tue: info[id - 1].timestamp.tue,
+            wed: info[id - 1].timestamp.wed,
+            thu: info[id - 1].timestamp.thu,
+            fri: info[id - 1].timestamp.fri
+        },
+        role: info[id - 1].role, // ["admin", "superadmin", "worker"],
+        clinicId: info[id - 1].clinicId,
+        serviceId: info[id - 1].serviceId,
+        info: info[id - 1].info
     }
-    setOpen(false);
-  };
+    const [open, setOpen] = useState(false);
+    const [edit, setEdit] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [data, setData] = useState<IProfile>(information);
 
-  return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', height: 1 }}>
-      {
-        //main page
-        edit === false ?
-          <Box>
-            <Paper sx={{ display: 'flex', flexDiretion: 'row', justifyContent: 'space-between', paddingRight: 50, paddingLeft: 50 }}>
-              <Box>
-                <img src={data.profileImage} style={{
-                  width: '300px',
-                  height: '300px',
-                  objectFit: 'fill',
-                  borderRadius: '50%'
-                }} alt={'profileImage'} />
-              </Box>
-              <Box sx={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'center', flexDirection: 'column' }}>
-                <h1>{data.lastname} {data.firstname}</h1>
-                <h3>{data.address}</h3>
-                <h3>email: {data.email}</h3>
-                <h3>phone: {data.phone}</h3>
-              </Box>
-            </Paper>
-          </Box>
-          :
-          //editing page
-          <Box>
-            <Paper sx={{ display: 'flex', flexDiretion: 'row', justifyContent: 'space-between', paddingRight: 50, paddingLeft: 50 }}>
-              <Box>
-                <img src={data.profileImage} style={{
-                  width: '300px',
-                  height: '300px',
-                  objectFit: 'fill',
-                  borderRadius: '50%',
-                  zIndex: -1
-                }} alt={'profileImage'} />
-              </Box>
-              <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignContent: 'center' }}>
-                <Box sx={{ display: 'flex', flexDirection: 'row' }}>
-                  <Input value={data.lastname} onChange={(e) => setData({ ...data, lastname: e.target.value })} />
-                  <Input value={data.firstname} onChange={(e) => setData({ ...data, firstname: e.target.value })} />
+    //EDIT BUTTON && OPEN SNACKBAR
+    const handleClick = () => {
+        setOpen(true);
+        setEdit(false);
+    };
+    return (
+        <Container component='main' maxWidth='xs' sx={styles.mainContainer}>
+            <Paper sx={styles.paperContainer}>
+                <Box sx={styles.avatarContainer}>
+                    <img src={avatar} alt='avatar' style={styles.avatar}/>
                 </Box>
-                <Input value={data.address} onChange={(e) => setData({ ...data, address: e.target.value })} />
-                <Input value={data.email} onChange={(e) => setData({ ...data, email: e.target.value })} />
-                <Input value={data.email} onChange={(e) => setData({ ...data, email: e.target.value })} />
-                <Input value={data.phone} onChange={(e) => setData({ ...data, phone: e.target.value })} />
-              </Box>
             </Paper>
-          </Box>
-      }
-      <Box sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', paddingLeft: 50, paddingRight: 50 }}>
-        <Box sx={{ display: 'flex', justifyContent: 'flex-start', paddingLeft: 5 }}>
-          <h1>Work Schedule</h1>
-        </Box>
-        <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around' }}>
-          <Box>
-            <h3>Mon: {data.timestamp.mon}</h3>
-            <h3>Tue: {data.timestamp.tue}</h3>
-            <h3>Wed: {data.timestamp.wed}</h3>
-            <h3>Thu: {data.timestamp.thu}</h3>
-            <h3>Fri: {data.timestamp.fri}</h3>
-          </Box>
-          <Box>
-            <h3>Mon: Ирсэн</h3>
-            <h3>Tue: Ирсэн</h3>
-            <h3>Wed: Ирнэ</h3>
-            <h3>Thu: Чөлөөтэй</h3>
-            <h3>Fri: Чөлөөтэй</h3>
-          </Box>
-        </Box>
-      </Box>
-      {
-        edit == false ?
-          <Box sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'flex-end' }}>
-            <LoadingButton loading={loading}>
-              <Fab color='secondary' aria-label='edit' onClick={() => setEdit(true)}>
-                <EditIcon />
-              </Fab>
-            </LoadingButton>
-            <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-              <Alert onClose={handleClose} severity="success" sx={{ width: '100%', backgroundColor: '#00ceba' }}>
-                Амжилттай хадгалагдлаа！
-              </Alert>
-            </Snackbar>
-          </Box>
-          :
-          <Box sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'flex-end' }} >
-            <LoadingButton loading={loading}>
-              <Fab
-                color='secondary'
-                aria-label='edit'
-                onClick={() => handleClick()}
-              >
-                <SaveIcon />
-              </Fab>
-            </LoadingButton>
-          </Box>
-      }
-    </Box>
-  )
+            {
+                edit === false ?
+                    <Box sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'flex-end' }} onClick={() => setEdit(true)}>
+                        <FabLoading loading={loading}>
+                            <EditIcon />
+                        </FabLoading>
+                        <SnackBar children={'Амжилттай хадгалагдлаа！'} isOpen={open} />
+                    </Box>
+                    :
+                    <Box sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'flex-end' }} onClick={() => handleClick()} >
+                        <FabLoading loading={loading}>
+                            <SaveIcon />
+                        </FabLoading>
+                    </Box>
+            }
+        </Container>
+    )
 }
 export default ProfilePage

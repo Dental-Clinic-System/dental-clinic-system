@@ -1,6 +1,6 @@
 export const info = [
     {
-        id: 1,
+        _id: "1",
         username: "anand",
         firstname: "radnaa",
         lastname: "anand",
@@ -18,11 +18,10 @@ export const info = [
         role: "worker", // ["admin", "superadmin", "worker"],
         clinicId: '62384439c08d86a577ca37d4',
         serviceId: '622dbd4af7b28facf9bad4d5',
-        profileImage: 'https://thumbs.dreamstime.com/b/medical-doctor-profile-icon-stethoscope-sign-editable-vector-eps-symbol-illustration-183153126.jpg',
         info: "Дэлгэрэнгүй"
     },
     {
-        id: 2,
+        _id: "2",
         username: "anand 2",
         firstname: "radnaa",
         lastname: "anand 2",
@@ -40,11 +39,10 @@ export const info = [
         role: "worker", // ["admin", "superadmin", "worker"]
         clinicId: '62384439c08d86a577ca37d4',
         serviceId: '622dbd4af7b28facf9bad4d5',
-        profileImage: 'https://thumbs.dreamstime.com/b/medical-doctor-profile-icon-stethoscope-sign-editable-vector-eps-symbol-illustration-183153126.jpg',
         info: "Дэлгэрэнгүй"
     },
     {
-        id: 3,
+        _id: "3",
         username: "anand 3",
         firstname: "radnaa",
         lastname: "anand 3",
@@ -62,7 +60,6 @@ export const info = [
         role: "worker", // ["admin", "superadmin", "worker"]
         clinicId: '62384439c08d86a577ca37d4',
         serviceId: '622dbd4af7b28facf9bad4d5',
-        profileImage: 'https://thumbs.dreamstime.com/b/medical-doctor-profile-icon-stethoscope-sign-editable-vector-eps-symbol-illustration-183153126.jpg',
         info: "Дэлгэрэнгүй",
     },
 ]
