@@ -1,14 +1,9 @@
 import React from "react";
-import useState from "react";
 import { Box } from "@mui/system";
-import { Button } from "@mui/material";
 import Stack from '@mui/material/Stack';
 import { styled } from '@mui/material/styles';
 import Grid from '@mui/material/Grid';
 import { TeethTest } from "../components/custom/teeth";
-
-
-
 
 export const DentalNotation = () => {
 
@@ -17,7 +12,7 @@ export const DentalNotation = () => {
             <Box sx={{ width: '50%' }}>
                 <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
                     <Grid item xs={6}>
-                        <Stack direction="row-reverse" spacing={2}>
+                        <Stack direction="row" spacing={2}>
                             <Box>11</Box>
                             <Box>12</Box>
                             <Box>13</Box>
@@ -30,7 +25,7 @@ export const DentalNotation = () => {
                     </Grid>
 
                     <Grid item xs={6}>
-                        <Stack direction="row" spacing={2}>
+                        <Stack direction="row-reverse" spacing={2}>
                             <Box>21</Box>
                             <Box>22</Box>
                             <Box>23</Box>
@@ -42,7 +37,7 @@ export const DentalNotation = () => {
                         </Stack>
                     </Grid>
                     <Grid item xs={6}>
-                        <Stack direction="row-reverse" spacing={2}>
+                        <Stack direction="row" spacing={2}>
                             <Box>31</Box>
                             <Box>32</Box>
                             <Box>33</Box>
@@ -55,7 +50,7 @@ export const DentalNotation = () => {
                     </Grid>
 
                     <Grid item xs={6}>
-                        <Stack direction="row" spacing={2}>
+                        <Stack direction="row-reverse" spacing={2}>
                             <Box>41</Box>
                             <Box>42</Box>
                             <Box>43</Box>
@@ -66,16 +61,11 @@ export const DentalNotation = () => {
                             <Box>48</Box>
                         </Stack>
                     </Grid>
-
-                    <TeethTest mesial="blue" distal="blue" palatal="blue" cervicalPalatal="blue"></TeethTest>
-                    {/* mesial-left distal-right palatal-circle cervicalPalatal-bow */}
-                    <Grid>
-                    </Grid>
-
+                    <TeethTest palatal="blue" cervicalPalatal="blue" mesial="blue" distal="blue"></TeethTest>
                 </Grid>
             </Box>
 
-
+            
         </>
     );
 
