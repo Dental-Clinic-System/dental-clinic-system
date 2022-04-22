@@ -1,0 +1,16 @@
+.polygon {
+    stroke: black;
+    stroke-width: 1;
+}
+
+.unmarked {
+    fill: white;
+}
+
+.marked {
+    fill: grey;
+}
+
+#dental-chart {
+    text-align: center;
+}
