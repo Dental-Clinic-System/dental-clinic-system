@@ -1,22 +1,43 @@
 type Clinic {
   title: String
 }
+
+enum StaffType {
+  reception
+  doctor
+  admin
+}
+
+enum availability {
+  A9_13
+}
+
 type Staff {
   clinicId: String
+  type: StaffType
+  last_name: String!
+  first_name: String!
+  phone: String!
   clinic: Clinic!
-  username: String
-  email: String
+  username: String!
+  email: String!
   password: String!
+  timestamp: Boolean
+  last_login: String
+  availability: availability
 }
 type Query {
   loginStaff(clinicId: String, email: String, password: String): Staff
   getStaff(clinicId: String, _id: String): Staff
-  getStaffs(clinicID: String): [Staff]
+  getStaffs(clinicId: String): [Staff]
 }
 type Mutation {
   addStaff(
     clinicId: String
     username: String
+    last_name: String
+    first_name: String
+    phone: String
     email: String
     password: String
   ): Staff

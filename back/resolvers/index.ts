@@ -1,4 +1,4 @@
-import { addStaff, getStaff, loginStaff } from "./staffResolver";
+import { addStaff, getStaff, loginStaff, getStaffs } from "./staffResolver";
 import { addPatient, getPatients, getPatient, updatePatient, deletePatient } from "./patientResolver";
 
 export default {
@@ -6,7 +6,8 @@ export default {
     getStaff,
     loginStaff,
     getPatient,
-    getPatients
+    getPatients,
+    getStaffs
   },
   Mutation: {
     addStaff,

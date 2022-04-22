@@ -1,7 +1,21 @@
 import { Staff } from "../schemas";
 
-const addStaff = async (_: any, params: any) => {
-  const staff = new Staff(params);
+const addStaff = async (_: any, { clinicId, username, last_name, first_name, phone, email, password }: any) => {
+  const date = new Date()
+  const staff = new Staff({
+    clinicId: clinicId,
+    type: "reception",
+    last_name: last_name,
+    first_name: first_name,
+    phone: phone,
+    // clinic: Clinic!
+    username: username,
+    email: email,
+    password: password,
+    timestamp: true,
+    last_login: date.toISOString(),
+    availability: "A9_13"
+  });
 
   try {
     await staff.save();
@@ -18,6 +32,13 @@ const getStaff = async (_: any, params: any) => {
   return staff;
 };
 
+const getStaffs = async (_: any, { clinicId }: any) => {
+  const staffs = await Staff.find(
+    clinicId ? { clinicId } : {}
+  );
+  return staffs
+};
+
 const loginStaff = async (_: any, params: any) => {
   const staff = await Staff.findOne({
     clinicId: params.clinicId,
@@ -31,4 +52,4 @@ const loginStaff = async (_: any, params: any) => {
   staff.clinicId = staff.clinicId.toString();
   return staff;
 };
-export { addStaff, getStaff, loginStaff };
+export { addStaff, getStaff, loginStaff, getStaffs };
