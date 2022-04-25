@@ -2,10 +2,17 @@ type Clinic {
     title: String,
 }
 
+type Staff {
+    first_name: String!,
+    last_name: String!,
+}
+
 type Appointment {
-  _id: String
-  clinicId: Clinic
-  doctorId: String
+  _id: String,
+  clinicId: String
+  clinic: Clinic,
+  staffId: String,
+  staff: Staff
   patientId: String,
   serviceId: String,
   startDate: String,
@@ -23,7 +30,7 @@ type Query {
 type Mutation {
     addAppointment(
         clinicId: String
-        doctorId: String
+        staffId: String
         patientId: String
         serviceId: String
         startDate: String
@@ -35,7 +42,7 @@ type Mutation {
     updateAppointment(
         _id: String
         clinicId: String
-        doctorId: String
+        staffId: String
         patientId: String
         serviceId: String
         startDate: String
@@ -46,7 +53,7 @@ type Mutation {
     ): Appointment,
     deleteAppointment(
         clinicId: String
-        doctorId: String
+        staffId: String
         patientId: String
         serviceId: String
         startDate: String
@@ -54,5 +61,6 @@ type Mutation {
         endDate: String
         notes: String
         status: String
+        id: String
     ): Appointment,
 }

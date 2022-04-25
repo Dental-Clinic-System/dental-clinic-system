@@ -32,10 +32,8 @@ const getStaff = async (_: any, params: any) => {
   return staff;
 };
 
-const getStaffs = async (_: any, { clinicId }: any) => {
-  const staffs = await Staff.find(
-    clinicId ? { clinicId } : {}
-  );
+const getStaffs = async (_: any, params: any) => {
+  const staffs = await Staff.find(params ? {...params} : {});
   return staffs
 };
 
