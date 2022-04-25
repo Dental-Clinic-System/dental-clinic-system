@@ -2,6 +2,7 @@ type Clinic {
     title: String,
 }
 
+<<<<<<< HEAD
 type Staff {
     first_name: String!,
     last_name: String!,
@@ -13,6 +14,12 @@ type Appointment {
   clinic: Clinic,
   staffId: String,
   staff: Staff
+=======
+type Appointment {
+  _id: String
+  clinicId: Clinic
+  doctorId: String
+>>>>>>> 10b6bc40472ef2f98edcde59d2b6ddb7990fd0b3
   patientId: String,
   serviceId: String,
   startDate: String,
@@ -30,7 +37,11 @@ type Query {
 type Mutation {
     addAppointment(
         clinicId: String
+<<<<<<< HEAD
         staffId: String
+=======
+        doctorId: String
+>>>>>>> 10b6bc40472ef2f98edcde59d2b6ddb7990fd0b3
         patientId: String
         serviceId: String
         startDate: String
@@ -42,7 +53,11 @@ type Mutation {
     updateAppointment(
         _id: String
         clinicId: String
+<<<<<<< HEAD
         staffId: String
+=======
+        doctorId: String
+>>>>>>> 10b6bc40472ef2f98edcde59d2b6ddb7990fd0b3
         patientId: String
         serviceId: String
         startDate: String
@@ -53,7 +68,11 @@ type Mutation {
     ): Appointment,
     deleteAppointment(
         clinicId: String
+<<<<<<< HEAD
         staffId: String
+=======
+        doctorId: String
+>>>>>>> 10b6bc40472ef2f98edcde59d2b6ddb7990fd0b3
         patientId: String
         serviceId: String
         startDate: String
