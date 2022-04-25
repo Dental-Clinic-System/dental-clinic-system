@@ -120,3 +120,21 @@ export const GET_STAFFS = gql`
     }
   }
 `;
+export const GetAppointments = gql`
+  query GetAppointments {
+    getAppointments {
+      _id
+      doctorId
+      patientId
+      clinicId {
+        title
+      }
+      status
+      serviceId
+      startDate
+      endDate
+      title
+      notes
+    }
+  }
+`
