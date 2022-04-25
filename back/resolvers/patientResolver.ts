@@ -25,15 +25,17 @@ const getPatient = async (_: any, params: any) => {
     const patient = await Patient.findOne({
         _id: params._id,
     })
-    .populate("clinic_id")
+    .populate("clinicId")
     .lean();
+
     return patient;
 };
 
 const getPatients = async (_: any, params: any) => {
     const patient = await Patient.find(params)
-    .populate("clinic_id")
+    .populate("clinicId")
     .lean();
+
     return patient;
 };
 
