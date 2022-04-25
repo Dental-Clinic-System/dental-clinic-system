@@ -57,3 +57,22 @@ export const DELETE_CLINIC = gql`
 mutation DeleteClinic($id: String) {
   deleteClinic(_id: $id)
 }`
+
+export const UPDATE_APPOINTMENT = gql`
+  mutation UpdateAppointment($id: String, $title: String, $startDate: String, $clinicId: String, $doctorId: String, $patientId: String, $serviceId: String, $endDate: String, $notes: String, $status: String) {
+  updateAppointment(_id: $id, title: $title, startDate: $startDate, clinicId: $clinicId, doctorId: $doctorId, patientId: $patientId, serviceId: $serviceId, endDate: $endDate, notes: $notes, status: $status) {
+    _id
+    clinicId {
+      title
+    }
+    doctorId
+    patientId
+    serviceId
+    title
+    startDate
+    endDate
+    notes
+    status
+  }
+}
+`
