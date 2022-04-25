@@ -22,7 +22,7 @@ export const Sidebar = () => {
     { path: "/", text: "Home" },
     { path: "/appointment", text: "Appointments" },
     { path: "/users", text: "Users" },
-    { path: "/clinics", text: "Clinics" },
+    // { path: "/clinics", text: "Clinics" },
     { path: "/services", text: "Services" },
     { path: "/patients", text: "Patients" },
   ];
