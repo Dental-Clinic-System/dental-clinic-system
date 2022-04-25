@@ -163,3 +163,18 @@ export const DELETE_SERVICE = gql`
     }
   }
 `;
+export const ADD_STAFF = gql`
+  mutation Mutation($clinicId: String, $username: String, $lastName: String, $firstName: String, $phone: String, $email: String, $password: String) {
+    addStaff(clinicId: $clinicId, username: $username, last_name: $lastName, first_name: $firstName, phone: $phone, email: $email, password: $password) {
+      clinicId
+      type
+      last_name
+      first_name
+      phone
+      username
+      email
+      timestamp
+      availability
+    }
+  }
+`;

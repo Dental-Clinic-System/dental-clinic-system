@@ -6,6 +6,10 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
+import { useMutation, useQuery } from "@apollo/client";
+import { GET_STAFFS, ADD_STAFF } from '../graphql'
+import { CreateModal, ModalInput } from '../components'
+import { Button } from "@mui/material";
 
 const RenderInfo = () => {
   const [age, setAge] = useState("");
@@ -30,58 +34,39 @@ const RenderInfo = () => {
   );
 };
 export const Users = () => {
-  // const navigate = useNavigate()
-  // const SendProfile = (params: any) => {
-  //   return (
-  //     <button onClick={() => navigation?.navigate('profile', { state: params })}>
-  //       Дэлгэрэнгүй
-  //     </button>
-  //   )
-  // }
-  const row = [
-    {
-      id: 1,
-      username: "anand",
-      firstname: "radnaa",
-      lastname: "anand",
-      email: "anada@gmail.com",
-      phone: "99119911",
-      birth: "2005.11.04",
-      timestamp: "9:00 - 17:00",
-      role: "worker", // ["admin", "superadmin", "worker"],
-      info: "Дэлгэрэнгүй",
-    },
-    {
-      id: 2,
-      username: "anand 2",
-      firstname: "radnaa",
-      lastname: "anand 2",
-      email: "anada@gmail.com",
-      phone: "99119911",
-      birth: "2005.11.04",
-      timestamp: "9:00 - 17:00",
-      role: "worker", // ["admin", "superadmin", "worker"]
-      info: "Дэлгэрэнгүй",
-    },
-    {
-      id: 3,
-      username: "anand 3",
-      firstname: "radnaa",
-      lastname: "anand 3",
-      email: "anada@gmail.com",
-      phone: "99119911",
-      birth: "2005.11.04",
-      timestamp: "9:00 - 17:00",
-      role: "worker", // ["admin", "superadmin", "worker"]
-      info: "Дэлгэрэнгүй",
-    },
-  ];
+  const clinicId = window.sessionStorage.getItem("clinicId");
+  const { data, loading } = useQuery(GET_STAFFS)
+  const [addStaffModal, setAddStaffModal] = useState(false)
+  const [staffInfo, addStaffInfo] = useState({})
+  const [addStaff, { error }] = useMutation(ADD_STAFF)
+
+  if(loading) {
+    return <h1>Loading ...</h1>
+  }
+
+  const staffs = data?.getStaffs.map((staff: any, indx: any) => ({ ...staff, id: indx + 1, info: "Дэлгэрэнгүй" }))
+
   return (
     <Box>
+      <CreateModal open={addStaffModal} setOpen={setAddStaffModal} addButtonName={"Add Staff"} createFunction={() => {
+        addStaff({ variables: {
+          ...staffInfo,
+          clinicId: clinicId
+        }}) 
+        setAddStaffModal(false)
+      }}>
+        <ModalInput onChange={(e: any) => addStaffInfo({...staffInfo, username: e.target.value})} label={"Хэрэглэгчийн нэр"} />
+        <ModalInput onChange={(e: any) => addStaffInfo({...staffInfo, firstName: e.target.value})} label={"Нэр"} />
+        <ModalInput onChange={(e: any) => addStaffInfo({...staffInfo, lastName: e.target.value})} label={"Овог"} />
+        <ModalInput onChange={(e: any) => addStaffInfo({...staffInfo, email: e.target.value})} label={"Мэйл"} />
+        <ModalInput onChange={(e: any) => addStaffInfo({...staffInfo, password: e.target.value})} label={"Нууц үг"} />
+        <ModalInput onChange={(e: any) => addStaffInfo({...staffInfo, phone: e.target.value})} label={"Дугаар"} />
+      </CreateModal>
+      <Button onClick={() => setAddStaffModal(true)} >Add Staff</Button>
       <DataGrid
         sx={{ height: 640, width: '80vw' }}
         getRowId={(row) => row.id}
-        rows={row}
+        rows={staffs}
         columns={column}
         pageSize={10}
         rowsPerPageOptions={[5]}
@@ -105,17 +90,12 @@ const column: GridColDef[] = [
     flex: 1,
   },
   {
-    field: "address",
-    headerName: "Хаяг",
-    flex: 1,
-  },
-  {
-    field: "firstname",
+    field: "first_name",
     headerName: "Нэр",
     flex: 1,
   },
   {
-    field: "lastname",
+    field: "last_name",
     headerName: "Овог",
     flex: 1,
   },
@@ -130,17 +110,15 @@ const column: GridColDef[] = [
     flex: 1,
   },
   {
-    field: "birth",
-    headerName: "Төрсөн өдөр",
-    flex: 1,
-  },
-  {
-    field: "timestamp",
+    field: "availability",
     headerName: "Ажиллах хуваарь",
     flex: 1,
+    renderCell: (staff: any) => {
+      return staff.formattedValue === "A9_13" ? "9:00 - 13:00": ""
+    }
   },
   {
-    field: "role",
+    field: "type",
     headerName: "Үүрэг",
     flex: 1,
     // renderCell: () => { return RenderInfo }
@@ -156,13 +134,5 @@ const column: GridColDef[] = [
         </Link>
       );
     },
-  },
-  // {
-  //   field: "clinicId",
-  //   headerName: ""
-  // },
-  // {
-  //   field: "serviceId",
-  //   headerName: ""
-  // }`
+  }
 ];

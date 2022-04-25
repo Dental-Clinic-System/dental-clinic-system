@@ -106,3 +106,17 @@ export const LOGIN = gql`
     }
   }
 `;
+
+export const GET_STAFFS = gql`
+  query GetStaffs($clinicId: String) {
+    getStaffs(clinicId: $clinicId) {
+      username
+      first_name
+      last_name
+      email
+      phone
+      availability
+      type
+    }
+  }
+`;
