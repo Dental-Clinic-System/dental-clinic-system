@@ -15,4 +15,10 @@ const ClinicSchema = new Schema({
     status: String,
 });
 
+ClinicSchema.virtual('appointment', {
+    ref: 'Appointment',
+    localField: '_id',
+    foreignField: 'clinic'
+  })
+
 export const ClinicModel = mongoose.model("Clinic", ClinicSchema);
