@@ -1,7 +1,7 @@
 import mongoose, { Schema } from 'mongoose'
 
 const AppointmentSchema = new Schema({
-    doctorId: String,
+    staffId: { type: Schema.Types.ObjectId, ref: "Staff" },
     patientId: String,
     clinicId: { type: Schema.Types.ObjectId, ref: "Clinic" },
     serviceId: String,

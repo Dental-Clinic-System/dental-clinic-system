@@ -13,6 +13,7 @@ enum availability {
 }
 
 type Staff {
+  _id: String
   clinicId: String
   type: StaffType
   last_name: String!
@@ -29,7 +30,7 @@ type Staff {
 type Query {
   loginStaff(clinicId: String, email: String, password: String): Staff
   getStaff(clinicId: String, _id: String): Staff
-  getStaffs(clinicId: String): [Staff]
+  getStaffs(clinicId: String, type: String): [Staff]
 }
 type Mutation {
   addStaff(

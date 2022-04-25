@@ -32,8 +32,6 @@ const getAppointment = async (_: any, params: any) => {
 
 const getAppointments = async (_: any, params: any) => {
     const appointment = await AppointmentModel.find(params)
-        .populate("clinicId")
-        .lean();
     return appointment;
 };
 
