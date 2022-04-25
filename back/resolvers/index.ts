@@ -1,6 +1,7 @@
 import { addStaff, getStaff, loginStaff, getStaffs } from "./staffResolver";
 import { addPatient, getPatients, getPatient, updatePatient, deletePatient } from "./patientResolver";
 import { addService, getServices, getService, updateService, deleteService } from "./serviceResolver";
+import { addPatientHistory, getPatientHistory, getPatientHistories, updatePatientHistory, deletePatientHistory } from "./patientHistoryResolver";
 
 export default {
   Query: {
@@ -10,7 +11,9 @@ export default {
     getPatients,
     getStaffs,
     getService,
-    getServices
+    getServices,
+    getPatientHistory,
+    getPatientHistories
   },
   Mutation: {
     addStaff,
@@ -20,5 +23,8 @@ export default {
     addService,
     updateService,
     deleteService,
+    addPatientHistory,
+    updatePatientHistory,
+    deletePatientHistory
   },
 };

@@ -1,0 +1,61 @@
+type Clinic {
+  title: String
+}
+
+type Patient {
+  firstName: String
+}
+
+type Appointment {
+  title: String
+}
+
+type Service {
+  serviceName: String
+}
+
+type PatientHistory {
+  _id: String
+  clinicId: Clinic!
+  patientId: Patient!
+  appointmentId: Appointment!
+  serviceId: Service!
+  note: String
+  toReport: String
+}
+
+type Mutation {
+  addPatientHistory(
+    clinicId: String
+    patientId: String
+    appointmentId: String
+    serviceId: String
+    note: String
+    toReport: String
+  ): PatientHistory
+
+  updatePatientHistory(
+    _id: String
+    clinicId: String
+    patientId: String
+    appointmentId: String
+    serviceId: String
+    note: String
+    toReport: String
+  ): PatientHistory
+
+  deletePatientHistory(_id: String): PatientHistory
+}
+
+type Query {
+  getPatientHistories(
+    clinicId: String
+    patientId: String
+    appointmentId: String
+    serviceId: String
+    note: String
+    toReport: String
+  ): [PatientHistory]
+
+  getPatientHistory(_id: String): PatientHistory
+}
