@@ -57,7 +57,7 @@ const router: RouteObject[] = [
     element: <PatientHistoriesScreen />,
   },
   {
-    path: '/chart',
+    path: '/chart/:id',
     element: <Chart />,
   }
 ];
@@ -65,7 +65,7 @@ const router: RouteObject[] = [
 const registerRouter: RouteObject[] = [
   {
     path: "/:id",
-    element: <LogIn />,
+    element: <LogIn />, 
   },
 ];
 

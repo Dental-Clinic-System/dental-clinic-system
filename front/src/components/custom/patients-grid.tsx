@@ -6,6 +6,7 @@ import { Box, Button } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { DeleteModal } from '../common'
 import { CustomInput } from './custom-input';
+import { useNavigate } from "react-router";
 
 type PatientType = {
   _id: String
@@ -70,8 +71,16 @@ export const PatientsGrid = () => {
     setSelectedPatient(row)
     setOpen(true)
   }
+  
+  const navigate = useNavigate();
 
   const columns = [
+    {
+      field: '_id', width: 150,
+      renderCell: (e: any) => {
+        return <div onClick={() => navigate(`/chart/${e.id}`)}>{e.id}</div>;
+      }
+    },
     { field: 'firstName', headerName: 'Өвчтөний нэр', width: 150 },
     { field: 'lastName', headerName: 'Өвчтөний Овог', width: 150 },
     { field: 'age', headerName: 'Нас', width: 70 },

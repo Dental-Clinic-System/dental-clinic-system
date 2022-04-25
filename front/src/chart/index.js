@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { ChartTable } from "./chart";
-import { Teeth } from './teeth'
+import { Teeth } from './tooth'
 import './chart.css';
-import { FormControl, InputLabel, NativeSelect, Input } from '@mui/material'
+import { FormControl, InputLabel, NativeSelect, Input, Button } from '@mui/material'
+import { useLocation } from "react-router";
+import { useMutation } from "@apollo/client";
 
 
 
 export const Chart = () => {
+    // const [addPatientHistory] = useMutation()
+
     const [selectedTooth, selectTooth] = useState({})
     const [selectedPiece, SelectPiece] = useState('')
     const [pieces, setPieces] = useState({
@@ -31,7 +35,9 @@ export const Chart = () => {
             note: ''
         },
     })
-    console.log(selectedPiece, pieces)
+    const location = useLocation()
+    console.log(location)
+
     useEffect(() => {
         const polygonsArray = document.getElementsByClassName('tooth')
         for (const polygon of polygonsArray) {
@@ -87,6 +93,10 @@ export const Chart = () => {
         })
     }
 
+    const SaveHistory = () => {
+
+    }
+
     return (
         <div style={{ display: 'flex', height: '100vh' }}>
             <div style={{ width: '50%' }}>
@@ -118,6 +128,7 @@ export const Chart = () => {
                                     <option value={'composite'}>composite</option>
                                 </NativeSelect>
                             </FormControl>
+                            <Button onclick={SaveHistory}>Save</Button>
                         </div>
                         :
                         <div> select your tooth </div>
