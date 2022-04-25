@@ -3,7 +3,7 @@ import { Chip, Box, Button } from '@mui/material';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { useState, useEffect } from 'react';
 import { GetClinics } from '../graphql/queries';
-import { AddPatientInput, CreateModal, DeleteModal, Loading } from '../components';
+import { CustomInput, CreateModal, DeleteModal, Loading } from '../components';
 import { ADD_CLINIC, DELETE_CLINIC } from '../graphql';
 
 const RenderStatus = (params: any) => {
@@ -90,14 +90,14 @@ export const Clinic = () => {
       }
       <DeleteModal open={deleteModal} setOpen={setDeleteModal} deleteButtonName='delete clinic' deleteFunction={() => { deleteCLinic({ variables: { id: selectClinic[0] } }) }} />
       <CreateModal open={modal} setOpen={setModal} createFunction={() => addTodo({ variables: addData })} addButtonName={'Add clinic'}>
-        <AddPatientInput placeholder={'clinic_name'} value={addData.clinic_name} setValue={(value: string) => setAddData({ ...addData, clinic_name: value })} />
-        <AddPatientInput placeholder={'contact_number'} value={addData.contact_number} setValue={(value: string) => setAddData({ ...addData, contact_number: value })} />
-        <AddPatientInput placeholder={'email'} value={addData.email} setValue={(value: string) => setAddData({ ...addData, email: value })} />
-        <AddPatientInput placeholder={'status'} value={addData.status} setValue={(value: string) => setAddData({ ...addData, status: value })} />
-        <AddPatientInput placeholder={'city'} value={addData.official_address.city} setValue={(value: string) => setAddData({ ...addData, official_address: { ...addData.official_address, city: value } })} />
-        <AddPatientInput placeholder={'district'} value={addData.official_address.district} setValue={(value: string) => setAddData({ ...addData, official_address: { ...addData.official_address, district: value } })} />
-        <AddPatientInput placeholder={'sub_district'} value={addData.official_address.sub_district} setValue={(value: string) => setAddData({ ...addData, official_address: { ...addData.official_address, sub_district: value } })} />
-        <AddPatientInput placeholder={'full_address'} value={addData.official_address.full_address} setValue={(value: string) => setAddData({ ...addData, official_address: { ...addData.official_address, full_address: value } })} />
+        <CustomInput placeholder={'clinic_name'} value={addData.clinic_name} setValue={(value: string) => setAddData({ ...addData, clinic_name: value })} />
+        <CustomInput placeholder={'contact_number'} value={addData.contact_number} setValue={(value: string) => setAddData({ ...addData, contact_number: value })} />
+        <CustomInput placeholder={'email'} value={addData.email} setValue={(value: string) => setAddData({ ...addData, email: value })} />
+        <CustomInput placeholder={'status'} value={addData.status} setValue={(value: string) => setAddData({ ...addData, status: value })} />
+        <CustomInput placeholder={'city'} value={addData.official_address.city} setValue={(value: string) => setAddData({ ...addData, official_address: { ...addData.official_address, city: value } })} />
+        <CustomInput placeholder={'district'} value={addData.official_address.district} setValue={(value: string) => setAddData({ ...addData, official_address: { ...addData.official_address, district: value } })} />
+        <CustomInput placeholder={'sub_district'} value={addData.official_address.sub_district} setValue={(value: string) => setAddData({ ...addData, official_address: { ...addData.official_address, sub_district: value } })} />
+        <CustomInput placeholder={'full_address'} value={addData.official_address.full_address} setValue={(value: string) => setAddData({ ...addData, official_address: { ...addData.official_address, full_address: value } })} />
       </CreateModal>
     </Box >
   )

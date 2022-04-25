@@ -1,12 +1,12 @@
 import { Box, TextField } from '@mui/material'
 
-type AddPatientInputType = {
-    value: String;
+type CustomInputType = {
+    value?: String;
     setValue: Function;
     placeholder?: String;
 }
 
-export const AddPatientInput:React.FC<AddPatientInputType> = ({ value, setValue, placeholder }) => {
+export const CustomInput:React.FC<CustomInputType> = ({ value = '', setValue, placeholder }) => {
     return (
         <Box>
             <TextField 

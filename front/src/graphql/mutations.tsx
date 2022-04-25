@@ -29,9 +29,20 @@ export const DELETE_PATIENT = gql`
 `;
 
 export const UPDATE_PATIENT = gql`
-  mutation UpdatePatient($id: String, $lastname: String) {
-    updatePatient(_id: $id, lastname: $lastname)
+  mutation UpdatePatient($clinicId: String, $firstName: String, $lastName: String, $stateRegNumber: String, $email: String, $mobileNumber: String, $age: String, $gender: String, $birthdate: String, $cardNumber: String, $id: String) {
+  updatePatient(clinicId: $clinicId, firstName: $firstName, lastName: $lastName, stateRegNumber: $stateRegNumber, email: $email, mobileNumber: $mobileNumber, age: $age, gender: $gender, birthdate: $birthdate, cardNumber: $cardNumber, _id: $id) {
+    _id
+    firstName
+    lastName
+    stateRegNumber
+    mobileNumber
+    email
+    gender
+    age
+    birthdate
+    cardNumber
   }
+}
 `;
 export const ADD_CLINIC = gql`
   mutation Mutation(
