@@ -1,60 +1,54 @@
 import { useState } from "react";
 import { Box, Button } from '@mui/material';
 import { PatientsGrid, CreateModal, AddPatientInput, DeleteModal } from '../components/index'
-import { ADD_PATIENTS, DELETE_PATIENT } from "../graphql";
+import { ADD_PATIENT, DELETE_PATIENT } from "../graphql";
 import { useMutation } from "@apollo/client";
 
 export const PatientScreen = () => {
-    const [addPatient] = useMutation(ADD_PATIENTS)
+    const [addPatient] = useMutation(ADD_PATIENT)
     const [deletePatient] = useMutation(DELETE_PATIENT)
+    const clinicId = window.sessionStorage.getItem("clinicId")
 
     const [selectedPatient, setSelectedPatient] = useState([])
 
     const [openAdd, setOpenAdd] = useState(false)
     const [openDelete, setOpenDelete] = useState(false)
+
     const [firstname, setFirstname] = useState('')
     const [lastname, setLastname] = useState('')
     const [age, setAge] = useState('')
     const [birth, setBirth] = useState('')
-    const [registrationNumber, setRegistrationNumber] = useState('')
-    const [sex, setSex] = useState('')
-    const [addressDescription, setAddressDescription] = useState('')
+    const [gender, setGender] = useState('')
     const [phone, setPhone] = useState('')
-    const [homePhone, setHomePhone] = useState('')
     const [email, setEmail] = useState('')
-    const [doctor, setDoctor] = useState('')
     const [cardNumber, setCardNumber] = useState('')
+    const [stateRegNumber, setStateRegNumber] = useState('')
 
     const clear = () => {
         setFirstname('')
         setLastname('')
         setAge('')
         setBirth('')
-        setRegistrationNumber('')
-        setSex('')
-        setAddressDescription('')
+        setGender('')
         setPhone('')
-        setHomePhone('')
         setEmail('')
-        setDoctor('')
         setCardNumber('')
+        setStateRegNumber('')
         setOpenAdd(false)
     }
 
     const AddPatient = () => {
         let variables = {
-            firstname: firstname,
-            lastname: lastname,
-            age: age,
-            birth: birth,
-            registration_number: registrationNumber,
-            sex: sex,
-            address_description: addressDescription,
-            phone: phone,
-            home_phone: homePhone,
+            clinicId: clinicId,
+            firstName: firstname,
+            lastName: lastname,
+            stateRegNumber: stateRegNumber,
+            mobileNumber: phone,
             email: email,
-            doctor: doctor,
-            card_number: cardNumber,
+            gender: gender,
+            age: age,
+            birthdate: birth,
+            cardNumber: cardNumber
         }
 
         addPatient({ variables: variables })
@@ -82,14 +76,11 @@ export const PatientScreen = () => {
                 <AddPatientInput value={lastname} setValue={setLastname} placeholder={'Овог'} />
                 <AddPatientInput value={age} setValue={setAge} placeholder={'Нас'} />
                 <AddPatientInput value={birth} setValue={setBirth} placeholder={'Төрсөн өдөр'} />
-                <AddPatientInput value={registrationNumber} setValue={setRegistrationNumber} placeholder={'Регистер'} />
-                <AddPatientInput value={sex} setValue={setSex} placeholder={'Хүйс'} />
-                <AddPatientInput value={addressDescription} setValue={setAddressDescription} placeholder={'Хаяг'} />
+                <AddPatientInput value={gender} setValue={setGender} placeholder={'Хүйс'} />
                 <AddPatientInput value={phone} setValue={setPhone} placeholder={'Утасны дугаар'} />
-                <AddPatientInput value={homePhone} setValue={setHomePhone} placeholder={'Гэрийн утасны дугаар'} />
                 <AddPatientInput value={email} setValue={setEmail} placeholder={'и-майл'} />
-                <AddPatientInput value={doctor} setValue={setDoctor} placeholder={'Эмч'} />
                 <AddPatientInput value={cardNumber} setValue={setCardNumber} placeholder={'Кардын дугаар'} />
+                <AddPatientInput value={stateRegNumber} setValue={setStateRegNumber} placeholder={'Дүүргийн гегистерийн дугаар'} />
             </CreateModal>
 
             <DeleteModal open={openDelete} setOpen={setOpenDelete} deleteButtonName={'устгах'} deleteFunction={DeletePatient}></DeleteModal>
