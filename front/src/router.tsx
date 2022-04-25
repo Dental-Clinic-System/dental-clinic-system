@@ -20,7 +20,7 @@ const Loader = (Component: any) => (props: any) =>
   );
 //pages
 const Profile = Loader(lazy(() => import("./pages/profile")));
-const Users = Loader(lazy(() => import("./pages/users")));
+const Users = Loader(lazy(() => import("./pages/staff")));
 
 const router: RouteObject[] = [
   {
