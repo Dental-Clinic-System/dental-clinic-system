@@ -12,7 +12,8 @@ const addService = async (_: any, params: any) => {
   }
 };
 
-const updateService = async (_: any, { _id, params }: any) => {
+const updateService = async (_: any, { _id, ...params }: any) => {
+  console.log(_id, params);
   const service = await Service.findByIdAndUpdate(_id, params);
   return service
 };
