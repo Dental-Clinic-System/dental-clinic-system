@@ -1,70 +1,31 @@
 import { gql } from "@apollo/client";
 
-export const ADD_PATIENTS = gql`
-  mutation Mutation(
-    $lastname: String
-    $firstname: String
-    $birth: String
-    $age: String
-    $registrationNumber: String
-    $sex: String
-    $city: String
-    $district: String
-    $committee: String
-    $addressDescription: String
-    $phone: String
-    $homePhone: String
-    $role: String
-    $doctor: String
-    $email: String
-    $cardNumber: String
-    $sysdate: String
-  ) {
-    addPatient(
-      lastname: $lastname
-      firstname: $firstname
-      birth: $birth
-      age: $age
-      registration_number: $registrationNumber
-      sex: $sex
-      city: $city
-      district: $district
-      committee: $committee
-      address_description: $addressDescription
-      phone: $phone
-      home_phone: $homePhone
-      role: $role
-      doctor: $doctor
-      email: $email
-      card_number: $cardNumber
-      sysdate: $sysdate
-    ) {
-      _id
-      lastname
-      firstname
-      birth
-      age
-      registration_number
-      sex
-      city
-      district
-      committee
-      address_description
-      role
-      phone
-      home_phone
-      email
-      doctor
-      sysdate
-      card_number
+export const ADD_PATIENT = gql`
+  mutation AddPatient($clinicId: String, $firstName: String, $stateRegNumber: String, $lastName: String, $mobileNumber: String, $email: String, $gender: String, $age: String, $birthdate: String, $cardNumber: String) {
+  addPatient(clinicId: $clinicId, firstName: $firstName, stateRegNumber: $stateRegNumber, lastName: $lastName, mobileNumber: $mobileNumber, email: $email, gender: $gender, age: $age, birthdate: $birthdate, cardNumber: $cardNumber) {
+    _id
+    clinicId {
+      title
     }
+    firstName
+    lastName
+    stateRegNumber
+    mobileNumber
+    email
+    gender
+    age
+    birthdate
+    cardNumber
   }
+}
 `;
 
 export const DELETE_PATIENT = gql`
   mutation Mutation($id: String) {
-    deletePatient(_id: $id)
+  deletePatient(_id: $id) {
+    _id
   }
+}
 `;
 
 export const UPDATE_PATIENT = gql`
