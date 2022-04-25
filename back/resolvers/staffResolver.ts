@@ -26,10 +26,10 @@ const loginStaff = async (_: any, params: any) => {
   })
     .populate("clinicId")
     .lean();
+
   staff.clinic = staff.clinicId;
   staff.password = "N/A";
   staff.clinicId = staff.clinicId._id.toString();
-  console.log(staff);
   return staff;
 };
 export { addStaff, getStaff, loginStaff };

@@ -141,6 +141,9 @@ export const LogIn = () => {
               </Link>
             </Grid>
           </Grid>
+          <Grid container>
+            username: teststaff1@gmail.com <br /> password: 12345678
+          </Grid>
         </Box>
       </Box>
     </Container>
