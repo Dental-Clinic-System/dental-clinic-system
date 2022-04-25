@@ -81,7 +81,6 @@
   },
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx}": [
-      "yarn eslint",
       "yarn prettier --write",
       "yarn test:jest  --findRelatedTests --bail"
     ],
