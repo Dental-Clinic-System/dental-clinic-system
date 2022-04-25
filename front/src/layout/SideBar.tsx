@@ -30,6 +30,7 @@ export const Sidebar = () => {
   return (
     <Box>
       <Toolbar />
+      {sessionStorage.getItem("clinicTitle")}
       <Divider />
       <List>
         {route.map((data) => (
