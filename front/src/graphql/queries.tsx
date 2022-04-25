@@ -26,15 +26,27 @@ export const GET_PATIENTS = gql`
 `;
 
 export const GET_SERVICES = gql`
-  query GetServices {
-    getServices {
+  query GetServices($clinicId: String) {
+    getServices(clinicId: $clinicId) {
       _id
-      classification
-      service_name
-      code
-      short
+      clinicId
+      serviceName
+      serviceCode
       description
       price
+    }
+  }
+`;
+
+export const GET_SERVICE = gql`
+  query GetService($clinicId: String, $id: String) {
+    getService(clinicId: $clinicId, _id: $id) {
+      _id
+      clinicId
+      serviceName
+      price
+      serviceCode
+      description
     }
   }
 `;
@@ -91,6 +103,20 @@ export const LOGIN = gql`
       clinic {
         title
       }
+    }
+  }
+`;
+
+export const GET_STAFFS = gql`
+  query GetStaffs($clinicId: String) {
+    getStaffs(clinicId: $clinicId) {
+      username
+      first_name
+      last_name
+      email
+      phone
+      availability
+      type
     }
   }
 `;

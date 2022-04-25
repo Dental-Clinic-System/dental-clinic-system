@@ -1,4 +1,5 @@
 type Service {
+  _id: String
   clinicId: String
   serviceName: String
   serviceCode: String

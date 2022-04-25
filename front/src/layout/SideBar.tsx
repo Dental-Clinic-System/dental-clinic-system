@@ -21,11 +21,16 @@ export const Sidebar = () => {
     { path: "patients", text: "Patients" },
     { path: "patient-histories", text: "Patient Histories" },
   ];
+  const signOutTemp = () => {
+    sessionStorage.clear();
+    window.location.replace("http://localhost:3000/625fca30c1cf951c042bd5ec");
+  };
 
   return (
     <Box>
       <Toolbar />
       {sessionStorage.getItem("clinicTitle")}
+      <button onClick={signOutTemp}>Sign out</button>
       <Divider />
       <List>
         {route.map((data) => (

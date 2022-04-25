@@ -69,14 +69,12 @@ export const LogIn = () => {
       const { clinicId, username, clinic } = loginStaff || {};
 
       console.log(clinic);
-      window.sessionStorage.setItem("clinicId", clinicId);
-      window.sessionStorage.setItem("username", username);
-      window.sessionStorage.setItem("clinicTitle", clinic?.title);
 
       if (!loginStaff) alert("user not found");
       else {
         window.sessionStorage.setItem("clinicId", clinicId);
         window.sessionStorage.setItem("username", username);
+        window.sessionStorage.setItem("clinicTitle", clinic?.title);
 
         alert(`successfully logged in by: ${info.email}`);
         navigate("/625fca30c1cf951c042bd5ec");
@@ -142,6 +140,9 @@ export const LogIn = () => {
                 Бүртгүүлэх
               </Link>
             </Grid>
+          </Grid>
+          <Grid container>
+            username: teststaff1@gmail.com <br /> password: 12345678
           </Grid>
         </Box>
       </Box>

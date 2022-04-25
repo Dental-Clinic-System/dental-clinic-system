@@ -1,59 +1,63 @@
+type Clinic {
+  title: String
+}
+
 type Patient {
   _id: String
-  clinic_id: String
-  first_name: String
-  last_name: String
-  state_reg_number: String
-  mobile_number: String
+  clinicId: Clinic!
+  firstName: String
+  lastName: String
+  stateRegNumber: String
+  mobileNumber: String
   email: String
   gender: String
   age: String
   birthdate: String
-  card_number: String
+  cardNumber: String
 }
 
 type Mutation {
   addPatient(
-    clinic_id: String
-    first_name: String
-    last_name: String
-    state_reg_number: String
-    mobile_number: String
+    clinicId: String
+    firstName: String
+    lastName: String
+    stateRegNumber: String
+    mobileNumber: String
     email: String
     gender: String
     age: String
     birthdate: String
-    card_number: String
+    cardNumber: String
   ): Patient
   deletePatient(_id: String): Patient
   updatePatient(
     _id: String
-    clinic_id: String
-    first_name: String
-    last_name: String
-    state_reg_number: String
-    mobile_number: String
+    clinicId: String
+    firstName: String
+    lastName: String
+    stateRegNumber: String
+    mobileNumber: String
     email: String
     gender: String
     age: String
     birthdate: String
-    card_number: String
+    cardNumber: String
   ): Patient
 }
 
 type Query {
   getPatients(
     _id: String
-    clinic_id: String
-    first_name: String
-    last_name: String
-    state_reg_number: String
-    mobile_number: String
+    clinicId: String
+    firstName: String
+    lastName: String
+    stateRegNumber: String
+    mobileNumber: String
     email: String
     gender: String
     age: String
     birthdate: String
-    card_number: String
+    cardNumber: String
   ): [Patient]
 
   getPatient(_id: String): Patient

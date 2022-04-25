@@ -1,4 +1,4 @@
-import { addStaff, getStaff, loginStaff } from "./staffResolver";
+import { addStaff, getStaff, loginStaff, getStaffs } from "./staffResolver";
 import { addPatient, getPatients, getPatient, updatePatient, deletePatient } from "./patientResolver";
 import { addService, getServices, getService, updateService, deleteService } from "./serviceResolver";
 import { addPatientHistory, getPatientHistory, getPatientHistories, updatePatientHistory, deletePatientHistory } from "./patientHistoryResolver";
@@ -9,6 +9,7 @@ export default {
     loginStaff,
     getPatient,
     getPatients,
+    getStaffs,
     getService,
     getServices,
     getPatientHistory,
