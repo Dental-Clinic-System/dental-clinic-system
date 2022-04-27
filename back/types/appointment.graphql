@@ -1,0 +1,66 @@
+type Clinic {
+    title: String,
+}
+
+type Staff {
+    first_name: String!,
+    last_name: String!,
+}
+
+type Appointment {
+  _id: String,
+  clinicId: String
+  clinic: Clinic,
+  staffId: String,
+  staff: Staff
+  patientId: String,
+  serviceId: String,
+  startDate: String,
+  title: String,
+  endDate: String,
+  notes: String,
+  status: String
+}
+
+type Query {
+  getAppointment(clinicId: String, _id: String): Appointment
+  getAppointments(clinicId: String): [Appointment]
+}
+
+type Mutation {
+    addAppointment(
+        clinicId: String
+        staffId: String
+        patientId: String
+        serviceId: String
+        startDate: String
+        title: String
+        endDate: String
+        notes: String
+        status: String
+    ): Appointment,
+    updateAppointment(
+        _id: String
+        clinicId: String
+        staffId: String
+        patientId: String
+        serviceId: String
+        startDate: String
+        title: String
+        endDate: String
+        notes: String
+        status: String
+    ): Appointment,
+    deleteAppointment(
+        clinicId: String
+        staffId: String
+        patientId: String
+        serviceId: String
+        startDate: String
+        title: String
+        endDate: String
+        notes: String
+        status: String
+        id: String
+    ): Appointment,
+}

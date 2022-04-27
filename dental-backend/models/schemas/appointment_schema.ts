@@ -3,13 +3,15 @@ import mongoose from 'mongoose'
 const { Schema } = mongoose;
 
 const AppointmentSchema = new Schema({
-    userId: String,
+    doctorId: String,
     patientId: String,
-    clinicId: String,
+    clinic: {type: Schema.Types.ObjectId, ref: 'Clinic'},
     serviceId: String,
     status: String,
-    date: String,
-    hour: String,
+    startDate: String,
+    title: String,
+    endDate: String,
+    notes: String,
 });
 
 export const AppointmentModel = mongoose.model("Appointment", AppointmentSchema);

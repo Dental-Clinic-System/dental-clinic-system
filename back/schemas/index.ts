@@ -3,3 +3,4 @@ export * from "./Staff";
 export * from './Patient';
 export * from "./Service";
 export * from './PatientHistory'
+export * from "./Appointment";

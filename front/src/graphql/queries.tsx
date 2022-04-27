@@ -100,8 +100,9 @@ export const LOGIN = gql`
 `;
 
 export const GET_STAFFS = gql`
-  query GetStaffs($clinicId: String) {
-    getStaffs(clinicId: $clinicId) {
+  query GetStaffs($type: String, $clinicId: String) {
+    getStaffs(type: $type, clinicId: $clinicId) {
+      _id
       username
       first_name
       last_name
@@ -112,3 +113,19 @@ export const GET_STAFFS = gql`
     }
   }
 `;
+export const GetAppointments = gql`
+  query GetAppointments($clinicId: String) {
+  getAppointments(clinicId: $clinicId) {
+    _id
+    patientId
+    serviceId
+    startDate
+    title
+    endDate
+    notes
+    status
+    staffId
+    clinicId
+  }
+}
+`
