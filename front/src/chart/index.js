@@ -1,100 +1,67 @@
+import { useMutation, useQuery } from "@apollo/client";
+import { Button, FormControl, Input, InputLabel, NativeSelect } from '@mui/material';
 import React, { useEffect, useState } from "react";
-import { ChartTable } from "./chart";
-import { Teeth } from './tooth'
-import './chart.css';
-import { FormControl, InputLabel, NativeSelect, Input, Button } from '@mui/material'
 import { useLocation } from "react-router";
-import { useMutation } from "@apollo/client";
-
+import { ADD_PATIENT_HISTORY } from "../graphql";
+import { GET_SERVICES } from '../graphql/queries';
+import { ChartTable } from "./chart";
+import './chart.css';
+import { Teeth } from './tooth';
 
 
 export const Chart = () => {
-    // const [addPatientHistory] = useMutation()
-
-    const [selectedTooth, selectTooth] = useState({})
-    const [selectedPiece, SelectPiece] = useState('')
-    const [pieces, setPieces] = useState({
-        top: {
-            fill: '',
-            note: ''
-        },
-        left: {
-            fill: '',
-            note: ''
-        },
-        right: {
-            fill: '',
-            note: ''
-        },
-        center: {
-            fill: '',
-            note: ''
-        },
-        bottom: {
-            fill: '',
-            note: ''
-        },
-    })
+    const clinicId = window.sessionStorage.getItem("clinicId");
     const location = useLocation()
-    console.log(location)
+    const patientId = location.pathname.slice(7)
+    const [toothSides, setToothSides] = useState([])
+    const [data, setData] = useState({
+        clinicId: "625fca30c1cf951c042bd5ec",
+        patientId: patientId,
+        appointmentId: null,
+        serviceId: "",
+        toothId: "",
+        note: "",
+        toReport: "true"
+    })
+
+    const { data: services } = useQuery(GET_SERVICES, {
+        variables: { clinicId: clinicId },
+    });
+    const [AddHistory] = useMutation(ADD_PATIENT_HISTORY)
+
+    const polygonsArray = document.getElementsByClassName('tooth')
+    const toothSidesArray = document.getElementsByClassName('piece')
 
     useEffect(() => {
-        const polygonsArray = document.getElementsByClassName('tooth')
         for (const polygon of polygonsArray) {
-            polygon.onclick = event => onToothClickHandler(event)
+            polygon.onclick = event => setData({ ...data, toothId: event.path[1].id })
         }
-        const ToothPieces = document.getElementsByClassName('piece')
-        for (const ToothPiece of ToothPieces) {
-            ToothPiece.onclick = event => onPieceClickHandler(event)
+        for (const ToothSide of toothSidesArray) {
+            ToothSide.onclick = event => onPieceClickHandler(event)
         }
     }, [])
 
-    const onToothClickHandler = (tooth) => {
-        setSelectedPiece('note', '')
-        setPieces({
-            top: {
-                fill: '',
-                note: ''
-            },
-            left: {
-                fill: '',
-                note: ''
-            },
-            right: {
-                fill: '',
-                note: ''
-            },
-            center: {
-                fill: '',
-                note: ''
-            },
-            bottom: {
-                fill: '',
-                note: ''
-            },
-        })
-        let element = tooth.path[1]
-        selectTooth({ toothId: element.id });
-    }
 
-    const onPieceClickHandler = (piece) => {
-        piece.currentTarget.classList.toggle('unmarked');
-        piece.currentTarget.classList.toggle('marked');
-        SelectPiece(piece.path[0].id)
-    }
-
-    const setSelectedPiece = (type, params) => {
-        setPieces({
-            ...pieces,
-            [`${selectedPiece}`]: {
-                ...pieces?.[`${selectedPiece}`],
-                [`${type}`]: params
+    const onPieceClickHandler = async (tooth) => {
+        tooth.currentTarget.classList.toggle('unmarked');
+        tooth.currentTarget.classList.toggle('marked');
+        await setToothSides([])
+        for (const side of toothSidesArray) {
+            if (side.classList.contains('marked')) {
+                await setToothSides((prev) => [...prev, side.id])
             }
-        })
+        }
     }
 
     const SaveHistory = () => {
-
+        console.log('here')
+        let result = AddHistory({
+            variables: {
+                ...data,
+                toothSides
+            }
+        })
+        console.log(result)
     }
 
     return (
@@ -103,46 +70,29 @@ export const Chart = () => {
                 <ChartTable />
             </div>
             <div >
-                {
-                    selectedTooth ?
-                        <div style={{ display: 'flex', flexDirection: 'column' }}>
-                            {selectedTooth.toothId}
-                            <Teeth />
-                            <Input disabled={!selectedPiece} placeholder="note" onChange={(e) => setSelectedPiece('note', e.target.value)} value={pieces?.[`${selectedPiece}`]?.note} />
-                            <FormControl fullWidth>
-                                <InputLabel variant="standard" htmlFor="uncontrolled-native">
-                                    fill
-                                </InputLabel>
-                                <NativeSelect
-                                    // defaultValue={}
-                                    inputProps={{
-                                        name: 'fill',
-                                        id: 'uncontrolled-native',
-                                    }}
-                                    value={pieces?.[`${selectedPiece}`]?.fill}
-                                    onChange={(e) => setSelectedPiece('fill', e.target.value)}
-                                >
-                                    <option value={'ceramic'}>ceramic</option>
-                                    <option value={'gold'}>gold</option>
-                                    <option value={'glass ionomer'}>glass ionomer</option>
-                                    <option value={'composite'}>composite</option>
-                                </NativeSelect>
-                            </FormControl>
-                            <Button onclick={SaveHistory}>Save</Button>
-                        </div>
-                        :
-                        <div> select your tooth </div>
-                }
+                <div style={{ display: 'flex', flexDirection: 'column' }}>
+                    <Teeth />
+                    <Input placeholder="note" onChange={(e) => setData({ ...data, note: e.target.value })} value={data.note} />
+                    <FormControl fullWidth>
+                        <InputLabel variant="standard" htmlFor="uncontrolled-native">
+                            fill
+                        </InputLabel>
+                        <NativeSelect
+                            inputProps={{
+                                name: 'fill',
+                                id: 'uncontrolled-native',
+                            }}
+                            value={data.serviceId}
+                            onChange={(e) => setData({ ...data, serviceId: e.target.value })}
+                        >
+                            {
+                                services?.getServices?.map((e) => <option value={e._id}>{e.serviceName}</option>)
+                            }
+                        </NativeSelect>
+                    </FormControl>
+                    <Button onClick={SaveHistory}>Save</Button>
+                </div>
             </div>
         </div>
     )
 }
-
-
-// option #1: selected teeth oorchlogdoh uyd draft hiigdsen note iig save hiij bolno // ingevel olon shudnii note zereg bichij bolno
-// array.foreach(mutaion )
-
-// option #2: daraagiin shudee songohod omno n drart hiisnee clear hiih // submit darah uyd neg l shudnii note save hiine
-// one mutation
-
-// 
