@@ -62,29 +62,38 @@ export const GetClinics = gql`
 `;
 
 export const GET_PATIENT_HISTORY = gql`
-  query GetPatients($id: String) {
-    getPatients(_id: $id) {
-      history {
-        serviceId
-        clinicId
-        date
-        payment
-        detail
-      }
+query Query($clinicId: String, $patientId: String) {
+  getPatientHistories(clinicId: $clinicId, patientId: $patientId) {
+    _id
+    clinicId {
+      title
+    }
+    serviceId {
+      serviceName
+      _id
+    }
+    note
+    toReport
+    patientId {
+      _id
+      age
+    }
+    appointmentId {
+      title
     }
   }
+}
 `;
 
 export const GET_PATIENTS_BRIEFLY = gql`
-  query GetPatients {
-    getPatients {
-      _id
-      lastname
-      firstname
-      registration_number
-      card_number
-    }
+  query GetPatients($clinicId: String) {
+  getPatients(clinicId: $clinicId) {
+    _id
+    firstName
+    lastName
+    cardNumber
   }
+}
 `;
 
 export const LOGIN = gql`

@@ -6,10 +6,9 @@ import { GET_PATIENTS_BRIEFLY } from '../graphql';
 import { SmallDataGridHeight } from '../helper/constants';
 
 type PatientType = {
-    card_number: String;
-    firstname: String;
-    lastname: String;
-    registration_number: String;
+    cardNumber: String;
+    firstName: String;
+    lastName: String;
     _id: String;
 }
 
@@ -39,7 +38,13 @@ const searchListStyle = {
 }
 
 export const PatientHistoriesScreen = ({ patientId = '' }) => {
-    const { data, loading } = useQuery(GET_PATIENTS_BRIEFLY)
+    const clinicId = window.sessionStorage.getItem("clinicId")
+    const { data, loading } = useQuery(GET_PATIENTS_BRIEFLY, {
+        variables: {
+            clinicId: clinicId
+        }
+    })
+
     const [recommendedPatients, setRecommendedPatients] = useState<PatientType[]>([])
     const [name, setName] = useState<String>('')
     const [selectedPatient, setSelectedPatient] = useState<String>(patientId)
@@ -47,7 +52,7 @@ export const PatientHistoriesScreen = ({ patientId = '' }) => {
     const handleChange = (e: any) => {
         setName(e.target.value);
 
-        let newArray = data && data.getPatients.filter((patient: PatientType) => patient.firstname.toLowerCase().includes(e.target.value))
+        let newArray = data && data.getPatients.filter((patient: PatientType) => patient.firstName.toLowerCase().includes(e.target.value))
 
         setRecommendedPatients(newArray)
     }
@@ -62,22 +67,21 @@ export const PatientHistoriesScreen = ({ patientId = '' }) => {
         <Box sx={containerStyle}>
             {loading && <Loading />}
             <Box sx={{ width: '100%' }}>
-                <TextField value={name} onChange={(e) => handleChange(e)} size='small'/>
+                <TextField value={name} onChange={(e) => handleChange(e)} size='small' />
                 <Box sx={{ height: SmallDataGridHeight, marginTop: 3 }}>
                     {recommendedPatients && recommendedPatients.map((patient: PatientType, index: number) => {
                         return (
-                            <Box key={index} sx={searchListStyle} onClick={() => selectPatient(patient._id, patient.firstname)}>
-                                <Box sx={{ width: '20%' }}>{patient.firstname}</Box>
-                                <Box sx={{ width: '20%' }}>{patient.lastname}</Box>
-                                <Box sx={{ width: '20%' }}>{patient.registration_number}</Box>
-                                <Box sx={{ width: '20%' }}>{patient.card_number}</Box>
+                            <Box key={index} sx={searchListStyle} onClick={() => selectPatient(patient._id, patient.firstName)}>
+                                <Box sx={{ width: '30%' }}>{patient.firstName}</Box>
+                                <Box sx={{ width: '30%' }}>{patient.lastName}</Box>
+                                <Box sx={{ width: '30%' }}>{patient.cardNumber}</Box>
                             </Box>
                         )
                     })}
                 </Box>
             </Box>
 
-            <PatientHistoryGrid id={selectedPatient}/>
+            <PatientHistoryGrid id={selectedPatient} />
         </Box>
     )
 }
