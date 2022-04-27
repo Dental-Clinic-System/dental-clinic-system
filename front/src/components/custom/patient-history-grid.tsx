@@ -6,10 +6,10 @@ import { DataGrid } from '@mui/x-data-grid';
 import { SmallDataGridHeight } from "../../helper/constants";
 
 const columns = [
-    { field: 'date', headerName: 'Огноо', width: 150 },
-    { field: 'clinicId', headerName: 'Үзүүлсэн Эмнэлэг', width: 150 },
-    { field: 'serviceId', headerName: 'Авсан үйлчилгээ', width: 150 },
-    { field: 'payment', headerName: 'Төлбөр төлөлт', width: 150 },
+    { field: 'clinicId', headerName: 'Үзүүлсэн Эмнэлэг', width: 180, valueFormatter: ({ value } : any) => value.title },
+    { field: 'serviceId', headerName: 'Авсан үйлчилгээ', width: 180, valueFormatter: ({ value } : any) => value.serviceName },
+    { field: 'appointmentId', headerName: 'Цаг авалт', width: 180, valueFormatter: ({ value } : any) => value.hello },
+    { field: 'note', headerName: 'Мэдээлэл', width: 180 },
 ];
 
 type PatientHistoryGridType = {
@@ -17,20 +17,22 @@ type PatientHistoryGridType = {
 }
 
 export const PatientHistoryGrid: React.FC<PatientHistoryGridType> = ({ id }) => {
+    const clinicId = window.sessionStorage.getItem("clinicId")
     const { data, loading } = useQuery(GET_PATIENT_HISTORY, {
         variables: {
-            id: id
+            clinicId: clinicId,
+            patientId: id
         }
     })
 
-    const histories = data ? data.getPatients[0].history : [];
+    const histories = data ? data.getPatientHistories : []
 
     return (
         <Box>
             {loading && <Loading />}
             <DataGrid
-                sx={{ height: SmallDataGridHeight, width: '100%' }}
-                getRowId={(row) => row.payment}
+                sx={{ height: SmallDataGridHeight }}
+                getRowId={(row) => row._id}
                 rows={histories}
                 columns={columns}
             />
