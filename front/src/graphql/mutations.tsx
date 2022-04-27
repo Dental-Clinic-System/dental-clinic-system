@@ -169,3 +169,21 @@ export const UPDATE_APPOINTMENT = gql`
   }
 }
 `
+export const ADD_PATIENT_HISTORY = gql`
+mutation AddPatientHistory($clinicId: String,$patientId: String,$appointmentId: String,$serviceId: String,$note: String,$toReport: String,$toothId: String,$toothSides: [String],
+) {
+  addPatientHistory(
+    clinicId: $clinicId
+    patientId: $patientId
+    appointmentId: $appointmentId
+    serviceId: $serviceId
+    note: $note
+    toReport: $toReport
+    toothId: $toothId
+    toothSides: $toothSides
+  ) {
+    _id
+  }
+}
+
+`

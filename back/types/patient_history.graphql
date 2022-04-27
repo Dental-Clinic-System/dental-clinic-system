@@ -20,6 +20,8 @@ type PatientHistory {
   patientId: Patient!
   appointmentId: Appointment!
   serviceId: Service!
+  toothId:String
+  toothSides:[String]
   note: String
   toReport: String
 }
@@ -30,6 +32,8 @@ type Mutation {
     patientId: String
     appointmentId: String
     serviceId: String
+    toothId:String
+    toothSides:[String]
     note: String
     toReport: String
   ): PatientHistory
@@ -40,6 +44,8 @@ type Mutation {
     patientId: String
     appointmentId: String
     serviceId: String
+    toothId:String
+    toothSides:[String]
     note: String
     toReport: String
   ): PatientHistory
@@ -53,6 +59,8 @@ type Query {
     patientId: String
     appointmentId: String
     serviceId: String
+    toothId:String
+    toothSides:[String]
     note: String
     toReport: String
   ): [PatientHistory]
