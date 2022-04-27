@@ -86,26 +86,22 @@ export const Services = () => {
       field: "serviceName",
       headerName: "Үйлчилгээний нэр",
       width: 150,
-      editable: true,
     },
     {
       field: "serviceCode",
       headerName: "Код",
       width: 110,
-      editable: true,
     },
     {
       field: "price",
       headerName: "Үнэ",
       type: "number",
       width: 110,
-      editable: true,
     },
     {
       field: "description",
       headerName: "Тодорхойлолт",
       width: 250,
-      editable: true,
     },
     {
       field: "action",
@@ -157,8 +153,8 @@ export const Services = () => {
       <DeleteModal
         open={openDeleteModal}
         setOpen={setOpenDeleteModal}
-        deleteButtonName={"Delete"}
-        fixButtonName={"Fix"}
+        deleteButtonName={"Устгах"}
+        fixButtonName={"Засах"}
         deleteFunction={deleteData}
         fixFunction={updateData}
       >
