@@ -2,7 +2,7 @@ import { PatientHistory } from "../schemas";
 
 const addPatientHistory = async (_: any, params: any) => {
     const patientHistory = new PatientHistory(params);
-    console.log(params)
+
     try {
         await patientHistory.save();
         return patientHistory;
