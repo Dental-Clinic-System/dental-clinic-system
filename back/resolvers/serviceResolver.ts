@@ -1,7 +1,6 @@
 import { Service } from "../schemas";
 
 const addService = async (_: any, params: any) => {
-  console.log(JSON.stringify(params));
   const service = new Service(params);
 
   try {
@@ -13,14 +12,19 @@ const addService = async (_: any, params: any) => {
 };
 
 const updateService = async (_: any, { _id, ...params }: any) => {
-  console.log(_id, params);
-  const service = await Service.findByIdAndUpdate(_id, params);
-  return service
+  await Service.findByIdAndUpdate(_id, params);
+  const res = await Service.findOne({
+    _id: _id,
+  });
+  return res
 };
 
 const deleteService = async (_: any, params: any) => {
-  const service = await Service.findByIdAndDelete({ _id: params._id });
-  return service
+  const res = await Service.findOne({
+    _id: params._id,
+  });
+  await Service.findByIdAndDelete({ _id: params._id });
+  return res;
 };
 
 const getService = async (_: any, params: any) => {
@@ -33,7 +37,7 @@ const getService = async (_: any, params: any) => {
 
 const getServices = async (_: any, params: any) => {
   const services = await Service.find({
-    clinicId: params.clinicId
+    clinicId: params.clinicId,
   });
   return services;
 };

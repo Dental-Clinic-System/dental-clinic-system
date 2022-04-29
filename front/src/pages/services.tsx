@@ -23,9 +23,9 @@ export const Services = () => {
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const [openAddModal, setOpenAddModal] = useState(false);
   const [serviceData, setServiceData] = useState<any>({ clinicId: clinicId });
-  const [selectedId, setselectedId] = useState({});
-  const [services, setServices] = useState([]);
-  const { loading, error, data, refetch } = useQuery(GET_SERVICES, {
+  const [selectedId, setselectedId] = useState<any>({});
+  const [services, setServices] = useState<any>([]);
+  const { loading, error, data } = useQuery(GET_SERVICES, {
     variables: { clinicId: clinicId },
   });
   const [AddService] = useMutation(ADD_SERVICE);
@@ -38,7 +38,7 @@ export const Services = () => {
       setServices(data.getServices);
       setServiceData({ clinicId: clinicId });
     }
-  }, [loading, data]);
+  }, [loading]);
 
   const updateChangeData = (key: string, data: string) => {
     setServiceData({
@@ -49,8 +49,9 @@ export const Services = () => {
 
   const addData = async () => {
     try {
-      await AddService({ variables: serviceData });
-      refetch();
+      const res = await AddService({ variables: serviceData });
+      const addedService = res.data.addService;
+      setServices([ ...services, addedService ]);
       setOpenAddModal(false);
     } catch (error) {
       console.log(error);
@@ -58,27 +59,28 @@ export const Services = () => {
   };
 
   const updateData = async () => {
-    console.log(serviceData);
     try {
-      await UpdateService({ variables: serviceData });
-      refetch();
+      const res = await UpdateService({ variables: serviceData });
+      const updatedService = services.map((e: any) =>
+        e._id === res.data.updateService._id ? { ...e, ...res.data.updateService } : e
+      );
+      setServices(updatedService);
       setOpenDeleteModal(false);
-    } catch (error) {
-      console.log(error);
-    } 
-  };
-
-  const deleteData = async () => {
-    try {
-      await DeleteService({ variables: selectedId });
-      setOpenDeleteModal(false);
-      refetch();
     } catch (error) {
       console.log(error);
     }
   };
 
-  console.log(data, serviceData);
+  const deleteData = async () => {
+    try {
+      const res = await DeleteService({ variables: selectedId });
+      const deleteState = services.filter((e: any) => e._id !== res.data.deleteService._id);
+      setServices(deleteState);
+      setOpenDeleteModal(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const columns: GridColDef[] = [
     { field: "_id", headerName: "ID", width: 90 },
@@ -122,7 +124,7 @@ export const Services = () => {
           setServiceData({ clinicId: clinicId });
         }}
       >
-        Add Service
+        Үйлчилгээ Нэмэх
       </Button>
       <CreateModal
         open={openAddModal}
@@ -179,7 +181,7 @@ export const Services = () => {
         <ModalInput
           label={"Тодорхойлолт"}
           onChange={(e: any) => updateChangeData("description", e.target.value)}
-          value={serviceData?.description }
+          value={serviceData?.description}
         />
       </DeleteModal>
       <DataGrid
