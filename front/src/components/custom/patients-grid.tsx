@@ -84,7 +84,7 @@ export const PatientsGrid = () => {
     { field: 'firstName', headerName: 'Өвчтөний нэр', width: 150 },
     { field: 'lastName', headerName: 'Өвчтөний Овог', width: 150 },
     { field: 'age', headerName: 'Нас', width: 70 },
-    { field: 'birthdate', headerName: 'Төрсөн өдөр', width: 70 },
+    { field: 'birthdate', headerName: 'Төрсөн өдөр', width: 150 },
     { field: 'gender', headerName: 'Хүйс', width: 70 },
     { field: 'mobileNumber', headerName: 'Утасны дугаар', width: 120 },
     {

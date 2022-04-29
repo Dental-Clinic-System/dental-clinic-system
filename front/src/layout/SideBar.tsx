@@ -15,7 +15,7 @@ export const Sidebar = () => {
   const route = [
     { path: "/", text: "Home" },
     { path: "appointment", text: "Appointments" },
-    { path: "users", text: "Stafff" },
+    { path: "users", text: "Staffs" },
     // { path: "clinics", text: "Clinics" },
     { path: "services", text: "Services" },
     { path: "patients", text: "Patients" },
