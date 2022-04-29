@@ -58,7 +58,7 @@ export const LogIn = () => {
     console.log({ clinicId: id, email: info.email, password: info.password });
     const { data, error: loginError } = await login({
       variables: {
-        clinicId: id,
+        clinicId: (info.email !== 'superadmin@gmail.com') ? id : "999fca30c1cf951c042bd5ec",
         email: info.email,
         password: info.password,
       },
@@ -68,7 +68,7 @@ export const LogIn = () => {
       const { loginStaff } = data || {};
       const { clinicId, username, clinic } = loginStaff || {};
 
-      console.log(clinic);
+      console.log(clinic, "clinic");
 
       if (!loginStaff) alert("user not found");
       else {
