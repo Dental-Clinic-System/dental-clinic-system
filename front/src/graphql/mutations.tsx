@@ -187,3 +187,8 @@ mutation AddPatientHistory($clinicId: String,$patientId: String,$appointmentId: 
 }
 
 `
+export const UPDATE_STAFF = gql`
+  mutation Mutation($username: String!, $type: StaffType, $clinicId: String!, $lastName: String, $firstName: String, $phone: String, $email: String, $password: String, $availability: availability) {
+    updateStaff(username: $username, type: $type, clinicId: $clinicId, last_name: $lastName, first_name: $firstName, phone: $phone, email: $email, password: $password, availability: $availability) 
+  }
+`
