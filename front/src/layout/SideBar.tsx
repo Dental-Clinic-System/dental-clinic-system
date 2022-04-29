@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Box,
   Divider,
@@ -7,20 +7,22 @@ import {
   List,
   ListItemText,
 } from "@mui/material";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export const Sidebar = () => {
-  const [selectedIndex, setSelectedIndex] = useState();
+  const userType = sessionStorage.getItem("username")
 
-  const route = [
+  const userRoute = [
     { path: "/", text: "Home" },
     { path: "appointment", text: "Appointments" },
-    { path: "users", text: "Staffs" },
-    // { path: "clinics", text: "Clinics" },
+    { path: "users", text: "Staff" },
     { path: "services", text: "Services" },
     { path: "patients", text: "Patients" },
     { path: "patient-histories", text: "Patient Histories" },
   ];
+  const adminRoute = [ { path: "clinics", text: "Clinics" } ];
+  const route = (userType === "super") ? adminRoute : userRoute;
+
   const signOutTemp = () => {
     sessionStorage.clear();
     window.location.replace("http://localhost:3000/625fca30c1cf951c042bd5ec");
