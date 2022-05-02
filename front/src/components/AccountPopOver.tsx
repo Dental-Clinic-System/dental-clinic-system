@@ -2,12 +2,11 @@ import { FC, MouseEvent, useState } from "react";
 import { Popover, Typography, Box, Divider, Button } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import IconButton from "@mui/material/IconButton";
-// import { useAuth } from '../providers';
+import { useAuth } from '../providers/AuthProvider';
 
 export const AccountPopOver: FC = () => {
-  //   const { signout, user } = useAuth();
+    const { signout } = useAuth()
   const [user, setUser] = useState();
-  const signout = () => {};
   const anchor = undefined;
   const [anchorElement, setAnchorElement] = useState<
     HTMLButtonElement | undefined
