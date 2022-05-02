@@ -152,13 +152,11 @@ export const ADD_STAFF = gql`
 `;
 
 export const UPDATE_APPOINTMENT = gql`
-  mutation UpdateAppointment($id: String, $title: String, $startDate: String, $clinicId: String, $doctorId: String, $patientId: String, $serviceId: String, $endDate: String, $notes: String, $status: String) {
-  updateAppointment(_id: $id, title: $title, startDate: $startDate, clinicId: $clinicId, doctorId: $doctorId, patientId: $patientId, serviceId: $serviceId, endDate: $endDate, notes: $notes, status: $status) {
+  mutation UpdateAppointment($id: String, $title: String, $startDate: String, $clinicId: String, $staffId: String, $patientId: String, $serviceId: String, $endDate: String, $notes: String, $status: String) {
+  updateAppointment(_id: $id, title: $title, startDate: $startDate, clinicId: $clinicId, staffId: $staffId, patientId: $patientId, serviceId: $serviceId, endDate: $endDate, notes: $notes, status: $status) {
     _id
-    clinicId {
-      title
-    }
-    doctorId
+    clinicId 
+    staffId
     patientId
     serviceId
     title
@@ -185,10 +183,34 @@ mutation AddPatientHistory($clinicId: String,$patientId: String,$appointmentId: 
     _id
   }
 }
+`
 
+export const DELETE_APPOINTMENT = gql`
+  mutation DeleteAppointment($id: String) {
+    deleteAppointment(_id: $id) {
+      _id
+    }
+  }
 `
 export const UPDATE_STAFF = gql`
   mutation Mutation($username: String!, $type: StaffType, $clinicId: String!, $lastName: String, $firstName: String, $phone: String, $email: String, $password: String, $availability: availability) {
     updateStaff(username: $username, type: $type, clinicId: $clinicId, last_name: $lastName, first_name: $firstName, phone: $phone, email: $email, password: $password, availability: $availability) 
+  }
+`
+
+export const ADD_APPOINTMENT = gql`
+  mutation AddAppointment($clinicId: String, $patientId: String, $staffId: String, $serviceId: String, $startDate: String, $title: String, $endDate: String, $notes: String, $status: String) {
+    addAppointment(clinicId: $clinicId, patientId: $patientId, staffId: $staffId, serviceId: $serviceId, startDate: $startDate, title: $title, endDate: $endDate, notes: $notes, status: $status) {
+      _id
+      clinicId
+      staffId
+      patientId
+      serviceId
+      startDate
+      title
+      notes
+      status
+      endDate
+    }
   }
 `
