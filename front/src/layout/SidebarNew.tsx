@@ -10,25 +10,25 @@ import { Link, useLocation } from "react-router-dom";
 import { ListItem, ListItemIcon, ListItemText } from "@mui/material";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 
-const userRoute = [
-  { href: "/", title: "Хяналтын самбар", icon: <DashboardIcon /> },
-  { href: "staff", title: "Ажилчид", icon: <PeopleIcon /> },
-  { href: "appointment", title: "Цаг авах", icon: <CalendarMonthIcon /> },
-  { href: "services", title: "Эмчилгээ", icon: <MedicationIcon /> },
-  {
-    href: "patients",
-    title: "Өвчтөнүүд",
-    icon: <AirlineSeatReclineExtraIcon />,
-  },
-  { href: "patient-histories", title: "Өвчтөний түүх", icon: <HistoryIcon /> },
-];
-const userType = sessionStorage.getItem("username");
-const adminRoute = [
-  { href: "clinics", title: "Clinics", icon: <LocalHospitalIcon /> },
-];
-const route = userType === "super" ? adminRoute : userRoute;
-
 export const SideBarNew: FC = () => {
+  const userRoute = [
+    { href: "/", title: "Хяналтын самбар", icon: <DashboardIcon /> },
+    { href: "staff", title: "Ажилчид", icon: <PeopleIcon /> },
+    { href: "appointment", title: "Цаг авах", icon: <CalendarMonthIcon /> },
+    { href: "services", title: "Эмчилгээ", icon: <MedicationIcon /> },
+    {
+      href: "patients",
+      title: "Өвчтөнүүд",
+      icon: <AirlineSeatReclineExtraIcon />,
+    },
+    { href: "patient-histories", title: "Өвчтөний түүх", icon: <HistoryIcon /> },
+  ];
+  const userType = sessionStorage.getItem("username");
+  const adminRoute = [
+    { href: "clinics", title: "Clinics", icon: <LocalHospitalIcon /> },
+  ];
+  const route = userType === "super" ? adminRoute : userRoute;
+
   return (
     <>
       {route.map(({ href, title, icon }, index) => {
