@@ -1,17 +1,12 @@
 import { createContext, useState, useContext, FC, useEffect } from "react";
+import { LogIn } from "../pages";
 // import { auth } from '../firebase';
-import type { User } from "firebase/auth";
-import {
-  signInWithEmailAndPassword,
-  signOut,
-  onAuthStateChanged,
-} from "firebase/auth";
+// import type { User } from "firebase/auth";
 // import { Loader } from '../components';
 // import { useAlert } from './AlertProvider';
-// import { AuthModal } from '../modals';
 
 interface AuthContextInterface {
-  user?: User;
+  user?: any;
   signin: (email: string, password: string) => void;
   signout: () => void;
 }
@@ -22,13 +17,12 @@ const AuthContext = createContext<AuthContextInterface>(
 
 export const AuthProvider: FC = (props) => {
   const { children } = props;
-  // const alert = useAlert();
   const [checking, setChecking] = useState(true);
-  const [user, setUser] = useState<User>();
+  const [user, setUser] = useState();
 
   const signin = (email: string, password: string): void => {
     setChecking(true);
-    // signInWithEmailAndPassword(auth, email, password).catch((error: Error) => alert.error(error.message));
+    LogIn()
   };
 
   const signout = (): void => {
@@ -38,22 +32,6 @@ export const AuthProvider: FC = (props) => {
     window.location.replace("http://localhost:3000/625fca30c1cf951c042bd5ec");
     // signOut(auth).catch((error: Error) => alert.error(error.message));
   };
-
-  useEffect(() => {
-    // const unsubscribe = onAuthStateChanged(auth, (user) => {
-    //   if (user) {
-    //     setUser(user);
-    //   } else {
-    //     setUser(() => {
-    //       const returnValue = undefined;
-    //       return returnValue;
-    //     });
-    //   }
-    //   setChecking(false);
-    // });
-    // return () => unsubscribe();
-  }, []);
-
   return (
     <AuthContext.Provider value={{ user, signin, signout }}>
       {/* {checking && <Loader />}
