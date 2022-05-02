@@ -6,7 +6,7 @@ export const GET_PATIENTS = gql`
     _id
     firstName
     lastName
-    stateRegNumber
+    registrationNumber
     mobileNumber
     email
     gender

@@ -19,12 +19,13 @@ const style = {
 type CreateModalType = {
     open: boolean;
     setOpen: Function;
-    createFunction: Function;
+    createFunction?: Function;
     addButtonName: String;
+    showButton?: Boolean;
 }
 
 export const CreateModal: React.FC<CreateModalType> = (params) => {
-    const { open, setOpen, children, createFunction, addButtonName } = params;
+    const { open, setOpen, children, createFunction = () => {}, addButtonName, showButton = true } = params;
     const handleClose = () => setOpen(false);
 
     return (
@@ -39,8 +40,12 @@ export const CreateModal: React.FC<CreateModalType> = (params) => {
                     display: 'flex',
                     justifyContent: 'space-around'
                 }}>
-                    <Button onClick={handleClose} variant='outlined' color='error'>Буцах</Button>
-                    <Button onClick={() => createFunction()} variant='outlined'>{addButtonName}</Button>
+                    {showButton &&
+                        <Box>
+                            <Button onClick={handleClose} variant='outlined' color='error'>Буцах</Button>
+                            <Button onClick={() => createFunction()} variant='outlined'>{addButtonName}</Button>
+                        </Box>
+                    }
                 </Box>
             </Box>
 
