@@ -64,9 +64,9 @@ export const PatientScreen = () => {
                 <CustomInput value={birth} setValue={setBirth} placeholder={'Төрсөн өдөр'} />
                 <CustomInput value={gender} setValue={setGender} placeholder={'Хүйс'} />
                 <CustomInput value={phone} setValue={setPhone} placeholder={'Утасны дугаар'} />
-                <CustomInput value={email} setValue={setEmail} placeholder={'и-майл'} />
-                <CustomInput value={cardNumber} setValue={setCardNumber} placeholder={'Кардын дугаар'} />
-                <CustomInput value={stateRegNumber} setValue={setStateRegNumber} placeholder={'Дүүргийн гегистерийн дугаар'} />
+                <CustomInput value={email} setValue={setEmail} placeholder={'Имэйл'} />
+                <CustomInput value={cardNumber} setValue={setCardNumber} placeholder={'Картын дугаар'} />
+                <CustomInput value={stateRegNumber} setValue={setStateRegNumber} placeholder={'Улсын бүртгэлийн дугаар'} />
             </CreateModal>
         </Box>
     );
