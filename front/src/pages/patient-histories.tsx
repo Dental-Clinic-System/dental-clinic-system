@@ -4,6 +4,7 @@ import { Box, TextField } from '@mui/material'
 import { useQuery } from '@apollo/client';
 import { GET_PATIENTS_BRIEFLY } from '../graphql';
 import { SmallDataGridHeight } from '../helper/constants';
+import DentalChart from '../components/custom/dentalChart'
 
 type PatientType = {
     cardNumber: String;
@@ -67,6 +68,7 @@ export const PatientHistoriesScreen = ({ patientId = '' }) => {
         <Box sx={containerStyle}>
             {loading && <Loading />}
             <Box sx={{ width: '100%' }}>
+                <DentalChart/>
                 <TextField value={name} onChange={(e) => handleChange(e)} size='small' />
                 <Box sx={{ height: SmallDataGridHeight, marginTop: 3 }}>
                     {recommendedPatients && recommendedPatients.map((patient: PatientType, index: number) => {
