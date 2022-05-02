@@ -16,6 +16,8 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { useLazyQuery } from "@apollo/client";
 import { IError, ILogin } from "../interfaces/ILogin";
 import { LOGIN } from "../graphql";
+import { useAuth } from "../providers/AuthProvider";
+import { LegendToggleTwoTone } from "@mui/icons-material";
 
 const useStyles = makeStyles({
   paperContainer: {
@@ -38,9 +40,10 @@ const useStyles = makeStyles({
 });
 
 export const LogIn = () => {
-  const { id } = useParams();
+  let { id } = useParams();
+  if (!id) id = window.location.pathname.substring(1);
   const styles = useStyles();
-  console.log(id);
+  console.log("clinicId: ", id);
   const navigate = useNavigate();
 
   const [error, setError] = useState<IError>({
@@ -53,6 +56,7 @@ export const LogIn = () => {
   });
 
   const [login] = useLazyQuery(LOGIN);
+  // const { signin } = useAuth();
 
   const handleSubmit = async () => {
     console.log({ clinicId: id, email: info.email, password: info.password });

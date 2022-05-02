@@ -7,8 +7,8 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { useMutation, useQuery } from "@apollo/client";
-import { GET_STAFFS, ADD_STAFF } from '../graphql'
-import { CreateModal, ModalInput } from '../components'
+import { GET_STAFFS, ADD_STAFF } from "../graphql";
+import { CreateModal, ModalInput } from "../components";
 import { Button } from "@mui/material";
 
 const RenderInfo = () => {
@@ -35,36 +35,77 @@ const RenderInfo = () => {
 };
 export const Users = () => {
   const clinicId = window.sessionStorage.getItem("clinicId");
-  const { data, loading } = useQuery(GET_STAFFS)
-  const [addStaffModal, setAddStaffModal] = useState(false)
-  const [staffInfo, addStaffInfo] = useState({})
-  const [addStaff, { error }] = useMutation(ADD_STAFF)
+  const { data, loading } = useQuery(GET_STAFFS);
+  const [addStaffModal, setAddStaffModal] = useState(false);
+  const [staffInfo, addStaffInfo] = useState({});
+  const [addStaff, { error }] = useMutation(ADD_STAFF);
 
-  if(loading) {
-    return <h1>Loading ...</h1>
+  if (loading) {
+    return <h1>Loading ...</h1>;
   }
 
-  const staffs = data?.getStaffs.map((staff: any, indx: any) => ({ ...staff, id: indx + 1, info: "Дэлгэрэнгүй" }))
+  const staffs = data?.getStaffs.map((staff: any, indx: any) => ({
+    ...staff,
+    id: indx + 1,
+    info: "Дэлгэрэнгүй",
+  }));
 
   return (
     <Box>
-      <CreateModal open={addStaffModal} setOpen={setAddStaffModal} addButtonName={"Add Staff"} createFunction={() => {
-        addStaff({ variables: {
-          ...staffInfo,
-          clinicId: clinicId
-        }}) 
-        setAddStaffModal(false)
-      }}>
-        <ModalInput onChange={(e: any) => addStaffInfo({...staffInfo, username: e.target.value})} label={"Хэрэглэгчийн нэр"} />
-        <ModalInput onChange={(e: any) => addStaffInfo({...staffInfo, firstName: e.target.value})} label={"Нэр"} />
-        <ModalInput onChange={(e: any) => addStaffInfo({...staffInfo, lastName: e.target.value})} label={"Овог"} />
-        <ModalInput onChange={(e: any) => addStaffInfo({...staffInfo, email: e.target.value})} label={"Мэйл"} />
-        <ModalInput onChange={(e: any) => addStaffInfo({...staffInfo, password: e.target.value})} label={"Нууц үг"} />
-        <ModalInput onChange={(e: any) => addStaffInfo({...staffInfo, phone: e.target.value})} label={"Дугаар"} />
+      <CreateModal
+        open={addStaffModal}
+        setOpen={setAddStaffModal}
+        addButtonName={"Add Staff"}
+        createFunction={() => {
+          addStaff({
+            variables: {
+              ...staffInfo,
+              clinicId: clinicId,
+            },
+          });
+          setAddStaffModal(false);
+        }}
+      >
+        <ModalInput
+          onChange={(e: any) =>
+            addStaffInfo({ ...staffInfo, username: e.target.value })
+          }
+          label={"Хэрэглэгчийн нэр"}
+        />
+        <ModalInput
+          onChange={(e: any) =>
+            addStaffInfo({ ...staffInfo, firstName: e.target.value })
+          }
+          label={"Нэр"}
+        />
+        <ModalInput
+          onChange={(e: any) =>
+            addStaffInfo({ ...staffInfo, lastName: e.target.value })
+          }
+          label={"Овог"}
+        />
+        <ModalInput
+          onChange={(e: any) =>
+            addStaffInfo({ ...staffInfo, email: e.target.value })
+          }
+          label={"Мэйл"}
+        />
+        <ModalInput
+          onChange={(e: any) =>
+            addStaffInfo({ ...staffInfo, password: e.target.value })
+          }
+          label={"Нууц үг"}
+        />
+        <ModalInput
+          onChange={(e: any) =>
+            addStaffInfo({ ...staffInfo, phone: e.target.value })
+          }
+          label={"Дугаар"}
+        />
       </CreateModal>
-      <Button onClick={() => setAddStaffModal(true)} >Add Staff</Button>
+      <Button onClick={() => setAddStaffModal(true)}>Add Staff</Button>
       <DataGrid
-        sx={{ height: 640, width: '80vw' }}
+        sx={{ height: 640, width: "80vw" }}
         getRowId={(row) => row.id}
         rows={staffs}
         columns={column}
@@ -114,8 +155,8 @@ const column: GridColDef[] = [
     headerName: "Ажиллах хуваарь",
     flex: 1,
     renderCell: (staff: any) => {
-      return staff.formattedValue === "A9_13" ? "9:00 - 13:00": ""
-    }
+      return staff.formattedValue === "A9_13" ? "9:00 - 13:00" : "";
+    },
   },
   {
     field: "type",
@@ -134,5 +175,5 @@ const column: GridColDef[] = [
         </Link>
       );
     },
-  }
+  },
 ];

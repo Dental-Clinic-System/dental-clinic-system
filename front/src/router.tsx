@@ -14,11 +14,11 @@ import {
 import { Services } from "./pages/services";
 
 const Loader = (Component: any) => (props: any) =>
-(
-  <Suspense fallback={<SuspenseLoader />}>
-    <Component {...props} />
-  </Suspense>
-);
+  (
+    <Suspense fallback={<SuspenseLoader />}>
+      <Component {...props} />
+    </Suspense>
+  );
 //pages
 const Profile = Loader(lazy(() => import("./pages/profile")));
 const Users = Loader(lazy(() => import("./pages/staff")));
@@ -57,15 +57,15 @@ const router: RouteObject[] = [
     element: <PatientHistoriesScreen />,
   },
   {
-    path: '/chart/:id',
+    path: "/chart/:id",
     element: <Chart />,
-  }
+  },
 ];
 
 const registerRouter: RouteObject[] = [
   {
     path: "/:id",
-    element: <LogIn />, 
+    element: <LogIn />,
   },
 ];
 
