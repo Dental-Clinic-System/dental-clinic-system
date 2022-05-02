@@ -11,13 +11,15 @@ import {
 import { Paper } from "@mui/material";
 import { useEffect, useState } from "react";
 import { GetAppointments, GET_STAFFS } from "../graphql/queries";
-import { UPDATE_APPOINTMENT } from '../graphql/mutations'
+import { UPDATE_APPOINTMENT, DELETE_APPOINTMENT, ADD_APPOINTMENT } from '../graphql/mutations'
 
 export const Appointment = () => {
   const [appointments, setAppointments] = useState([{}]);
   const { loading, error, data } = useQuery(GetAppointments, { variables: { clinicId: "625fca30c1cf951c042bd5ec" } });
   const { loading: sLoading, error: sError, data: sData } = useQuery(GET_STAFFS, { variables: { type: 'doctor', clinicId: sessionStorage.getItem('clinicId') } });
   const [UpdateAppointment] = useMutation(UPDATE_APPOINTMENT)
+  const [AddAppointment] = useMutation(ADD_APPOINTMENT)
+  const [DeleteAppointment] = useMutation(DELETE_APPOINTMENT)
   const [doctors, setDoctors] = useState([{}]);
   const [patients, setPatients] = useState([{}])
 
@@ -31,7 +33,7 @@ export const Appointment = () => {
         let temp = {
           text: `${e.first_name} ${e.last_name}`,
           id: e._id,
-          doctorId: e._id,
+          staffId: e._id,
           clinicId: sessionStorage.getItem('clinicId')
         }
         tempDoctor.push(temp)
@@ -54,11 +56,12 @@ export const Appointment = () => {
           startDate: new Date(e.startDate),
           endDate: new Date(e.endDate),
           id: e._id,
-          doctorId: e.staffId
         }
         formattedData.push(temp)
 
-        tempPatient.push({ id: e.patientId, doctor: e.staffId, text: e.patientId })
+        if (!tempPatient.includes({id: e.patientId, text: e.patientId})) {
+          tempPatient.push({ id: e.patientId, text: e.patientId })
+        }
       })
       setPatients(tempPatient)
       setAppointments(formattedData)
@@ -68,20 +71,26 @@ export const Appointment = () => {
     formatStaff()
   }, [data, sData])
 
-  const crud = ({ added, changed, deleted }) => {
+  const add = async (added) => {
+    let formattedData = {
+      ...added,
+      clinicId: "625fca30c1cf951c042bd5ec",
+      status: "active",
+      serviceId: ""
+    }
+    delete formattedData.allDay;
+
+    await AddAppointment({ variables: formattedData })
+    window.location.reload()
+  }
+
+  const crud = ({ changed, deleted }) => {
     setAppointments((data) => {
       let tempdata = data;
-
-      if (added) {
-        const startingAddedId = tempdata.length > 0 ? tempdata[tempdata.length - 1].id + 1 : 0;
-        tempdata = [...tempdata, { id: startingAddedId, ...added }];
-        console.log(added);
-      }
 
       if (changed) {
         tempdata = tempdata.map((appointment) => {
           if (changed[appointment.id]) {
-            console.log(changed[appointment.id])
             UpdateAppointment({ variables: { ...changed[appointment.id], id: appointment.id } })
             return { ...appointment, ...changed[appointment.id] }
           } else {
@@ -92,30 +101,67 @@ export const Appointment = () => {
 
       if (deleted) {
         tempdata = tempdata.filter((appointment) => {
-          return appointment.id !== deleted;
+          if (appointment.id === deleted) {
+            DeleteAppointment({ variables: { ...deleted[appointment.id], id: appointment.id } })
+            return false;
+          } else {
+            return true;
+          }
         });
       }
 
-      console.log(tempdata);
+      console.log('endoftheday', tempdata);
 
       return tempdata;
     });
   };
 
+  const BasicLayout = ({ onFieldChange, appointmentData, ...restProps }) => {
+    const onCustomFieldChange = (nextValue) => {
+      onFieldChange({ patientId: nextValue });
+    };
+  
+    return (
+      <AppointmentForm.BasicLayout
+        appointmentData={appointmentData}
+        onFieldChange={onFieldChange}
+        {...restProps}
+      >
+        <AppointmentForm.Label
+          text="Patient"
+          type="title"
+        />
+        <AppointmentForm.TextEditor
+          value={appointmentData.patientId}
+          onValueChange={onCustomFieldChange}
+          placeholder="Enter patient name"
+        />
+      </AppointmentForm.BasicLayout>
+    );
+  };
+
   if (!data && !sData) {
     return <div>"loading"</div>
   }
+
   return (
     <>
-      <Paper style={{ textAlign: "center" }}>
+      <Paper style={{ textAlign: "center", zIndex: '100' }}>
         <Scheduler data={appointments}>
           <ViewState CurrentDate="2022-04-27" defaultCurrentViewName="Week" />
-          <EditingState onCommitChanges={crud} />
+          <EditingState onCommitChanges={({ added, changed, deleted }) => {
+            if (added) {
+              add(added)
+            }
+            if (changed || deleted) {
+              crud({ changed, deleted })
+            }
+          }} />
 
           <GroupingState
             grouping={[
               {
-                resourceName: "doctorId",
+                resourceName: "staffId",
               },
             ]}
           />
@@ -127,22 +173,17 @@ export const Appointment = () => {
           <Resources
             data={[
               {
-                fieldName: "doctorId",
+                fieldName: "staffId",
                 title: "Doctor",
                 instances: doctors ? doctors : [{ text: 'Doctor', id: 'doctor' }],
-              },
-              {
-                instances: patients ? patients : [{ text: 'Patient', id: 'patient' }],
-                fieldName: 'patientId',
-                title: 'Patient'
               }
             ]}
-            mainResourceName="doctorId"
+            mainResourceName="staffId"
           />
 
           <IntegratedGrouping />
           <AppointmentTooltip showDeleteButton showOpenButton />
-          <AppointmentForm />
+          <AppointmentForm basicLayoutComponent={BasicLayout} />
 
           <Toolbar />
           <ViewSwitcher />
