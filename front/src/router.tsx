@@ -37,11 +37,11 @@ const router: RouteObject[] = [
     element: <Services />,
   },
   {
-    path: "/profile/:uid",
+    path: "/staff/:uid",
     element: <Profile />,
   },
   {
-    path: "/users",
+    path: "/staff",
     element: <Users />,
   },
   {

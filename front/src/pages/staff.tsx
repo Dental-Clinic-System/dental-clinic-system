@@ -7,7 +7,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { useMutation, useQuery } from "@apollo/client";
-import { GET_STAFFS, ADD_STAFF } from "../graphql";
+import { GET_STAFFS, ADD_STAFF, UPDATE_STAFF } from "../graphql";
 import { CreateModal, ModalInput } from "../components";
 import { Button } from "@mui/material";
 
@@ -35,10 +35,15 @@ const RenderInfo = () => {
 };
 export const Users = () => {
   const clinicId = window.sessionStorage.getItem("clinicId");
-  const { data, loading } = useQuery(GET_STAFFS);
+  const { data, loading } = useQuery(GET_STAFFS, {
+    variables: {
+      clinicId: clinicId,
+    },
+  });
   const [addStaffModal, setAddStaffModal] = useState(false);
   const [staffInfo, addStaffInfo] = useState({});
-  const [addStaff, { error }] = useMutation(ADD_STAFF);
+  const [addStaff] = useMutation(ADD_STAFF);
+  const [updateStaff] = useMutation(UPDATE_STAFF);
 
   if (loading) {
     return <h1>Loading ...</h1>;
@@ -50,12 +55,13 @@ export const Users = () => {
     info: "Дэлгэрэнгүй",
   }));
 
+  console.log("staffs: ", data);
   return (
     <Box>
       <CreateModal
         open={addStaffModal}
         setOpen={setAddStaffModal}
-        addButtonName={"Add Staff"}
+        addButtonName={"Ажилтан нэмэх"}
         createFunction={() => {
           addStaff({
             variables: {
@@ -103,7 +109,7 @@ export const Users = () => {
           label={"Дугаар"}
         />
       </CreateModal>
-      <Button onClick={() => setAddStaffModal(true)}>Add Staff</Button>
+      <Button onClick={() => setAddStaffModal(true)}>Ажилтан нэмэх</Button>
       <DataGrid
         sx={{ height: 640, width: "80vw" }}
         getRowId={(row) => row.id}
@@ -112,6 +118,18 @@ export const Users = () => {
         pageSize={10}
         rowsPerPageOptions={[5]}
         disableSelectionOnClick
+        onEditRowsModelChange={async (e, d) => {
+          const { type } = e[Object.keys(e)[0]];
+          const key = Object.keys(e)[0];
+          const userName = staffs[`${Number(key) - 1}`];
+          await updateStaff({
+            variables: {
+              clinicId: clinicId,
+              username: userName["username"],
+              type: type.value,
+            },
+          });
+        }}
       />
     </Box>
   );
@@ -142,7 +160,7 @@ const column: GridColDef[] = [
   },
   {
     field: "email",
-    headerName: "Мэйл",
+    headerName: "Имэйл",
     flex: 1,
   },
   {
@@ -162,6 +180,9 @@ const column: GridColDef[] = [
     field: "type",
     headerName: "Үүрэг",
     flex: 1,
+    editable: true,
+    type: "singleSelect",
+    valueOptions: ["doctor", "reception", "admin"],
     // renderCell: () => { return RenderInfo }
   },
   {
@@ -170,7 +191,7 @@ const column: GridColDef[] = [
     flex: 1,
     renderCell: (row) => {
       return (
-        <Link to={`/profile/${row.id}`} state={{ id: row.id }}>
+        <Link to={`/staff/${row.id}`} state={{ id: row.id }}>
           Дэлгэрэнгүй
         </Link>
       );
