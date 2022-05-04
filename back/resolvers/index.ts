@@ -1,5 +1,5 @@
 import { addStaff, getStaff, loginStaff, getStaffs, updateStaff } from "./staffResolver";
-import { addPatient, getPatients, getPatient, updatePatient, deletePatient } from "./patientResolver";
+import { addPatient, getPatients, getPatient, updatePatient, deletePatient, findPatient } from "./patientResolver";
 import { addService, getServices, getService, updateService, deleteService } from "./serviceResolver";
 import { addPatientHistory, getPatientHistory, getPatientHistories, updatePatientHistory, deletePatientHistory } from "./patientHistoryResolver";
 import { addAppointment, getAppointment, getAppointments, updateAppointment, deleteAppointment } from "./appointmentResolver";
@@ -17,6 +17,7 @@ export default {
     getPatientHistories,
     getAppointments,
     getAppointment,
+    findPatient
   },
   Mutation: {
     addStaff,

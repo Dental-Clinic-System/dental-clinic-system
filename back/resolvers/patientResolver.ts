@@ -25,18 +25,25 @@ const getPatient = async (_: any, params: any) => {
     const patient = await Patient.findOne({
         _id: params._id,
     })
-    .populate("clinicId")
-    .lean();
+        .populate("clinicId")
+        .lean();
 
     return patient;
 };
 
 const getPatients = async (_: any, params: any) => {
     const patient = await Patient.find(params)
-    .populate("clinicId")
-    .lean();
+        .populate("clinicId")
+        .lean();
 
     return patient;
 };
 
-export { addPatient, getPatient, getPatients, updatePatient, deletePatient };
+const findPatient = async (_: any, params: any) => {
+    console.log(params)
+    const patient = await Patient.findOne(params)
+    console.log('res',patient)
+    return patient
+}
+
+export { addPatient, getPatient, getPatients, updatePatient, deletePatient, findPatient };
