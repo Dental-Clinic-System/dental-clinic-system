@@ -61,6 +61,6 @@ type Query {
     birthdate: String
     cardNumber: String
   ): [Patient]
-
+  findPatient(mobileNumber: String):Patient
   getPatient(_id: String): Patient
 }
