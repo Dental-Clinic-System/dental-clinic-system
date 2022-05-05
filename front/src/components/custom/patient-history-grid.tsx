@@ -6,9 +6,8 @@ import { DataGrid } from '@mui/x-data-grid';
 import { SmallDataGridHeight } from "../../helper/constants";
 
 const columns = [
-    { field: 'clinicId', headerName: 'Үзүүлсэн Эмнэлэг', width: 180, valueFormatter: ({ value } : any) => value.title },
     { field: 'serviceId', headerName: 'Авсан үйлчилгээ', width: 180, valueFormatter: ({ value } : any) => value.serviceName },
-    { field: 'appointmentId', headerName: 'Цаг авалт', width: 180, valueFormatter: ({ value } : any) => value.hello },
+    { field: 'appointmentId', headerName: 'Цаг авалтын нэр', width: 180, valueFormatter: ({ value} : any) => value.title },
     { field: 'note', headerName: 'Мэдээлэл', width: 180 },
 ];
 
@@ -25,6 +24,8 @@ export const PatientHistoryGrid: React.FC<PatientHistoryGridType> = ({ id }) => 
         }
     })
 
+    console.log(data)
+
     const histories = data ? data.getPatientHistories : []
 
     return (
@@ -35,6 +36,7 @@ export const PatientHistoryGrid: React.FC<PatientHistoryGridType> = ({ id }) => 
                 getRowId={(row) => row._id}
                 rows={histories}
                 columns={columns}
+                disableSelectionOnClick
             />
         </Box>
     );

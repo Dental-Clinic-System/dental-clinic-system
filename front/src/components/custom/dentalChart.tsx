@@ -1,10 +1,7 @@
-import React from "react";
 import { useState } from "react";
 import { Box } from "@mui/system";
 import Stack from '@mui/material/Stack';
 import Grid from '@mui/material/Grid';
-import { id } from "date-fns/locale";
-
 
 let teeth18 = require("./teeth/fullImage-buccal/buccal-18.png");
 let teeth17 = require("./teeth/fullImage-buccal/buccal-17.png");
@@ -93,19 +90,15 @@ export const DentalChart = () => {
 
     const [selectedTeeth, selectTeeth] = useState('');
 
-
-
     return (
         <>
-            {console.log(id)}
-            <Box sx={{ width: '53%' }}>
+            <Box sx={{ width: 500 }}>
                 <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
                     <Grid item xs={6}>
                         <Stack direction="row" spacing={0.1}>
                             <Stack direction="column">
                                 <Box>
                                     <img src={teeth18} id={"18"} height="80" width="30"></img>
-
                                 </Box>
 
                                 <Box>
@@ -257,7 +250,7 @@ export const DentalChart = () => {
                                 24
                             </Stack>
 
-                            <Stack>                             
+                            <Stack>
                                 <Box>
                                     <img src={teeth23} id={"23"} height="80" width="30"></img>
 

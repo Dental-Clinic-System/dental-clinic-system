@@ -4,7 +4,7 @@ import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import { Theme } from "./theme";
 import { MainLayout } from "./layout/MainLayout";
-import { AuthProvider } from "./providers/AuthProvider";
+import { PatientProvider, AuthProvider } from "./providers";
 import { LogIn } from "./pages";
 
 const App = () => {
@@ -15,9 +15,11 @@ const App = () => {
   return (
     <Theme>
       <LocalizationProvider dateAdapter={AdapterDateFns}>
-        <AuthProvider>
-          {userToken ? <MainLayout>{routerContent}</MainLayout> : <LogIn/>}
-        </AuthProvider>
+        <PatientProvider>
+          <AuthProvider>
+            {userToken ? <MainLayout>{routerContent}</MainLayout> : <LogIn />}
+          </AuthProvider>
+        </PatientProvider>
       </LocalizationProvider>
     </Theme>
   );
