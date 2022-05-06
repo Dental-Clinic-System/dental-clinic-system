@@ -10,17 +10,17 @@ import * as Yup from 'yup';
 import { LeftSide } from './';
 
 const validationSchema = Yup.object().shape({
-  clinicName: Yup.string().max(50).required('Clinic name is required'),
+  title: Yup.string().max(50).required('Clinic name is required'),
   email: Yup.string().max(50).email('Not a valid email').required('Email is required'),
-  phone: Yup.string()
+  contact_number: Yup.string()
     .min(8)
     .max(11)
     .required('contact number is required ')
     .matches(/^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/),
   city: Yup.string().required('Please enter a city name'),
   district: Yup.string().required('Please enter a district name'),
-  sub_district: Yup.string().required('Please enter a sub district'),
-  full_address: Yup.string().max(200).required('Please enter a full address'),
+  khoroo: Yup.string().required('Please enter a sub district'),
+  address: Yup.string().max(200).required('Please enter a full address'),
 });
 
 const RightSide = () => {
@@ -29,13 +29,12 @@ const RightSide = () => {
 
   const formik = useFormik({
     initialValues: {
-      clinicName: '',
+      title: '',
       email: '',
-      phone: '',
-      city: '',
+      contact_number: '',
       district: '',
-      sub_district: '',
-      full_address: '',
+      khoroo: '',
+      address: '',
     },
     validationSchema: validationSchema,
     onSubmit: async (values) => {
@@ -60,23 +59,23 @@ const RightSide = () => {
               label="Эмнэлгийн мэдээлэл"
               questions={[
                 {
-                  id: 'clinicName',
+                  id: 'title',
                   question: 'Эмнэлгийн нэр',
                   type: 'input',
                   grid: { xs: 12 },
-                  error: Boolean(formik.errors.clinicName),
+                  error: Boolean(formik.errors.title),
                   helperText: '',
-                  value: formik.values.clinicName,
+                  value: formik.values.title,
                   onChange: formik.handleChange,
                 },
                 {
-                  id: 'phone',
+                  id: 'contact_number',
                   question: 'Холбоо барих утас',
                   type: 'input',
                   grid: { xs: 12 },
-                  error: Boolean(formik.errors.phone),
+                  error: Boolean(formik.errors.contact_number),
                   helperText: '',
-                  value: formik.values.phone,
+                  value: formik.values.contact_number,
                   onChange: formik.handleChange,
                 },
                 {
@@ -98,17 +97,6 @@ const RightSide = () => {
               label="Албан ёсны хаяг"
               questions={[
                 {
-                  id: 'city',
-                  question: 'Аймаг / хот',
-                  type: 'selector',
-                  grid: { xs: 5.4 },
-                  error: Boolean(formik.errors.city),
-                  helperText: '',
-                  value: formik.values.city,
-                  selections: ['Улаанбаатар', 'Эрдэнэт'],
-                  onChange: formik.handleChange('city'),
-                },
-                {
                   id: 'district',
                   question: 'Сум / Дүүрэг',
                   type: 'selector',
@@ -120,24 +108,24 @@ const RightSide = () => {
                   onChange: formik.handleChange('district'),
                 },
                 {
-                  id: 'sub_district',
+                  id: 'khoroo',
                   question: 'Баг / Хороо',
                   type: 'selector',
                   grid: { xs: 5.4 },
-                  error: Boolean(formik.errors.sub_district),
+                  error: Boolean(formik.errors.khoroo),
                   helperText: '',
-                  value: formik.values.sub_district,
+                  value: formik.values.khoroo,
                   selections: ['1-р хороо', '2-р хороо'],
-                  onChange: formik.handleChange('sub_district'),
+                  onChange: formik.handleChange('khoroo'),
                 },
                 {
-                  id: 'full_address',
+                  id: 'address',
                   question: 'Дэлгэрэнгүй хаяг',
                   type: 'input',
                   grid: { xs: 12 },
-                  error: Boolean(formik.errors.full_address),
+                  error: Boolean(formik.errors.address),
                   helperText: '',
-                  value: formik.values.full_address,
+                  value: formik.values.address,
                   onChange: formik.handleChange,
                 },
               ]}
