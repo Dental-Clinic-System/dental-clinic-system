@@ -7,7 +7,7 @@ import {
   Clinic,
   PatientScreen,
   Appointment,
-  Home,
+  Dashboard,
   PatientHistoriesScreen,
   LogIn,
 } from "./pages";
@@ -26,7 +26,7 @@ const Users = Loader(lazy(() => import("./pages/staff")));
 const router: RouteObject[] = [
   {
     path: "/",
-    element: <Home />,
+    element: <Dashboard />,
   },
   {
     path: "/appointment",
