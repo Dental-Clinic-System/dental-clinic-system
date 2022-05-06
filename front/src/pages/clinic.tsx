@@ -2,9 +2,8 @@ import { useMutation, useQuery } from '@apollo/client';
 import { Chip, Box, Button } from '@mui/material';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { useState, useEffect } from 'react';
-import { GetClinics } from '../graphql/queries';
 import { CustomInput, CreateModal, DeleteModal, Loading } from '../components';
-import { ADD_CLINIC, DELETE_CLINIC } from '../graphql';
+import { ADD_CLINIC, DELETE_CLINIC, GET_CLINICS } from '../graphql';
 
 const RenderStatus = (params: any) => {
   if (params.status == "accepted") {
@@ -16,25 +15,21 @@ const RenderStatus = (params: any) => {
 
 
 export const Clinic = () => {
-  const { loading, error, data } = useQuery(GetClinics);
+  const [addTodo] = useMutation(ADD_CLINIC);
+  const [deleteCLinic] = useMutation(DELETE_CLINIC);
+  const { loading, error, data } = useQuery(GET_CLINICS);
   const [clinics, setClinics] = useState([]);
-  const [modal, setModal] = useState(false)
-  const [deleteModal, setDeleteModal] = useState(false)
-  const [deleteCLinic] = useMutation(DELETE_CLINIC)
-  const [addTodo] = useMutation(ADD_CLINIC)
-  const [selectClinic, setSelectClinic] = useState([])
+  const [modal, setModal] = useState(false);
+  const [deleteModal, setDeleteModal] = useState(false);
+  const [selectClinic, setSelectClinic] = useState([]);
 
   const [addData, setAddData] = useState({
-    clinic_name: '',
-    contact_number: '',
+    title: '',
     email: '',
-    official_address: {
-      city: '',
-      district: '',
-      sub_district: '',
-      full_address: '',
-    },
-    status: '',
+    contact_number: '',
+    district: '',
+    khoroo: '',
+    address: '',
   })
   useEffect(() => {
     let formatedData: any = [];
@@ -50,26 +45,27 @@ export const Clinic = () => {
   const columns: GridColDef[] = [
     {
       field: 'index',
-      headerName: 'No',
+      headerName: 'Ду.',
       width: 15,
     },
-    { field: 'clinic_name', headerName: 'name', width: 150 },
-    { field: 'email', headerName: 'email', width: 200 },
-    { field: 'contact_number', headerName: 'contact number', width: 150 },
+    { field: '_id', headerName: 'ID', width: 150 },
+    { field: 'title', headerName: 'Эмнэлгийн нэр', width: 150 },
+    { field: 'email', headerName: 'Имэйл', width: 200 },
+    { field: 'contact_number', headerName: 'Холбогдох утас', width: 150 },
+    { field: 'district', headerName: 'Дүүрэг', width: 150 },
+    { field: 'khoroo', headerName: 'Хороо', width: 100 },
+    { field: 'address', headerName: 'Дэлгэрэнгүй хаяг', width: 150 },
     {
-      field: 'official_address', headerName: 'official_address', width: 150,
-      renderCell: (address: any) => <div>{address?.full_address}</div>
-    },
-    {
-      field: 'status', headerName: 'status', width: 150,
+      field: 'status', headerName: 'Төлөв', width: 150,
       renderCell: (params) => <RenderStatus status={params.value} />
     },
   ]
 
+  console.log(clinics, "clinics")
   return (
     <Box sx={{ width: '100%', height: '90Vh', alignItems: 'center', justifyContent: 'center' }}>
-      <Button onClick={() => setModal(true)} variant='outlined'>Clinic нэмэх</Button>
-      <Button onClick={() => setDeleteModal(true)} variant='outlined' color='error'>Clinic хасах</Button>
+      <Button onClick={() => setModal(true)} variant='outlined'>Эмнэлэг нэмэх</Button>
+      <Button onClick={() => setDeleteModal(true)} variant='outlined' color='error'>Эмнэлэг хасах</Button>
       {
         loading ?
           <Loading />
@@ -86,18 +82,23 @@ export const Clinic = () => {
             onSelectionModelChange={(item: any) => {
               setSelectClinic(item)
             }}
+            initialState={{
+              columns: {
+                columnVisibilityModel: {
+                  _id: false,
+                },
+              }
+            }}
           />
       }
       <DeleteModal open={deleteModal} setOpen={setDeleteModal} deleteButtonName='delete clinic' deleteFunction={() => { deleteCLinic({ variables: { id: selectClinic[0] } }) }} />
       <CreateModal open={modal} setOpen={setModal} createFunction={() => addTodo({ variables: addData })} addButtonName={'Add clinic'}>
-        <CustomInput placeholder={'clinic_name'} value={addData.clinic_name} setValue={(value: string) => setAddData({ ...addData, clinic_name: value })} />
-        <CustomInput placeholder={'contact_number'} value={addData.contact_number} setValue={(value: string) => setAddData({ ...addData, contact_number: value })} />
-        <CustomInput placeholder={'email'} value={addData.email} setValue={(value: string) => setAddData({ ...addData, email: value })} />
-        <CustomInput placeholder={'status'} value={addData.status} setValue={(value: string) => setAddData({ ...addData, status: value })} />
-        <CustomInput placeholder={'city'} value={addData.official_address.city} setValue={(value: string) => setAddData({ ...addData, official_address: { ...addData.official_address, city: value } })} />
-        <CustomInput placeholder={'district'} value={addData.official_address.district} setValue={(value: string) => setAddData({ ...addData, official_address: { ...addData.official_address, district: value } })} />
-        <CustomInput placeholder={'sub_district'} value={addData.official_address.sub_district} setValue={(value: string) => setAddData({ ...addData, official_address: { ...addData.official_address, sub_district: value } })} />
-        <CustomInput placeholder={'full_address'} value={addData.official_address.full_address} setValue={(value: string) => setAddData({ ...addData, official_address: { ...addData.official_address, full_address: value } })} />
+        <CustomInput placeholder={'Эмнэлгийн нэр'} value={addData.title} setValue={(value: string) => setAddData({ ...addData, title: value })} />
+        <CustomInput placeholder={'Имэйл'} value={addData.email} setValue={(value: string) => setAddData({ ...addData, email: value })} />
+        <CustomInput placeholder={'Холбогдох утас'} value={addData.contact_number} setValue={(value: string) => setAddData({ ...addData, contact_number: value })} />
+        <CustomInput placeholder={'Дүүрэг'} value={addData.district} setValue={(value: string) => setAddData({ ...addData, district: value })} />
+        <CustomInput placeholder={'Хороо'} value={addData.khoroo} setValue={(value: string) => setAddData({ ...addData, khoroo: value })} />
+        <CustomInput placeholder={'Дэлгэрэнгүй хаяг'} value={addData.address} setValue={(value: string) => setAddData({ ...addData, address: value })} />
       </CreateModal>
     </Box >
   )

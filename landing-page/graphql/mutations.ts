@@ -2,33 +2,31 @@ import { gql } from '@apollo/client';
 
 export const ADDCLINIC = gql`
   mutation AddClinic(
-    $clinicName: String
-    $phone: String
+    $title: String
+    $contact_number: String
     $email: String
-    $city: String
     $district: String
-    $sub_district: String
-    $full_address: String
+    $khoroo: String
+    $address: String
   ) {
     addClinic(
-      clinic_name: $clinicName
-      phone: $phone
+      title: $title
+      contact_number: $contact_number
       email: $email
-      official_address: { city: $city, district: $district, sub_district: $sub_district, full_address: $full_address }
+      district: $district 
+      khoroo: $khoroo 
+      address: $address 
     ) {
       _id
-      clinic_name
+      title
       operation_name
       operation_date
       contact_number
       clinic_web
       email
-      official_address {
-        city
-        district
-        sub_district
-        full_address
-      }
+      district
+      khoroo
+      address
       status
       clinic_admin {
         admin_number
@@ -37,7 +35,7 @@ export const ADDCLINIC = gql`
         position
       }
       workhours
-      phone
+      contact_number
     }
   }
 `;
