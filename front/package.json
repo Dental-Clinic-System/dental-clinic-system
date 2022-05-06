@@ -2,7 +2,6 @@
   "name": "front",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://localhost:3000/625fca30c1cf951c042bd5ec",
   "dependencies": {
     "@apollo/client": "^3.5.10",
     "@date-io/date-fns": "^2.13.1",
