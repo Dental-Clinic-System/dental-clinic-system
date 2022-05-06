@@ -1,0 +1,46 @@
+scalar object
+type Clinic {
+  _id:String,
+  address:String,
+  district:String,
+  khoroo:String,
+  status:String,
+  title:String,
+  email:String,
+  contact_number:String,
+}
+type Mutation {
+  addClinic(
+    address:String,
+    district:String,
+    khoroo:String,
+    status:String,
+    title:String,
+    email:String,
+    contact_number:String,
+  ): Clinic
+  deleteClinic(_id: String): String
+  updateClinic (
+    _id:String,
+    address:String,
+    district:String,
+    khoroo:String,
+    status:String,
+    title:String,
+    email:String,
+    contact_number:String,
+  ): Clinic
+}
+type Query {
+  getClinics(
+    _id:String,
+    address:String,
+    district:String,
+    khoroo:String,
+    status:String,
+    title:String,
+    email:String,
+    contact_number:String,
+  ): [Clinic]
+  getClinic(_id:String): Clinic
+}

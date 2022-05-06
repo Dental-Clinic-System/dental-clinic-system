@@ -3,7 +3,7 @@ import { addPatient, getPatients, getPatient, updatePatient, deletePatient, find
 import { addService, getServices, getService, updateService, deleteService } from "./serviceResolver";
 import { addPatientHistory, getPatientHistory, getPatientHistories, updatePatientHistory, deletePatientHistory } from "./patientHistoryResolver";
 import { addAppointment, getAppointment, getAppointments, updateAppointment, deleteAppointment } from "./appointmentResolver";
-
+import { addClinic, getClinic, updateClinic, getClinics, deleteClinic } from './clinicResolver'
 export default {
   Query: {
     getStaff,
@@ -17,7 +17,9 @@ export default {
     getPatientHistories,
     getAppointments,
     getAppointment,
-    findPatient
+    findPatient,
+    getClinics,
+    getClinic,
   },
   Mutation: {
     addStaff,
@@ -33,6 +35,9 @@ export default {
     addAppointment,
     updateAppointment,
     deleteAppointment,
-    updateStaff
+    updateStaff,
+    addClinic,
+    updateClinic,
+    deleteClinic
   },
 };

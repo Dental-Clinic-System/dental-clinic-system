@@ -43,19 +43,16 @@ export const GET_SERVICE = gql`
   }
 `;
 
-export const GetClinics = gql`
+export const GET_CLINICS = gql`
   query Query {
     getClinics {
       _id
-      clinic_name
-      contact_number
+      title
       email
-      official_address {
-        city
-        district
-        sub_district
-        full_address
-      }
+      contact_number
+      address
+      district
+      khoroo
       status
     }
   }

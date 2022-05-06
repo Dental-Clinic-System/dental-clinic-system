@@ -45,30 +45,31 @@ export const UPDATE_PATIENT = gql`
 }
 `;
 export const ADD_CLINIC = gql`
-  mutation Mutation(
-    $clinic_name: String
-    $contact_number: String
+  mutation AddClinic(
+    $title: String
     $email: String
-    $official_address: Official_address_type
+    $contact_number: String
+    $district: String
+    $khoroo: String
+    $address: String
     $status: String
   ) {
     addClinic(
-      clinic_name: $clinic_name
-      contact_number: $contact_number
+      title: $title
       email: $email
-      official_address: $official_address
+      contact_number: $contact_number
+      district: $district
+      khoroo: $khoroo
+      adress: $address
       status: $status
     ) {
       _id
-      clinic_name
-      contact_number
+      title
       email
-      official_address {
-        city
-        district
-        sub_district
-        full_address
-      }
+      contact_number
+      district
+      khoroo
+      address
       status
     }
   }
