@@ -8,6 +8,7 @@ type Patient {
 
 type Appointment {
   title: String
+  notes: String
 }
 
 type Service {

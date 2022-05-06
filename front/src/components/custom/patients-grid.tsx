@@ -1,12 +1,13 @@
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useQuery, useMutation } from "@apollo/client";
 import { GET_PATIENTS, DELETE_PATIENT, UPDATE_PATIENT } from "../../graphql";
 import { Loading } from "..";
-import { Box, Button } from "@mui/material";
+import { Box, Button, TextField } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { DeleteModal } from '../common'
 import { CustomInput } from './custom-input';
 import { useNavigate } from "react-router";
+import { PatientContext } from '../../providers'
 
 type PatientType = {
   _id: String
@@ -21,13 +22,27 @@ type PatientType = {
   cardNumber: String
 }
 
-export const PatientsGrid = () => {
+type PatientsGridType = {
+  setOpenAdd: Function
+}
+
+export const PatientsGrid: React.FC<PatientsGridType> = ({ setOpenAdd }) => {
+  const navigate = useNavigate();
   const { loading, data } = useQuery(GET_PATIENTS)
+  const { setContextPatient } = useContext(PatientContext)
   const [deletePatient] = useMutation(DELETE_PATIENT)
   const [updatePatient] = useMutation(UPDATE_PATIENT)
   const [open, setOpen] = useState(false)
+
   const clinicId = window.sessionStorage.getItem("clinicId")
+
   const [selectedPatient, setSelectedPatient] = useState<PatientType>()
+  const [patients, setPatients] = useState(data?.getPatients)
+  const [searchingName, setSearchingName] = useState('')
+
+  useEffect(() => {
+    setPatients(data?.getPatients)
+  }, [data])
 
   const [firstname, setFirstname] = useState('')
   const [lastname, setLastname] = useState('')
@@ -46,6 +61,14 @@ export const PatientsGrid = () => {
 
     deletePatient({ variables: variables })
     setOpen(false)
+  }
+
+  const handleSearchChange = (e: any) => {
+    setSearchingName(e.target.value);
+
+    let newArray = data && data.getPatients.filter((patient: PatientType) => patient.firstName.toLowerCase().includes(e.target.value))
+
+    setPatients(newArray)
   }
 
   const UpdatePatient = () => {
@@ -71,15 +94,28 @@ export const PatientsGrid = () => {
     setSelectedPatient(row)
     setOpen(true)
   }
-  
-  const navigate = useNavigate();
+
+  const navigatePatientHistory = (val: any) => {
+    setContextPatient(val.row)
+    navigate(`/patient-history/${val.id}`)
+  }
 
   const columns = [
     {
-      field: '_id', width: 150,
-      renderCell: (e: any) => {
-        return <div onClick={() => navigate(`/chart/${e.id}`)}>{e.id}</div>;
-      }
+      field: "Дэлгэрэнгүй",
+      width: 100,
+      renderCell: (cellValue: any) => {
+        return (
+          <Button
+            variant="contained"
+            color="primary"
+            size='small'
+            onClick={() => navigatePatientHistory(cellValue)}
+          >
+            -
+          </Button>
+        );
+      },
     },
     { field: 'firstName', headerName: 'Өвчтөний нэр', width: 150 },
     { field: 'lastName', headerName: 'Өвчтөний Овог', width: 150 },
@@ -109,10 +145,22 @@ export const PatientsGrid = () => {
   return (
     <Box>
       {loading && <Loading />}
+      <Box sx={{
+        display: 'flex',
+        flexDirection: 'row',
+        width: '100%',
+        height: 60,
+        justifyContent: 'space-between',
+        alignItems: 'center'
+      }}>
+        <TextField value={searchingName} onChange={handleSearchChange} placeholder='Нэрээр хайх' size='small'/>
+        <Button onClick={() => setOpenAdd(true)} variant='outlined' size='small' sx={{ height: 40 }}>Өвчтөн нэмэх</Button>
+      </Box>
+
       <DataGrid
-        sx={{ height: 640, width: '80vw' }}
+        sx={{ height: 640, width: '100%' }}
         getRowId={(row) => row._id}
-        rows={data ? data.getPatients : []}
+        rows={patients ? patients : []}
         columns={columns}
         pageSize={10}
         disableSelectionOnClick
