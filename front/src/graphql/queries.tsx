@@ -138,3 +138,22 @@ export const GetAppointments = gql`
   }
 }
 `
+export const GET_PATIENT_HISTORIES = gql`
+  query Query($clinicId: String) {
+    getPatientHistories(clinicId: $clinicId) {
+      note
+      serviceId {
+        serviceCode
+        serviceName
+      }
+      patientId {
+        firstName
+        mobileNumber
+      }
+      appointmentId {
+        startDate
+        endDate
+      }
+    }
+  }
+`
