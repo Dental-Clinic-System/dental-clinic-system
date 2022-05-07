@@ -5,14 +5,13 @@ import { useLazyQuery } from "@apollo/client";
 import { FIND_PATIENT } from '../graphql/queries';
 import auth from '@react-native-firebase/auth'
 
-const Login = () => {
+const Login = ({ navigation }: any) => {
     const [number, setNumber] = useState('')
     const [login] = useLazyQuery(FIND_PATIENT)
     const [step, setStep] = useState(1)
     const [confirmation, setConfirmation] = useState<any>()
     const [code, setCode] = useState('')
     const [error, setError] = useState('')
-    const [user, setUser] = useState<any>()
     const isDarkMode = useColorScheme() === 'dark';
     const backgroundStyle = {
         backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
@@ -27,8 +26,6 @@ const Login = () => {
                 }
             })
             if (data?.findPatient) {
-                // const confirmation = await auth().signInWithPhoneNumber(number);
-                // setConfirmation(confirmation);
                 const confirm = await auth().signInWithPhoneNumber(`+976${number}`)
                 setConfirmation(confirm)
                 setStep(2)
@@ -40,19 +37,17 @@ const Login = () => {
         }
     }
     const ConfirmCode = async () => {
-        const { user } = await confirmation.confirm(code)
-        // const credential = auth.PhoneAuthProvider.credential(confirmation.verificationId, code)
-        // let userData = await auth().currentUser?.linkWithCr\edential(credential)
-        setUser(user)
-        console.log(user.uid)
-        setError(user.uid)
+        confirmation.confirm(code).then(() => {
+            navigation.navigate("Home")
+        }).catch((error: any) => {
+            console.log(error)
+            if (error = '[Error: [auth/code-expired] The SMS code has expired. Please re-send the verification code to try again.]') { 
+                setError('sms code buruu baina')
+            }
+        });
     }
-    console.log(user?.uid)
-
     return (
-        <SafeAreaView
-            style={backgroundStyle}
-        >
+        <SafeAreaView style={backgroundStyle}>
             <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
             <View style={[styles.container]}>
                 {
