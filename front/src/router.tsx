@@ -8,7 +8,7 @@ import {
   PatientScreen,
   Appointment,
   Dashboard,
-  PatientHistoriesScreen,
+  PatientHistoryScreen,
   LogIn,
 } from "./pages";
 import { Services } from "./pages/services";
@@ -53,8 +53,8 @@ const router: RouteObject[] = [
     element: <PatientScreen />,
   },
   {
-    path: "/patient-histories",
-    element: <PatientHistoriesScreen />,
+    path: "/patient-history/:id/",
+    element: <PatientHistoryScreen />,
   },
   {
     path: "/chart/:id",

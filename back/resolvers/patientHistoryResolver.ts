@@ -35,8 +35,7 @@ const getPatientHistories = async (_: any, params: any) => {
     .populate("clinicId").lean()
     .populate("patientId").lean()
     .populate("serviceId").lean()
-
-    console.log(patientHistory)
+    .populate("appointmentId").lean()
     return patientHistory;
 };
 

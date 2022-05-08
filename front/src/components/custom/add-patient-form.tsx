@@ -6,7 +6,7 @@ import { PatientSchema } from '../../helper/validations';
 import { WarningBox } from './warning-box';
 import { PATIENT_FORM } from '../../helper/constants';
 
-type MyInputType = {
+type InputType = {
     field: {
         name: 'firstName' | 'lastName' | 'email' | 'age' | 'registrationNumber' | 'mobileNumber' | 'gender' | 'birthdate' | 'cardNumber'
     }
@@ -17,7 +17,7 @@ export const AddPatientForm = ({ setOpen }: any) => {
     const [addPatient] = useMutation(ADD_PATIENT)
     const clinicId = window.sessionStorage.getItem("clinicId")
 
-    const MyInput = ({ field, form: { errors } }: MyInputType) => {
+    const Input = ({ field, form: { errors } }: InputType) => {
         let name = field.name
 
         return (
@@ -36,6 +36,8 @@ export const AddPatientForm = ({ setOpen }: any) => {
             </Box>
         )
     }
+
+
 
     return (
         <Formik
@@ -65,15 +67,15 @@ export const AddPatientForm = ({ setOpen }: any) => {
                 justifyContent: 'space-evenly',
                 alignItems: 'center'
             }}>
-                <Field name='firstName' component={MyInput} />
-                <Field name='lastName' component={MyInput} />
-                <Field name='email' component={MyInput} />
-                <Field name='age' component={MyInput} />
-                <Field name='registrationNumber' component={MyInput} />
-                <Field name='mobileNumber' component={MyInput} />
-                <Field name='gender' component={MyInput} />
-                <Field name='birthdate' component={MyInput} />
-                <Field name='cardNumber' component={MyInput} />
+                <Field name='firstName' component={Input} />
+                <Field name='lastName' component={Input} />
+                <Field name='email' component={Input} />
+                <Field name='age' component={Input} />
+                <Field name='registrationNumber' component={Input} />
+                <Field name='mobileNumber' component={Input} />
+                <Field name='gender' component={Input} />
+                <Field name='birthdate' component={Input} />
+                <Field name='cardNumber' component={Input} />
                 <Button type='submit' variant='outlined'>
                     Өвчтөн нэмэх
                 </Button>

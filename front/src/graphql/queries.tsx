@@ -59,24 +59,31 @@ export const GET_CLINICS = gql`
 `;
 
 export const GET_PATIENT_HISTORY = gql`
-query Query($clinicId: String, $patientId: String) {
-  getPatientHistories(clinicId: $clinicId, patientId: $patientId) {
+query GetPatientHistories($patientId: String, $clinicId: String) {
+  getPatientHistories(patientId: $patientId, clinicId: $clinicId) {
     _id
     clinicId {
       title
+    }
+    patientId {
+      _id
+      cardNumber
     }
     serviceId {
       serviceName
       _id
     }
+    toothId
+    toothSides
     note
     toReport
-    patientId {
-      _id
-      age
-    }
     appointmentId {
+      _id
       title
+      endDate
+      notes
+      status
+      startDate
     }
   }
 }
@@ -88,6 +95,26 @@ export const GET_PATIENTS_BRIEFLY = gql`
     _id
     firstName
     lastName
+    cardNumber
+  }
+}
+`;
+
+export const GET_PATIENT = gql`
+query GetPatient($id: String) {
+  getPatient(_id: $id) {
+    _id
+    clinicId {
+      title
+    }
+    firstName
+    lastName
+    mobileNumber
+    registrationNumber
+    email
+    gender
+    age
+    birthdate
     cardNumber
   }
 }

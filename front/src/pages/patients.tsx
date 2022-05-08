@@ -8,9 +8,7 @@ export const PatientScreen = () => {
 
     return (
         <Box>
-            <Button onClick={() => setOpenAdd(true)} variant='outlined'>Өвчтөн нэмэх</Button>
-
-            <PatientsGrid />
+            <PatientsGrid setOpenAdd={setOpenAdd}/>
 
             <CreateModal open={openAdd} setOpen={setOpenAdd} addButtonName={'Өвчтөн нэмэх'} showButton={false}>
                 <AddPatientForm setOpen={setOpenAdd}/>
