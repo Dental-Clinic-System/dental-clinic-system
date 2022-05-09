@@ -7,7 +7,7 @@ type Service {
   description: String
 }
 type Query {
-  getService(clinicId: String, _id: String): Service
+  getService(clinicId: String, _id: String, serviceCode: String): Service
   getServices(clinicId: String): [Service]
 }
 type Mutation {

@@ -1,26 +1,18 @@
-import { useState, useContext, useEffect } from 'react'
-import { Loading, PatientHistoryGrid } from "../components"
-import { useParams } from 'react-router'
-import { Box, TextField } from '@mui/material'
-import { useQuery } from '@apollo/client'
-import { GET_PATIENTS_BRIEFLY, GET_PATIENT } from '../graphql'
-import { SmallDataGridHeight } from '../helper/constants'
-import DentalChart from '../components/custom/dentalChart'
-import { DefaultModal } from '../components/common'
-import { PatientContext } from '../providers'
-import { PATIENT_FORM } from '../helper/constants'
-import { useNavigate } from "react-router"
+import { useMutation, useQuery } from '@apollo/client';
+import { Box, Button, FormControl, Select, TextField } from '@mui/material';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import { useContext, useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router';
+import { Loading, PatientHistoryGrid } from "../components";
+import { DefaultModal } from '../components/common';
+import DentalChart from '../components/custom/dentalChart';
+import { ADD_PATIENT_HISTORY, GetAppointments, GET_PATIENT, GET_PATIENTS_BRIEFLY, GET_SERVICES } from '../graphql';
+import { PATIENT_FORM, SmallDataGridHeight } from '../helper/constants';
+import { PatientContext } from '../providers';
 import {
-    containerStyle,
-    searchListStyle,
-    textStyle,
-    textFormCellStyle,
-    patientInfoStyle,
-    innerContainterStyle,
-    searchModalStyle,
-    searchModalCellStyle,
-    searchPatientStyle
-} from '../styles/patient-history-style'
+    containerStyle, innerContainterStyle, patientInfoStyle, searchListStyle, searchModalCellStyle, searchModalStyle, searchPatientStyle, textFormCellStyle, textStyle
+} from '../styles/patient-history-style';
 
 type PatientType = {
     cardNumber: string;
@@ -34,7 +26,14 @@ export const PatientHistoryScreen = () => {
     const { contextPatient, setContextPatient } = useContext(PatientContext)
     const { id = '' } = useParams();
     const clinicId = window.sessionStorage.getItem("clinicId")
-
+    const [toothId, setToothId] = useState('')
+    const [AddHistory] = useMutation(ADD_PATIENT_HISTORY)
+    const { data: GetAppointmentsData } = useQuery(GetAppointments, {
+        variables: {
+            clinicId: clinicId,
+            patientId: id
+        },
+    });
     const { data: patientData } = useQuery(GET_PATIENT, {
         variables: {
             id: id
@@ -47,9 +46,29 @@ export const PatientHistoryScreen = () => {
         }
     })
 
+    const { data: services } = useQuery(GET_SERVICES, {
+        variables: {
+            clinicId: clinicId
+        }
+    })
+
+    const ToothHandler = (event: any) => {
+        console.log(event)
+        let element = event.path[0]
+        setToothId(element.id)
+    }
+    console.log('services:', services)
     useEffect(() => {
         patientData && setContextPatient(patientData?.getPatient)
     }, [patientData])
+
+    useEffect(() => {
+        const toothsArray: any = document.getElementsByClassName('Tooth')
+        for (const ToothSide of toothsArray) {
+            ToothSide.onclick = (event: any) => ToothHandler(event)
+        }
+    }, [])
+
 
     const { firstName, lastName, age, birthdate, cardNumber, email, gender, mobileNumber, registrationNumber } = contextPatient;
 
@@ -58,7 +77,9 @@ export const PatientHistoryScreen = () => {
     const [searchingName, setSearchingName] = useState<string>(firstName)
     const [open, setOpen] = useState<boolean>(false)
     const [selectedPatient, setSelectedPatient] = useState<string>(id)
-
+    const [note, setNote] = useState<string>("")
+    const [appointmentID, setAppointmentID] = useState<string>("")
+    const [serviceID, setServiceID] = useState<String>("")
     const handleChange = (e: any) => {
         setSearchingName(e.target.value);
 
@@ -74,6 +95,33 @@ export const PatientHistoryScreen = () => {
         setOpen(false)
         setRecommendedPatients([])
         navigate(`/patient-history/${id}`)
+    }
+
+    const addHistory = async () => {
+        if(toothId && note && appointmentID && serviceID) {
+            const resp = await AddHistory({
+                variables: {
+                    patientId: id,
+                    clinicId: clinicId,
+                    appointmentId: appointmentID,
+                    serviceId: serviceID,
+                    note: note,
+                    toReport: "true",
+                    status: "pending",
+                    toothId: toothId
+                }
+            })
+            if(resp?.data) {
+                alert('Success')
+                setToothId('')
+                setNote('')
+            } else {
+                alert(resp?.errors)
+                console.log(resp?.errors)
+            }
+        } else {
+            alert('fill required field !')
+        }
     }
 
     return (
@@ -150,7 +198,66 @@ export const PatientHistoryScreen = () => {
                         })}
                     </Box>
                 </DefaultModal>
-                <DentalChart />
+                <Box>
+                    <DentalChart />
+                    <Box sx={innerContainterStyle}>
+                        <Box sx={{ display: 'flex', flexDirection: 'column', height: '400px' }}>
+                            <Box sx={patientInfoStyle}>
+                                <Box sx={textFormCellStyle}>
+                                    <Box sx={textStyle}>ToothId:</Box>
+                                    <TextField disabled size='small' placeholder={'Tooth ID'} value={toothId} />
+                                </Box>
+                                <Box sx={textFormCellStyle}>
+                                    <Box sx={textStyle}>Note</Box>
+                                    <TextField size='small' onChange={(e) => setNote(e.target.value)} value={note} placeholder={'Note'} />
+                                </Box>
+                                <Box sx={textFormCellStyle}>
+                                    <Box sx={textStyle}>service:</Box>
+                                    <FormControl sx={{ width: '195px' }}>
+                                        <InputLabel id="demo-simple-select-helper-label">Service</InputLabel>
+                                        <Select
+                                            labelId="demo-simple-select-helper-label"
+                                            id="demo-simple-select-helper"
+                                            value={age}
+                                            label="Age"
+                                            onChange={(e) => setServiceID(e.target.value)}
+                                        >
+                                            {
+                                                services?.getServices?.map((service: any) => {
+                                                    return (
+                                                        <MenuItem value={service._id}>{service.serviceName}</MenuItem>
+                                                    )
+                                                })
+                                            }
+                                        </Select>
+                                    </FormControl>
+                                </Box>
+                                <Box sx={textFormCellStyle}>
+                                    <Box sx={textStyle}>appointment:</Box>
+                                    <FormControl sx={{ width: '195px' }}>
+                                        <InputLabel id="demo-simple-select-helper-label">Time</InputLabel>
+                                        <Select
+                                            labelId="demo-simple-select-helper-label"
+                                            id="demo-simple-select-helper"
+                                            value={age}
+                                            label="Age"
+                                            onChange={(e) => setAppointmentID(e.target.value)}
+                                        >
+                                            {
+                                                GetAppointmentsData?.getAppointments.map((appointment: any) => {
+                                                    return (
+                                                        <MenuItem value={appointment._id}>{appointment.title}</MenuItem>
+                                                    )
+                                                })
+                                            }
+                                        </Select>
+                                    </FormControl>
+                                </Box>
+                                <Button onClick={addHistory} >ADD History</Button>
+                            </Box>
+                        </Box>
+                    </Box>
+                </Box>
             </Box>
 
             <PatientHistoryGrid id={selectedPatient} />
