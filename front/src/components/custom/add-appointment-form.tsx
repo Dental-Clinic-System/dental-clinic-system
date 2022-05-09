@@ -1,11 +1,11 @@
 import { DateTimePicker, LocalizationProvider } from "@mui/lab"
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { Box, Button, FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/material"
-import { useState } from "react"
+import { Autocomplete, Box, Button, FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/material"
+import { useEffect, useState } from "react"
 import { useMutation } from "@apollo/client";
 import { ADD_APPOINTMENT, DELETE_APPOINTMENT, UPDATE_APPOINTMENT } from "../../graphql";
 
-export const AddAppointmentForm = ({ data, setOpen, staffs, buttonLabel, showDelete, setData }: any) => {
+export const AddAppointmentForm = ({ data, setOpen, staffs, buttonLabel, showDelete, setData, patients }: any) => {
     const [AddAppointment] = useMutation(ADD_APPOINTMENT)
     const [UpdateAppointment] = useMutation(UPDATE_APPOINTMENT)
     const [DeleteAppointment] = useMutation(DELETE_APPOINTMENT)
@@ -15,7 +15,15 @@ export const AddAppointmentForm = ({ data, setOpen, staffs, buttonLabel, showDel
     const [staff, setStaff] = useState(data ? data.staffId : staffs[0].id)
     const [startTime, setStartTime] = useState(data && data.startDate)
     const [endTime, setEndTime] = useState(data && data.endDate)
-    const [patient, setPatient] = useState(data && data.patientId)
+    const [patient, setPatient] = useState({text: '', _id: ''})
+
+    useEffect(() => {
+        console.log(data, patients)
+        if (data && patients) {
+            let pat = patients.find((e: any) => e.id == data.patientId)
+            setPatient(pat)
+        }
+    }, [data, patients])
 
     const change = () => {
         let changed = {
@@ -24,7 +32,7 @@ export const AddAppointmentForm = ({ data, setOpen, staffs, buttonLabel, showDel
             staffId: staff,
             startDate: startTime,
             endDate: endTime,
-            patientId: patient,
+            patientId: patient._id,
         }
 
         setData((e: any) => {
@@ -32,7 +40,6 @@ export const AddAppointmentForm = ({ data, setOpen, staffs, buttonLabel, showDel
 
             tempdata = tempdata.map((appointment: any) => {
                 if (appointment.id == data.id) {
-                    console.log('dasd')
                     UpdateAppointment({ variables: { ...changed, id: appointment.id } })
                     return { ...appointment, ...changed }
                 } else {
@@ -93,7 +100,28 @@ export const AddAppointmentForm = ({ data, setOpen, staffs, buttonLabel, showDel
                         ))}
                     </Select>
                 </FormControl>
-                <TextField required sx={{ marginBottom: '20px', width: '100%' }} label='Өвчтөн' size='small' value={patient} onChange={(e) => setPatient(e.target.value)} />
+                <Autocomplete
+                    value={patient}
+                    onChange={(event, newValue) => {
+                        if (typeof newValue === 'string') {
+                            setPatient({
+                                text: newValue,
+                                _id: patients.find((e: any) => e.lastName + ' ' + e.firstName == newValue)
+                            })
+                        } else if (newValue && newValue.text) {
+                            setPatient(newValue)
+                        }
+                    }}
+                    getOptionLabel={(option) => {
+                        return option.text;
+                    }}
+                    selectOnFocus
+                    options={patients}
+                    renderOption={(props, option) => <li {...props}>{option.text}</li>}
+                    renderInput={(params) => (
+                        <TextField sx={{ marginBottom: '20px', width: '100%' }} {...params} size='small' label="Өвчтөн" />
+                    )}
+                />
                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                     <DateTimePicker
                         label='Эхлэх цаг'
