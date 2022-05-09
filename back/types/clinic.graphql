@@ -8,6 +8,7 @@ type Clinic {
   title:String,
   email:String,
   contact_number:String,
+  clinic_name: String
 }
 type Mutation {
   addClinic(
@@ -18,6 +19,7 @@ type Mutation {
     title:String,
     email:String,
     contact_number:String,
+    clinic_name: String,
   ): Clinic
   deleteClinic(_id: String): String
   updateClinic (
@@ -29,6 +31,7 @@ type Mutation {
     title:String,
     email:String,
     contact_number:String,
+    clinic_name: String,
   ): Clinic
 }
 type Query {
@@ -41,6 +44,8 @@ type Query {
     title:String,
     email:String,
     contact_number:String,
+    clinic_name: String,
   ): [Clinic]
   getClinic(_id:String): Clinic
+  getClinicByClinicName(clinic_name: String): Clinic
 }

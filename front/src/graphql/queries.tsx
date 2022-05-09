@@ -2,19 +2,19 @@ import { gql } from "@apollo/client";
 
 export const GET_PATIENTS = gql`
   query GetPatients {
-  getPatients {
-    _id
-    firstName
-    lastName
-    registrationNumber
-    mobileNumber
-    email
-    gender
-    age
-    birthdate
-    cardNumber
+    getPatients {
+      _id
+      firstName
+      lastName
+      registrationNumber
+      mobileNumber
+      email
+      gender
+      age
+      birthdate
+      cardNumber
+    }
   }
-}
 `;
 
 export const GET_SERVICES = gql`
@@ -59,65 +59,65 @@ export const GET_CLINICS = gql`
 `;
 
 export const GET_PATIENT_HISTORY = gql`
-query GetPatientHistories($patientId: String, $clinicId: String) {
-  getPatientHistories(patientId: $patientId, clinicId: $clinicId) {
-    _id
-    clinicId {
-      title
-    }
-    patientId {
+  query GetPatientHistories($patientId: String, $clinicId: String) {
+    getPatientHistories(patientId: $patientId, clinicId: $clinicId) {
       _id
-      cardNumber
-    }
-    serviceId {
-      serviceName
-      _id
-    }
-    toothId
-    toothSides
-    note
-    toReport
-    appointmentId {
-      _id
-      title
-      endDate
-      notes
-      status
-      startDate
+      clinicId {
+        title
+      }
+      patientId {
+        _id
+        cardNumber
+      }
+      serviceId {
+        serviceName
+        _id
+      }
+      toothId
+      toothSides
+      note
+      toReport
+      appointmentId {
+        _id
+        title
+        endDate
+        notes
+        status
+        startDate
+      }
     }
   }
-}
 `;
 
 export const GET_PATIENTS_BRIEFLY = gql`
   query GetPatients($clinicId: String) {
-  getPatients(clinicId: $clinicId) {
-    _id
-    firstName
-    lastName
-    cardNumber
+    getPatients(clinicId: $clinicId) {
+      _id
+      firstName
+      lastName
+      cardNumber
+    }
   }
-}
 `;
 
 export const GET_PATIENT = gql`
-query GetPatient($id: String) {
-  getPatient(_id: $id) {
-    _id
-    clinicId {
-      title
+  query GetPatient($id: String) {
+    getPatient(_id: $id) {
+      _id
+      clinicId {
+        title
+      }
+      firstName
+      lastName
+      mobileNumber
+      registrationNumber
+      email
+      gender
+      age
+      birthdate
+      cardNumber
     }
-    firstName
-    lastName
-    mobileNumber
-    registrationNumber
-    email
-    gender
-    age
-    birthdate
-    cardNumber
   }
-}
 `;
 
 export const LOGIN = gql`
@@ -147,21 +147,21 @@ export const GET_STAFFS = gql`
   }
 `;
 export const GetAppointments = gql`
-query GetAppointments($clinicId: String, $patientId: String) {
-  getAppointments(clinicId: $clinicId, patientId: $patientId) {
-    _id
-    patientId
-    serviceId
-    startDate
-    title
-    endDate
-    notes
-    status
-    staffId
-    clinicId
+  query GetAppointments($clinicId: String, $patientId: String) {
+    getAppointments(clinicId: $clinicId, patientId: $patientId) {
+      _id
+      patientId
+      serviceId
+      startDate
+      title
+      endDate
+      notes
+      status
+      staffId
+      clinicId
+    }
   }
-}
-`
+`;
 export const GET_PATIENT_HISTORIES = gql`
   query Query($clinicId: String) {
     getPatientHistories(clinicId: $clinicId) {
@@ -180,4 +180,19 @@ export const GET_PATIENT_HISTORIES = gql`
       }
     }
   }
-`
+`;
+
+export const GET_CLINIC_BY_TITLE = gql`
+  query Query($clinic_name: String) {
+    getClinicByClinicName(clinic_name: $clinic_name) {
+      title
+      _id
+      address
+      district
+      khoroo
+      status
+      email
+      contact_number
+    }
+  }
+`;

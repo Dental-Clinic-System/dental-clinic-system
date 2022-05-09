@@ -11,13 +11,12 @@ import {
   Typography,
 } from "@mui/material";
 import { makeStyles } from "@material-ui/core";
-import { useNavigate, useParams } from "react-router";
+import { useNavigate } from "react-router";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import { useLazyQuery } from "@apollo/client";
+import { useLazyQuery, useQuery } from "@apollo/client";
 import { IError, ILogin } from "../interfaces/ILogin";
-import { LOGIN } from "../graphql";
+import { GET_CLINIC_BY_TITLE, LOGIN } from "../graphql";
 import { useAuth } from "../providers/AuthProvider";
-import { LegendToggleTwoTone } from "@mui/icons-material";
 
 const useStyles = makeStyles({
   paperContainer: {
@@ -40,10 +39,14 @@ const useStyles = makeStyles({
 });
 
 export const LogIn = () => {
-  let { id } = useParams();
-  if (!id) id = window.location.pathname.substring(1);
+  const clinic_name = window.location.hostname.split(".")[0] || "";
+
+  const { data } = useQuery(GET_CLINIC_BY_TITLE, {
+    variables: { clinic_name: clinic_name },
+  });
+  const { getClinicByClinicName } = data || {};
+
   const styles = useStyles();
-  console.log("clinicId: ", id);
   const navigate = useNavigate();
 
   const [error, setError] = useState<IError>({
@@ -59,10 +62,17 @@ export const LogIn = () => {
   // const { signin } = useAuth();
 
   const handleSubmit = async () => {
-    console.log({ clinicId: id, email: info.email, password: info.password });
+    console.log({
+      clinicId: getClinicByClinicName._id,
+      email: info.email,
+      password: info.password,
+    });
     const { data, error: loginError } = await login({
       variables: {
-        clinicId: (info.email !== 'superadmin@gmail.com') ? id : "999fca30c1cf951c042bd5ec",
+        clinicId:
+          info.email !== "superadmin@gmail.com"
+            ? getClinicByClinicName._id
+            : "999fca30c1cf951c042bd5ec",
         email: info.email,
         password: info.password,
       },
@@ -81,7 +91,7 @@ export const LogIn = () => {
         window.sessionStorage.setItem("clinicTitle", clinic?.title);
 
         alert(`successfully logged in by: ${info.email}`);
-        navigate("/625fca30c1cf951c042bd5ec");
+        navigate("/");
       }
     }
   };
@@ -95,7 +105,9 @@ export const LogIn = () => {
         </Avatar>
 
         <Typography component="h1" variant="h5">
-          Нэвтрэх
+          {getClinicByClinicName
+            ? `${getClinicByClinicName.title} -т Нэвтрэх`
+            : "Бүртгэлтэй эмнэлэг олдсонгүй!!!"}
         </Typography>
 
         <Box sx={{ mt: 1 }}>
