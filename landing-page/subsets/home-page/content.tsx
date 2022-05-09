@@ -2,29 +2,33 @@ import React from 'react';
 import { Box, Grid, Button } from '@mui/material';
 import { useState } from 'react';
 import { QuestionSection } from './question-section';
-import { ADDCLINIC } from '../../graphql';
+import { ADD_CLINIC } from '../../graphql';
 import { useMutation } from '@apollo/client';
 import { SnackBar, SnackBatTypeParam } from '../../components/';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { LeftSide } from './';
 
-const validationSchema = Yup.object().shape({
-  title: Yup.string().max(50).required('Clinic name is required'),
-  email: Yup.string().max(50).email('Not a valid email').required('Email is required'),
+const ClinicSchema = Yup.object().shape({
+  title: Yup.string()
+    .min(2, 'Хэт богино')
+    .max(50, 'Хэт урт')
+    .required('Эмнэлгийн нэр шаардлагатай'),
+  email: Yup.string().email('Буруу имэйл').required('Имэйл шаардлагатай'),
   contact_number: Yup.string()
     .min(8)
-    .max(11)
-    .required('contact number is required ')
-    .matches(/^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/),
-  city: Yup.string().required('Please enter a city name'),
-  district: Yup.string().required('Please enter a district name'),
-  khoroo: Yup.string().required('Please enter a sub district'),
-  address: Yup.string().max(200).required('Please enter a full address'),
+    .max(8)
+    .required('Утасны дугаар шаардлагатай'),
+  district: Yup.string().required('Дүүрэг сонгоно уу'),
+  khoroo: Yup.string().required('Хороо сонгоно уу'),
+  address: Yup.string()
+    .min(10, 'Хэт богино')
+    .max(200, 'Хэт урт')
+    .required('Дэлгэрэнгүй хаяг оруулна уу'),
 });
 
 const RightSide = () => {
-  const [AddClinic] = useMutation(ADDCLINIC);
+  const [addClinic] = useMutation(ADD_CLINIC);
   const [snackBar, setSnackBar] = useState<SnackBatTypeParam>({ open: false, message: '', severity: 'info' });
 
   const formik = useFormik({
@@ -36,12 +40,11 @@ const RightSide = () => {
       khoroo: '',
       address: '',
     },
-    validationSchema: validationSchema,
+    validationSchema: ClinicSchema,
     onSubmit: async (values) => {
       setSnackBar({ message: 'Хүсэлт илгээж байна.', open: true, severity: 'info' });
       try {
-        await AddClinic({ variables: values });
-
+        await addClinic({ variables: values });
         setSnackBar({ message: 'Таны хүсэлтийг хүлээж авлаа.', open: true, severity: 'success' });
       } catch (error) {
         console.log(error);
@@ -69,16 +72,6 @@ const RightSide = () => {
                   onChange: formik.handleChange,
                 },
                 {
-                  id: 'contact_number',
-                  question: 'Холбоо барих утас',
-                  type: 'input',
-                  grid: { xs: 12 },
-                  error: Boolean(formik.errors.contact_number),
-                  helperText: '',
-                  value: formik.values.contact_number,
-                  onChange: formik.handleChange,
-                },
-                {
                   id: 'email',
                   question: 'Имэйл хаяг',
                   type: 'input',
@@ -86,6 +79,16 @@ const RightSide = () => {
                   error: Boolean(formik.errors.email),
                   helperText: '',
                   value: formik.values.email,
+                  onChange: formik.handleChange,
+                },
+                {
+                  id: 'contact_number',
+                  question: 'Холбоо барих утас',
+                  type: 'input',
+                  grid: { xs: 12 },
+                  error: Boolean(formik.errors.contact_number),
+                  helperText: '',
+                  value: formik.values.contact_number,
                   onChange: formik.handleChange,
                 },
               ]}
@@ -134,7 +137,7 @@ const RightSide = () => {
 
           <Grid item container xs={8} justifyContent="flex-end">
             <Grid item xs={4}>
-              <Button fullWidth variant="contained" type="submit">
+              <Button fullWidth type="submit" variant="contained">
                 Илгээх
               </Button>
             </Grid>

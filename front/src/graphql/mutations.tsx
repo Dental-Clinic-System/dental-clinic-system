@@ -60,7 +60,7 @@ export const ADD_CLINIC = gql`
       contact_number: $contact_number
       district: $district
       khoroo: $khoroo
-      adress: $address
+      address: $address
       status: $status
     ) {
       _id

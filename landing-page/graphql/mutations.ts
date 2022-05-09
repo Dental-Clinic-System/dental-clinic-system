@@ -1,41 +1,32 @@
 import { gql } from '@apollo/client';
 
-export const ADDCLINIC = gql`
+export const ADD_CLINIC = gql`
   mutation AddClinic(
     $title: String
-    $contact_number: String
     $email: String
+    $contact_number: String
     $district: String
     $khoroo: String
     $address: String
+    $status: String
   ) {
     addClinic(
       title: $title
-      contact_number: $contact_number
       email: $email
-      district: $district 
-      khoroo: $khoroo 
-      address: $address 
+      contact_number: $contact_number
+      district: $district
+      khoroo: $khoroo
+      address: $address
+      status: $status
     ) {
       _id
       title
-      operation_name
-      operation_date
-      contact_number
-      clinic_web
       email
+      contact_number
       district
       khoroo
       address
       status
-      clinic_admin {
-        admin_number
-        admin_email
-        admin_name
-        position
-      }
-      workhours
-      contact_number
     }
   }
 `;
