@@ -12,13 +12,13 @@ import { Edit } from '@mui/icons-material';
 import { Button, IconButton, Paper } from "@mui/material";
 import { useEffect, useState } from "react";
 import { AddAppointmentForm, CreateModal } from '../components/index';
-import { GetAppointments, GET_STAFFS } from "../graphql/queries";
-
+import { GetAppointments, GET_STAFFS, GET_PATIENTS } from "../graphql/queries";
 
 export const Appointment = () => {
   const [appointments, setAppointments] = useState([{}]);
-  const { loading, error, data } = useQuery(GetAppointments, { variables: { clinicId: "625fca30c1cf951c042bd5ec" } });
-  const { loading: sLoading, error: sError, data: sData } = useQuery(GET_STAFFS, { variables: { type: 'doctor', clinicId: sessionStorage.getItem('clinicId') } });
+  const { data } = useQuery(GetAppointments, { variables: { clinicId: "625fca30c1cf951c042bd5ec" } });
+  const { data: sData } = useQuery(GET_STAFFS, { variables: { type: 'doctor', clinicId: sessionStorage.getItem('clinicId') } });
+  const { data: pData } = useQuery(GET_PATIENTS);
   const [doctors, setDoctors] = useState([{}]);
   const [patients, setPatients] = useState([{}])
   const [tooltip, setTooltip] = useState(false)
@@ -56,17 +56,26 @@ export const Appointment = () => {
           id: e._id,
         }
         formattedData.push(temp)
-
-        if (!tempPatient.includes({ id: e.patientId, text: e.patientId })) {
-          tempPatient.push({ id: e.patientId, text: e.patientId })
-        }
       })
-      setPatients(tempPatient)
       setAppointments(formattedData)
     }
 
+    if (pData) {
+      pData.getPatients?.map((e, i) => {
+        let temp = {
+          ...e,
+          id: e._id,
+          text: e.lastName + ' ' + e.firstName,
+        }
+
+        tempPatient.push(temp)
+      })
+      console.log(tempPatient)
+      setPatients(tempPatient)
+    }
+
     formatStaff()
-  }, [data, sData])
+  }, [data, sData, pData])
 
   const Header = ({ children, appointmentData, ...other }) => {
     const [hOpen, setHOpen] = useState(false)
@@ -83,7 +92,7 @@ export const Appointment = () => {
         </IconButton>
 
         <CreateModal open={hOpen} setOpen={setHOpen} addButtonName='Edit' showButton={false}>
-          <AddAppointmentForm setData={setAppointments} staffs={doctors} showDelete buttonLabel='change' data={appointmentData} setOpen={setHOpenAndTooltip} />
+          <AddAppointmentForm patients={patients} setData={setAppointments} staffs={doctors} showDelete buttonLabel='change' data={appointmentData} setOpen={setHOpenAndTooltip} />
         </CreateModal>
       </AppointmentTooltip.Header>
     )
@@ -99,7 +108,7 @@ export const Appointment = () => {
         Цаг авах
       </Button>
       <CreateModal open={open} setOpen={setOpen} addButtonName='Edit' showButton={false}>
-        <AddAppointmentForm staffs={doctors} buttonLabel='add' setOpen={setOpen} />
+        <AddAppointmentForm patients={patients} staffs={doctors} buttonLabel='add' setOpen={setOpen} />
       </CreateModal>
       <Paper style={{ textAlign: "center", zIndex: '100' }}>
         <Scheduler data={appointments}>
