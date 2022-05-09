@@ -31,8 +31,8 @@ export const GET_SERVICES = gql`
 `;
 
 export const GET_SERVICE = gql`
-  query GetService($clinicId: String, $id: String) {
-    getService(clinicId: $clinicId, _id: $id) {
+  query GetService($serviceCode: String, $id: String, $clinicId: String) {
+    getService(serviceCode: $serviceCode, _id: $id, clinicId: $clinicId) {
       _id
       clinicId
       serviceName
@@ -147,8 +147,8 @@ export const GET_STAFFS = gql`
   }
 `;
 export const GetAppointments = gql`
-  query GetAppointments($clinicId: String) {
-  getAppointments(clinicId: $clinicId) {
+query GetAppointments($clinicId: String, $patientId: String) {
+  getAppointments(clinicId: $clinicId, patientId: $patientId) {
     _id
     patientId
     serviceId
