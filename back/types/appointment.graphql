@@ -23,8 +23,8 @@ type Appointment {
 }
 
 type Query {
-  getAppointment(clinicId: String, _id: String): Appointment
-  getAppointments(clinicId: String): [Appointment]
+  getAppointment(clinicId: String, _id: String, patientId: String): Appointment
+  getAppointments(clinicId: String, patientId: String): [Appointment]
 }
 
 type Mutation {

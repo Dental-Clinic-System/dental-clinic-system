@@ -81,7 +81,7 @@ type teethType = {
 const Teeth = (id: teethType) => {
     return (
         <Box>
-            <img src={`./teeth/fullImage-buccal/buccal-${id}.png`} height="80" width="30" ></img>
+            <img className="Tooth" src={`./teeth/fullImage-buccal/buccal-${id}.png`} height="80" width="30" ></img>
         </Box>
     )
 };
@@ -98,95 +98,95 @@ export const DentalChart = () => {
                         <Stack direction="row" spacing={0.1}>
                             <Stack direction="column">
                                 <Box>
-                                    <img src={teeth18} id={"18"} height="80" width="30"></img>
+                                    <img className="Tooth" src={teeth18} id={"18"} height="80" width="30"></img>
                                 </Box>
 
                                 <Box>
-                                    <img src={incisal18} id={"18"} height="40" width="30"></img>
+                                    <img className="Tooth" src={incisal18} id={"18"} height="40" width="30"></img>
                                 </Box>
                                 18
                             </Stack>
 
                             <Stack direction="column">
                                 <Box>
-                                    <img src={teeth17} id={"17"} height="80" width="30"></img>
+                                    <img className="Tooth" src={teeth17} id={"17"} height="80" width="30"></img>
 
                                 </Box>
 
                                 <Box>
-                                    <img src={incisal17} id={"17"} height="40" width="30"></img>
+                                    <img className="Tooth" src={incisal17} id={"17"} height="40" width="30"></img>
                                 </Box>
                                 17
                             </Stack>
 
                             <Stack direction="column">
                                 <Box>
-                                    <img src={teeth16} id={"16"} height="80" width="30"></img>
+                                    <img className="Tooth" src={teeth16} id={"16"} height="80" width="30"></img>
 
                                 </Box>
 
                                 <Box>
-                                    <img src={incisal16} id={"16"} height="40" width="30"></img>
+                                    <img className="Tooth" src={incisal16} id={"16"} height="40" width="30"></img>
                                 </Box>
                                 16
                             </Stack>
 
                             <Stack direction="column">
                                 <Box>
-                                    <img src={teeth15} id={"15"} height="80" width="30"></img>
+                                    <img className="Tooth" src={teeth15} id={"15"} height="80" width="30"></img>
 
                                 </Box>
 
                                 <Box>
-                                    <img src={incisal15} id={"15"} height="40" width="30"></img>
+                                    <img className="Tooth" src={incisal15} id={"15"} height="40" width="30"></img>
                                 </Box>
                                 15
                             </Stack>
 
                             <Stack direction="column">
                                 <Box>
-                                    <img src={teeth14} id={"14"} height="80" width="30"></img>
+                                    <img className="Tooth" src={teeth14} id={"14"} height="80" width="30"></img>
 
                                 </Box>
 
                                 <Box>
-                                    <img src={incisal14} id={"14"} height="40" width="30"></img>
+                                    <img className="Tooth" src={incisal14} id={"14"} height="40" width="30"></img>
                                 </Box>
                                 14
                             </Stack>
 
                             <Stack direction="column">
                                 <Box>
-                                    <img src={teeth13} id={"13"} height="80" width="30"></img>
+                                    <img className="Tooth" src={teeth13} id={"13"} height="80" width="30"></img>
 
                                 </Box>
 
                                 <Box>
-                                    <img src={incisal13} id={"13"} height="40" width="30"></img>
+                                    <img className="Tooth" src={incisal13} id={"13"} height="40" width="30"></img>
                                 </Box>
                                 13
                             </Stack>
 
                             <Stack direction="column">
                                 <Box>
-                                    <img src={teeth12} id={"12"} height="80" width="30"></img>
+                                    <img className="Tooth" src={teeth12} id={"12"} height="80" width="30"></img>
 
                                 </Box>
 
                                 <Box>
-                                    <img src={incisal12} id={"12"} height="40" width="30"></img>
+                                    <img className="Tooth" src={incisal12} id={"12"} height="40" width="30"></img>
                                 </Box>
                                 12
                             </Stack>
 
                             <Stack direction="column">
                                 <Box>
-                                    <img src={teeth11} id={"11"} height="80" width="30"></img>
+                                    <img className="Tooth" src={teeth11} id={"11"} height="80" width="30"></img>
 
                                 </Box>
 
                                 <Box>
-                                    <img src={incisal11} id={"11"} height="40" width="30"></img>
+                                    <img className="Tooth" src={incisal11} id={"11"} height="40" width="30"></img>
                                 </Box>
                                 11
                             </Stack>
@@ -198,42 +198,42 @@ export const DentalChart = () => {
                         <Stack direction="row-reverse" spacing={0.1}>
                             <Stack>
                                 <Box>
-                                    <img src={teeth28} id={"28"} height="80" width="30"></img>
+                                    <img className="Tooth" src={teeth28} id={"28"} height="80" width="30"></img>
 
                                 </Box>
                                 <Box>
-                                    <img src={incisal28} id={"28"} height="40" width="30"></img>
+                                    <img className="Tooth" src={incisal28} id={"28"} height="40" width="30"></img>
                                 </Box>
                                 28
                             </Stack>
                             <Stack>
                                 <Box>
-                                    <img src={teeth27} id={"27"} height="80" width="30"></img>
+                                    <img className="Tooth" src={teeth27} id={"27"} height="80" width="30"></img>
 
                                 </Box>
                                 <Box>
-                                    <img src={incisal27} id={"27"} height="40" width="30"></img>
+                                    <img className="Tooth" src={incisal27} id={"27"} height="40" width="30"></img>
                                 </Box>
                                 27
                             </Stack>
                             <Stack>
                                 <Box>
-                                    <img src={teeth26} id={"26"} height="80" width="30"></img>
+                                    <img className="Tooth" src={teeth26} id={"26"} height="80" width="30"></img>
 
                                 </Box>
                                 <Box>
-                                    <img src={incisal26} id={"26"} height="40" width="30"></img>
+                                    <img className="Tooth" src={incisal26} id={"26"} height="40" width="30"></img>
                                 </Box>
                                 26
                             </Stack>
 
                             <Stack>
                                 <Box>
-                                    <img src={teeth25} id={"25"} height="80" width="30"></img>
+                                    <img className="Tooth" src={teeth25} id={"25"} height="80" width="30"></img>
 
                                 </Box>
                                 <Box>
-                                    <img src={incisal25} id={"25"} height="40" width="30"></img>
+                                    <img className="Tooth" src={incisal25} id={"25"} height="40" width="30"></img>
                                 </Box>
                                 25
                             </Stack>
@@ -241,42 +241,42 @@ export const DentalChart = () => {
                             <Stack>
 
                                 <Box>
-                                    <img src={teeth24} id={"24"} height="80" width="30"></img>
+                                    <img className="Tooth" src={teeth24} id={"24"} height="80" width="30"></img>
 
                                 </Box>
                                 <Box>
-                                    <img src={incisal24} id={"24"} height="40" width="30"></img>
+                                    <img className="Tooth" src={incisal24} id={"24"} height="40" width="30"></img>
                                 </Box>
                                 24
                             </Stack>
 
                             <Stack>
                                 <Box>
-                                    <img src={teeth23} id={"23"} height="80" width="30"></img>
+                                    <img className="Tooth" src={teeth23} id={"23"} height="80" width="30"></img>
 
                                 </Box>
                                 <Box>
-                                    <img src={incisal23} id={"23"} height="40" width="30"></img>
+                                    <img className="Tooth" src={incisal23} id={"23"} height="40" width="30"></img>
                                 </Box>
                                 23
                             </Stack>
 
                             <Stack>
                                 <Box>
-                                    <img src={teeth22} id={"22"} height="80" width="30"></img>
+                                    <img className="Tooth" src={teeth22} id={"22"} height="80" width="30"></img>
                                 </Box>
                                 <Box>
-                                    <img src={incisal22} id={"22"} height="40" width="30"></img>
+                                    <img className="Tooth" src={incisal22} id={"22"} height="40" width="30"></img>
                                 </Box>
                                 22
                             </Stack>
 
                             <Stack>
                                 <Box>
-                                    <img src={teeth21} id={"21"} height="80" width="30"></img>
+                                    <img className="Tooth" src={teeth21} id={"21"} height="80" width="30"></img>
                                 </Box>
                                 <Box>
-                                    <img src={incisal21} id={"21"} height="40" width="30"></img>
+                                    <img className="Tooth" src={incisal21} id={"21"} height="40" width="30"></img>
                                 </Box>
                                 21
                             </Stack>
@@ -289,11 +289,11 @@ export const DentalChart = () => {
                                 48
 
                                 <Box>
-                                    <img src={incisal48} id={"48"} height="40" width="30"></img>
+                                    <img className="Tooth" src={incisal48} id={"48"} height="40" width="30"></img>
                                 </Box>
 
                                 <Box>
-                                    <img src={teeth48} id={"48"} height="80" width="30"></img>
+                                    <img className="Tooth" src={teeth48} id={"48"} height="80" width="30"></img>
                                 </Box>
 
 
@@ -303,11 +303,11 @@ export const DentalChart = () => {
                                 47
 
                                 <Box>
-                                    <img src={incisal47} id={"47"} height="40" width="30"></img>
+                                    <img className="Tooth" src={incisal47} id={"47"} height="40" width="30"></img>
                                 </Box>
 
                                 <Box>
-                                    <img src={teeth47} id={"47"} height="80" width="30"></img>
+                                    <img className="Tooth" src={teeth47} id={"47"} height="80" width="30"></img>
                                 </Box>
 
 
@@ -317,11 +317,11 @@ export const DentalChart = () => {
                                 46
 
                                 <Box>
-                                    <img src={incisal46} id={"46"} height="40" width="30"></img>
+                                    <img className="Tooth" src={incisal46} id={"46"} height="40" width="30"></img>
                                 </Box>
 
                                 <Box>
-                                    <img src={teeth46} id={"46"} height="80" width="30"></img>
+                                    <img className="Tooth" src={teeth46} id={"46"} height="80" width="30"></img>
                                 </Box>
 
 
@@ -331,11 +331,11 @@ export const DentalChart = () => {
                                 45
 
                                 <Box>
-                                    <img src={incisal45} id={"45"} height="40" width="30"></img>
+                                    <img className="Tooth" src={incisal45} id={"45"} height="40" width="30"></img>
                                 </Box>
 
                                 <Box>
-                                    <img src={teeth45} id={"45"} height="80" width="30"></img>
+                                    <img className="Tooth" src={teeth45} id={"45"} height="80" width="30"></img>
                                 </Box>
 
 
@@ -347,11 +347,11 @@ export const DentalChart = () => {
 
 
                                 <Box>
-                                    <img src={incisal44} id={"44"} height="40" width="30"></img>
+                                    <img className="Tooth" src={incisal44} id={"44"} height="40" width="30"></img>
                                 </Box>
 
                                 <Box>
-                                    <img src={teeth44} id={"44"} height="80" width="30"></img>
+                                    <img className="Tooth" src={teeth44} id={"44"} height="80" width="30"></img>
                                 </Box>
 
 
@@ -361,11 +361,11 @@ export const DentalChart = () => {
                                 43
 
                                 <Box>
-                                    <img src={incisal41} id={"43"} height="40" width="30"></img>
+                                    <img className="Tooth" src={incisal41} id={"43"} height="40" width="30"></img>
                                 </Box>
 
                                 <Box>
-                                    <img src={teeth41} id={"43"} height="80" width="30"></img>
+                                    <img className="Tooth" src={teeth41} id={"43"} height="80" width="30"></img>
                                 </Box>
 
 
@@ -375,11 +375,11 @@ export const DentalChart = () => {
                                 42
 
                                 <Box>
-                                    <img src={incisal42} id={"42"} height="40" width="30"></img>
+                                    <img className="Tooth" src={incisal42} id={"42"} height="40" width="30"></img>
                                 </Box>
 
                                 <Box>
-                                    <img src={teeth42} id={"42"} height="80" width="30"></img>
+                                    <img className="Tooth" src={teeth42} id={"42"} height="80" width="30"></img>
                                 </Box>
 
 
@@ -390,11 +390,11 @@ export const DentalChart = () => {
                                 41
 
                                 <Box>
-                                    <img src={incisal41} id={"41"} height="40" width="30"></img>
+                                    <img className="Tooth" src={incisal41} id={"41"} height="40" width="30"></img>
                                 </Box>
 
                                 <Box>
-                                    <img src={teeth41} id={"41"} height="80" width="30"></img>
+                                    <img className="Tooth" src={teeth41} id={"41"} height="80" width="30"></img>
                                 </Box>
 
                             </Stack>
@@ -408,11 +408,11 @@ export const DentalChart = () => {
                                 38
 
                                 <Box>
-                                    <img src={incisal38} id={"48"} height="40" width="30"></img>
+                                    <img className="Tooth" src={incisal38} id={"38"} height="40" width="30"></img>
                                 </Box>
 
                                 <Box>
-                                    <img src={teeth38} id={"48"} height="80" width="30"></img>
+                                    <img className="Tooth" src={teeth38} id={"38"} height="80" width="30"></img>
                                 </Box>
 
 
@@ -422,11 +422,11 @@ export const DentalChart = () => {
                                 37
 
                                 <Box>
-                                    <img src={incisal37} id={"47"} height="40" width="30"></img>
+                                    <img className="Tooth" src={incisal37} id={"37"} height="40" width="30"></img>
                                 </Box>
 
                                 <Box>
-                                    <img src={teeth37} id={"47"} height="80" width="30"></img>
+                                    <img className="Tooth" src={teeth37} id={"37"} height="80" width="30"></img>
                                 </Box>
 
 
@@ -436,11 +436,11 @@ export const DentalChart = () => {
                                 36
 
                                 <Box>
-                                    <img src={incisal36} id={"46"} height="40" width="30"></img>
+                                    <img className="Tooth" src={incisal36} id={"36"} height="40" width="30"></img>
                                 </Box>
 
                                 <Box>
-                                    <img src={teeth36} id={"46"} height="80" width="30"></img>
+                                    <img className="Tooth" src={teeth36} id={"36"} height="80" width="30"></img>
                                 </Box>
 
 
@@ -450,11 +450,11 @@ export const DentalChart = () => {
                                 35
 
                                 <Box>
-                                    <img src={incisal35} id={"45"} height="40" width="30"></img>
+                                    <img className="Tooth" src={incisal35} id={"35"} height="40" width="30"></img>
                                 </Box>
 
                                 <Box>
-                                    <img src={teeth35} id={"45"} height="80" width="30"></img>
+                                    <img className="Tooth" src={teeth35} id={"35"} height="80" width="30"></img>
                                 </Box>
 
 
@@ -466,11 +466,11 @@ export const DentalChart = () => {
 
 
                                 <Box>
-                                    <img src={incisal34} id={"44"} height="40" width="30"></img>
+                                    <img className="Tooth" src={incisal34} id={"34"} height="40" width="30"></img>
                                 </Box>
 
                                 <Box>
-                                    <img src={teeth34} id={"44"} height="80" width="30"></img>
+                                    <img className="Tooth" src={teeth34} id={"34"} height="80" width="30"></img>
                                 </Box>
 
 
@@ -480,11 +480,11 @@ export const DentalChart = () => {
                                 33
 
                                 <Box>
-                                    <img src={incisal33} id={"43"} height="40" width="30"></img>
+                                    <img className="Tooth" src={incisal33} id={"33"} height="40" width="30"></img>
                                 </Box>
 
                                 <Box>
-                                    <img src={teeth33} id={"43"} height="80" width="30"></img>
+                                    <img className="Tooth" src={teeth33} id={"33"} height="80" width="30"></img>
                                 </Box>
 
 
@@ -494,11 +494,11 @@ export const DentalChart = () => {
                                 32
 
                                 <Box>
-                                    <img src={incisal32} id={"42"} height="40" width="30"></img>
+                                    <img className="Tooth" src={incisal32} id={"32"} height="40" width="30"></img>
                                 </Box>
 
                                 <Box>
-                                    <img src={teeth32} id={"42"} height="80" width="30"></img>
+                                    <img className="Tooth" src={teeth32} id={"32"} height="80" width="30"></img>
                                 </Box>
 
 
@@ -509,11 +509,11 @@ export const DentalChart = () => {
                                 31
 
                                 <Box>
-                                    <img src={incisal31} id={"31"} height="40" width="30"></img>
+                                    <img className="Tooth" src={incisal31} id={"31"} height="40" width="30"></img>
                                 </Box>
 
                                 <Box>
-                                    <img src={teeth31} id={"31"} height="80" width="30"></img>
+                                    <img className="Tooth" src={teeth31} id={"31"} height="80" width="30"></img>
                                 </Box>
 
                             </Stack>

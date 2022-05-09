@@ -28,10 +28,7 @@ const deleteService = async (_: any, params: any) => {
 };
 
 const getService = async (_: any, params: any) => {
-  const service = await Service.findOne({
-    clinicId: params.clinicId,
-    _id: params._id,
-  });
+  const service = await Service.findOne(params ? {...params} : {});
   return service;
 };
 

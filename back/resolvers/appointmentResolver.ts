@@ -22,9 +22,8 @@ const deleteAppointment = async (_: any, params: any) => {
 };
 
 const getAppointment = async (_: any, params: any) => {
-    const appointment = await AppointmentModel.findOne({
-        _id: params._id,
-    })
+    const appointment = await AppointmentModel
+        .findOne(params ? { ...params } : {})
         .populate("clinicId")
         .lean();
     return appointment;
