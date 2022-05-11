@@ -8,7 +8,7 @@ import { Typography, Box, useTheme, Grid } from "@mui/material";
 import { useQuery } from "@apollo/client";
 import { reduce, map, size } from "lodash";
 import { GetAppointments } from "../../../graphql";
-import { CircularProgress } from "@material-ui/core";
+import { Loading } from "../..";
 
 type AppointmentsDataType = {
   clinicId: string;
@@ -129,17 +129,7 @@ export const Calendar = () => {
     );
   };
 
-  if (loading)
-    return (
-      <Box
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        height="100%"
-      >
-        <CircularProgress />
-      </Box>
-    );
+  if (loading) return <Loading />;
 
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>

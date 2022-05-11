@@ -1,4 +1,5 @@
 import { createContext, useState, useContext, FC, useEffect } from "react";
+import { useNavigate } from "react-router";
 import { LogIn } from "../pages";
 // import { auth } from '../firebase';
 // import type { User } from "firebase/auth";
@@ -19,6 +20,7 @@ export const AuthProvider: FC = (props) => {
   const { children } = props;
   const [checking, setChecking] = useState(true);
   const [user, setUser] = useState();
+  const navigate = useNavigate();
 
   const signin = (email: string, password: string): void => {
     setChecking(true);
@@ -29,7 +31,7 @@ export const AuthProvider: FC = (props) => {
     console.log("signout clicked");
     setChecking(true);
     sessionStorage.clear();
-    window.location.replace("http://localhost:3000/625fca30c1cf951c042bd5ec");
+    navigate('/');
     // signOut(auth).catch((error: Error) => alert.error(error.message));
   };
   return (

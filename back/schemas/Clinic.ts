@@ -13,6 +13,7 @@ const ClinicSchema = new Schema({
     default: "pending",
   },
   timetable: { type: Schema.Types.Mixed, required: false },
+  clinic_name: { type: String, maxlength: 10 },
 });
 
 const Clinic = mongoose.model("Clinic", ClinicSchema);

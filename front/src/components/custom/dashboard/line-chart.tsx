@@ -2,14 +2,9 @@ import { useTheme } from "@material-ui/core";
 import { Bar, XAxis, ResponsiveContainer, BarChart } from "recharts";
 import { useQuery } from "@apollo/client";
 import { GET_STAFFS } from "../../../graphql";
-import { reduce, values } from "lodash";
+import { Loading } from "../../";
+import { size, chain } from "lodash";
 
-type StaffsCHartDataType = {
-  [key: string]: {
-    count: number;
-    type: string;
-  };
-};
 type StaffsDataType = {
   availability?: string;
   email?: string;
@@ -25,7 +20,7 @@ export const LineChart = () => {
   const { palette } = useTheme();
 
   const clinicId = window.sessionStorage.getItem("clinicId");
-  const { data } = useQuery(GET_STAFFS, {
+  const { data, loading } = useQuery(GET_STAFFS, {
     variables: {
       clinicId: clinicId,
     },
@@ -34,21 +29,19 @@ export const LineChart = () => {
     getStaffs: [],
   };
 
-  const staffs = reduce(
-    getStaffs,
-    (prev: StaffsCHartDataType, cur: StaffsDataType) => ({
-      ...prev,
-      [cur.type]: {
-        type: cur.type,
-        count: prev[cur.type] ? prev[cur.type].count + 1 : 1,
-      },
-    }),
-    {}
-  );
+  const staffs = chain(getStaffs)
+    .groupBy("type")
+    .mapValues((val, key) => {
+      return { type: key, count: size(val) };
+    })
+    .values()
+    .value();
+
+  if (loading) return <Loading />;
 
   return (
     <ResponsiveContainer width="100%" height="100%">
-      <BarChart width={150} height={40} data={values(staffs)}>
+      <BarChart width={150} height={40} data={staffs}>
         <XAxis dataKey="type" type="category" />
         <Bar dataKey="count" fill={palette.info.light} label />
       </BarChart>
