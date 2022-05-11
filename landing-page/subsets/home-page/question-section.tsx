@@ -13,7 +13,7 @@ type QuestionType = {
   question: string;
   value: string;
   onChange: any;
-  helperText: string;
+  helperText: any;
   type: 'input' | 'selector' | 'number';
   grid: grid;
   selections?: Array<string>;
@@ -60,13 +60,13 @@ const Question = ({ id, value, question, grid, onChange, helperText, selections,
     return (
       <Grid item {...grid}>
         <InputLabel style={{ marginBottom: '10px', marginTop: '10px' }}>{question}</InputLabel>
-        <TextField value={value} type="number" error={error} onChange={onChange} fullWidth size="small" />
+        <TextField value={value} type="number" error={error} helperText={helperText} onChange={onChange} fullWidth size="small" />
       </Grid>
     );
   return (
     <Grid item {...grid}>
       <InputLabel style={{ marginBottom: '10px', marginTop: '10px' }}>{question}</InputLabel>
-      <TextField id={id} value={value} error={error} onChange={onChange} fullWidth size="small" />
+      <TextField id={id} value={value} error={error} helperText={helperText} onChange={onChange} fullWidth size="small" />
     </Grid>
   );
 };

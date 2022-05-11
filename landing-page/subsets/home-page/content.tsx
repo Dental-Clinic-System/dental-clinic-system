@@ -9,15 +9,15 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { LeftSide } from './';
 
-const ClinicSchema = Yup.object().shape({
+export const ClinicSchema = Yup.object({
   title: Yup.string()
     .min(2, 'Хэт богино')
-    .max(50, 'Хэт урт')
+    .max(45, 'Хэт урт')
     .required('Эмнэлгийн нэр шаардлагатай'),
-  email: Yup.string().email('Буруу имэйл').required('Имэйл шаардлагатай'),
+  email: Yup.string().email('Алдаатай имэйл').required('Имэйл шаардлагатай'),
   contact_number: Yup.string()
-    .min(8)
-    .max(8)
+    .min(8, 'Хэт богино')
+    .max(8, 'Хэт урт')
     .required('Утасны дугаар шаардлагатай'),
   district: Yup.string().required('Дүүрэг сонгоно уу'),
   khoroo: Yup.string().required('Хороо сонгоно уу'),
@@ -67,7 +67,7 @@ const RightSide = () => {
                   type: 'input',
                   grid: { xs: 12 },
                   error: Boolean(formik.errors.title),
-                  helperText: '',
+                  helperText: formik.errors.title,
                   value: formik.values.title,
                   onChange: formik.handleChange,
                 },
@@ -77,7 +77,7 @@ const RightSide = () => {
                   type: 'input',
                   grid: { xs: 12 },
                   error: Boolean(formik.errors.email),
-                  helperText: '',
+                  helperText: formik.errors.email,
                   value: formik.values.email,
                   onChange: formik.handleChange,
                 },
@@ -87,7 +87,7 @@ const RightSide = () => {
                   type: 'input',
                   grid: { xs: 12 },
                   error: Boolean(formik.errors.contact_number),
-                  helperText: '',
+                  helperText: formik.errors.contact_number,
                   value: formik.values.contact_number,
                   onChange: formik.handleChange,
                 },
@@ -105,7 +105,7 @@ const RightSide = () => {
                   type: 'selector',
                   grid: { xs: 5.4 },
                   error: Boolean(formik.errors.district),
-                  helperText: '',
+                  helperText: formik.errors.district,
                   value: formik.values.district,
                   selections: ['БЗД', 'СБД'],
                   onChange: formik.handleChange('district'),
@@ -116,7 +116,7 @@ const RightSide = () => {
                   type: 'selector',
                   grid: { xs: 5.4 },
                   error: Boolean(formik.errors.khoroo),
-                  helperText: '',
+                  helperText: formik.errors.khoroo,
                   value: formik.values.khoroo,
                   selections: ['1-р хороо', '2-р хороо'],
                   onChange: formik.handleChange('khoroo'),
@@ -127,7 +127,7 @@ const RightSide = () => {
                   type: 'input',
                   grid: { xs: 12 },
                   error: Boolean(formik.errors.address),
-                  helperText: '',
+                  helperText: formik.errors.address,
                   value: formik.values.address,
                   onChange: formik.handleChange,
                 },
