@@ -4,7 +4,7 @@
 if [[ $(git rev-parse --abbrev-ref HEAD) != main ]]
 then
     echo "This is a development branch"
-    cd dental-front && npm test
+    # cd dental-front && npm test
 else
     echo "This is main branch!!!"
 fi
