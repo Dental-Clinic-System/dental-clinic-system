@@ -2,12 +2,7 @@ import { useMutation, useQuery } from "@apollo/client";
 import { Chip, Box, Button, Typography, IconButton } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { useState, useEffect } from "react";
-import {
-  CreateModal,
-  DeleteModal,
-  Loading,
-  ModalInput,
-} from "../components";
+import { CreateModal, DeleteModal, Loading, ModalInput } from "../components";
 import {
   ADD_CLINIC,
   DELETE_CLINIC,
@@ -26,6 +21,8 @@ type clinicType = {
   district: string;
   status: string;
 };
+
+// Data grid deer haragdaj baigaa cliniciin status
 
 const RenderStatus = (params: any) => {
   return params.status === "active" ? (
@@ -47,7 +44,9 @@ export const Clinic = () => {
   const [clinics, setClinics] = useState<any>([]);
   const [selectedId, setselectedId] = useState<any>({});
   const [approveModal, setApproveModal] = useState(false);
+  const [declineModal, setDeclineModal] = useState(false);
   const [clinicData, setClinicData] = useState<any>({});
+  const [actionParams, setActionParams] = useState<any>({});
 
   const styles = {
     approveModalTitle: {
@@ -67,12 +66,16 @@ export const Clinic = () => {
     },
   };
 
+  // Input deer orj baigaa uurchlultiig avj baigaa function
+
   const updateChangeData = (key: string, data: string) => {
     setClinicData({
       ...clinicData,
       [key]: data,
     });
   };
+
+  // Add request yvuulj baigaa heseg
 
   const addData = async () => {
     try {
@@ -85,6 +88,8 @@ export const Clinic = () => {
       console.log(error);
     }
   };
+
+  // Update request yvuulj baigaa heseg
 
   const updateData = async () => {
     try {
@@ -100,6 +105,8 @@ export const Clinic = () => {
       console.log(error);
     }
   };
+
+  // Delete request yvuulj baigaa heseg
 
   const deleteData = async () => {
     try {
@@ -125,10 +132,13 @@ export const Clinic = () => {
     }
   };
 
-  const approveClinic = async (params: any) => {
+  // Cliniciin huseltiig huleej avj baigaa function
+
+  const approveClinic = async () => {
     try {
+      console.log(actionParams);
       const data = {
-        ...params.row,
+        ...actionParams,
         status: "active",
       };
       const res = await UpdateClinic({ variables: data });
@@ -138,15 +148,18 @@ export const Clinic = () => {
           : e
       );
       setClinics(updatedClinic);
+      setApproveModal(false);
     } catch (error) {
       console.log(error);
     }
   };
 
-  const declineClinic = async (params: any) => {
+  // Cliniciin huseltees tatgalzaj avj baigaa function
+
+  const declineClinic = async () => {
     try {
       const data = {
-        ...params.row,
+        ...actionParams,
         status: "inactive",
       };
       const res = await UpdateClinic({ variables: data });
@@ -156,10 +169,13 @@ export const Clinic = () => {
           : e
       );
       setClinics(updatedClinic);
+      setDeclineModal(false);
     } catch (error) {
       console.log(error);
     }
   };
+
+  // Databasees clinicuudiin medeelliig querydej avj baigaa
 
   useEffect(() => {
     let formatedData: any = [];
@@ -175,6 +191,8 @@ export const Clinic = () => {
     });
     setClinics(formatedData);
   }, [data]);
+
+  // MUI Data Gridiin column structure
 
   const columns: GridColDef[] = [
     {
@@ -201,20 +219,28 @@ export const Clinic = () => {
       sortable: false,
       width: 150,
       renderCell: (params: any) => {
+        // console.log(params.row);
+        // setActionParams(params.row);
         const clinicStatus: string = params.row.status;
         return clinicStatus === "pending" ? (
           <>
             <IconButton
               color="success"
               sx={styles.actionButton}
-              onClick={() => approveClinic(params)}
+              onClick={() => {
+                setActionParams(params.row);
+                setApproveModal(true);
+              }}
             >
               <AddBox />
             </IconButton>
             <IconButton
               color="error"
               sx={styles.actionButton}
-              onClick={() => declineClinic(params)}
+              onClick={() => {
+                setActionParams(params.row);
+                setDeclineModal(true);
+              }}
             >
               <IndeterminateCheckBox />
             </IconButton>
@@ -223,7 +249,10 @@ export const Clinic = () => {
           <IconButton
             color="error"
             sx={styles.declineButton}
-            onClick={() => declineClinic(params)}
+            onClick={() => {
+              setActionParams(params.row);
+              setDeclineModal(true);
+            }}
           >
             <IndeterminateCheckBox />
           </IconButton>
@@ -231,7 +260,10 @@ export const Clinic = () => {
           <IconButton
             color="success"
             sx={styles.actionButton}
-            onClick={() => approveClinic(params)}
+            onClick={() => {
+              setActionParams(params.row);
+              setApproveModal(true);
+            }}
           >
             <AddBox />
           </IconButton>
@@ -332,7 +364,7 @@ export const Clinic = () => {
         addButtonName={"Зөвшөөрөх"}
         open={approveModal}
         setOpen={setApproveModal}
-        createFunction={() => console.log("approve")}
+        createFunction={approveClinic}
       >
         <Typography
           id="modal-title"
@@ -340,7 +372,7 @@ export const Clinic = () => {
           align="center"
           sx={styles.approveModalTitle}
         >
-          Зөвшөөрөл өгөх
+          ЗӨВШӨӨРӨЛ ӨГӨХ
         </Typography>
         <Typography
           id="modal-description"
@@ -348,7 +380,30 @@ export const Clinic = () => {
           align="center"
           sx={styles.approveModalDesc}
         >
-          Та тус эмнэлэгт системийн эрх өгөхийг зөвшөөрч байна уу?
+          Та тус эмнэлгийн хүсэлтийг хүлээж авахдаа итгэлтэй байна уу?
+        </Typography>
+      </CreateModal>
+      <CreateModal
+        addButtonName={"Зөвшөөрөх"}
+        open={declineModal}
+        setOpen={setDeclineModal}
+        createFunction={declineClinic}
+      >
+        <Typography
+          id="modal-title"
+          variant="h5"
+          align="center"
+          sx={styles.approveModalTitle}
+        >
+          ТАТГАЛЗАХ
+        </Typography>
+        <Typography
+          id="modal-description"
+          variant="h6"
+          align="center"
+          sx={styles.approveModalDesc}
+        >
+          Та тус эмнэлгийн хүсэлтээс татгалзахдаа итгэлтэй байна уу?
         </Typography>
       </CreateModal>
       <DeleteModal
