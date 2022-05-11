@@ -21,7 +21,7 @@ type Mutation {
     contact_number:String,
     clinic_name: String,
   ): Clinic
-  deleteClinic(_id: String): String
+  deleteClinic(_id: String): Clinic
   updateClinic (
     _id:String,
     address:String,

@@ -15,14 +15,19 @@ const addClinic = async (_: any, params: any) => {
 };
 
 const updateClinic = async (_: any, { _id, ...params }: any) => {
-  console.log(_id, params);
-  const clinic = await Clinic.findByIdAndUpdate(_id, params);
-  return clinic;
+  await Clinic.findByIdAndUpdate(_id, params);
+  const res = await Clinic.findOne({
+    _id: _id,
+  });
+  return res
 };
 
 const deleteClinic = async (_: any, params: any) => {
-  const clinic = await Clinic.findByIdAndDelete({ _id: params._id });
-  return clinic;
+  const res = await Clinic.findOne({
+    _id: params._id,
+  });
+  await Clinic.findByIdAndDelete({ _id: params._id });
+  return res;
 };
 
 const getClinic = async (_: any, params: any) => {
