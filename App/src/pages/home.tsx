@@ -12,10 +12,14 @@ export const Home = ({ navigation }: any) => {
             <Text>
                 home
             </Text>
-
             <TouchableOpacity onPress={SignOut}>
                 <Text>
                     signout
+                </Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate('Clinics')}>
+                <Text>
+                    clinics
                 </Text>
             </TouchableOpacity>
         </SafeAreaView>
