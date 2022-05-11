@@ -1,5 +1,5 @@
 import { Box } from "@mui/system";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { Link } from "react-router-dom";
 import InputLabel from "@mui/material/InputLabel";
@@ -10,6 +10,7 @@ import { useMutation, useQuery } from "@apollo/client";
 import { GET_STAFFS, ADD_STAFF, UPDATE_STAFF } from "../graphql";
 import { CreateModal, ModalInput } from "../components";
 import { Button } from "@mui/material";
+import { STAFFS } from "../helper/constants";
 
 const RenderInfo = () => {
   const [age, setAge] = useState("");
@@ -45,6 +46,10 @@ export const Users = () => {
   const [addStaff] = useMutation(ADD_STAFF);
   const [updateStaff] = useMutation(UPDATE_STAFF);
 
+  useEffect(() => {
+    document.title = STAFFS;
+  }, []);
+
   if (loading) {
     return <h1>Loading ...</h1>;
   }
@@ -55,7 +60,6 @@ export const Users = () => {
     info: "Дэлгэрэнгүй",
   }));
 
-  console.log("staffs: ", data);
   return (
     <Box>
       <CreateModal

@@ -1,14 +1,15 @@
-import { ModalInput, CreateModal, DeleteModal, Loading } from "../components";
+import { ModalInput, CreateModal, DeleteModal } from "../components";
 import { useState, useEffect } from "react";
-import { DataGrid, GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
+import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { useQuery, useMutation } from "@apollo/client";
-import { Button, Box, Typography, TextField, Input } from "@mui/material";
+import { Button, Box, Typography } from "@mui/material";
 import {
   GET_SERVICES,
   ADD_SERVICE,
   UPDATE_SERVICE,
   DELETE_SERVICE,
 } from "../graphql";
+import { SERVICE } from "../helper/constants";
 
 type serviceType = {
   _id: string;
@@ -33,6 +34,10 @@ export const Services = () => {
   const [DeleteService] = useMutation(DELETE_SERVICE);
 
   useEffect(() => {
+    document.title = SERVICE;
+  }, []);
+
+  useEffect(() => {
     if (error) console.log(error);
     if (!loading && !error) {
       setServices(data.getServices);
@@ -51,7 +56,7 @@ export const Services = () => {
     try {
       const res = await AddService({ variables: serviceData });
       const addedService = res.data.addService;
-      setServices([ ...services, addedService ]);
+      setServices([...services, addedService]);
       setOpenAddModal(false);
     } catch (error) {
       console.log(error);
@@ -62,7 +67,9 @@ export const Services = () => {
     try {
       const res = await UpdateService({ variables: serviceData });
       const updatedService = services.map((e: any) =>
-        e._id === res.data.updateService._id ? { ...e, ...res.data.updateService } : e
+        e._id === res.data.updateService._id
+          ? { ...e, ...res.data.updateService }
+          : e
       );
       setServices(updatedService);
       setOpenDeleteModal(false);
@@ -74,7 +81,9 @@ export const Services = () => {
   const deleteData = async () => {
     try {
       const res = await DeleteService({ variables: selectedId });
-      const deleteState = services.filter((e: any) => e._id !== res.data.deleteService._id);
+      const deleteState = services.filter(
+        (e: any) => e._id !== res.data.deleteService._id
+      );
       setServices(deleteState);
       setOpenDeleteModal(false);
     } catch (error) {
