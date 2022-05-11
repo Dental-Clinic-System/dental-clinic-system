@@ -25,6 +25,7 @@ const Login = ({ navigation }: any) => {
                     mobileNumber: number
                 }
             })
+            console.log(data)
             if (data?.findPatient) {
                 const confirm = await auth().signInWithPhoneNumber(`+976${number}`)
                 setConfirmation(confirm)
@@ -41,7 +42,7 @@ const Login = ({ navigation }: any) => {
             navigation.navigate("Home")
         }).catch((error: any) => {
             console.log(error)
-            if (error = '[Error: [auth/code-expired] The SMS code has expired. Please re-send the verification code to try again.]') { 
+            if (error = '[Error: [auth/code-expired] The SMS code has expired. Please re-send the verification code to try again.]') {
                 setError('sms code buruu baina')
             }
         });

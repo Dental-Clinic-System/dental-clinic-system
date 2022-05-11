@@ -8,3 +8,18 @@ query FindPatient($mobileNumber: String) {
   }
 }
 `;
+
+
+export const GET_CLINICS = gql`
+query GetClinic {
+  getClinics {
+    title
+    _id
+    address
+    district
+    khoroo
+    status
+    email
+    contact_number
+  }
+}`;
