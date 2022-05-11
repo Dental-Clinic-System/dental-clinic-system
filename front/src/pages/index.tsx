@@ -6,3 +6,4 @@ export * from "./appointment";
 export * from "./dashboard";
 export * from './patient-history';
 export * from "./login";
+export * from "./supplies";
