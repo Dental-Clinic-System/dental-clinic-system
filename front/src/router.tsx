@@ -10,6 +10,7 @@ import {
   Dashboard,
   PatientHistoryScreen,
   LogIn,
+  Supplies
 } from "./pages";
 import { Services } from "./pages/services";
 
@@ -51,6 +52,10 @@ const router: RouteObject[] = [
   {
     path: "/patients",
     element: <PatientScreen />,
+  },
+  {
+    path: '/supplies',
+    element: <Supplies />,
   },
   {
     path: "/patient-history/:id/",

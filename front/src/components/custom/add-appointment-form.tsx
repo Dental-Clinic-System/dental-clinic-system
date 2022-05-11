@@ -60,7 +60,7 @@ export const AddAppointmentForm = ({ data, setOpen, staffs, buttonLabel, showDel
             staffId: staff,
             startDate: startTime,
             endDate: endTime,
-            patientId: patient,
+            patientId: patient._id,
             clinicId: sessionStorage.getItem('clinicId'),
             status: "active",
             serviceId: ""
