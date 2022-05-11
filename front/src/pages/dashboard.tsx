@@ -24,16 +24,14 @@ export const Dashboard = () => {
             Welcome to your Dental dashboard.
           </Typography>
         </Grid>
-        <Grid item xs={8} minHeight={300}>
-          <Item>
-            <Typography variant="h6" mb={4}>
-              Ажилчид
-            </Typography>
+        <Grid item xs={8} py={4}>
+          <Item height={400}>
+            <Typography variant="h6">Ажилчид</Typography>
             <LineChart />
           </Item>
         </Grid>
         <Grid item xs={4}>
-          <Item>
+          <Item height={400}>
             <Typography variant="h6" mb={4}>
               Ажилчид
             </Typography>

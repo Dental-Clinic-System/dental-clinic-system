@@ -17,6 +17,7 @@ import { useLazyQuery, useQuery } from "@apollo/client";
 import { IError, ILogin } from "../interfaces/ILogin";
 import { GET_CLINIC_BY_TITLE, LOGIN } from "../graphql";
 import { useAuth } from "../providers/AuthProvider";
+import { Loading } from "../components";
 
 const useStyles = makeStyles({
   paperContainer: {
@@ -41,7 +42,7 @@ const useStyles = makeStyles({
 export const LogIn = () => {
   const clinic_name = window.location.hostname.split(".")[0] || "";
 
-  const { data } = useQuery(GET_CLINIC_BY_TITLE, {
+  const { data, loading } = useQuery(GET_CLINIC_BY_TITLE, {
     variables: { clinic_name: clinic_name },
   });
   const { getClinicByClinicName } = data || {};
@@ -95,6 +96,20 @@ export const LogIn = () => {
       }
     }
   };
+
+  if (loading)
+    return (
+      <Container
+        component="main"
+        maxWidth="xs"
+        className={styles.paperContainer}
+      >
+        <CssBaseline />
+        <Box className={styles.container}>
+          <Loading />
+        </Box>
+      </Container>
+    );
 
   return (
     <Container component="main" maxWidth="xs" className={styles.paperContainer}>

@@ -9,6 +9,7 @@ const useStyles = makeStyles(({ palette, spacing }) => ({
     padding: spacing(10),
     borderRadius: spacing(3),
     boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
+    overflow: "hidden",
   },
 }));
 
