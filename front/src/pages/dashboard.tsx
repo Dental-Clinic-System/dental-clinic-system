@@ -8,6 +8,8 @@ import {
   PieChart,
   Calendar,
 } from "../components/custom/dashboard";
+import { useEffect } from "react";
+import { DASHBOARD } from "../helper/constants";
 
 export const Dashboard = () => {
   const TITLE = sessionStorage.getItem("clinicTitle");
@@ -15,13 +17,17 @@ export const Dashboard = () => {
   const { data } = useQuery(GET_PATIENTS);
   const { getPatients } = data || { getPatients: [] };
 
+  useEffect(() => {
+    document.title = DASHBOARD;
+  }, []);
+
   return (
     <Container maxWidth="lg">
       <Grid container spacing={2}>
         <Grid item xs={12} minHeight={90}>
-          <Typography variant="h5">Hello, {TITLE}.</Typography>
+          <Typography variant="h5">Сайн уу? {TITLE}</Typography>
           <Typography variant="subtitle1">
-            Welcome to your Dental dashboard.
+            Хяналтын самбартаа тавтай морил.
           </Typography>
         </Grid>
         <Grid item xs={8} py={4}>

@@ -123,6 +123,8 @@ export const PatientsGrid: React.FC<PatientsGridType> = ({ setOpenAdd }) => {
     { field: 'birthdate', headerName: 'Төрсөн өдөр', width: 70 },
     { field: 'gender', headerName: 'Хүйс', width: 70 },
     { field: 'mobileNumber', headerName: 'Утасны дугаар', width: 120 },
+    { field: 'email', headerName: 'Имэйл хаяг', width: 150 },
+    { field: 'cardNumber', headerName: 'Картын дугаар', width: 150 },
     {
       field: "Засах",
       renderCell: (cellValue: any) => {
@@ -138,8 +140,6 @@ export const PatientsGrid: React.FC<PatientsGridType> = ({ setOpenAdd }) => {
       },
       width: 120
     },
-    { field: 'email', headerName: 'Имэйл хаяг', width: 150 },
-    { field: 'cardNumber', headerName: 'Картын дугаар', width: 150 },
   ];
 
   return (

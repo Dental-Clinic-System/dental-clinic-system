@@ -1,18 +1,28 @@
-import { useState } from "react";
-import { Box, Button } from '@mui/material';
-import { PatientsGrid, CreateModal } from '../components/index'
+import { useState, useEffect } from "react";
+import { Box } from "@mui/material";
+import { PatientsGrid, CreateModal } from "../components/index";
 import { AddPatientForm } from "../components/custom";
+import { PATIENTS } from "../helper/constants";
 
 export const PatientScreen = () => {
-    const [openAdd, setOpenAdd] = useState(false)
+  const [openAdd, setOpenAdd] = useState(false);
 
-    return (
-        <Box>
-            <PatientsGrid setOpenAdd={setOpenAdd}/>
+  useEffect(() => {
+    document.title = PATIENTS;
+  }, []);
 
-            <CreateModal open={openAdd} setOpen={setOpenAdd} addButtonName={'Өвчтөн нэмэх'} showButton={false}>
-                <AddPatientForm setOpen={setOpenAdd}/>
-            </CreateModal>
-        </Box>
-    );
-}
+  return (
+    <Box>
+      <PatientsGrid setOpenAdd={setOpenAdd} />
+
+      <CreateModal
+        open={openAdd}
+        setOpen={setOpenAdd}
+        addButtonName={"Өвчтөн нэмэх"}
+        showButton={false}
+      >
+        <AddPatientForm setOpen={setOpenAdd} />
+      </CreateModal>
+    </Box>
+  );
+};

@@ -91,7 +91,6 @@ export const LogIn = () => {
         window.sessionStorage.setItem("username", username);
         window.sessionStorage.setItem("clinicTitle", clinic?.title);
 
-        alert(`successfully logged in by: ${info.email}`);
         navigate("/");
       }
     }
@@ -163,7 +162,7 @@ export const LogIn = () => {
           <Grid container>
             <Grid item xs>
               <Link href="#" variant="body2">
-                нууц үгээ мартсан?
+                Нууц үгээ мартсан?
               </Link>
             </Grid>
             <Grid item>

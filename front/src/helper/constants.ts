@@ -18,15 +18,21 @@ export const SYSDATE = "Эмчилгээний дуусах хугацаа";
 export const BigDataGridHeight = 640;
 export const MediumDataGridHeight = 450;
 export const SmallDataGridHeight = 300;
-export const AUTH_TOKEN = 'auth-token';
+export const AUTH_TOKEN = "auth-token";
 export const PATIENT_FORM = {
-    firstName: { name: FIRST_NAME, placeholder: 'Батаа' },
-    lastName: { name: LAST_NAME, placeholder: 'Балдан' },
-    email: { name: EMAIL, placeholder: 'bataa123@gmail.com' },
-    age: { name: AGE, placeholder: '20' },
-    registrationNumber: { name: REGISTRATION_NUMBER, placeholder: 'УО00252301' },
-    mobileNumber: { name: PHONE, placeholder: '99119911' },
-    gender: { name: SEX, placeholder: 'Эр' },
-    birthdate: { name: BIRTH, placeholder: '2000-05-23' },
-    cardNumber: { name: CARD_NUMBER, placeholder: '9830918902' }
-}
+  firstName: { name: FIRST_NAME, placeholder: "Батаа" },
+  lastName: { name: LAST_NAME, placeholder: "Балдан" },
+  email: { name: EMAIL, placeholder: "bataa123@gmail.com" },
+  age: { name: AGE, placeholder: "20" },
+  registrationNumber: { name: REGISTRATION_NUMBER, placeholder: "УО00252301" },
+  mobileNumber: { name: PHONE, placeholder: "99119911" },
+  gender: { name: SEX, placeholder: "Эр" },
+  birthdate: { name: BIRTH, placeholder: "2000-05-23" },
+  cardNumber: { name: CARD_NUMBER, placeholder: "9830918902" },
+};
+export const DASHBOARD = "Хяналтын самбар";
+export const STAFFS = "Ажилчид";
+export const APPOINTMENT = "Цаг авах";
+export const SERVICE = "Эмчилгээ";
+export const PATIENTS = "Өвчтөнүүд";
+export const PATIENT_HISTORY = "Өвчтөний түүх";

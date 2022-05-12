@@ -1,8 +1,11 @@
 import { Clinic } from "../schemas";
 
 const addClinic = async (_: any, params: any) => {
-  let clinic_name = params.clinic_name || params.title;
+  let clinic_name: string = params.clinic_name || params.title;
   clinic_name = clinic_name.slice(0, 10).toLowerCase();
+  while (clinic_name.includes(" ")) {
+    clinic_name = clinic_name.replace(" ", "");
+  }
 
   const clinic = new Clinic({ ...params, clinic_name });
 
@@ -19,7 +22,7 @@ const updateClinic = async (_: any, { _id, ...params }: any) => {
   const res = await Clinic.findOne({
     _id: _id,
   });
-  return res
+  return res;
 };
 
 const deleteClinic = async (_: any, params: any) => {
