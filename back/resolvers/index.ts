@@ -41,6 +41,7 @@ import {
   updateClinic,
   getClinics,
   deleteClinic,
+  updateClinicStatus,
 } from "./clinicResolver";
 export default {
   Query: {
@@ -78,5 +79,6 @@ export default {
     addClinic,
     updateClinic,
     deleteClinic,
+    updateClinicStatus,
   },
 };

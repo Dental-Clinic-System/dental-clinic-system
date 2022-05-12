@@ -8,8 +8,10 @@ type Clinic {
   title:String,
   email:String,
   contact_number:String,
-  clinic_name: String
+  clinic_name: String,
+  password: String,
 }
+
 type Mutation {
   addClinic(
     address:String,
@@ -32,6 +34,10 @@ type Mutation {
     email:String,
     contact_number:String,
     clinic_name: String,
+  ): Clinic
+  updateClinicStatus (
+    _id:String,
+    status:String,
   ): Clinic
 }
 type Query {
