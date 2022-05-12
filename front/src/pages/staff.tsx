@@ -1,19 +1,19 @@
-import { Box } from "@mui/system";
-import { useEffect, useState } from "react";
-import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import { Link } from "react-router-dom";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
-import { useMutation, useQuery } from "@apollo/client";
-import { GET_STAFFS, ADD_STAFF, UPDATE_STAFF } from "../graphql";
-import { CreateModal, ModalInput } from "../components";
-import { Button } from "@mui/material";
-import { STAFFS } from "../helper/constants";
+import { Box } from '@mui/system';
+import { useEffect, useState } from 'react';
+import { DataGrid, GridColDef } from '@mui/x-data-grid';
+import { Link } from 'react-router-dom';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+import { useMutation, useQuery } from '@apollo/client';
+import { GET_STAFFS, ADD_STAFF, UPDATE_STAFF } from '../graphql';
+import { CreateModal, ModalInput } from '../components';
+import { Button } from '@mui/material';
+import { STAFFS } from '../helper/constants';
 
 const RenderInfo = () => {
-  const [age, setAge] = useState("");
+  const [age, setAge] = useState('');
   const handleChange = (event: SelectChangeEvent) => {
     setAge(event.target.value as string);
   };
@@ -34,106 +34,135 @@ const RenderInfo = () => {
     </FormControl>
   );
 };
+
+type StaffType = {
+  _id: string;
+  username: string;
+  first_name: string;
+  last_name: string;
+  email: string;
+  phone: string;
+  last_login: string;
+  availability: string;
+  type: string;
+  timestamp: boolean;
+  password: string;
+  createdAt: Date;
+  updatedAt: Date;
+};
+
 export const Users = () => {
-  const clinicId = window.sessionStorage.getItem("clinicId");
-  const { data, loading } = useQuery(GET_STAFFS, {
+  const clinicId = window.sessionStorage.getItem('clinicId');
+  const { data, loading, error } = useQuery(GET_STAFFS, {
     variables: {
-      clinicId: clinicId,
-    },
+      clinicId: clinicId
+    }
   });
   const [addStaffModal, setAddStaffModal] = useState(false);
   const [staffInfo, addStaffInfo] = useState({});
+  const [staffs, setStaffs] = useState<Array<StaffType>>([]);
   const [addStaff] = useMutation(ADD_STAFF);
   const [updateStaff] = useMutation(UPDATE_STAFF);
 
   useEffect(() => {
     document.title = STAFFS;
-  }, []);
+    if (error) console.log(error);
+    if (!loading && !error) {
+      setStaffs(
+        data?.getStaffs.map((staff: any, index: any) => ({
+          ...staff,
+          index: index + 1,
+          info: 'Дэлгэрэнгүй'
+        }))
+      );
+    }
+  }, [loading]);
+
+  const addData = async () => {
+    try {
+      const res: any = await addStaff({
+        variables: {
+          ...staffInfo,
+          clinicId: clinicId
+        }
+      });
+      const addedStaffIndex = staffs.length + 1;
+      const addedStaff: StaffType = {
+        ...res.data.addStaff,
+        index: addedStaffIndex
+      };
+      staffs.map((staff: any, index: any) => ({
+        ...staff,
+        index: index + 1,
+        info: 'Дэлгэрэнгүй'
+      }));
+      setStaffs([...staffs, addedStaff]);
+      setAddStaffModal(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   if (loading) {
     return <h1>Loading ...</h1>;
   }
-
-  const staffs = data?.getStaffs.map((staff: any, indx: any) => ({
-    ...staff,
-    id: indx + 1,
-    info: "Дэлгэрэнгүй",
-  }));
 
   return (
     <Box>
       <CreateModal
         open={addStaffModal}
         setOpen={setAddStaffModal}
-        addButtonName={"Ажилтан нэмэх"}
-        createFunction={() => {
-          addStaff({
-            variables: {
-              ...staffInfo,
-              clinicId: clinicId,
-            },
-          });
-          setAddStaffModal(false);
-        }}
+        addButtonName={'Ажилтан нэмэх'}
+        createFunction={addData}
       >
         <ModalInput
           onChange={(e: any) =>
             addStaffInfo({ ...staffInfo, username: e.target.value })
           }
-          label={"Хэрэглэгчийн нэр"}
+          label={'Хэрэглэгчийн нэр'}
         />
         <ModalInput
           onChange={(e: any) =>
             addStaffInfo({ ...staffInfo, firstName: e.target.value })
           }
-          label={"Нэр"}
+          label={'Нэр'}
         />
         <ModalInput
           onChange={(e: any) =>
             addStaffInfo({ ...staffInfo, lastName: e.target.value })
           }
-          label={"Овог"}
+          label={'Овог'}
         />
         <ModalInput
           onChange={(e: any) =>
             addStaffInfo({ ...staffInfo, email: e.target.value })
           }
-          label={"Мэйл"}
+          label={'Мэйл'}
         />
         <ModalInput
           onChange={(e: any) =>
             addStaffInfo({ ...staffInfo, password: e.target.value })
           }
-          label={"Нууц үг"}
+          label={'Нууц үг'}
         />
         <ModalInput
           onChange={(e: any) =>
             addStaffInfo({ ...staffInfo, phone: e.target.value })
           }
-          label={"Дугаар"}
+          label={'Дугаар'}
         />
       </CreateModal>
-      <Button onClick={() => setAddStaffModal(true)}>Ажилтан нэмэх</Button>
+      <Button variant="contained" onClick={() => setAddStaffModal(true)}>
+        Ажилтан нэмэх
+      </Button>
       <DataGrid
-        sx={{ height: 640, width: "80vw" }}
-        getRowId={(row) => row.id}
+        sx={{ height: 640, width: '100%' }}
+        getRowId={(row) => row._id}
         rows={staffs}
         columns={column}
         pageSize={10}
         rowsPerPageOptions={[5]}
         disableSelectionOnClick
-        onEditRowsModelChange={async (e, d) => {
-          const { type } = e[Object.keys(e)[0]];
-          const key = Object.keys(e)[0];
-          const userName = staffs[`${Number(key) - 1}`];
-          await updateStaff({
-            variables: {
-              clinicId: clinicId,
-              username: userName["username"],
-              type: type.value,
-            },
-          });
-        }}
       />
     </Box>
   );
@@ -143,55 +172,55 @@ export default Users;
 
 const column: GridColDef[] = [
   {
-    field: "id",
-    headerName: "ID",
-    flex: 1,
+    field: 'index',
+    headerName: 'Ду',
+    flex: 1
   },
   {
-    field: "username",
-    headerName: "Хэрэглэгчийн нэр",
-    flex: 1,
+    field: 'username',
+    headerName: 'Хэрэглэгчийн нэр',
+    flex: 1
   },
   {
-    field: "first_name",
-    headerName: "Нэр",
-    flex: 1,
+    field: 'first_name',
+    headerName: 'Нэр',
+    flex: 1
   },
   {
-    field: "last_name",
-    headerName: "Овог",
-    flex: 1,
+    field: 'last_name',
+    headerName: 'Овог',
+    flex: 1
   },
   {
-    field: "email",
-    headerName: "Имэйл",
-    flex: 1,
+    field: 'email',
+    headerName: 'Имэйл',
+    flex: 1
   },
   {
-    field: "phone",
-    headerName: "Дугаар",
-    flex: 1,
+    field: 'phone',
+    headerName: 'Дугаар',
+    flex: 1
   },
   {
-    field: "availability",
-    headerName: "Ажиллах хуваарь",
+    field: 'availability',
+    headerName: 'Ажиллах хуваарь',
     flex: 1,
     renderCell: (staff: any) => {
-      return staff.formattedValue === "A9_13" ? "9:00 - 13:00" : "";
-    },
+      return staff.formattedValue === 'A9_13' ? '9:00 - 13:00' : '';
+    }
   },
   {
-    field: "type",
-    headerName: "Үүрэг",
+    field: 'type',
+    headerName: 'Үүрэг',
     flex: 1,
     editable: true,
-    type: "singleSelect",
-    valueOptions: ["doctor", "reception", "admin"],
+    type: 'singleSelect',
+    valueOptions: ['doctor', 'reception', 'admin']
     // renderCell: () => { return RenderInfo }
   },
   {
-    field: "info",
-    headerName: "Дэлгэрэнгүй",
+    field: 'info',
+    headerName: 'Дэлгэрэнгүй',
     flex: 1,
     renderCell: (row) => {
       return (
@@ -199,6 +228,6 @@ const column: GridColDef[] = [
           Дэлгэрэнгүй
         </Link>
       );
-    },
-  },
+    }
+  }
 ];
