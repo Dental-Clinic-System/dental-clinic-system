@@ -23,7 +23,7 @@ export const searchListStyle = {
 }
 
 export const textStyle = {
-    width: 50
+    width: 150
 }
 
 export const textFormCellStyle = {
@@ -31,7 +31,8 @@ export const textFormCellStyle = {
     flexDirection: 'row',
     width: '100%',
     justifyContent: 'space-around',
-    alignItems: 'center'
+    alignItems: 'center',
+    borderRadius: 3,
 }
 
 export const patientInfoStyle = {
@@ -42,7 +43,6 @@ export const patientInfoStyle = {
     borderRadius: 3,
     width: 420,
     height: 550,
-    background: 'white',
     marginTop: 5,
     marginBottom: 5
 }

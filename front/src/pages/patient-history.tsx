@@ -1,25 +1,36 @@
-import { useMutation, useQuery } from "@apollo/client";
-import { Box, Button, FormControl, Select, TextField } from "@mui/material";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import { useContext, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router";
-import { Loading, PatientHistoryGrid } from "../components";
-import { DefaultModal } from "../components/common";
-import DentalChart from "../components/custom/dentalChart";
+import { useMutation, useQuery } from '@apollo/client';
+import {
+  Box,
+  Button,
+  FormControl,
+  Select,
+  TextField,
+  Table,
+  TableBody,
+  TableCell,
+  TableRow,
+  TableHead
+} from '@mui/material';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import { useContext, useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router';
+import { Loading, PatientHistoryGrid } from '../components';
+import { DefaultModal } from '../components/common';
+import DentalChart from '../components/custom/dentalChart';
 import {
   ADD_PATIENT_HISTORY,
   GetAppointments,
   GET_PATIENT,
   GET_PATIENTS_BRIEFLY,
-  GET_SERVICES,
-} from "../graphql";
+  GET_SERVICES
+} from '../graphql';
 import {
   PATIENT_FORM,
   PATIENT_HISTORY,
-  SmallDataGridHeight,
-} from "../helper/constants";
-import { PatientContext } from "../providers";
+  SmallDataGridHeight
+} from '../helper/constants';
+import { PatientContext } from '../providers';
 import {
   containerStyle,
   innerContainterStyle,
@@ -29,8 +40,8 @@ import {
   searchModalStyle,
   searchPatientStyle,
   textFormCellStyle,
-  textStyle,
-} from "../styles/patient-history-style";
+  textStyle
+} from '../styles/patient-history-style';
 
 type PatientType = {
   cardNumber: string;
@@ -42,32 +53,32 @@ type PatientType = {
 export const PatientHistoryScreen = () => {
   const navigate = useNavigate();
   const { contextPatient, setContextPatient } = useContext(PatientContext);
-  const { id = "" } = useParams();
-  const clinicId = window.sessionStorage.getItem("clinicId");
-  const [toothId, setToothId] = useState("");
+  const { id = '' } = useParams();
+  const clinicId = window.sessionStorage.getItem('clinicId');
+  const [toothId, setToothId] = useState('');
   const [AddHistory] = useMutation(ADD_PATIENT_HISTORY);
   const { data: GetAppointmentsData } = useQuery(GetAppointments, {
     variables: {
       clinicId: clinicId,
-      patientId: id,
-    },
+      patientId: id
+    }
   });
   const { data: patientData } = useQuery(GET_PATIENT, {
     variables: {
-      id: id,
-    },
+      id: id
+    }
   });
 
   const { data, loading } = useQuery(GET_PATIENTS_BRIEFLY, {
     variables: {
-      clinicId: clinicId,
-    },
+      clinicId: clinicId
+    }
   });
 
   const { data: services } = useQuery(GET_SERVICES, {
     variables: {
-      clinicId: clinicId,
-    },
+      clinicId: clinicId
+    }
   });
 
   const ToothHandler = (event: any) => {
@@ -75,13 +86,13 @@ export const PatientHistoryScreen = () => {
     let element = event.path[0];
     setToothId(element.id);
   };
-  console.log("services:", services);
+  console.log('services:', services);
   useEffect(() => {
     patientData && setContextPatient(patientData?.getPatient);
   }, [patientData]);
 
   useEffect(() => {
-    const toothsArray: any = document.getElementsByClassName("Tooth");
+    const toothsArray: any = document.getElementsByClassName('Tooth');
     for (const ToothSide of toothsArray) {
       ToothSide.onclick = (event: any) => ToothHandler(event);
     }
@@ -100,7 +111,7 @@ export const PatientHistoryScreen = () => {
     email,
     gender,
     mobileNumber,
-    registrationNumber,
+    registrationNumber
   } = contextPatient;
 
   const [recommendedPatients, setRecommendedPatients] = useState<PatientType[]>(
@@ -110,9 +121,9 @@ export const PatientHistoryScreen = () => {
   const [searchingName, setSearchingName] = useState<string>(firstName);
   const [open, setOpen] = useState<boolean>(false);
   const [selectedPatient, setSelectedPatient] = useState<string>(id);
-  const [note, setNote] = useState<string>("");
-  const [appointmentID, setAppointmentID] = useState<string>("");
-  const [serviceID, setServiceID] = useState<String>("");
+  const [note, setNote] = useState<string>('');
+  const [appointmentID, setAppointmentID] = useState<string>('');
+  const [serviceID, setServiceID] = useState<String>('');
   const handleChange = (e: any) => {
     setSearchingName(e.target.value);
 
@@ -143,111 +154,70 @@ export const PatientHistoryScreen = () => {
           appointmentId: appointmentID,
           serviceId: serviceID,
           note: note,
-          toReport: "true",
-          status: "pending",
-          toothId: toothId,
-        },
+          toReport: 'true',
+          status: 'pending',
+          toothId: toothId
+        }
       });
       if (resp?.data) {
-        alert("Success");
-        setToothId("");
-        setNote("");
+        alert('Success');
+        setToothId('');
+        setNote('');
       } else {
         alert(resp?.errors);
         console.log(resp?.errors);
       }
     } else {
-      alert("fill required field !");
+      alert('fill required field !');
     }
   };
+
+  const createRowData = (name: string, field: string) => {
+    return { name, field };
+  };
+
+  const rows = [
+    createRowData(PATIENT_FORM.firstName.name, firstName),
+    createRowData(PATIENT_FORM.lastName.name, lastName),
+    createRowData(PATIENT_FORM.age.name, age),
+    createRowData(PATIENT_FORM.birthdate.name, birthdate),
+    createRowData(PATIENT_FORM.cardNumber.name, cardNumber),
+    createRowData(PATIENT_FORM.email.name, email),
+    createRowData(PATIENT_FORM.gender.name, gender),
+    createRowData(PATIENT_FORM.mobileNumber.name, mobileNumber),
+    createRowData(PATIENT_FORM.registrationNumber.name, registrationNumber)
+  ];
 
   return (
     <Box sx={containerStyle}>
       {loading && <Loading />}
       <Box sx={innerContainterStyle}>
-        <Box sx={{ display: "flex", flexDirection: "column" }}>
+        <Box sx={{ display: 'flex', flexDirection: 'column' }}>
           <TextField
             size="small"
             placeholder={name}
             onClick={() => setOpen(true)}
             InputProps={{
-              readOnly: true,
+              readOnly: true
             }}
             sx={searchPatientStyle}
           />
           <Box sx={patientInfoStyle}>
-            <Box sx={textFormCellStyle}>
-              <Box sx={textStyle}>{PATIENT_FORM.firstName.name}:</Box>
-              <TextField
-                size="small"
-                placeholder={firstName}
-                InputProps={{ readOnly: true }}
-              />
-            </Box>
-            <Box sx={textFormCellStyle}>
-              <Box sx={textStyle}>{PATIENT_FORM.lastName.name}:</Box>
-              <TextField
-                size="small"
-                placeholder={lastName}
-                InputProps={{ readOnly: true }}
-              />
-            </Box>
-            <Box sx={textFormCellStyle}>
-              <Box sx={textStyle}>{PATIENT_FORM.age.name}:</Box>
-              <TextField
-                size="small"
-                placeholder={age}
-                InputProps={{ readOnly: true }}
-              />
-            </Box>
-            <Box sx={textFormCellStyle}>
-              <Box sx={textStyle}>{PATIENT_FORM.gender.name}:</Box>
-              <TextField
-                size="small"
-                placeholder={gender}
-                InputProps={{ readOnly: true }}
-              />
-            </Box>
-            <Box sx={textFormCellStyle}>
-              <Box sx={textStyle}>{PATIENT_FORM.email.name}:</Box>
-              <TextField
-                size="small"
-                placeholder={email}
-                InputProps={{ readOnly: true }}
-              />
-            </Box>
-            <Box sx={textFormCellStyle}>
-              <Box sx={textStyle}>{PATIENT_FORM.cardNumber.name}:</Box>
-              <TextField
-                size="small"
-                placeholder={cardNumber}
-                InputProps={{ readOnly: true }}
-              />
-            </Box>
-            <Box sx={textFormCellStyle}>
-              <Box sx={textStyle}>{PATIENT_FORM.mobileNumber.name}:</Box>
-              <TextField
-                size="small"
-                placeholder={mobileNumber}
-                InputProps={{ readOnly: true }}
-              />
-            </Box>
-            <Box sx={textFormCellStyle}>
-              <Box sx={textStyle}>{PATIENT_FORM.registrationNumber.name}:</Box>
-              <TextField
-                size="small"
-                placeholder={registrationNumber}
-                InputProps={{ readOnly: true }}
-              />
-            </Box>
-            <Box sx={textFormCellStyle}>
-              <Box sx={textStyle}>{PATIENT_FORM.birthdate.name}:</Box>
-              <TextField
-                size="small"
-                placeholder={birthdate}
-                InputProps={{ readOnly: true }}
-              />
-            </Box>
+            <Table>
+              <TableHead>
+                <TableCell>Өвчтөний талаар</TableCell>
+              </TableHead>
+              <TableBody>
+                {rows.map((row) => (
+                  <TableRow key={row.name}>
+                    <TableCell component="th" scope="row">
+                      {row.name}
+                    </TableCell>
+                    <TableCell align="right">{row.field}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
           </Box>
         </Box>
         <DefaultModal
@@ -255,7 +225,7 @@ export const PatientHistoryScreen = () => {
           setOpen={setOpen}
           sx={{
             width: 500,
-            height: 500,
+            height: 500
           }}
         >
           <TextField
@@ -291,7 +261,7 @@ export const PatientHistoryScreen = () => {
           <DentalChart />
           <Box sx={innerContainterStyle}>
             <Box
-              sx={{ display: "flex", flexDirection: "column", height: "400px" }}
+              sx={{ display: 'flex', flexDirection: 'column', height: '400px' }}
             >
               <Box sx={patientInfoStyle}>
                 <Box sx={textFormCellStyle}>
@@ -299,7 +269,7 @@ export const PatientHistoryScreen = () => {
                   <TextField
                     disabled
                     size="small"
-                    placeholder={"Tooth ID"}
+                    placeholder={'Tooth ID'}
                     value={toothId}
                   />
                 </Box>
@@ -309,12 +279,12 @@ export const PatientHistoryScreen = () => {
                     size="small"
                     onChange={(e) => setNote(e.target.value)}
                     value={note}
-                    placeholder={"Note"}
+                    placeholder={'Note'}
                   />
                 </Box>
                 <Box sx={textFormCellStyle}>
                   <Box sx={textStyle}>service:</Box>
-                  <FormControl sx={{ width: "195px" }}>
+                  <FormControl sx={{ width: '195px' }}>
                     <InputLabel id="demo-simple-select-helper-label">
                       Service
                     </InputLabel>
@@ -337,7 +307,7 @@ export const PatientHistoryScreen = () => {
                 </Box>
                 <Box sx={textFormCellStyle}>
                   <Box sx={textStyle}>appointment:</Box>
-                  <FormControl sx={{ width: "195px" }}>
+                  <FormControl sx={{ width: '195px' }}>
                     <InputLabel id="demo-simple-select-helper-label">
                       Time
                     </InputLabel>
