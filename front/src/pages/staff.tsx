@@ -1,5 +1,5 @@
 import { Box } from "@mui/system";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { Link } from "react-router-dom";
 import InputLabel from "@mui/material/InputLabel";
@@ -33,44 +33,82 @@ const RenderInfo = () => {
     </FormControl>
   );
 };
+
+type StaffType = {
+  _id: string,
+  username: string,
+  first_name: string,
+  last_name: string,
+  email: string,
+  phone: string,
+  last_login: string,
+  availability: string,
+  type: string,
+  timestamp: boolean,
+  password: string,
+  createdAt: Date,
+  updatedAt: Date,
+}
+
 export const Users = () => {
   const clinicId = window.sessionStorage.getItem("clinicId");
-  const { data, loading } = useQuery(GET_STAFFS, {
+  const { data, loading, error } = useQuery(GET_STAFFS, {
     variables: {
       clinicId: clinicId,
     },
   });
   const [addStaffModal, setAddStaffModal] = useState(false);
   const [staffInfo, addStaffInfo] = useState({});
+  const [staffs, setStaffs] = useState<Array<StaffType>>([]);
   const [addStaff] = useMutation(ADD_STAFF);
   const [updateStaff] = useMutation(UPDATE_STAFF);
+
+  useEffect(() => {
+    if (error) console.log(error);
+    if (!loading && !error) {
+      setStaffs(
+        data?.getStaffs.map((staff: any, index: any) => ({
+          ...staff,
+          index: index + 1,
+          info: "Дэлгэрэнгүй",
+        }))
+      );
+    }
+  }, [loading]);
+
+  const addData = async () => {
+    try {
+      const res: any = await addStaff({
+        variables: {
+          ...staffInfo,
+          clinicId: clinicId,
+        },
+      });
+      const addedStaffIndex = staffs.length + 1;
+      const addedStaff: StaffType = {...res.data.addStaff, index: addedStaffIndex};
+      staffs.map((staff: any, index: any) => ({
+        ...staff,
+        index: index + 1,
+        info: "Дэлгэрэнгүй",
+      }))
+      setStaffs([...staffs, addedStaff]);
+      setAddStaffModal(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   if (loading) {
     return <h1>Loading ...</h1>;
   }
 
-  const staffs = data?.getStaffs.map((staff: any, indx: any) => ({
-    ...staff,
-    id: indx + 1,
-    info: "Дэлгэрэнгүй",
-  }));
-
-  console.log("staffs: ", data);
   return (
     <Box>
       <CreateModal
         open={addStaffModal}
         setOpen={setAddStaffModal}
         addButtonName={"Ажилтан нэмэх"}
-        createFunction={() => {
-          addStaff({
-            variables: {
-              ...staffInfo,
-              clinicId: clinicId,
-            },
-          });
-          setAddStaffModal(false);
-        }}
+        createFunction={addData}
       >
         <ModalInput
           onChange={(e: any) =>
@@ -109,27 +147,17 @@ export const Users = () => {
           label={"Дугаар"}
         />
       </CreateModal>
-      <Button onClick={() => setAddStaffModal(true)}>Ажилтан нэмэх</Button>
+      <Button variant="contained" onClick={() => setAddStaffModal(true)}>
+        Ажилтан нэмэх
+      </Button>
       <DataGrid
-        sx={{ height: 640, width: "80vw" }}
-        getRowId={(row) => row.id}
+        sx={{ height: 640, width: "100%" }}
+        getRowId={(row) => row._id}
         rows={staffs}
         columns={column}
         pageSize={10}
         rowsPerPageOptions={[5]}
         disableSelectionOnClick
-        onEditRowsModelChange={async (e, d) => {
-          const { type } = e[Object.keys(e)[0]];
-          const key = Object.keys(e)[0];
-          const userName = staffs[`${Number(key) - 1}`];
-          await updateStaff({
-            variables: {
-              clinicId: clinicId,
-              username: userName["username"],
-              type: type.value,
-            },
-          });
-        }}
       />
     </Box>
   );
@@ -139,8 +167,8 @@ export default Users;
 
 const column: GridColDef[] = [
   {
-    field: "id",
-    headerName: "ID",
+    field: "index",
+    headerName: "Ду",
     flex: 1,
   },
   {
