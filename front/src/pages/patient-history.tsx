@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from '@apollo/client';
-import { Box, Button, FormControl, Select, TextField } from '@mui/material';
+import { Box, Button, FormControl, Select, TextField, Table, TableBody, TableCell, TableRow, TableHead } from '@mui/material';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import { useContext, useEffect, useState } from 'react';
@@ -124,6 +124,22 @@ export const PatientHistoryScreen = () => {
         }
     }
 
+    const createRowData = (name: string, field: string) => {
+        return { name, field }
+    }
+
+    const rows = [
+        createRowData(PATIENT_FORM.firstName.name, firstName),
+        createRowData(PATIENT_FORM.lastName.name, lastName),
+        createRowData(PATIENT_FORM.age.name, age),
+        createRowData(PATIENT_FORM.birthdate.name, birthdate),
+        createRowData(PATIENT_FORM.cardNumber.name, cardNumber),
+        createRowData(PATIENT_FORM.email.name, email),
+        createRowData(PATIENT_FORM.gender.name, gender),
+        createRowData(PATIENT_FORM.mobileNumber.name, mobileNumber),
+        createRowData(PATIENT_FORM.registrationNumber.name, registrationNumber),
+    ];
+
     return (
         <Box sx={containerStyle}>
             {loading && <Loading />}
@@ -138,42 +154,23 @@ export const PatientHistoryScreen = () => {
                         sx={searchPatientStyle}
                     />
                     <Box sx={patientInfoStyle}>
-                        <Box sx={textFormCellStyle}>
-                            <Box sx={textStyle}>{PATIENT_FORM.firstName.name}:</Box>
-                            <TextField size='small' placeholder={firstName} InputProps={{ readOnly: true }} />
-                        </Box>
-                        <Box sx={textFormCellStyle}>
-                            <Box sx={textStyle}>{PATIENT_FORM.lastName.name}:</Box>
-                            <TextField size='small' placeholder={lastName} InputProps={{ readOnly: true }} />
-                        </Box>
-                        <Box sx={textFormCellStyle}>
-                            <Box sx={textStyle}>{PATIENT_FORM.age.name}:</Box>
-                            <TextField size='small' placeholder={age} InputProps={{ readOnly: true }} />
-                        </Box>
-                        <Box sx={textFormCellStyle}>
-                            <Box sx={textStyle}>{PATIENT_FORM.gender.name}:</Box>
-                            <TextField size='small' placeholder={gender} InputProps={{ readOnly: true }} />
-                        </Box>
-                        <Box sx={textFormCellStyle}>
-                            <Box sx={textStyle}>{PATIENT_FORM.email.name}:</Box>
-                            <TextField size='small' placeholder={email} InputProps={{ readOnly: true }} />
-                        </Box>
-                        <Box sx={textFormCellStyle}>
-                            <Box sx={textStyle}>{PATIENT_FORM.cardNumber.name}:</Box>
-                            <TextField size='small' placeholder={cardNumber} InputProps={{ readOnly: true }} />
-                        </Box>
-                        <Box sx={textFormCellStyle}>
-                            <Box sx={textStyle}>{PATIENT_FORM.mobileNumber.name}:</Box>
-                            <TextField size='small' placeholder={mobileNumber} InputProps={{ readOnly: true }} />
-                        </Box>
-                        <Box sx={textFormCellStyle}>
-                            <Box sx={textStyle}>{PATIENT_FORM.registrationNumber.name}:</Box>
-                            <TextField size='small' placeholder={registrationNumber} InputProps={{ readOnly: true }} />
-                        </Box>
-                        <Box sx={textFormCellStyle}>
-                            <Box sx={textStyle}>{PATIENT_FORM.birthdate.name}:</Box>
-                            <TextField size='small' placeholder={birthdate} InputProps={{ readOnly: true }} />
-                        </Box>
+                        <Table>
+                            <TableHead>
+                                <TableCell>
+                                    Өвчтөний талаар
+                                </TableCell>
+                            </TableHead>
+                            <TableBody>
+                                {rows.map((row) => (
+                                    <TableRow key={row.name}>
+                                        <TableCell component="th" scope="row">
+                                            {row.name}
+                                        </TableCell>
+                                        <TableCell align="right">{row.field}</TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
                     </Box>
                 </Box>
                 <DefaultModal open={open} setOpen={setOpen} sx={{
