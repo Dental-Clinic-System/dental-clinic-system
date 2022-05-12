@@ -154,6 +154,23 @@ export const UPDATE_CLINIC = gql`
   }
 `;
 
+export const UPDATE_CLINIC_STATUS = gql`
+  mutation UpdateClinicStatus($_id: String, $status: String) {
+    updateClinicStatus(_id: $_id, status: $status) {
+      title
+      _id
+      address
+      district
+      khoroo
+      status
+      email
+      contact_number
+      clinic_name
+      password
+    }
+  }
+`;
+
 export const DELETE_CLINIC = gql`
   mutation DeleteClinic($_id: String) {
     deleteClinic(_id: $_id) {

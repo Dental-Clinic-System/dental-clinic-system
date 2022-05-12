@@ -8,6 +8,7 @@ import {
   DELETE_CLINIC,
   GET_CLINICS,
   UPDATE_CLINIC,
+  UPDATE_CLINIC_STATUS,
 } from "../graphql";
 import { AddBox, IndeterminateCheckBox } from "@mui/icons-material";
 
@@ -38,6 +39,7 @@ export const Clinic = () => {
   const [AddClinic] = useMutation(ADD_CLINIC);
   const [DeleteCLinic] = useMutation(DELETE_CLINIC);
   const [UpdateClinic] = useMutation(UPDATE_CLINIC);
+  const [UpdateClinicStatus] = useMutation(UPDATE_CLINIC_STATUS);
   const { loading, error, data } = useQuery(GET_CLINICS);
   const [openAddModal, setOpenAddModal] = useState(false);
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
@@ -136,15 +138,14 @@ export const Clinic = () => {
 
   const approveClinic = async () => {
     try {
-      console.log(actionParams);
       const data = {
-        ...actionParams,
+        _id: actionParams._id,
         status: "active",
       };
-      const res = await UpdateClinic({ variables: data });
+      const res = await UpdateClinicStatus({ variables: data });
       const updatedClinic = clinics.map((e: any) =>
-        e._id === res.data.updateClinic._id
-          ? { ...e, ...res.data.updateClinic }
+        e._id === res.data.updateClinicStatus._id
+          ? { ...e, ...res.data.updateClinicStatus }
           : e
       );
       setClinics(updatedClinic);
@@ -219,8 +220,6 @@ export const Clinic = () => {
       sortable: false,
       width: 150,
       renderCell: (params: any) => {
-        // console.log(params.row);
-        // setActionParams(params.row);
         const clinicStatus: string = params.row.status;
         return clinicStatus === "pending" ? (
           <>
