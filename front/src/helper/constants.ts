@@ -30,3 +30,9 @@ export const PATIENT_FORM = {
     birthdate: { name: BIRTH, placeholder: '2000-05-23' },
     cardNumber: { name: CARD_NUMBER, placeholder: '9830918902' }
 }
+export const APPOINTMENT_FORM = {
+    notes: 'Мэдээлэл',
+    startDate: 'Эхлэсэн өдөр',
+    endDate: 'Дууссан цаг',
+    title: 'цаг авалтын нэр'
+}
