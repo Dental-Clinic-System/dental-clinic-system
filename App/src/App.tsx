@@ -1,7 +1,8 @@
-import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+import { ApolloClient, ApolloProvider, gql, InMemoryCache } from '@apollo/client';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
+import { AppointmentPage } from './pages/appointment';
 import { Clinics } from './pages/clinics';
 import { Home } from './pages/home';
 import Login from './pages/login';
@@ -19,7 +20,7 @@ const App = () => {
     <ApolloProvider client={client}>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName={"Homer"}
+          initialRouteName={"Home"}
         >
           <Stack.Screen
             name="Home"
@@ -32,6 +33,10 @@ const App = () => {
           <Stack.Screen
             name="Clinics"
             component={Clinics}
+          />
+          <Stack.Screen
+            name="Appointment"
+            component={AppointmentPage}
           />
         </Stack.Navigator>
       </NavigationContainer>

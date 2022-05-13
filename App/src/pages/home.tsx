@@ -7,19 +7,34 @@ export const Home = ({ navigation }: any) => {
         auth().signOut()
         navigation.navigate('Login')
     }
+    console.log(auth().currentUser)
     return (
         <SafeAreaView>
             <Text>
                 home
             </Text>
-            <TouchableOpacity onPress={SignOut}>
-                <Text>
-                    signout
-                </Text>
-            </TouchableOpacity>
+            {
+                auth().currentUser == null ?
+                    <TouchableOpacity onPress={SignOut}>
+                        <Text>
+                            login
+                        </Text>
+                    </TouchableOpacity>
+                    :
+                    <TouchableOpacity onPress={SignOut}>
+                        <Text>
+                            signout
+                        </Text>
+                    </TouchableOpacity>
+            }
             <TouchableOpacity onPress={() => navigation.navigate('Clinics')}>
                 <Text>
                     clinics
+                </Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate('Appointment')}>
+                <Text>
+                    appointment
                 </Text>
             </TouchableOpacity>
         </SafeAreaView>
