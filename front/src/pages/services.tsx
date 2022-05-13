@@ -99,6 +99,26 @@ export const Services = () => {
       width: 150,
     },
     {
+      field: "serviceName",
+      headerName: "Үйлчилгээний нэр",
+      width: 150,
+    },
+    {
+      field: "serviceName",
+      headerName: "Үйлчилгээний нэр",
+      width: 150,
+    },
+    {
+      field: "serviceName",
+      headerName: "Үйлчилгээний нэр",
+      width: 150,
+    },
+    {
+      field: "serviceName",
+      headerName: "Үйлчилгээний нэр",
+      width: 150,
+    },
+    {
       field: "serviceCode",
       headerName: "Код",
       width: 110,
@@ -127,11 +147,12 @@ export const Services = () => {
   return (
     <Box>
       <Button
-        variant="contained"
+        variant="outlined"
         onClick={() => {
           setOpenAddModal(true);
           setServiceData({ clinicId: clinicId });
         }}
+        sx={{marginBottom:"10px"}}
       >
         Үйлчилгээ Нэмэх
       </Button>
@@ -194,7 +215,7 @@ export const Services = () => {
         />
       </DeleteModal>
       <DataGrid
-        sx={{ height: "60vh", width: "100%" }}
+        sx={{height: "80vh", width: "100%"}}
         getRowId={(row) => row._id}
         rows={services}
         columns={columns}
