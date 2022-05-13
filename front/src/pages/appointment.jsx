@@ -147,7 +147,7 @@ export const Appointment = () => {
 
   return (
     <>
-      <Button variant="outlined" onClick={() => setOpen(true)}>
+      <Button variant="outlined" sx={{marginBottom: "10px"}} onClick={() => setOpen(true)}>
         Цаг авах
       </Button>
       <CreateModal

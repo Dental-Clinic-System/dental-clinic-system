@@ -127,11 +127,12 @@ export const Services = () => {
   return (
     <Box>
       <Button
-        variant="contained"
+        variant="outlined"
         onClick={() => {
           setOpenAddModal(true);
           setServiceData({ clinicId: clinicId });
         }}
+        sx={{marginBottom:"10px"}}
       >
         Үйлчилгээ Нэмэх
       </Button>
