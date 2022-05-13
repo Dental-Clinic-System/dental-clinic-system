@@ -152,7 +152,7 @@ export const Users = () => {
           label={'Дугаар'}
         />
       </CreateModal>
-      <Button variant="contained" onClick={() => setAddStaffModal(true)}>
+      <Button sx={{marginBottom: "10px"}} variant="outlined" onClick={() => setAddStaffModal(true)}>
         Ажилтан нэмэх
       </Button>
       <DataGrid

@@ -294,6 +294,7 @@ export const Clinic = () => {
           setOpenAddModal(true);
         }}
         variant="outlined"
+        sx={{marginBottom:"10px"}}
       >
         Эмнэлэг нэмэх
       </Button>
