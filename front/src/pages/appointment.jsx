@@ -23,7 +23,7 @@ import { Edit } from '@mui/icons-material';
 import { Button, IconButton, Paper } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { AddAppointmentForm, CreateModal } from '../components/index';
-import { GetAppointments, GET_STAFFS, GET_PATIENTS } from '../graphql/queries';
+import { GetAppointments, GET_STAFFS, GET_PATIENTS, GET_SERVICES } from '../graphql/queries';
 import { APPOINTMENT } from '../helper/constants';
 
 export const Appointment = () => {
@@ -34,6 +34,10 @@ export const Appointment = () => {
   const { data: sData } = useQuery(GET_STAFFS, {
     variables: { type: 'doctor', clinicId: sessionStorage.getItem('clinicId') }
   });
+  const { data: seData } = useQuery(GET_SERVICES, {
+    variables: { clinicId: sessionStorage.getItem('clinicId') },
+  });
+  console.log(seData)
   const { data: pData } = useQuery(GET_PATIENTS);
   const [doctors, setDoctors] = useState([{}]);
   const [patients, setPatients] = useState([{}]);
@@ -130,6 +134,7 @@ export const Appointment = () => {
             buttonLabel="change"
             data={appointmentData}
             setOpen={setHOpenAndTooltip}
+            services={seData && seData.getServices}
           />
         </CreateModal>
       </AppointmentTooltip.Header>
@@ -156,6 +161,7 @@ export const Appointment = () => {
           staffs={doctors}
           buttonLabel="add"
           setOpen={setOpen}
+          services={seData && seData.getServices}
         />
       </CreateModal>
       <Paper style={{ textAlign: 'center', zIndex: '100' }}>

@@ -2,10 +2,21 @@ import { DateTimePicker, LocalizationProvider } from "@mui/lab"
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { Autocomplete, Box, Button, FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/material"
 import { useEffect, useState } from "react"
-import { useMutation } from "@apollo/client";
-import { ADD_APPOINTMENT, DELETE_APPOINTMENT, UPDATE_APPOINTMENT } from "../../graphql";
+import { useMutation, useQuery } from "@apollo/client";
+import { ADD_APPOINTMENT, DELETE_APPOINTMENT, GET_SERVICES, UPDATE_APPOINTMENT } from "../../graphql";
 
-export const AddAppointmentForm = ({ data, setOpen, staffs, buttonLabel, showDelete, setData, patients }: any) => {
+type AppointmentFormType = {
+    data?: any,
+    setOpen: Function,
+    staffs: any, 
+    buttonLabel: 'change' | 'add',
+    showDelete?: boolean,
+    setData: Function,
+    patients: any, 
+    services: any
+}
+
+export const AddAppointmentForm = ({ data, setOpen, staffs, buttonLabel, showDelete, setData, patients, services }: AppointmentFormType) => {
     const [AddAppointment] = useMutation(ADD_APPOINTMENT)
     const [UpdateAppointment] = useMutation(UPDATE_APPOINTMENT)
     const [DeleteAppointment] = useMutation(DELETE_APPOINTMENT)
@@ -15,15 +26,20 @@ export const AddAppointmentForm = ({ data, setOpen, staffs, buttonLabel, showDel
     const [staff, setStaff] = useState(data ? data.staffId : staffs[0].id)
     const [startTime, setStartTime] = useState(data && data.startDate)
     const [endTime, setEndTime] = useState(data && data.endDate)
-    const [patient, setPatient] = useState({text: '', _id: ''})
+    const [patient, setPatient] = useState({ text: '', _id: '' })
+    const [service, setService] = useState({ serviceName: '', _id: '' })
 
     useEffect(() => {
-        console.log(data, patients)
         if (data && patients) {
             let pat = patients.find((e: any) => e.id == data.patientId)
             setPatient(pat)
         }
-    }, [data, patients])
+
+        if (data && services) {
+            let ser = services.find((e: any) => e._id == data.serviceId)
+            setService(ser)
+        }
+    }, [data, patients, services])
 
     const change = () => {
         let changed = {
@@ -33,6 +49,7 @@ export const AddAppointmentForm = ({ data, setOpen, staffs, buttonLabel, showDel
             startDate: startTime,
             endDate: endTime,
             patientId: patient._id,
+            serviceId: service._id
         }
 
         setData((e: any) => {
@@ -63,7 +80,7 @@ export const AddAppointmentForm = ({ data, setOpen, staffs, buttonLabel, showDel
             patientId: patient._id,
             clinicId: sessionStorage.getItem('clinicId'),
             status: "active",
-            serviceId: ""
+            serviceId: service._id
         }
 
         await AddAppointment({ variables: formattedData })
@@ -119,7 +136,24 @@ export const AddAppointmentForm = ({ data, setOpen, staffs, buttonLabel, showDel
                     options={patients}
                     renderOption={(props, option) => <li {...props}>{option.text}</li>}
                     renderInput={(params) => (
-                        <TextField sx={{ marginBottom: '20px', width: '100%' }} {...params} size='small' label="Өвчтөн" />
+                        <TextField required sx={{ marginBottom: '20px', width: '100%' }} {...params} size='small' label="Өвчтөн" />
+                    )}
+                />
+                <Autocomplete
+                    value={service}
+                    onChange={(event, newValue) => {
+                        if (newValue && newValue.serviceName) {
+                            setService(newValue)
+                        }
+                    }}
+                    getOptionLabel={(option) => {
+                        return option.serviceName;
+                    }}
+                    selectOnFocus
+                    options={services}
+                    renderOption={(props, option) => <li {...props}>{option.serviceName}</li>}
+                    renderInput={(params) => (
+                        <TextField required sx={{ marginBottom: '20px', width: '100%' }} {...params} size='small' label="Эмчилгээ" />
                     )}
                 />
                 <LocalizationProvider dateAdapter={AdapterDateFns}>
