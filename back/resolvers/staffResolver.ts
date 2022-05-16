@@ -24,10 +24,10 @@ const addStaff = async (_: any, { clinicId, username, last_name, first_name, pho
     return error;
   }
 };
-const getStaff = async (_: any, params: any) => {
+const getStaff = async (_: any, { clinicId, _id }: any) => {
   const staff = await Staff.findOne({
-    clinicId: params.clinicId,
-    _id: params._id,
+    clinicId: clinicId,
+    _id: _id,
   });
   return staff;
 };
