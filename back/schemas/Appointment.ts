@@ -6,7 +6,7 @@ const AppointmentSchema = new Schema({
     patientId: { type: Schema.Types.ObjectId, ref: "Patient" },
     clinic: { type: Schema.Types.ObjectId, ref: "Clinic" },
     clinicId: { type: Schema.Types.ObjectId },
-    serviceId: String,
+    serviceId: { type: Schema.Types.ObjectId },
     status: {
         type: String,
         enum: ["pending", "active", "inactive"],
