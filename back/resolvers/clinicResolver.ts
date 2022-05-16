@@ -77,6 +77,7 @@ const getClinics = async (_: any, params: any) => {
   const clinics = await Clinic.find({
     clinicId: params.clinicId,
   });
+  console.log('here', clinics)
   return clinics;
 };
 
