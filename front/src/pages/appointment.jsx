@@ -130,7 +130,6 @@ export const Appointment = () => {
             patients={patients}
             setData={setAppointments}
             staffs={doctors}
-            showDelete
             buttonLabel="change"
             data={appointmentData}
             setOpen={setHOpenAndTooltip}

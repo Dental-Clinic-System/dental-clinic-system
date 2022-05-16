@@ -1,6 +1,6 @@
 import { DateTimePicker, LocalizationProvider } from "@mui/lab"
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { Autocomplete, Box, Button, FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/material"
+import { Autocomplete, Box, Button, FormControl, InputLabel, MenuItem, Select, TextField, Typography } from "@mui/material"
 import { useEffect, useState } from "react"
 import { useMutation, useQuery } from "@apollo/client";
 import { ADD_APPOINTMENT, DELETE_APPOINTMENT, GET_SERVICES, UPDATE_APPOINTMENT } from "../../graphql";
@@ -8,15 +8,14 @@ import { ADD_APPOINTMENT, DELETE_APPOINTMENT, GET_SERVICES, UPDATE_APPOINTMENT }
 type AppointmentFormType = {
     data?: any,
     setOpen: Function,
-    staffs: any, 
+    staffs: any,
     buttonLabel: 'change' | 'add',
-    showDelete?: boolean,
     setData: Function,
-    patients: any, 
+    patients: any,
     services: any
 }
 
-export const AddAppointmentForm = ({ data, setOpen, staffs, buttonLabel, showDelete, setData, patients, services }: AppointmentFormType) => {
+export const AddAppointmentForm = ({ data, setOpen, staffs, buttonLabel, setData, patients, services }: AppointmentFormType) => {
     const [AddAppointment] = useMutation(ADD_APPOINTMENT)
     const [UpdateAppointment] = useMutation(UPDATE_APPOINTMENT)
     const [DeleteAppointment] = useMutation(DELETE_APPOINTMENT)
@@ -28,6 +27,7 @@ export const AddAppointmentForm = ({ data, setOpen, staffs, buttonLabel, showDel
     const [endTime, setEndTime] = useState(data && data.endDate)
     const [patient, setPatient] = useState({ text: '', _id: '' })
     const [service, setService] = useState({ serviceName: '', _id: '' })
+    const [error, setError] = useState('')
 
     useEffect(() => {
         if (data && patients) {
@@ -41,50 +41,67 @@ export const AddAppointmentForm = ({ data, setOpen, staffs, buttonLabel, showDel
         }
     }, [data, patients, services])
 
+    // CRUD
+
     const change = () => {
-        let changed = {
-            title,
-            notes,
-            staffId: staff,
-            startDate: startTime,
-            endDate: endTime,
-            patientId: patient._id,
-            serviceId: service._id
-        }
-
-        setData((e: any) => {
-            let tempdata = e;
-
-            tempdata = tempdata.map((appointment: any) => {
-                if (appointment.id == data.id) {
-                    UpdateAppointment({ variables: { ...changed, id: appointment.id } })
-                    return { ...appointment, ...changed }
-                } else {
-                    return appointment;
+        if (title && staff && startTime && endTime) {
+            if (startTime !== endTime) {
+                let changed = {
+                    title,
+                    notes,
+                    staffId: staff,
+                    startDate: startTime,
+                    endDate: endTime,
+                    patientId: patient._id,
+                    serviceId: service._id
                 }
-            });
-
-            return tempdata;
-        })
-
-        setOpen(false)
+        
+                setData((e: any) => {
+                    let tempdata = e;
+        
+                    tempdata = tempdata.map((appointment: any) => {
+                        if (appointment.id == data.id) {
+                            UpdateAppointment({ variables: { ...changed, id: appointment.id } })
+                            return { ...appointment, ...changed }
+                        } else {
+                            return appointment;
+                        }
+                    });
+        
+                    return tempdata;
+                })
+        
+                setOpen(false)
+            }
+            setError('Эхлэх ба дуусах цаг ижил байж болохгүй')
+            return
+        } 
+        setError('Бүгдийг нь бөглөнө үү')
     }
 
     const add = async () => {
-        let formattedData = {
-            title,
-            notes,
-            staffId: staff,
-            startDate: startTime,
-            endDate: endTime,
-            patientId: patient._id,
-            clinicId: sessionStorage.getItem('clinicId'),
-            status: "active",
-            serviceId: service._id
-        }
-
-        await AddAppointment({ variables: formattedData })
-        window.location.reload()
+        if (title && staff && startTime && endTime) {
+            if (startTime !== endTime) {
+                let formattedData = {
+                    title,
+                    notes,
+                    staffId: staff,
+                    startDate: startTime,
+                    endDate: endTime,
+                    patientId: patient._id,
+                    clinicId: sessionStorage.getItem('clinicId'),
+                    status: "active",
+                    serviceId: service._id
+                }
+        
+                await AddAppointment({ variables: formattedData })
+                window.location.reload()
+                return
+            }
+            setError('Эхлэх ба дуусах цаг ижил байж болохгүй')
+            return
+        } 
+        setError('Бүгдийг нь бөглөнө үү')
     }
 
     const deleteFunction = () => {
@@ -171,24 +188,29 @@ export const AddAppointmentForm = ({ data, setOpen, staffs, buttonLabel, showDel
                     />
                 </LocalizationProvider>
                 <TextField sx={{ marginBottom: '20px', width: '100%' }} rows={4} multiline label='Нэмэлт мэдээлэл' size='small' value={notes} onChange={(e) => setNotes(e.target.value)} />
+                <Typography sx={{width: '100%', marginBottom: error ? '20px' : '0px'}} textAlign='center' color='error'>{error && error}</Typography>
             </Box>
             <Box sx={{ width: '100%', display: 'flex', justifyContent: 'space-around' }}>
-                <Button variant='outlined' size='small' onClick={() => setOpen(false)}>Буцах</Button>
-                {showDelete &&
-                    <Button
-                        variant='outlined'
-                        color='error'
-                        onClick={() => { deleteFunction() }}
-                        size='small'
-                    >
-                        Устгах
-                    </Button>
-                }
                 {buttonLabel == 'change' &&
-                    <Button variant='outlined' size='small' color='success' onClick={() => change()}>Засах</Button>
+                    <>
+                        <Button sx={{ flex: 1, marginRight: '10px' }} variant='outlined' size='small' onClick={() => setOpen(false)}>Буцах</Button>
+                        <Button
+                            variant='outlined'
+                            color='error'
+                            onClick={() => { deleteFunction() }}
+                            size='small'
+                            sx={{ flex: 1, marginRight: '10px' }}
+                        >
+                            Устгах
+                        </Button>
+                        <Button sx={{ flex: 1 }} variant='outlined' size='small' color='success' onClick={() => change()}>Засах</Button>
+                    </>
                 }
                 {buttonLabel == 'add' &&
-                    <Button variant='outlined' size='small' color='success' onClick={() => add()}>Цаг авах</Button>
+                    <>
+                        <Button sx={{ flex: 1, marginRight: '10px' }} variant='outlined' size='small' color='error' onClick={() => setOpen(false)}>Буцах</Button>
+                        <Button sx={{ flex: 2 }} variant='outlined' size='small' onClick={() => add()}>Цаг авах</Button>
+                    </>
                 }
             </Box>
         </Box>
