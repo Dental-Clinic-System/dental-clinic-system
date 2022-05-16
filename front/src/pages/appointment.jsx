@@ -158,7 +158,7 @@ export const Appointment = () => {
           setOpen={setOpen}
         />
       </CreateModal>
-      <Paper style={{ textAlign: 'center', zIndex: '100' }}>
+      <Paper style={{ textAlign: 'center', marginTop: "10px", zIndex: '100' }}>
         <Scheduler data={appointments}>
           <ViewState CurrentDate="2022-04-27" defaultCurrentViewName="Week" />
 
