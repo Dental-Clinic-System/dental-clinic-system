@@ -146,6 +146,21 @@ export const GET_STAFFS = gql`
     }
   }
 `;
+
+export const GET_STAFF = gql`
+  query getStaff($clinicId: String, $id: String) {
+    getStaff(clinicId: $clinicId, _id: $id) {
+      _id
+      username
+      first_name
+      last_name
+      email
+      phone
+      availability
+      type
+    }
+  }
+`;
 export const GetAppointments = gql`
   query GetAppointments($clinicId: String, $patientId: String) {
     getAppointments(clinicId: $clinicId, patientId: $patientId) {
