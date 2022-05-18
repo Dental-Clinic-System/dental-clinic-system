@@ -211,3 +211,16 @@ export const GET_CLINIC_BY_TITLE = gql`
     }
   }
 `;
+
+export const GET_SUPPLIES = gql`
+  query GetSupplies($clinicId: String) {
+    getSupplies(clinicId: $clinicId) {
+      _id
+      clinicId
+      itemName
+      barCode
+      itemCode
+      quantity
+    }
+  }
+`;

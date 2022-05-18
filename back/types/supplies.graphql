@@ -1,0 +1,28 @@
+type Supplies {
+  _id: String
+  clinicId: String
+  itemName: String
+  itemCode: String
+  barCode: String
+  quantity: String
+}
+type Query {
+  getSupplies(clinicId: String): [Supplies]
+}
+type Mutation {
+  addSupplies(
+    clinicId: String
+    itemName: String
+    itemCode: String
+    barCode: String
+    quantity: String
+  ): Supplies
+  updateSupplies(
+    _id: String
+    itemName: String
+    itemCode: String
+    barCode: String
+    quantity: String
+  ): Supplies
+  deleteSupplies(_id: String): Supplies
+}

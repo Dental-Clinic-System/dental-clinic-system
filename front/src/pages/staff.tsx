@@ -123,21 +123,21 @@ export const Users = () => {
         />
         <ModalInput
           onChange={(e: any) =>
-            addStaffInfo({ ...staffInfo, firstName: e.target.value })
-          }
-          label={'Нэр'}
-        />
-        <ModalInput
-          onChange={(e: any) =>
             addStaffInfo({ ...staffInfo, lastName: e.target.value })
           }
           label={'Овог'}
         />
         <ModalInput
           onChange={(e: any) =>
+            addStaffInfo({ ...staffInfo, firstName: e.target.value })
+          }
+          label={'Нэр'}
+        />
+        <ModalInput
+          onChange={(e: any) =>
             addStaffInfo({ ...staffInfo, email: e.target.value })
           }
-          label={'Мэйл'}
+          label={'Имэйл'}
         />
         <ModalInput
           onChange={(e: any) =>
@@ -149,10 +149,14 @@ export const Users = () => {
           onChange={(e: any) =>
             addStaffInfo({ ...staffInfo, phone: e.target.value })
           }
-          label={'Дугаар'}
+          label={'Утасны дугаар'}
         />
       </CreateModal>
-      <Button sx={{marginBottom: "10px"}} variant="outlined" onClick={() => setAddStaffModal(true)}>
+      <Button
+        sx={{ marginBottom: '10px' }}
+        variant="outlined"
+        onClick={() => setAddStaffModal(true)}
+      >
         Ажилтан нэмэх
       </Button>
       <DataGrid

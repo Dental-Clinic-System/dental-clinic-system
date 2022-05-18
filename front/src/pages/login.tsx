@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   Avatar,
   Box,
@@ -8,42 +8,42 @@ import {
   Grid,
   Link,
   TextField,
-  Typography,
-} from "@mui/material";
-import { makeStyles } from "@material-ui/core";
-import { useNavigate } from "react-router";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import { useLazyQuery, useQuery } from "@apollo/client";
-import { IError, ILogin } from "../interfaces/ILogin";
-import { GET_CLINIC_BY_TITLE, LOGIN } from "../graphql";
-import { useAuth } from "../providers/AuthProvider";
-import { Loading } from "../components";
+  Typography
+} from '@mui/material';
+import { makeStyles } from '@material-ui/core';
+import { useNavigate } from 'react-router';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import { useLazyQuery, useQuery } from '@apollo/client';
+import { IError, ILogin } from '../interfaces/ILogin';
+import { GET_CLINIC_BY_TITLE, LOGIN } from '../graphql';
+import { useAuth } from '../providers/AuthProvider';
+import { Loading } from '../components';
 
 const useStyles = makeStyles({
   paperContainer: {
-    width: "100vw",
-    height: "100vh",
-    display: "flex",
-    justifyContent: "center",
+    width: '100vw',
+    height: '100vh',
+    display: 'flex',
+    justifyContent: 'center'
   },
   container: {
     marginTop: 8,
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center'
   },
   submitButton: {
     mt: 3,
     mb: 2,
-    backgroundColor: "#00d0cf",
-  },
+    backgroundColor: '#00d0cf'
+  }
 });
 
 export const LogIn = () => {
-  const clinic_name = window.location.hostname.split(".")[0] || "";
+  const clinic_name = window.location.hostname.split('.')[0] || '';
 
   const { data, loading } = useQuery(GET_CLINIC_BY_TITLE, {
-    variables: { clinic_name: clinic_name },
+    variables: { clinic_name: clinic_name }
   });
   const { getClinicByClinicName } = data || {};
 
@@ -52,11 +52,11 @@ export const LogIn = () => {
 
   const [error, setError] = useState<IError>({
     emailError: false,
-    passwordError: false,
+    passwordError: false
   });
   const [info, setInfo] = useState<ILogin>({
-    email: "test@gmail.com",
-    password: "123456",
+    email: 'test@gmail.com',
+    password: '123456'
   });
 
   const [login] = useLazyQuery(LOGIN);
@@ -66,17 +66,17 @@ export const LogIn = () => {
     console.log({
       clinicId: getClinicByClinicName._id,
       email: info.email,
-      password: info.password,
+      password: info.password
     });
     const { data, error: loginError } = await login({
       variables: {
         clinicId:
-          info.email !== "superadmin@gmail.com"
+          info.email !== 'superadmin@gmail.com'
             ? getClinicByClinicName._id
-            : "999fca30c1cf951c042bd5ec",
+            : '999fca30c1cf951c042bd5ec',
         email: info.email,
-        password: info.password,
-      },
+        password: info.password
+      }
     });
 
     if (!loginError) {
@@ -85,13 +85,13 @@ export const LogIn = () => {
 
       console.log(clinic);
 
-      if (!loginStaff) alert("user not found");
+      if (!loginStaff) alert('user not found');
       else {
-        window.sessionStorage.setItem("clinicId", clinicId);
-        window.sessionStorage.setItem("username", username);
-        window.sessionStorage.setItem("clinicTitle", clinic?.title);
+        window.sessionStorage.setItem('clinicId', clinicId);
+        window.sessionStorage.setItem('username', username);
+        window.sessionStorage.setItem('clinicTitle', clinic?.title);
 
-        navigate("/");
+        navigate('/');
       }
     }
   };
@@ -114,14 +114,14 @@ export const LogIn = () => {
     <Container component="main" maxWidth="xs" className={styles.paperContainer}>
       <CssBaseline />
       <Box className={styles.container}>
-        <Avatar sx={{ m: 1, bgcolor: "#00d0cf" }}>
+        <Avatar sx={{ m: 1, bgcolor: '#00d0cf' }}>
           <LockOutlinedIcon />
         </Avatar>
 
         <Typography component="h1" variant="h5">
           {getClinicByClinicName
-            ? `${getClinicByClinicName.title} -т Нэвтрэх`
-            : "Бүртгэлтэй эмнэлэг олдсонгүй!!!"}
+            ? `${getClinicByClinicName.title}`
+            : 'Бүртгэл олдсонгүй'}
         </Typography>
 
         <Box sx={{ mt: 1 }}>
@@ -131,11 +131,11 @@ export const LogIn = () => {
             required
             fullWidth
             id="email"
-            label="Мэйл"
+            label="Имэйл"
             name="email"
             autoComplete="email"
             autoFocus
-            onChange={(e) => setInfo({ ...info, email: e.target.value })}
+            onChange={(e) => setInfo({ ...info, email: e.target.value.trim() })}
           />
           <TextField
             error={error.passwordError}
@@ -147,7 +147,9 @@ export const LogIn = () => {
             type="password"
             id="password"
             autoComplete="current-password"
-            onChange={(e) => setInfo({ ...info, password: e.target.value })}
+            onChange={(e) =>
+              setInfo({ ...info, password: e.target.value.trim() })
+            }
           />
 
           <Button
