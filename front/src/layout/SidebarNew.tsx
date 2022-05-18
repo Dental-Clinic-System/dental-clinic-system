@@ -21,11 +21,6 @@ export const SideBarNew: FC = () => {
       title: "Өвчтөнүүд",
       icon: <AirlineSeatReclineExtraIcon />,
     },
-    {
-      href: "patient-histories",
-      title: "Өвчтөний түүх",
-      icon: <HistoryIcon />,
-    },
     { href: "supplies", title: "Бараа материал", icon: <Inventory /> },
     { href: "report", title: "Тайлан", icon: <InsertDriveFile /> },
   ];

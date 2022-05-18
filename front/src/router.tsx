@@ -59,10 +59,6 @@ const router: RouteObject[] = [
     element: <Supplies />,
   },
   {
-    path: "/patient-history/:id/",
-    element: <PatientHistoryScreen />,
-  },
-  {
     path: "/chart/:id",
     element: <Chart />,
   },
