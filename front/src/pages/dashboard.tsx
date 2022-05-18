@@ -12,7 +12,7 @@ import { useEffect } from "react";
 import { DASHBOARD } from "../helper/constants";
 
 export const Dashboard = () => {
-  const TITLE = sessionStorage.getItem("clinicTitle");
+  const TITLE = sessionStorage.getItem("clinicTitle") === "Chandmani" ? "Чандмань" : sessionStorage.getItem("clinicTitle");
 
   const { data } = useQuery(GET_PATIENTS);
   const { getPatients } = data || { getPatients: [] };

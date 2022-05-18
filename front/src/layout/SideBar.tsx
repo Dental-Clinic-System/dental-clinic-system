@@ -29,7 +29,7 @@ export const Sidebar = () => {
   return (
     <Box>
       <Toolbar />
-      {sessionStorage.getItem("clinicTitle")}
+      {sessionStorage.getItem("clinicTitle") === "Chandmani" ? "Чандмань" : sessionStorage.getItem("clinicTitle")}
       <button onClick={signOutTemp}>Sign out</button>
       <Divider />
       <List>
