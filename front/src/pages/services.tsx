@@ -1,15 +1,15 @@
-import { ModalInput, CreateModal, DeleteModal } from "../components";
-import { useState, useEffect } from "react";
-import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import { useQuery, useMutation } from "@apollo/client";
-import { Button, Box, Typography } from "@mui/material";
+import { ModalInput, CreateModal, DeleteModal } from '../components';
+import { useState, useEffect } from 'react';
+import { DataGrid, GridColDef } from '@mui/x-data-grid';
+import { useQuery, useMutation } from '@apollo/client';
+import { Button, Box, Typography } from '@mui/material';
 import {
   GET_SERVICES,
   ADD_SERVICE,
   UPDATE_SERVICE,
-  DELETE_SERVICE,
-} from "../graphql";
-import { SERVICE } from "../helper/constants";
+  DELETE_SERVICE
+} from '../graphql';
+import { SERVICE } from '../helper/constants';
 
 type serviceType = {
   _id: string;
@@ -20,14 +20,14 @@ type serviceType = {
 };
 
 export const Services = () => {
-  const clinicId = window.sessionStorage.getItem("clinicId");
+  const clinicId = window.sessionStorage.getItem('clinicId');
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const [openAddModal, setOpenAddModal] = useState(false);
   const [serviceData, setServiceData] = useState<any>({ clinicId: clinicId });
   const [selectedId, setselectedId] = useState<any>({});
   const [services, setServices] = useState<any>([]);
   const { loading, error, data } = useQuery(GET_SERVICES, {
-    variables: { clinicId: clinicId },
+    variables: { clinicId: clinicId }
   });
   const [AddService] = useMutation(ADD_SERVICE);
   const [UpdateService] = useMutation(UPDATE_SERVICE);
@@ -48,7 +48,7 @@ export const Services = () => {
   const updateChangeData = (key: string, data: string) => {
     setServiceData({
       ...serviceData,
-      [key]: data,
+      [key]: data
     });
   };
 
@@ -92,56 +92,56 @@ export const Services = () => {
   };
 
   const columns: GridColDef[] = [
-    { field: "_id", headerName: "ID", width: 90 },
+    { field: '_id', headerName: 'ID', width: 90 },
     {
-      field: "serviceName",
-      headerName: "Үйлчилгээний нэр",
-      width: 150,
+      field: 'serviceName',
+      headerName: 'Үйлчилгээний нэр',
+      width: 150
     },
     {
-      field: "serviceName",
-      headerName: "Үйлчилгээний нэр",
-      width: 150,
+      field: 'serviceName',
+      headerName: 'Үйлчилгээний нэр',
+      width: 150
     },
     {
-      field: "serviceName",
-      headerName: "Үйлчилгээний нэр",
-      width: 150,
+      field: 'serviceName',
+      headerName: 'Үйлчилгээний нэр',
+      width: 150
     },
     {
-      field: "serviceName",
-      headerName: "Үйлчилгээний нэр",
-      width: 150,
+      field: 'serviceName',
+      headerName: 'Үйлчилгээний нэр',
+      width: 150
     },
     {
-      field: "serviceName",
-      headerName: "Үйлчилгээний нэр",
-      width: 150,
+      field: 'serviceName',
+      headerName: 'Үйлчилгээний нэр',
+      width: 150
     },
     {
-      field: "serviceCode",
-      headerName: "Код",
-      width: 110,
+      field: 'serviceCode',
+      headerName: 'Код',
+      width: 110
     },
     {
-      field: "price",
-      headerName: "Үнэ",
-      type: "number",
-      width: 110,
+      field: 'price',
+      headerName: 'Үнэ',
+      type: 'number',
+      width: 110
     },
     {
-      field: "description",
-      headerName: "Тодорхойлолт",
-      width: 250,
+      field: 'description',
+      headerName: 'Тодорхойлолт',
+      width: 250
     },
     {
-      field: "action",
-      headerName: "Үйлдэл",
+      field: 'action',
+      headerName: 'Үйлдэл',
       sortable: false,
       renderCell: () => {
         return <Button onClick={() => setOpenDeleteModal(true)}>Засах</Button>;
-      },
-    },
+      }
+    }
   ];
 
   return (
@@ -152,41 +152,41 @@ export const Services = () => {
           setOpenAddModal(true);
           setServiceData({ clinicId: clinicId });
         }}
-        sx={{marginBottom:"10px"}}
+        sx={{ marginBottom: '10px' }}
       >
         Үйлчилгээ Нэмэх
       </Button>
       <CreateModal
         open={openAddModal}
         setOpen={setOpenAddModal}
-        addButtonName={"Үүсгэх"}
+        addButtonName={'Үүсгэх'}
         createFunction={addData}
       >
         <Typography id="modal-modal-title" variant="h6" component="h2">
           Үйлчилгээ Нэмэх
         </Typography>
         <ModalInput
-          label={"Үйлчилгээний нэр"}
-          onChange={(e: any) => updateChangeData("serviceName", e.target.value)}
+          label={'Үйлчилгээний нэр'}
+          onChange={(e: any) => updateChangeData('serviceName', e.target.value)}
         />
         <ModalInput
-          label={"Код"}
-          onChange={(e: any) => updateChangeData("serviceCode", e.target.value)}
+          label={'Код'}
+          onChange={(e: any) => updateChangeData('serviceCode', e.target.value)}
         />
         <ModalInput
-          label={"Үнэ"}
-          onChange={(e: any) => updateChangeData("price", e.target.value)}
+          label={'Үнэ'}
+          onChange={(e: any) => updateChangeData('price', e.target.value)}
         />
         <ModalInput
-          label={"Тодорхойлолт"}
-          onChange={(e: any) => updateChangeData("description", e.target.value)}
+          label={'Тодорхойлолт'}
+          onChange={(e: any) => updateChangeData('description', e.target.value)}
         />
       </CreateModal>
       <DeleteModal
         open={openDeleteModal}
         setOpen={setOpenDeleteModal}
-        deleteButtonName={"Устгах"}
-        fixButtonName={"Засах"}
+        deleteButtonName={'Устгах'}
+        fixButtonName={'Засах'}
         deleteFunction={deleteData}
         fixFunction={updateData}
       >
@@ -194,28 +194,28 @@ export const Services = () => {
           Үйлчилгээ засах
         </Typography>
         <ModalInput
-          label={"Үйлчилгээний нэр"}
-          onChange={(e: any) => updateChangeData("serviceName", e.target.value)}
+          label={'Үйлчилгээний нэр'}
+          onChange={(e: any) => updateChangeData('serviceName', e.target.value)}
           value={serviceData?.serviceName}
         />
         <ModalInput
-          label={"Код"}
-          onChange={(e: any) => updateChangeData("serviceCode", e.target.value)}
+          label={'Код'}
+          onChange={(e: any) => updateChangeData('serviceCode', e.target.value)}
           value={serviceData?.serviceCode}
         />
         <ModalInput
-          label={"Үнэ"}
-          onChange={(e: any) => updateChangeData("price", e.target.value)}
+          label={'Үнэ'}
+          onChange={(e: any) => updateChangeData('price', e.target.value)}
           value={serviceData?.price}
         />
         <ModalInput
-          label={"Тодорхойлолт"}
-          onChange={(e: any) => updateChangeData("description", e.target.value)}
+          label={'Тодорхойлолт'}
+          onChange={(e: any) => updateChangeData('description', e.target.value)}
           value={serviceData?.description}
         />
       </DeleteModal>
       <DataGrid
-        sx={{height: "80vh", width: "100%"}}
+        sx={{ height: '80vh', width: '100%' }}
         getRowId={(row) => row._id}
         rows={services}
         columns={columns}

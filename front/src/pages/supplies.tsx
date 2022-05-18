@@ -108,7 +108,7 @@ export const Supplies = () => {
         onClick={() => setOpenAddModal(true)}
         sx={{ marginBottom: '10px' }}
       >
-        Материал Нэмэх
+        Бараа материал Нэмэх
       </Button>
       <CreateModal
         open={openAddModal}
@@ -117,7 +117,7 @@ export const Supplies = () => {
         createFunction={addData}
       >
         <Typography id="modal-modal-title" variant="h6" component="h2">
-          Материал Нэмэх
+          Бараа материал Нэмэх
         </Typography>
         <ModalInput
           label={'Материалын нэр'}
@@ -145,7 +145,7 @@ export const Supplies = () => {
         fixFunction={updateData}
       >
         <Typography id="modal-modal-title" variant="h6" component="h2">
-          Материал засах
+          Засах
         </Typography>
         <ModalInput
           label={'Материалын нэр'}
