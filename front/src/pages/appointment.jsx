@@ -52,7 +52,7 @@ export const Appointment = () => {
     if (sData) {
       await sData?.getStaffs?.map((e, i) => {
         let temp = {
-          text: `${e.first_name} ${e.last_name}`,
+          text: `${e.last_name} ${e.first_name}`,
           id: e._id,
           staffId: e._id,
           clinicId: sessionStorage.getItem('clinicId')
