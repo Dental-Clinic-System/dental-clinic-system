@@ -1,3 +1,5 @@
+
+
 import { ReactNode, CSSProperties } from 'react';
 import { Typography } from '@material-ui/core';
 import { Box, Container } from '@mui/material';
@@ -15,7 +17,8 @@ const Td = ({
         border: '1px solid black',
         fontSize: '12px',
         fontWeight: '500',
-        width: '50%',
+        width: '20%',
+        textAlign: 'center',
         ...style
       }}
     >
@@ -23,13 +26,20 @@ const Td = ({
     </td>
   );
 };
-const Th = ({ children }: { children?: ReactNode }) => {
+const Th = ({
+  children,
+  style
+}: {
+  children?: ReactNode;
+  style?: CSSProperties;
+}) => {
   return (
     <th
       style={{
         border: '1px solid black',
         fontSize: 14,
-        fontWeight: '600'
+        fontWeight: '600',
+        ...style
       }}
     >
       {children}
@@ -43,7 +53,7 @@ export const HealthDepartReport = () => {
       <Box
         style={{
           width: 595,
-          height: 842,
+          // height: 842,
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
@@ -53,7 +63,7 @@ export const HealthDepartReport = () => {
         id="healthDepart"
       >
         <Typography style={{ fontSize: 16, fontWeight: 600 }}>
-          НИЙСЛЭЛИЙН ЭРҮҮЛ МЭНДИЙН ГАЗАРТ
+          Амбулаторын үзлэг / Насны бүлэг
         </Typography>
         <Box display="flex" justifyContent="space-between" width="100%" mt={5}>
           <Typography
@@ -77,44 +87,235 @@ export const HealthDepartReport = () => {
           }}
         >
           <tr style={{ border: '1px solid black' }}>
-            <Th>Нэр</Th>
-            <Th>Тоо</Th>
+            <Th></Th>
+            <Th>Оношилгоо эмчилгээ</Th>
+            <Th>Гажиг засал</Th>
+            <Th>Согог засал</Th>
+            <Th>Мэс засал</Th>
           </tr>
           <tr style={{ border: '1px solid black' }}>
-            <Td>0-5 нас</Td>
-            <Td>120</Td>
+            <Td>Үзлэгийн тоо бүгд</Td>
+            <Td>15</Td>
+            <Td>0</Td>
+            <Td>1</Td>
+            <Td>2</Td>
           </tr>
           <tr style={{ border: '1px solid black' }}>
-            <Td>6-12 нас</Td>
-            <Td>100</Td>
+            <Td>Эрэгтэй</Td>
+            <Td>7</Td>
+            <Td>0</Td>
+            <Td>1</Td>
+            <Td>2</Td>
           </tr>
           <tr style={{ border: '1px solid black' }}>
-            <Td>13-18 нас</Td>
-            <Td>32</Td>
+            <Td>Эмэгтэй</Td>
+            <Td>8</Td>
+            <Td>0</Td>
+            <Td>0</Td>
+            <Td>0</Td>
           </tr>
           <tr style={{ border: '1px solid black' }}>
-            <Td>18-29 нас</Td>
-            <Td>89</Td>
+            <Td>Ам Булаторын үзлэгийн тоо</Td>
+            <Td>15</Td>
+            <Td>0</Td>
+            <Td>1</Td>
+            <Td>2</Td>
           </tr>
           <tr style={{ border: '1px solid black' }}>
-            <Td>30-44 нас</Td>
-            <Td>208</Td>
+            <Td>Анх</Td>
+            <Td>14</Td>
+            <Td>0</Td>
+            <Td>1</Td>
+            <Td>1</Td>
           </tr>
           <tr style={{ border: '1px solid black' }}>
-            <Td>45-64 нас</Td>
-            <Td>243</Td>
+            <Td>Давтан</Td>
+            <Td>1</Td>
+            <Td>0</Td>
+            <Td>0</Td>
+            <Td>1</Td>
           </tr>
           <tr style={{ border: '1px solid black' }}>
-            <Td>65-81 нас</Td>
-            <Td>176</Td>
+            <Td>1 хүртэлх: Эрэгтэй</Td>
+            <Td>0</Td>
+            <Td>0</Td>
+            <Td>0</Td>
+            <Td>0</Td>
           </tr>
           <tr style={{ border: '1px solid black' }}>
-            <Td>Анх удаа үйлчлүүлсэн</Td>
-            <Td>125</Td>
+            <Td>1 хүртэлх: Эмэгтэй</Td>
+            <Td>0</Td>
+            <Td>0</Td>
+            <Td>0</Td>
+            <Td>0</Td>
           </tr>
           <tr style={{ border: '1px solid black' }}>
-            <Td>Дахин үйлчлүүлсэн</Td>
-            <Td>453</Td>
+            <Td>1-4: Эрэгтэй</Td>
+            <Td>0</Td>
+            <Td>0</Td>
+            <Td>0</Td>
+            <Td>0</Td>
+          </tr>
+          <tr style={{ border: '1px solid black' }}>
+            <Td>1-4: Эмэгтэй</Td>
+            <Td>0</Td>
+            <Td>0</Td>
+            <Td>0</Td>
+            <Td>0</Td>
+          </tr>
+          <tr style={{ border: '1px solid black' }}>
+            <Td>5-9: Эрэгтэй</Td>
+            <Td>2</Td>
+            <Td>0</Td>
+            <Td>0</Td>
+            <Td>0</Td>
+          </tr>
+          <tr style={{ border: '1px solid black' }}>
+            <Td>5-9: Эмэгтэй</Td>
+            <Td>2</Td>
+            <Td>0</Td>
+            <Td>0</Td>
+            <Td>0</Td>
+          </tr>
+          <tr style={{ border: '1px solid black' }}>
+            <Td>10-14: Эрэгтэй</Td>
+            <Td>0</Td>
+            <Td>0</Td>
+            <Td>0</Td>
+            <Td>0</Td>
+          </tr>
+          <tr style={{ border: '1px solid black' }}>
+            <Td>10-14: Эмэгтэй</Td>
+            <Td>1</Td>
+            <Td>0</Td>
+            <Td>0</Td>
+            <Td>0</Td>
+          </tr>
+          <tr style={{ border: '1px solid black' }}>
+            <Td>15-19: Эрэгтэй</Td>
+            <Td>0</Td>
+            <Td>0</Td>
+            <Td>0</Td>
+            <Td>0</Td>
+          </tr>
+          <tr style={{ border: '1px solid black' }}>
+            <Td>15-19: Эмэгтэй</Td>
+            <Td>0</Td>
+            <Td>0</Td>
+            <Td>0</Td>
+            <Td>0</Td>
+          </tr>
+          <tr style={{ border: '1px solid black' }}>
+            <Td>20-24: Эрэгтэй</Td>
+            <Td>2</Td>
+            <Td>0</Td>
+            <Td>1</Td>
+            <Td>1</Td>
+          </tr>
+          <tr style={{ border: '1px solid black' }}>
+            <Td>20-24: Эмэгтэй</Td>
+            <Td>1</Td>
+            <Td>0</Td>
+            <Td>0</Td>
+            <Td>0</Td>
+          </tr>
+          <tr style={{ border: '1px solid black' }}>
+            <Td>25-29: Эрэгтэй</Td>
+            <Td>1</Td>
+            <Td>0</Td>
+            <Td>0</Td>
+            <Td>0</Td>
+          </tr>
+          <tr style={{ border: '1px solid black' }}>
+            <Td>25-29: Эмэгтэй</Td>
+            <Td>0</Td>
+            <Td>0</Td>
+            <Td>0</Td>
+            <Td>0</Td>
+          </tr>
+          <tr style={{ border: '1px solid black' }}>
+            <Td>30-34: Эрэгтэй</Td>
+            <Td>1</Td>
+            <Td>0</Td>
+            <Td>0</Td>
+            <Td>1</Td>
+          </tr>
+          <tr style={{ border: '1px solid black' }}>
+            <Td>30-34: Эмэгтэй</Td>
+            <Td>1</Td>
+            <Td>0</Td>
+            <Td>0</Td>
+            <Td>0</Td>
+          </tr>
+          <tr style={{ border: '1px solid black' }}>
+            <Td>35-39: Эрэгтэй</Td>
+            <Td>0</Td>
+            <Td>0</Td>
+            <Td>0</Td>
+            <Td>0</Td>
+          </tr>
+          <tr style={{ border: '1px solid black' }}>
+            <Td>35-39: Эмэгтэй</Td>
+            <Td>0</Td>
+            <Td>0</Td>
+            <Td>0</Td>
+            <Td>0</Td>
+          </tr>
+          <tr style={{ border: '1px solid black' }}>
+            <Td>40-44: Эрэгтэй</Td>
+            <Td>0</Td>
+            <Td>0</Td>
+            <Td>0</Td>
+            <Td>0</Td>
+          </tr>
+          <tr style={{ border: '1px solid black' }}>
+            <Td>40-44: Эмэгтэй</Td>
+            <Td>0</Td>
+            <Td>0</Td>
+            <Td>0</Td>
+            <Td>0</Td>
+          </tr>
+          <tr style={{ border: '1px solid black' }}>
+            <Td>45-49: Эрэгтэй</Td>
+            <Td>0</Td>
+            <Td>0</Td>
+            <Td>0</Td>
+            <Td>0</Td>
+          </tr>
+          <tr style={{ border: '1px solid black' }}>
+            <Td>45-49: Эмэгтэй</Td>
+            <Td>1</Td>
+            <Td>0</Td>
+            <Td>0</Td>
+            <Td>0</Td>
+          </tr>
+          <tr style={{ border: '1px solid black' }}>
+            <Td>50-54: Эрэгтэй</Td>
+            <Td>0</Td>
+            <Td>0</Td>
+            <Td>0</Td>
+            <Td>0</Td>
+          </tr>
+          <tr style={{ border: '1px solid black' }}>
+            <Td>50-54: Эмэгтэй</Td>
+            <Td>1</Td>
+            <Td>0</Td>
+            <Td>0</Td>
+            <Td>0</Td>
+          </tr>
+          <tr style={{ border: '1px solid black' }}>
+            <Td>55-59: Эрэгтэй</Td>
+            <Td>0</Td>
+            <Td>0</Td>
+            <Td>0</Td>
+            <Td>0</Td>
+          </tr>
+          <tr style={{ border: '1px solid black' }}>
+            <Td>55-59: Эмэгтэй</Td>
+            <Td>0</Td>
+            <Td>0</Td>
+            <Td>0</Td>
+            <Td>0</Td>
           </tr>
         </table>
         <table style={{ marginTop: '20px', fontSize: '12px' }}>
@@ -135,3 +336,4 @@ export const HealthDepartReport = () => {
     </Container>
   );
 };
+
