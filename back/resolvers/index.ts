@@ -43,6 +43,12 @@ import {
   deleteClinic,
   updateClinicStatus,
 } from "./clinicResolver";
+import {
+  addSupplies,
+  getSupplies,
+  updateSupplies,
+  deleteSupplies,
+} from "./suppliesResolver";
 export default {
   Query: {
     getStaff,
@@ -60,6 +66,7 @@ export default {
     getClinics,
     getClinic,
     getClinicByClinicName,
+    getSupplies,
   },
   Mutation: {
     addStaff,
@@ -80,5 +87,8 @@ export default {
     updateClinic,
     deleteClinic,
     updateClinicStatus,
+    addSupplies,
+    updateSupplies,
+    deleteSupplies,
   },
 };

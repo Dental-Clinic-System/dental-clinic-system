@@ -410,3 +410,66 @@ export const ADD_APPOINTMENT = gql`
     }
   }
 `;
+
+export const ADD_SUPPLIES = gql`
+  mutation AddSupplies(
+    $clinicId: String
+    $itemName: String
+    $itemCode: String
+    $barCode: String
+    $quantity: String
+  ) {
+    addSupplies(
+      clinicId: $clinicId
+      itemName: $itemName
+      itemCode: $itemCode
+      barCode: $barCode
+      quantity: $quantity
+    ) {
+      _id
+      clinicId
+      itemName
+      itemCode
+      barCode
+      quantity
+    }
+  }
+`;
+
+export const UPDATE_SUPPLIES = gql`
+  mutation UpdateSupplies(
+    $_id: String
+    $itemName: String
+    $itemCode: String
+    $barCode: String
+    $quantity: String
+  ) {
+    updateSupplies(
+      _id: $_id
+      itemName: $itemName
+      itemCode: $itemCode
+      barCode: $barCode
+      quantity: $quantity
+    ) {
+      _id
+      clinicId
+      itemName
+      itemCode
+      barCode
+      quantity
+    }
+  }
+`;
+
+export const DELETE_SUPPLIES = gql`
+  mutation DeleteSupplies($_id: String) {
+    deleteSupplies(_id: $_id) {
+      _id
+      clinicId
+      itemName
+      itemCode
+      barCode
+      quantity
+    }
+  }
+`;
