@@ -1,17 +1,23 @@
 import React from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-} from 'react-native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { NavigationContainer } from '@react-navigation/native';
+import { HomeScreen, ProfileScreen, MedicineScreen, AppointmentScreen } from './screens';
+import { BottomTabBar } from './navigation/bottom-tabs';
+
+const Tab = createBottomTabNavigator();
 
 const App = () => {
   return (
-    <SafeAreaView>
-    </SafeAreaView>
+    <NavigationContainer>
+      <Tab.Navigator tabBar={props => <BottomTabBar {...props} />}>
+        <Tab.Screen name="home" component={HomeScreen} />
+        <Tab.Screen name="profile" component={ProfileScreen} />
+        <Tab.Screen name="medicine" component={MedicineScreen} />
+        <Tab.Screen name="appointment" component={AppointmentScreen} />
+      </Tab.Navigator>
+    </NavigationContainer>
   );
 };
 
-const styles = StyleSheet.create({
-});
 
 export default App;

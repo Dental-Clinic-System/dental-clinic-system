@@ -73,7 +73,10 @@ export const MainLayout: FC = ({ children }) => {
   const toggleDrawer = (): void => {
     setOpen(!open);
   };
-  const TITLE = sessionStorage.getItem('clinicTitle');
+  const TITLE =
+    sessionStorage.getItem('clinicTitle') === 'Chandmani'
+      ? 'Чандмань'
+      : sessionStorage.getItem('clinicTitle');
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -117,12 +120,22 @@ export const MainLayout: FC = ({ children }) => {
             px: [1]
           }}
         >
+          <img
+            src={
+              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZ26Nc-kvrmG6aNwESH5hkHJTmzGbG792G6Q&usqp=CAU'
+            }
+            alt=""
+            style={{
+              height: '60px',
+              objectFit: 'fill'
+            }}
+          />
           <Typography
             component="h1"
             variant="h6"
             color="inherit"
             noWrap
-            ml={5}
+            ml={1}
             sx={{ flexGrow: 1 }}
           >
             {TITLE}
