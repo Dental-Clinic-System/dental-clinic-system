@@ -170,17 +170,62 @@ export const Supplies = () => {
       </DeleteModal>
       <DataGrid
         sx={{ height: 640, width: '100%' }}
-        rows={supplies}
+        rows={dummyData}
         columns={columns}
         pageSize={10}
-        getRowId={(row) => row._id}
-        onSelectionModelChange={(itm) => {
-          setSuppliesData(
-            supplies.filter((e: suppliesType) => e._id === itm[0])[0]
-          );
-          setSelectedId({ _id: itm[0] });
-        }}
+        getRowId={(row) => row.itemCode}
+        // onSelectionModelChange={(itm) => {
+        //   setSuppliesData(
+        //     supplies.filter((e: suppliesType) => e._id === itm[0])[0]
+        //   );
+        //   setSelectedId({ _id: itm[0] });
+        // }}
       />
     </Box>
   );
 };
+
+const dummyData = [
+    {
+        itemCode: 'F01',
+        barCode: '99384724',
+        itemName: 'Ломбо',
+        quantity: '100 мг',
+    },
+    {
+        itemCode: 'C01',
+        barCode: '83923823',
+        itemName: 'Бээлий',
+        quantity: '100'
+    },
+    {
+        itemCode: 'C02',
+        barCode: '34576543',
+        itemName: 'Чимхэгч',
+        quantity: '100'
+    },
+    {
+        itemCode: 'C03',
+        barCode: '23452346',
+        itemName: 'Амны толь',
+        quantity: '100'
+    },
+    {
+        itemCode: 'C04',
+        barCode: '54234536',
+        itemName: 'Тариур',
+        quantity: '100'
+    },
+    {
+        itemCode: 'C05',
+        barCode: '54234537',
+        itemName: 'Маск',
+        quantity: '100'
+    },
+    {
+        itemCode: 'C06',
+        barCode: '54234539',
+        itemName: 'Өвчин намдаагч',
+        quantity: '100'
+    },
+]
