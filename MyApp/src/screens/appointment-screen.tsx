@@ -58,35 +58,6 @@ export const AppointmentScreen = ({ navigation }: any) => {
     const [isEnable, setIsEnable] = useState(false)
     const Toogle = () => setIsEnable(!isEnable)
 
-    const RenderAppointment = ({ item }: any) => {
-        //@ts-ignore
-        const startDate = Date(item.startDate).slice(4, 10)
-        return (
-            <View
-                style={[styles.cardContainer, styles.lowShadow, styles.row]}
-            >
-                <View style={{ marginRight: 24 }}>
-                    <MedicationSvg />
-                </View>
-                <View>
-                    <Text style={[styles.cardTitle]}>
-                        {item.title}
-                    </Text>
-                    <Text style={[styles.scheduleBox, styles.center]}>
-                        Scheduled meeting on {startDate}
-                    </Text>
-                </View>
-                <TouchableOpacity
-                    onPress={() => navigation.navigate('AppointmentDetail')}
-                >
-                    <Text>
-                        Detail
-                    </Text>
-                </TouchableOpacity>
-            </View>
-        )
-    }
-
     return (
         <SafeAreaView style={[styles.container]}>
             <TouchableWithoutFeedback onPress={Toogle} >
@@ -198,7 +169,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#F5F7FB',
         display: 'flex',
         flexDirection: 'row',
-        justifyContent: 'space-between'
     },
     Button: {
         position: 'absolute',

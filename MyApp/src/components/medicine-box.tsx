@@ -63,8 +63,9 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        backgroundColor: 'white',
+        backgroundColor: '#F5F7FB',
         borderRadius: 5,
+        marginBottom: 10,
     },
 
     descriptionBox: {
@@ -91,7 +92,7 @@ const styles = StyleSheet.create({
     line: {
         width: '100%',
         height: 5,
-        backgroundColor: '#F5F7FB',
+        backgroundColor: 'white',
         borderRadius: 1
     }
 })

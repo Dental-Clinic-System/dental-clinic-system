@@ -45,7 +45,7 @@ export const RenderAppointment = ({ item }: any) => {
                         {item.title}
                     </Text>
                     <Text style={[styles.cardTitle]}>
-                        {item.doctor}
+                        {item.doctor}(Эмч)
                     </Text>
                 </View>
                 <TouchableOpacity onPress={showDescription}>
