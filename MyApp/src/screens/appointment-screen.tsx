@@ -1,17 +1,18 @@
-import React from 'react'
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { FlatList, StyleSheet, Text, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import MedicationSvg from '../components/svg/medication-svg'
+import { RenderAppointment } from '../components'
 
 const dummy = [
     {
         "patientId": "626bb33c7acbdbec34f29b76",
         "serviceId": "62632cb2326cde8e5d000d14",
-        "startDate": "05/09/2022 05:09 pm",
-        "title": "test",
+        "startDate": "05/21/2022 05:09 pm",
+        "startMonth": "APR",
+        "title": "Шүдний үзлэг",
         "endDate": "05/09/2022 05:09 pm",
-        "notes": "testasdf",
+        "doctor": "Баатар",
+        "notes": "2 цоорхой шүд янзалсан",
         "staffId": "62666e92562a50b30aa62c34",
         "clinicId": "625fca30c1cf951c042bd5ec"
     },
@@ -19,49 +20,35 @@ const dummy = [
         "patientId": "626bb33c7acbdbec34f29b76",
         "serviceId": "62665acb0b7b60fc06dd53c6",
         "startDate": "05/13/2022 03:16 pm",
-        "title": "asdfds",
+        "startMonth": "APR",
+        "doctor": "Баясгалан",
+        "title": "Шүдний ломбо",
         "endDate": "05/13/2022 03:17 pm",
-        "notes": "asdf",
+        "notes": "Баруун талын дээд талын шүдэнд ломбо хийсэн",
         "staffId": "62666e92562a50b30aa62c34",
         "clinicId": "625fca30c1cf951c042bd5ec"
     },
     {
         "patientId": "626bb33c7acbdbec34f29b76",
         "serviceId": "62632cb2326cde8e5d000d14",
-        "startDate": "05/09/2022 05:09 pm",
-        "title": "test",
+        "startDate": "04/09/2021 05:09 pm",
+        "startMonth": "MAR",
+        "doctor": "Баясгалан",
+        "title": "Шүдний ломбо",
         "endDate": "05/09/2022 05:09 pm",
-        "notes": "testasdf",
+        "notes": "Зүүн талын доод талын шүдэнд ломбо хийсэн",
         "staffId": "62666e92562a50b30aa62c34",
         "clinicId": "625fca30c1cf951c042bd5ec"
     },
     {
         "patientId": "626bb33c7acbdbec34f29b76",
         "serviceId": "62665acb0b7b60fc06dd53c6",
-        "startDate": "05/13/2022 03:16 pm",
-        "title": "asdfds",
-        "endDate": "05/13/2022 03:17 pm",
-        "notes": "asdf",
-        "staffId": "62666e92562a50b30aa62c34",
-        "clinicId": "625fca30c1cf951c042bd5ec"
-    },
-    {
-        "patientId": "626bb33c7acbdbec34f29b76",
-        "serviceId": "62632cb2326cde8e5d000d14",
-        "startDate": "05/09/2022 05:09 pm",
-        "title": "test",
-        "endDate": "05/09/2022 05:09 pm",
-        "notes": "testasdf",
-        "staffId": "62666e92562a50b30aa62c34",
-        "clinicId": "625fca30c1cf951c042bd5ec"
-    },
-    {
-        "patientId": "626bb33c7acbdbec34f29b76",
-        "serviceId": "62665acb0b7b60fc06dd53c6",
-        "startDate": "05/13/2022 03:16 pm",
-        "title": "asdfds",
-        "endDate": "05/13/2022 03:17 pm",
-        "notes": "asdf",
+        "startDate": "03/13/2021 03:16 pm",
+        "doctor": "Баатар",
+        "startMonth": "FEB",
+        "title": "Хиймэл шүд хийх",
+        "endDate": "05/13/2021 03:17 pm",
+        "notes": "Зүүн дээд талд хиймэл шүд хийсэн.",
         "staffId": "62666e92562a50b30aa62c34",
         "clinicId": "625fca30c1cf951c042bd5ec"
     },
@@ -106,29 +93,26 @@ export const AppointmentScreen = ({ navigation }: any) => {
                 <View style={[styles.switch_container, styles.shadow, styles.row]}>
                     <View style={[styles.switch, styles.center, isEnable == false && styles.enable]}>
                         <Text style={[isEnable == false && styles.enable]}>
-                            upcoming
+                            Удахгүй болох
                         </Text>
                     </View>
                     <View style={[styles.switch, styles.center, isEnable == true && styles.enable]}>
                         <Text style={[isEnable == true && styles.enable]}>
-                            before
+                            Түүх
                         </Text>
                     </View>
                 </View>
             </TouchableWithoutFeedback>
-            <Text style={[styles.title]}>
-                {isEnable == false ? 'upcoming' : 'before'} Appointments
-            </Text>
             <FlatList
-                style={{ width: '100%' }}
+                style={{ width: '100%', marginTop: 30 }}
                 renderItem={RenderAppointment}
                 data={dummy}
                 showsVerticalScrollIndicator={false}
             />
             <TouchableOpacity style={[styles.Button]} onPress={() => navigation.navigate('getAppointment')}>
                 <View style={[styles.buttonText]}>
-                    <Text style={{ color: 'white' }}>
-                        Get Appointment
+                    <Text style={{ color: 'white', fontSize: 18 }}>
+                        Цаг товлох
                     </Text>
                 </View>
             </TouchableOpacity>
@@ -141,7 +125,7 @@ const styles = StyleSheet.create({
     container: {
         display: 'flex',
         alignItems: 'center',
-        backgroundColor: '#F5F7FB',
+        backgroundColor: 'white',
         height: '100%'
     },
     row: {
@@ -212,10 +196,13 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         borderRadius: 5,
         backgroundColor: '#F5F7FB',
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between'
     },
     Button: {
         position: 'absolute',
-        bottom: 10,
+        bottom: 20,
         backgroundColor: '#0000',
         height: 43,
         width: 240,

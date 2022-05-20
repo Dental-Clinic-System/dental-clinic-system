@@ -7,10 +7,10 @@ const { width } = Dimensions.get("window");
 const Tab = createBottomTabNavigator();
 
 const Tab_Icons: any = {
-    appointment: AppointmentSvg,
-    home: HomeSvg,
-    medicine: MedicineSvg,
-    profile: ProfileSvg
+    Нүүр: AppointmentSvg,
+    Эм: HomeSvg,
+    Цаг_Aвалт: MedicineSvg,
+    Профайл: ProfileSvg
 }
 
 export const BottomTabBar: React.FC<any> = ({ state, descriptors, navigation }) => {

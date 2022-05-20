@@ -13,26 +13,6 @@ const data = [
         dose: 'Ibuprofen Tablets, 200 mg',
         description: 'heltgibgnbinjgnbjvnjginbivnn'
     },
-    {
-        name: 'Benadrly',
-        dose: 'Ibuprofen Tablets, 200 mg',
-        description: 'heltgibgnbinjgnbjvnjginbivnn'
-    },
-    {
-        name: 'Oscillococcinum',
-        dose: 'Ibuprofen Tablets, 200 mg',
-        description: 'heltgibgnbinjgnbjvnjginbivnn'
-    },
-    {
-        name: 'Advil',
-        dose: 'Ibuprofen Tablets, 200 mg',
-        description: 'heltgibgnbinjgnbjvnjginbivnn'
-    },
-    {
-        name: 'Benadrly',
-        dose: 'Ibuprofen Tablets, 200 mg',
-        description: 'heltgibgnbinjgnbjvnjginbivnn'
-    },
 ]
 
 export const MedicineScreen = () => {
