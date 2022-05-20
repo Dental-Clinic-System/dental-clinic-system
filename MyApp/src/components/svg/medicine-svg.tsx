@@ -1,11 +1,11 @@
 import * as React from "react"
 import Svg, { Path } from "react-native-svg"
 
-export const MedicineSvg: React.FC<any> = ({ color = '#181725' }) => {
+export const MedicineSvg: React.FC<any> = ({ color = '#181725', width = 15, height = 15 }) => {
   return (
     <Svg
-      width={15}
-      height={15}
+      width={width}
+      height={height}
       viewBox="0 0 15 15"
       fill="none"
     >
