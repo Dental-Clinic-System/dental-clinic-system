@@ -21,18 +21,26 @@ export const BottomTabBar: React.FC<any> = ({ state, descriptors, navigation }) 
     }
 
     const styles = StyleSheet.create({
+        container: {
+            height: 115,
+            paddingTop: 15,
+            display: 'flex',
+            justifyContent: 'flex-start',
+            alignItems: 'center',
+            backgroundColor: '#F5F7FB'
+        },
         navigation: {
             flexDirection: 'row',
-            height: 80,
-            width: width,
-            backgroundColor: 'white',
+            height: 70,
+            width: width - 40,
+            backgroundColor: '#F5F7FB',
             shadowColor: 'black',
             shadowOffset: {
                 width: 3,
                 height: 3,
             },
             shadowOpacity: 0.27,
-            borderRadius: 15,
+            borderRadius: 20,
         },
         element: {
             width: width / 4,
@@ -43,58 +51,60 @@ export const BottomTabBar: React.FC<any> = ({ state, descriptors, navigation }) 
     })
 
     return (
-        <View style={styles.navigation}>
-            {state.routes.map((route: any, index: any) => {
-                const { options } = descriptors[route.key];
-                const CustomIcon = Tab_Icons[route.name];
-                const label =
-                    options.tabBarLabel !== undefined
-                        ? options.tabBarLabel
-                        : options.title !== undefined
-                            ? options.title
-                            : route.name;
+        <View style={[styles.container]}>
+            <View style={styles.navigation}>
+                {state.routes.map((route: any, index: any) => {
+                    const { options } = descriptors[route.key];
+                    const CustomIcon = Tab_Icons[route.name];
+                    const label =
+                        options.tabBarLabel !== undefined
+                            ? options.tabBarLabel
+                            : options.title !== undefined
+                                ? options.title
+                                : route.name;
 
-                const isFocused = state.index === index;
+                    const isFocused = state.index === index;
 
-                const onPress = () => {
-                    const event = navigation.emit({
-                        type: 'tabPress',
-                        target: route.key,
-                        canPreventDefault: true,
-                    });
+                    const onPress = () => {
+                        const event = navigation.emit({
+                            type: 'tabPress',
+                            target: route.key,
+                            canPreventDefault: true,
+                        });
 
-                    if (!isFocused && !event.defaultPrevented) {
-                        navigation.navigate(route.name);
-                    }
-                };
+                        if (!isFocused && !event.defaultPrevented) {
+                            navigation.navigate(route.name);
+                        }
+                    };
 
-                const onLongPress = () => {
-                    navigation.emit({
-                        type: 'tabLongPress',
-                        target: route.key,
-                    });
-                };
+                    const onLongPress = () => {
+                        navigation.emit({
+                            type: 'tabLongPress',
+                            target: route.key,
+                        });
+                    };
 
-                return (
-                    <TouchableOpacity
-                        key={route.name}
-                        accessibilityRole="button"
-                        accessibilityState={isFocused ? { selected: true } : {}}
-                        accessibilityLabel={options.tabBarAccessibilityLabel}
-                        testID={options.tabBarTestID}
-                        onPress={onPress}
-                        onLongPress={onLongPress}
-                        style={{ flex: 1 }}
-                    >
-                        <View style={styles.element}>
-                            <CustomIcon color={isFocused ? '#1EA6D6' : '#181725'} />
-                            <Text style={{ color: isFocused ? '#1EA6D6' : '#181725', marginTop: 5 }}>
-                                {label}
-                            </Text>
-                        </View>
-                    </TouchableOpacity>
-                );
-            })}
+                    return (
+                        <TouchableOpacity
+                            key={route.name}
+                            accessibilityRole="button"
+                            accessibilityState={isFocused ? { selected: true } : {}}
+                            accessibilityLabel={options.tabBarAccessibilityLabel}
+                            testID={options.tabBarTestID}
+                            onPress={onPress}
+                            onLongPress={onLongPress}
+                            style={{ flex: 1 }}
+                        >
+                            <View style={styles.element}>
+                                <CustomIcon color={isFocused ? '#1EA6D6' : '#181725'} />
+                                <Text style={{ color: isFocused ? '#1EA6D6' : '#181725', marginTop: 5 }}>
+                                    {label}
+                                </Text>
+                            </View>
+                        </TouchableOpacity>
+                    );
+                })}
+            </View>
         </View>
     );
 }
