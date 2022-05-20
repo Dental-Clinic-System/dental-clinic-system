@@ -8,10 +8,10 @@ import MessegeIcon from './messege-svg'
 
 
 const dummy = [
-    '23 April',
-    '20 April',
-    '13 April',
-    '29 Mar',
+    '4 сарын 23',
+    '5 сарын 1',
+    '9 сарын 14',
+    '3 сарын 8',
 ]
 
 const RenderCompletedAppointments = ({ item }: any) => {
@@ -47,11 +47,11 @@ export const ProfileScreen = () => {
                 <View>
                     <View style={[styles.flex, styles.marginTop]}>
                         <Text style={[styles.userField]}>Нэр:</Text>
-                        <Text style={[styles.userValue]}>Joma Tech</Text>
+                        <Text style={[styles.userValue]}>Болд</Text>
                     </View>
                     <View style={[styles.flex, styles.marginTop]}>
                         <Text style={[styles.userField]}>Хүйс:</Text>
-                        <Text style={[styles.userValue]}>Male</Text>
+                        <Text style={[styles.userValue]}>Баатарсүрэн</Text>
                     </View>
                     <View style={[styles.flex, styles.marginTop]}>
                         <Text style={[styles.userField]}>Нас:</Text>

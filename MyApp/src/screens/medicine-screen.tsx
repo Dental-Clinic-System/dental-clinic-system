@@ -4,34 +4,14 @@ import { MedicineBox } from '../components'
 
 const data = [
     {
-        name: 'Advil',
-        dose: 'Ibuprofen Tablets, 200 mg',
-        description: 'heltgibgnbinjgnbjvnjginbivnn'
+        name: 'Адвил',
+        dose: 'Хүүхэд 30мг, том хүн 50мг',
+        description: 'Өглөө, өдөр хоол идэхээс 30минутын өмнө хоолны халбагаар өдөрт 2ш удаа '
     },
     {
-        name: 'Tylenol',
-        dose: 'Ibuprofen Tablets, 200 mg',
-        description: 'heltgibgnbinjgnbjvnjginbivnn'
-    },
-    {
-        name: 'Benadrly',
-        dose: 'Ibuprofen Tablets, 200 mg',
-        description: 'heltgibgnbinjgnbjvnjginbivnn'
-    },
-    {
-        name: 'Oscillococcinum',
-        dose: 'Ibuprofen Tablets, 200 mg',
-        description: 'heltgibgnbinjgnbjvnjginbivnn'
-    },
-    {
-        name: 'Advil',
-        dose: 'Ibuprofen Tablets, 200 mg',
-        description: 'heltgibgnbinjgnbjvnjginbivnn'
-    },
-    {
-        name: 'Benadrly',
-        dose: 'Ibuprofen Tablets, 200 mg',
-        description: 'heltgibgnbinjgnbjvnjginbivnn'
+        name: 'Туленол',
+        dose: 'Хүүхэд 50мг, том хүн 75мг',
+        description: 'Өглөө, өдөр, орой хоол идсэнээс 1цагийн дараа хоолны халбагаар өдөрт 3ш удаа, '
     },
 ]
 
@@ -53,7 +33,7 @@ export const MedicineScreen = () => {
         <View style={styles.container}>
             <View style={styles.inputCont}>
                 <TextInput style={styles.input}
-                    placeholder='Search here'
+                    placeholder='Эмийн нэр'
                     value={medicineName}
                     onChangeText={(text) => filterArr(text)}
                 />
@@ -74,7 +54,8 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '100%',
         display: 'flex',
-        alignItems: 'center'
+        alignItems: 'center',
+        backgroundColor: 'white'
     },
 
     input: {
@@ -85,7 +66,7 @@ const styles = StyleSheet.create({
     inputCont: {
         width: '90%',
         height: 50,
-        backgroundColor: 'white',
+        backgroundColor: '#F5F7FB',
         marginVertical: '5%',
         borderRadius: 5,
         display: 'flex',

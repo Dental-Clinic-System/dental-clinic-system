@@ -5,24 +5,6 @@ import { FlatList } from 'react-native-gesture-handler'
 import { TimeIcon } from '../components/svg'
 import { SearchIcon } from '../components/svg/search-svg'
 
-const medicineDummy = [
-    {
-        name: 'Advil',
-        dose: 'Ibuprofen Tablets, 200 mg',
-        description: 'heltgibgnbinjgnbjvnjginbivnn'
-    },
-    {
-        name: 'Tylenol',
-        dose: 'Ibuprofen Tablets, 200 mg',
-        description: 'heltgibgnbinjgnbjvnjginbivnn'
-    },
-    {
-        name: 'Benadrly',
-        dose: 'Ibuprofen Tablets, 200 mg',
-        description: 'heltgibgnbinjgnbjvnjginbivnn'
-    },
-]
-
 const RenderAppointment = () => {
     return (
         <View style={[styles.cardContainer, styles.shadow]}>
@@ -32,7 +14,7 @@ const RenderAppointment = () => {
                     source={{ uri: 'https://i.pinimg.com/474x/ac/04/33/ac0433ef8ae9ab0f778cf10a11d1fb1a.jpg' }}
                 />
                 <Text style={[styles.cardTitle]}>
-                    Chandmani
+                    Чандмань
                 </Text>
                 <Text >
                     +976 99111233
@@ -41,7 +23,7 @@ const RenderAppointment = () => {
             <View style={[styles.scheduleButton, styles.center, styles.row]}>
                 <TimeIcon />
                 <Text style={{ color: 'white', marginLeft: 6 }}>
-                    11:00 AM
+                    11:00 цагаас
                 </Text>
             </View>
         </View>
@@ -56,7 +38,7 @@ export const HomeScreen = () => {
                 Сайн уу
             </Text>
             <Text style={[styles.title, styles.marginBottom]}>
-                Joma tech
+                Баатарын Болд
             </Text>
             <View style={[styles.inputBox, styles.shadow, styles.row]}>
                 <SearchIcon />

@@ -35,10 +35,10 @@ const App = () => {
   return (
     <NavigationContainer>
       <Tab.Navigator tabBar={props => <BottomTabBar {...props} />}>
-        <Tab.Screen name="home" component={HomeScreen} />
-        <Tab.Screen name="medicine" component={MedicineScreen} />
-        <Tab.Screen name="appointment" component={AppointmentStack} options={{ headerShown: false }} />
-        <Tab.Screen name="profile" component={ProfileScreen} />
+        <Tab.Screen name="Нүүр" component={HomeScreen} />
+        <Tab.Screen name="Эм" component={MedicineScreen} />
+        <Tab.Screen name="Цаг_Aвалт" component={AppointmentStack} options={{ headerShown: false }} />
+        <Tab.Screen name="Профайл" component={ProfileScreen} />
       </Tab.Navigator>
     </NavigationContainer>
   );
