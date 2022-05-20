@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { HomeScreen, ProfileScreen, MedicineScreen, AppointmentScreen, getAppointment } from './screens';
 import { BottomTabBar } from './navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
+import { AppointmentDetailScreen } from './screens/appointment-detail';
 
 
 const Tab = createBottomTabNavigator();
@@ -21,6 +22,10 @@ const AppointmentStack = () => {
       <Stack.Screen
         name='getAppointment'
         component={getAppointment}
+      />
+      <Stack.Screen
+        name='AppointmentDetail'
+        component={AppointmentDetailScreen}
       />
     </Stack.Navigator>
   )

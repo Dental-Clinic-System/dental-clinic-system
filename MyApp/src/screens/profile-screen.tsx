@@ -18,7 +18,7 @@ const RenderCompletedAppointments = ({ item }: any) => {
     return (
         <View style={[styles.cardContainer]}>
             <Text style={{ color: '#1EA6D6' }}>
-                Meeting on {item}
+                цаг авсан өдөр {item}
             </Text>
         </View>
     )
@@ -46,15 +46,15 @@ export const ProfileScreen = () => {
                 </View>
                 <View>
                     <View style={[styles.flex, styles.marginTop]}>
-                        <Text style={[styles.userField]}>Name:</Text>
+                        <Text style={[styles.userField]}>Нэр:</Text>
                         <Text style={[styles.userValue]}>Joma Tech</Text>
                     </View>
                     <View style={[styles.flex, styles.marginTop]}>
-                        <Text style={[styles.userField]}>Gender:</Text>
+                        <Text style={[styles.userField]}>Хүйс:</Text>
                         <Text style={[styles.userValue]}>Male</Text>
                     </View>
                     <View style={[styles.flex, styles.marginTop]}>
-                        <Text style={[styles.userField]}>Age:</Text>
+                        <Text style={[styles.userField]}>Нас:</Text>
                         <Text style={[styles.userValue]}>32</Text>
                     </View>
                 </View>
@@ -62,7 +62,7 @@ export const ProfileScreen = () => {
             <View style={[styles.line, styles.lowShadow, styles.marginTop]} />
             <View style={[styles.containerPadding]}>
                 <Text style={[styles.title, styles.MarginBottom]}>
-                    Completed Appointments
+                    Дууссан цаг авалт
                 </Text>
                 <FlatList
                     showsVerticalScrollIndicator={false}

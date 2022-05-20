@@ -4,7 +4,6 @@ import { FlatList, StyleSheet, Text, TouchableOpacity, TouchableWithoutFeedback,
 import { SafeAreaView } from 'react-native-safe-area-context'
 import MedicationSvg from '../components/svg/medication-svg'
 
-
 const dummy = [
     {
         "patientId": "626bb33c7acbdbec34f29b76",
@@ -68,32 +67,39 @@ const dummy = [
     },
 ]
 
-
-
-const RenderAppointment = ({ item }: any) => {
-    //@ts-ignore
-    const startDate = Date(item.startDate).slice(4, 10)
-    return (
-        <View style={[styles.cardContainer, styles.lowShadow, styles.row]}>
-            <View style={{ marginRight: 24 }}>
-                <MedicationSvg />
-            </View>
-            <View>
-                <Text style={[styles.cardTitle]}>
-                    {item.title}
-                </Text>
-                <Text style={[styles.scheduleBox, styles.center]}>
-                    Scheduled meeting on {startDate}
-                </Text>
-            </View>
-        </View>
-    )
-}
-
-
 export const AppointmentScreen = ({ navigation }: any) => {
     const [isEnable, setIsEnable] = useState(false)
     const Toogle = () => setIsEnable(!isEnable)
+
+    const RenderAppointment = ({ item }: any) => {
+        //@ts-ignore
+        const startDate = Date(item.startDate).slice(4, 10)
+        return (
+            <View
+                style={[styles.cardContainer, styles.lowShadow, styles.row]}
+            >
+                <View style={{ marginRight: 24 }}>
+                    <MedicationSvg />
+                </View>
+                <View>
+                    <Text style={[styles.cardTitle]}>
+                        {item.title}
+                    </Text>
+                    <Text style={[styles.scheduleBox, styles.center]}>
+                        Scheduled meeting on {startDate}
+                    </Text>
+                </View>
+                <TouchableOpacity
+                    onPress={() => navigation.navigate('AppointmentDetail')}
+                >
+                    <Text>
+                        Detail
+                    </Text>
+                </TouchableOpacity>
+            </View>
+        )
+    }
+
     return (
         <SafeAreaView style={[styles.container]}>
             <TouchableWithoutFeedback onPress={Toogle} >
@@ -183,7 +189,7 @@ const styles = StyleSheet.create({
             width: 0,
             height: 8,
         },
-        shadowOpacity: 0.41,
+        shadowOpacity: 0.2,
         shadowRadius: 9.11,
     },
     lowShadow: {
@@ -199,6 +205,7 @@ const styles = StyleSheet.create({
         paddingVertical: 20,
         paddingHorizontal: 26,
         alignItems: 'center',
+        justifyContent: 'space-between',
         width: '100%',
         borderColor: 'white',
         borderWidth: 4,
@@ -223,6 +230,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     scheduleBox: {
+        width: 240,
         padding: 2,
+        fontSize: 14,
     }
 })
